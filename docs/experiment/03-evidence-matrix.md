@@ -6,7 +6,7 @@ Fecha de preparación: 2026-08-20. “Preparado” significa que existe el artef
 | --- | --- | --- | --- |
 | S1 | Sistema real identificado | Cumple | `README.md`: actores, flujos y arquitectura |
 | S1 | Categoría confirmada | Confirmada por el equipo | Aplicación móvil; anexar evidencia del docente en la entrega |
-| S1 | Hipótesis antes de medir | Preparada, no sellada | `01-preregistration.md`; crear el commit previo |
+| S1 | Hipótesis antes de medir | Sellada | `01-preregistration.md`; commit `03c61d0` publicado antes de medir |
 | S1 | Métrica y escenario | Preparado | p95, 500 ms, 40 solicitudes y concurrencia 10 |
 | S1 | Semilla identificada | Preparado | 10.000 ofertas, 90 % activas, ~1 KiB |
 | S1 | Presión externa | Preparado | SLA 250 ms, 50.000 ofertas, Internet o incumplimiento |

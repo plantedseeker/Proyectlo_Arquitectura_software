@@ -2,7 +2,7 @@
 
 Estado: **propuesta lista para sellar; aún no medida**  
 Fecha de propuesta: 2026-08-20  
-Commit de sellado: **pendiente**
+Commit de sellado: **`03c61d0320cbf8658c0500857ad92154ee2d9da1`**
 
 No agregar resultados a este documento. Cualquier cambio posterior de hipótesis o umbral debe crear una nueva versión y explicar el motivo.
 
@@ -60,4 +60,4 @@ Las alternativas a estudiar serían paginación por cursor, caché, índices par
 
 ## Condición para medir
 
-Crear primero un commit que contenga este prerregistro y copiar su hash en “Commit de sellado”. Después ejecutar el protocolo. No publicar como línea base una corrida hecha antes del sello.
+El prerregistro quedó publicado por primera vez en el commit de sellado indicado arriba. Las mediciones deben ejecutarse después de ese commit. No publicar como línea base una corrida hecha antes del sello.
