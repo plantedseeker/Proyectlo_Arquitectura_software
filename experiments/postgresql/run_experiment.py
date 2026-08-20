@@ -76,6 +76,7 @@ def main() -> int:
     parser.add_argument("--runs", type=int, default=4)
     parser.add_argument("--requests", type=int, default=40)
     parser.add_argument("--concurrency", type=int, default=10)
+    parser.add_argument("--git-revision")
     parser.add_argument("--output", type=pathlib.Path)
     args = parser.parse_args()
     if args.runs < 4:
@@ -111,7 +112,7 @@ def main() -> int:
             "platform": platform.platform(),
             "python": platform.python_version(),
             "logical_cpus": os.cpu_count(),
-            "git_revision": git_revision(),
+            "git_revision": args.git_revision or git_revision(),
         },
         "runs": [{"run": index + 1, "discarded": index == 0, **item} for index, item in enumerate(runs)],
     }
