@@ -13,7 +13,7 @@ Fecha de preparación: 2026-08-20. “Preparado” significa que existe el artef
 | S2 | Base con código existente | Cumple | Aplicación Kotlin/Compose migrada a API REST |
 | S2 | Instrucciones para arrancar | Verificadas | `README.md`, `docker-compose.yml` y `scripts/run-local-baseline.ps1` ejecutados en Windows |
 | S2 | Pruebas reales | Cumple | reglas Android, pruebas del instrumento e integración API/PostgreSQL |
-| S2 | CI en verde | Workflow preparado | `.github/workflows/ci.yml`; falta observar el primer check en GitHub |
+| S2 | CI en verde | Cumple | `UTrabajo CI` aprobó Android y backend en la [corrida 32343026489](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/32343026489) |
 | S2 | Persistencia PostgreSQL 16 | Cumple | imagen 16.14, Flyway, restricciones e índices verificados localmente |
 | S2 | Semilla sesgada | Verificada | 10.000 sintéticas, 9.000 activas y descripciones de carga en PostgreSQL 16 |
 | S3 | Instrumentación | Verificada | `run_experiment.py` y `metrics.py` sin dependencias externas |
@@ -28,6 +28,7 @@ Fecha de preparación: 2026-08-20. “Preparado” significa que existe el artef
 ## Verificaciones durante la preparación
 
 - Backend Kotlin: imagen construida con JDK 21 y API saludable contra PostgreSQL 16.
-- Android: `:app:compileDebugKotlin` → **BUILD SUCCESSFUL** con el SDK 36. La fase Java completa fue interrumpida después por una restricción de acceso a JAR del entorno de preparación; el workflow de GitHub cierra `test`, `lint` y APK en Linux.
+- Android: `test`, `lint` y APK aprobados con SDK 36 en GitHub Actions.
+- Backend: pruebas de integración contra PostgreSQL 16 aprobadas en GitHub Actions.
 - Instrumento: tres pruebas de cálculo aprobadas y ambos scripts validados por el compilador de Python.
 - Docker Desktop 4.87.0 y Engine 29.7.2: PostgreSQL 16.14 y API ejecutados localmente; línea base real conservada en `results/baseline.json`.
