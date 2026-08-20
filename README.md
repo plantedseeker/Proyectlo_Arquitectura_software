@@ -107,7 +107,7 @@ La evidencia está en `docs/experiment/`:
 - `03-evidence-matrix.md`: estado honesto requisito por requisito.
 
 La línea base histórica está conservada en `docs/experiment/results/baseline.json`.
-Después de la observación de auditoría, el protocolo prepara una segunda evidencia
-sin sobrescribirla: `baseline-s4-audit.json`, con mediana, identificación de la
+Después de la observación de auditoría se generó una segunda evidencia sin
+sobrescribirla: `baseline-s4-audit.json`, con mediana, identificación de la
 máquina, energía y topología. La matriz mantiene abierta la validez por categoría
 hasta anexar la confirmación del docente y ajustar el instrumento si corresponde.

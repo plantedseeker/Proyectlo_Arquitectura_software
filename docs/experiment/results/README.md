@@ -41,13 +41,38 @@ La mediana de los p95 de las tres corridas válidas (`22.430`, `24.763` y
   reconstruye retroactivamente. Por eso `baseline.json` conserva valor histórico,
   pero todavía no cierra por sí solo el requisito de condiciones de S4.
 
-El instrumento versión 2 y `scripts/run-local-baseline.ps1` ya capturan máquina,
-energía, topología y mediana en una nueva evidencia llamada
-`baseline-s4-audit.json`, sin sobrescribir este archivo original.
+## Línea base auditable versión 2
+
+`baseline-s4-audit.json` fue capturada el 2026-08-20 sobre la revisión
+`d247f932140944ac9358a3dbbca28a7e89b6753a`, sin sobrescribir la línea base
+histórica. Su SHA-256 es
+`80AF88268EDC0E161A03465B7122A5339CE10B07D41045103090D6F40C126A78`.
+La corrida registró automáticamente:
+
+- Acer Predator PH16-71, Intel Core i9-13900HX, 95.7 GiB de RAM, 32
+  procesadores lógicos y Windows 11 `10.0.26200`;
+- alimentación conectada, batería al 80 % y plan de energía `Equilibrado`;
+- generador Python, API y PostgreSQL 16 en el mismo equipo físico; los dos
+  servicios se ejecutaron en contenedores de Docker Desktop;
+- cuatro corridas, con la primera descartada, y mediana automática de los p95.
+
+| Corrida | Uso | p95 (ms) |
+| --- | --- | ---: |
+| 1 | Descartada | 26.444 |
+| 2 | Válida | 19.557 |
+| 3 | Válida | 16.732 |
+| 4 | Válida | 19.457 |
+
+La mediana de p95 de las corridas válidas es **`19.457 ms`**. Las tres cumplen
+`p95 <= 500 ms`, por lo que la decisión del instrumento sigue siendo
+**`supported`** para el trayecto HTTP API + PostgreSQL en este entorno local.
+
+El JSON también declara expresamente que el cliente Android no formó parte de
+la medición; la correspondencia completa con la categoría continúa abierta.
 
 Este resultado no demuestra el comportamiento por Internet ni la latencia de
 renderizado del cliente Android; esas condiciones permanecen como amenazas a
 la validez y como presión futura para reabrir la decisión arquitectónica.
 
-No sobrescribir esta línea base. Si cambian código, semilla o condiciones, se
-debe generar otro archivo y conservar `baseline.json`.
+No sobrescribir estas líneas base. Si cambian código, semilla o condiciones, se
+debe generar otro archivo y conservar `baseline.json` y `baseline-s4-audit.json`.

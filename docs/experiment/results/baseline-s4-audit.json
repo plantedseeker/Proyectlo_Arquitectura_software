@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "captured_at_utc": "2026-08-20T07:40:26.236855+00:00",
+  "hypothesis_threshold_p95_ms": 500,
+  "decision": "supported",
+  "conditions": {
+    "base_url": "http://localhost:8080",
+    "synthetic_jobs": 10000,
+    "active_distribution": "90%",
+    "page_size": 100,
+    "requests_per_run": 40,
+    "concurrency": 10,
+    "runs": 4,
+    "discarded_run": 1,
+    "python": "3.12.13",
+    "git_revision": "d247f932140944ac9358a3dbbca28a7e89b6753a",
+    "machine": {
+      "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+      "manufacturer": "Acer",
+      "model": "Predator PH16-71",
+      "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+      "physical_memory_gib": 95.7,
+      "logical_cpus": 32,
+      "operating_system": "Windows-11-10.0.26200-SP0",
+      "architecture": "AMD64"
+    },
+    "energy": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energÃ­a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true,
+      "condition_source": "operating_system",
+      "power_profile_source": "operating_system"
+    },
+    "deployment_topology": {
+      "shared_physical_machine": true,
+      "load_generator": "Python process on the Windows host",
+      "api": "Docker Desktop container on the same host",
+      "database": "PostgreSQL 16 Docker Desktop container on the same host"
+    },
+    "instrument_scope": {
+      "measured_component": "HTTP API and PostgreSQL response path",
+      "android_client_included": false,
+      "catalog_category": "pending_teacher_confirmation",
+      "claim_limit": "This result does not measure Android rendering or end-to-end mobile latency"
+    }
+  },
+  "valid_runs_summary": {
+    "valid_run_count": 3,
+    "valid_run_numbers": [
+      2,
+      3,
+      4
+    ],
+    "p95_median_ms": 19.457,
+    "p95_min_ms": 16.732,
+    "p95_max_ms": 19.557
+  },
+  "runs": [
+    {
+      "run": 1,
+      "discarded": true,
+      "samples": 40,
+      "min_ms": 9.803,
+      "mean_ms": 16.448,
+      "p50_ms": 15.588,
+      "p95_ms": 26.444,
+      "max_ms": 29.031,
+      "duration_s": 0.079,
+      "throughput_requests_s": 505.412,
+      "items_per_response": 100
+    },
+    {
+      "run": 2,
+      "discarded": false,
+      "samples": 40,
+      "min_ms": 8.479,
+      "mean_ms": 14.36,
+      "p50_ms": 14.563,
+      "p95_ms": 19.557,
+      "max_ms": 20.901,
+      "duration_s": 0.063,
+      "throughput_requests_s": 639.823,
+      "items_per_response": 100
+    },
+    {
+      "run": 3,
+      "discarded": false,
+      "samples": 40,
+      "min_ms": 8.938,
+      "mean_ms": 12.451,
+      "p50_ms": 12.091,
+      "p95_ms": 16.732,
+      "max_ms": 21.115,
+      "duration_s": 0.058,
+      "throughput_requests_s": 694.013,
+      "items_per_response": 100
+    },
+    {
+      "run": 4,
+      "discarded": false,
+      "samples": 40,
+      "min_ms": 7.985,
+      "mean_ms": 13.586,
+      "p50_ms": 12.641,
+      "p95_ms": 19.457,
+      "max_ms": 19.966,
+      "duration_s": 0.06,
+      "throughput_requests_s": 665.226,
+      "items_per_response": 100
+    }
+  ]
+}

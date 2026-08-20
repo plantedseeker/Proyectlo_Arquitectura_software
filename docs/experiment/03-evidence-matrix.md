@@ -20,11 +20,11 @@ Fecha de preparación: 2026-08-20. “Preparado” significa que existe el artef
 | S3 | Escenario y umbral | Cumple | `01-preregistration.md` |
 | S3 | Script reproducible | Verificado | `02-protocol.md` y automatización PowerShell ejecutada |
 | S3 | Validez del instrumento | **Abierto** | Los cálculos y HTTP están verificados; falta contrastar el alcance con la categoría confirmada y, si es móvil, medir también en Android |
-| S4 | Línea base | Parcial | `results/baseline.json` es posterior al prerregistro, pero su registro de condiciones es incompleto para auditoría |
-| S4 | ≥3 corridas y primera descartada | Cumple | cuatro corridas; corrida 1 marcada `discarded: true` |
-| S4 | Mediana de corridas válidas | Cumple | mediana de p95 = **24.763 ms**, derivada de 22.430, 24.763 y 41.364 ms |
-| S4 | Condiciones registradas | **Abierto** | La línea base original no capturó energía ni identificación completa durante la corrida; ejecutar el instrumento v2 para generar `baseline-s4-audit.json` |
-| S4 | Topología de la medición | Declarada | Generador Python + API + PostgreSQL compartieron equipo físico; API y base corrieron en Docker Desktop |
+| S4 | Línea base | Cumple para API + PostgreSQL | `results/baseline-s4-audit.json`, posterior al prerregistro y a la revisión medida `d247f93` |
+| S4 | ≥3 corridas y primera descartada | Cumple | cuatro corridas en la evidencia v2; corrida 1 marcada `discarded: true` |
+| S4 | Mediana de corridas válidas | Cumple | mediana de p95 = **19.457 ms**, calculada y guardada por el instrumento v2 |
+| S4 | Condiciones registradas | Cumple | JSON v2 identifica máquina, energía, plan, carga, versión, duración y alcance durante la corrida |
+| S4 | Topología de la medición | Cumple | JSON v2 declara que generador Python + API + PostgreSQL compartieron equipo físico; API y base corrieron en Docker Desktop |
 | S4 | Comparación con H1 | Parcial | La ruta API + PostgreSQL apoyó H1; no se extiende la conclusión al rendimiento móvil de extremo a extremo |
 
 ## Verificaciones durante la preparación
@@ -33,4 +33,4 @@ Fecha de preparación: 2026-08-20. “Preparado” significa que existe el artef
 - Android: `test`, `lint` y APK aprobados con SDK 36 en GitHub Actions.
 - Backend: pruebas de integración contra PostgreSQL 16 aprobadas en GitHub Actions.
 - Instrumento: cinco pruebas de cálculo aprobadas; la versión 2 registra mediana, máquina, energía, topología y límites de alcance.
-- Docker Desktop 4.87.0 y Engine 29.7.2: PostgreSQL 16.14 y API ejecutados localmente; línea base real conservada en `results/baseline.json`.
+- Docker Desktop 4.87.0 y Engine 29.7.2: PostgreSQL 16.14 y API ejecutados localmente; líneas base conservadas en `results/baseline.json` y `results/baseline-s4-audit.json`.
