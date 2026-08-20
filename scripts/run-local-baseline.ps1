@@ -135,11 +135,12 @@ Invoke-Checked -Executable $python -Arguments @(
     '--runs', '4',
     '--requests', '40',
     '--concurrency', '10',
+    '--deployment-topology', 'same-machine',
     '--git-revision', $revision,
-    '--output', 'docs/experiment/results/baseline.json'
+    '--output', 'docs/experiment/results/baseline-s4-audit.json'
 )
 
 Write-Host ''
-Write-Host 'Linea base creada correctamente:' -ForegroundColor Green
-Write-Host (Join-Path $projectRoot 'docs\experiment\results\baseline.json')
+Write-Host 'Linea base auditable creada correctamente:' -ForegroundColor Green
+Write-Host (Join-Path $projectRoot 'docs\experiment\results\baseline-s4-audit.json')
 Write-Host 'Deja Docker Desktop abierto y avisame cuando veas este mensaje.'

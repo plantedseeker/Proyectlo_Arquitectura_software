@@ -26,6 +26,25 @@ Las tres corridas válidas quedaron por debajo de 500 ms y no produjeron
 respuestas inválidas. Por la regla definida antes de medir, la decisión del
 instrumento es **`supported`**: H1 queda apoyada para este entorno local.
 
+La mediana de los p95 de las tres corridas válidas (`22.430`, `24.763` y
+`41.364` ms) es **`24.763 ms`**.
+
+## Aclaración de auditoría sobre esta línea base
+
+- En la ejecución real, el generador de carga Python, la API y PostgreSQL 16
+  compartieron el mismo equipo físico: Python corrió en Windows y los otros dos
+  componentes en Docker Desktop sobre ese host.
+- El equipo se identificó después como **Acer Predator PH16-71**, Intel Core
+  i9-13900HX, 95.7 GiB de RAM, 32 procesadores lógicos y Windows 11
+  `10.0.26200`. El JSON original solo guardó sistema operativo y CPU lógicas.
+- La condición de energía no fue registrada durante la corrida original y no se
+  reconstruye retroactivamente. Por eso `baseline.json` conserva valor histórico,
+  pero todavía no cierra por sí solo el requisito de condiciones de S4.
+
+El instrumento versión 2 y `scripts/run-local-baseline.ps1` ya capturan máquina,
+energía, topología y mediana en una nueva evidencia llamada
+`baseline-s4-audit.json`, sin sobrescribir este archivo original.
+
 Este resultado no demuestra el comportamiento por Internet ni la latencia de
 renderizado del cliente Android; esas condiciones permanecen como amenazas a
 la validez y como presión futura para reabrir la decisión arquitectónica.

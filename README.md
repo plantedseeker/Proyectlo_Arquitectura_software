@@ -101,9 +101,13 @@ GitHub Actions ejecuta las pruebas de Android y una integración real del backen
 
 La evidencia está en `docs/experiment/`:
 
-- `00-decision-gates.md`: categoría, persistencia y alcance confirmados.
+- `00-decision-gates.md`: decisiones del equipo y confirmaciones externas pendientes.
 - `01-preregistration.md`: hipótesis, métrica, semilla y presión externa.
 - `02-protocol.md`: semilla y medición reproducibles.
 - `03-evidence-matrix.md`: estado honesto requisito por requisito.
 
-La línea base aún no debe ejecutarse: primero hay que guardar el prerregistro en un commit y conservar su hash. Después, el protocolo genera cuatro corridas, descarta la primera y compara las tres válidas con la hipótesis.
+La línea base histórica está conservada en `docs/experiment/results/baseline.json`.
+Después de la observación de auditoría, el protocolo prepara una segunda evidencia
+sin sobrescribirla: `baseline-s4-audit.json`, con mediana, identificación de la
+máquina, energía y topología. La matriz mantiene abierta la validez por categoría
+hasta anexar la confirmación del docente y ajustar el instrumento si corresponde.

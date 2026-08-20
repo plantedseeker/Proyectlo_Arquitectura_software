@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 import statistics
-from typing import Iterable
+from typing import Iterable, Mapping
 
 
 def percentile(values: Iterable[float], percentile_value: float) -> float:
@@ -28,4 +28,21 @@ def summarize(latencies_ms: Iterable[float]) -> dict[str, float | int]:
         "p50_ms": round(percentile(values, 50), 3),
         "p95_ms": round(percentile(values, 95), 3),
         "max_ms": round(max(values), 3),
+    }
+
+
+def summarize_valid_runs(runs: Iterable[Mapping[str, float | int]]) -> dict[str, float | int | list[int]]:
+    """Resume los p95 de las corridas válidas sin mezclar el calentamiento."""
+    measured = list(runs)
+    if not measured:
+        raise ValueError("se necesita al menos una corrida válida")
+
+    p95_values = [float(item["p95_ms"]) for item in measured]
+    run_numbers = [int(item["run"]) for item in measured]
+    return {
+        "valid_run_count": len(measured),
+        "valid_run_numbers": run_numbers,
+        "p95_median_ms": round(statistics.median(p95_values), 3),
+        "p95_min_ms": round(min(p95_values), 3),
+        "p95_max_ms": round(max(p95_values), 3),
     }
