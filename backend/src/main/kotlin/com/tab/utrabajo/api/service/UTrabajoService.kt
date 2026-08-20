@@ -23,7 +23,7 @@ class UTrabajoService(private val jdbc: JdbcClient) {
         val profile = jdbc.sql(
             """
             SELECT u.id, u.email, u.role, u.full_name, u.phone, u.address, u.photo_path, u.cv_path,
-                   u.works_now, u.current_company, u.current_role, u.completed,
+                   u.works_now, u.current_company, u.current_job_role, u.completed,
                    c.nit, c.worker_count, c.representative_name, c.document_type, c.document_number,
                    c.representative_document_path, c.rut_path, c.chamber_of_commerce_path
             FROM app_user u
@@ -42,7 +42,7 @@ class UTrabajoService(private val jdbc: JdbcClient) {
                 "cvUrl" to rs.getString("cv_path"),
                 "trabajaActual" to rs.getObject("works_now"),
                 "empresaActual" to rs.getString("current_company"),
-                "rolActual" to rs.getString("current_role"),
+                "rolActual" to rs.getString("current_job_role"),
                 "completado" to rs.getBoolean("completed"),
                 "nit" to rs.getString("nit"),
                 "numeroTrabajadores" to rs.getObject("worker_count"),
@@ -84,7 +84,7 @@ class UTrabajoService(private val jdbc: JdbcClient) {
         jdbc.sql(
             """
             UPDATE app_user
-            SET works_now = :worksNow, current_company = :company, current_role = :role,
+            SET works_now = :worksNow, current_company = :company, current_job_role = :role,
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = :id AND role = 'student'
             """.trimIndent()

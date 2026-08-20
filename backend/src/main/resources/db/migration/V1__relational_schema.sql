@@ -10,7 +10,7 @@ CREATE TABLE app_user (
     cv_path VARCHAR(500),
     works_now BOOLEAN,
     current_company VARCHAR(160),
-    current_role VARCHAR(160),
+    current_job_role VARCHAR(160),
     completed BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP

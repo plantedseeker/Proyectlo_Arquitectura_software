@@ -51,12 +51,12 @@ function Invoke-Checked {
 }
 
 Write-Host '1/6 Verificando Docker...'
-Invoke-Checked $docker version
-Invoke-Checked $compose version
+Invoke-Checked -Executable $docker -Arguments @('version')
+Invoke-Checked -Executable $compose -Arguments @('version')
 
 Write-Host '2/6 Construyendo y levantando PostgreSQL 16 y la API...'
-Invoke-Checked $compose up --build -d
-Invoke-Checked $compose ps
+Invoke-Checked -Executable $compose -Arguments @('up', '--build', '-d')
+Invoke-Checked -Executable $compose -Arguments @('ps')
 
 Write-Host '3/6 Esperando a que la API esté saludable...'
 $healthy = $false
@@ -73,12 +73,14 @@ foreach ($attempt in 1..60) {
     }
 }
 if (-not $healthy) {
-    Invoke-Checked $compose logs --no-color --tail 150 api db
+    Invoke-Checked -Executable $compose -Arguments @('logs', '--no-color', '--tail', '150', 'api', 'db')
     throw 'La API no alcanzó el estado saludable.'
 }
 
 Write-Host '4/6 Verificando el instrumento...'
-Invoke-Checked $python -m unittest discover -s experiments/postgresql/tests -v
+Invoke-Checked -Executable $python -Arguments @(
+    '-m', 'unittest', 'discover', '-s', 'experiments/postgresql/tests', '-v'
+)
 
 Write-Host '5/6 Cargando 10.000 ofertas sintéticas...'
 $seed = Get-Content -LiteralPath 'experiments\postgresql\seed.sql' -Raw
@@ -88,11 +90,13 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host '6/6 Ejecutando cuatro corridas de rendimiento...'
-Invoke-Checked $python experiments/postgresql/run_experiment.py `
-    --runs 4 `
-    --requests 40 `
-    --concurrency 10 `
-    --output docs/experiment/results/baseline.json
+Invoke-Checked -Executable $python -Arguments @(
+    'experiments/postgresql/run_experiment.py',
+    '--runs', '4',
+    '--requests', '40',
+    '--concurrency', '10',
+    '--output', 'docs/experiment/results/baseline.json'
+)
 
 Write-Host ''
 Write-Host 'Línea base creada correctamente:' -ForegroundColor Green
