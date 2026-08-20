@@ -1,6 +1,7 @@
 package com.tab.utrabajo.api.config
 
 import com.tab.utrabajo.api.auth.TokenAuthenticationFilter
+import jakarta.servlet.DispatcherType
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -23,7 +24,8 @@ class SecurityConfig {
         .csrf { it.disable() }
         .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
         .authorizeHttpRequests {
-            it.requestMatchers("/api/auth/**", "/actuator/health", "/uploads/**").permitAll()
+            it.dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
+                .requestMatchers("/api/auth/**", "/actuator/health", "/uploads/**").permitAll()
                 .anyRequest().authenticated()
         }
         .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)

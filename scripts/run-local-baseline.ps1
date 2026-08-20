@@ -5,6 +5,12 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $projectRoot
 
+# Evita depender del archivo de contexto que Docker Desktop puede bloquear
+# brevemente mientras actualiza su estado.
+Remove-Item Env:DOCKER_CONTEXT -ErrorAction SilentlyContinue
+$env:DOCKER_HOST = 'npipe:////./pipe/docker_engine'
+$env:COMPOSE_BAKE = 'false'
+
 function Resolve-Executable {
     param(
         [Parameter(Mandatory)] [string] $Command,
@@ -22,7 +28,7 @@ function Resolve-Executable {
         }
     }
 
-    throw "No se encontró $Command. Cierra y vuelve a abrir PowerShell después de instalarlo."
+    throw "No se encontro $Command. Cierra y vuelve a abrir PowerShell despues de instalarlo."
 }
 
 $dockerRoot = Join-Path $env:LOCALAPPDATA 'Programs\DockerDesktop\resources\bin'
@@ -46,7 +52,7 @@ function Invoke-Checked {
 
     & $Executable @Arguments
     if ($LASTEXITCODE -ne 0) {
-        throw "El comando terminó con código ${LASTEXITCODE}: $Executable $($Arguments -join ' ')"
+        throw "El comando termino con codigo ${LASTEXITCODE}: $Executable $($Arguments -join ' ')"
     }
 }
 
@@ -55,7 +61,22 @@ Invoke-Checked -Executable $docker -Arguments @('version')
 Invoke-Checked -Executable $compose -Arguments @('version')
 
 Write-Host '2/6 Construyendo y levantando PostgreSQL 16 y la API...'
-Invoke-Checked -Executable $compose -Arguments @('up', '--build', '-d')
+$composeStarted = $false
+foreach ($attempt in 1..3) {
+    & $compose @('up', '--build', '-d')
+    if ($LASTEXITCODE -eq 0) {
+        $composeStarted = $true
+        break
+    }
+
+    if ($attempt -lt 3) {
+        Write-Warning "Docker Compose no pudo iniciar (intento $attempt de 3). Reintentando..."
+        Start-Sleep -Seconds 3
+    }
+}
+if (-not $composeStarted) {
+    throw 'Docker Compose no pudo construir y levantar los servicios despues de tres intentos.'
+}
 Invoke-Checked -Executable $compose -Arguments @('ps')
 
 Write-Host '3/6 Esperando a que la API esté saludable...'
@@ -74,7 +95,7 @@ foreach ($attempt in 1..60) {
 }
 if (-not $healthy) {
     Invoke-Checked -Executable $compose -Arguments @('logs', '--no-color', '--tail', '150', 'api', 'db')
-    throw 'La API no alcanzó el estado saludable.'
+    throw 'La API no alcanzo el estado saludable.'
 }
 
 Write-Host '4/6 Verificando el instrumento...'
@@ -82,11 +103,11 @@ Invoke-Checked -Executable $python -Arguments @(
     '-m', 'unittest', 'discover', '-s', 'experiments/postgresql/tests', '-v'
 )
 
-Write-Host '5/6 Cargando 10.000 ofertas sintéticas...'
+Write-Host '5/6 Cargando 10.000 ofertas sinteticas...'
 $seed = Get-Content -LiteralPath 'experiments\postgresql\seed.sql' -Raw
 $seed | & $compose exec -T db psql -v ON_ERROR_STOP=1 -U utrabajo -d utrabajo
 if ($LASTEXITCODE -ne 0) {
-    throw 'La carga de la semilla falló.'
+    throw 'La carga de la semilla fallo.'
 }
 
 Write-Host '6/6 Ejecutando cuatro corridas de rendimiento...'
@@ -99,6 +120,6 @@ Invoke-Checked -Executable $python -Arguments @(
 )
 
 Write-Host ''
-Write-Host 'Línea base creada correctamente:' -ForegroundColor Green
+Write-Host 'Linea base creada correctamente:' -ForegroundColor Green
 Write-Host (Join-Path $projectRoot 'docs\experiment\results\baseline.json')
 Write-Host 'Deja Docker Desktop abierto y avísame cuando veas este mensaje.'

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.security.MessageDigest
 import java.security.SecureRandom
+import java.sql.Timestamp
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import java.util.Base64
@@ -152,7 +153,7 @@ class AuthService(
         )
             .param("hash", tokenHash(token))
             .param("userId", UUID.fromString(user.uid))
-            .param("expiresAt", Instant.now().plus(sessionHours, ChronoUnit.HOURS))
+            .param("expiresAt", Timestamp.from(Instant.now().plus(sessionHours, ChronoUnit.HOURS)))
             .update()
         return AuthResponse(token, user)
     }
