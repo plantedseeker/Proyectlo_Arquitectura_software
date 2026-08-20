@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-20T07:01:23.126539+00:00",
+  "hypothesis_threshold_p95_ms": 500,
+  "decision": "supported",
+  "conditions": {
+    "base_url": "http://localhost:8080",
+    "synthetic_jobs": 10000,
+    "active_distribution": "90%",
+    "page_size": 100,
+    "requests_per_run": 40,
+    "concurrency": 10,
+    "runs": 4,
+    "discarded_run": 1,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "logical_cpus": 32,
+    "git_revision": "62c48d59d8011d788120e442e8dab1968357c037"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "discarded": true,
+      "samples": 40,
+      "min_ms": 14.72,
+      "mean_ms": 22.912,
+      "p50_ms": 21.785,
+      "p95_ms": 31.652,
+      "max_ms": 32.457,
+      "duration_s": 0.112,
+      "throughput_requests_s": 358.499,
+      "items_per_response": 100
+    },
+    {
+      "run": 2,
+      "discarded": false,
+      "samples": 40,
+      "min_ms": 16.192,
+      "mean_ms": 20.353,
+      "p50_ms": 20.38,
+      "p95_ms": 24.763,
+      "max_ms": 25.824,
+      "duration_s": 0.092,
+      "throughput_requests_s": 434.309,
+      "items_per_response": 100
+    },
+    {
+      "run": 3,
+      "discarded": false,
+      "samples": 40,
+      "min_ms": 14.054,
+      "mean_ms": 18.651,
+      "p50_ms": 18.367,
+      "p95_ms": 22.43,
+      "max_ms": 24.664,
+      "duration_s": 0.087,
+      "throughput_requests_s": 460.82,
+      "items_per_response": 100
+    },
+    {
+      "run": 4,
+      "discarded": false,
+      "samples": 40,
+      "min_ms": 13.719,
+      "mean_ms": 24.014,
+      "p50_ms": 20.278,
+      "p95_ms": 41.364,
+      "max_ms": 46.842,
+      "duration_s": 0.104,
+      "throughput_requests_s": 382.883,
+      "items_per_response": 100
+    }
+  ]
+}
