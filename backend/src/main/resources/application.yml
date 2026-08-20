@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: UTrabajoApi
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/utrabajo}
+    username: ${DB_USER:utrabajo}
+    password: ${DB_PASSWORD:utrabajo_local}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:10}
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+server:
+  address: 0.0.0.0
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  upload-directory: ${UPLOAD_DIRECTORY:./data/uploads}
+  public-base-url: ${PUBLIC_BASE_URL:http://10.0.2.2:8080}
+  session-hours: ${SESSION_HOURS:168}
+  seed-demo: ${SEED_DEMO:true}

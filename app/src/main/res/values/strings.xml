@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 📱 General -->
+    <string name="app_name">UTrabajo</string>
+
+    <!-- 🔐 LOGIN -->
+    <string name="login_title">UT</string>
+    <string name="email_field">Correo electrónico *</string>
+    <string name="password_field">Contraseña *</string>
+    <string name="login_button">Iniciar sesión</string>
+
+    <!-- Compatibilidad: dos claves de loading por si tu código usa una u otra -->
+    <string name="login_loading">Iniciando sesión…</string>
+    <string name="loading_text">Iniciando sesión…</string>
+
+    <string name="company_login_button">Iniciar sesión - Empresa</string>
+    <string name="recover_password">Recuperar contraseña</string>
+    <string name="fill_all_fields_error">Por favor complete todos los campos</string>
+    <string name="uid_error">Error interno: UID no disponible.</string>
+    <string name="user_check_error">Error verificando usuario:</string>
+    <string name="company_check_error">Error verificando empresa:</string>
+
+    <!-- 🏢 REGISTRO EMPRESA -->
+    <string name="register_company_title">Registro de Empresa</string>
+    <string name="nit_field">NIT y Nombre de la empresa *</string>
+    <string name="phone_field">Número Telefónico de la empresa *</string>
+    <string name="company_email_field">Correo de la empresa *</string>
+    <string name="workers_field">Número de trabajadores *</string>
+    <string name="register_button">Siguiente</string>
+    <string name="register_loading">Registrando…</string>
+    <string name="invalid_email">Por favor ingrese un correo válido</string>
+    <string name="register_error_generic">Ocurrió un error al registrar la empresa</string>
+
+    <!-- 👔 REPRESENTANTE EMPRESA -->
+    <string name="company_rep_info_title">Información del representante</string>
+
+    <!-- ⚠️ ERRORES GENERALES -->
+    <string name="error_title_generic">Error</string>
+    <string name="error_all_fields_required">Por favor complete todos los campos</string>
+    <string name="error_invalid_email">Por favor ingrese un correo electrónico válido</string>
+    <string name="error_passwords_do_not_match">Las contraseñas no coinciden</string>
+    <string name="error_password_length">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="error_password_requirements">La contraseña debe tener:\n• Una letra mayúscula\n• Un número\n• Un símbolo especial</string>
+
+    <!-- 🔑 CAMPOS DE FORMULARIO -->
+    <string name="full_name_field">Nombre Completo *</string>
+    <string name="confirm_password_field">Confirmar Contraseña *</string>
+    <string name="full_name_label">Nombre completo *</string>
+    <string name="email_label">Correo electrónico *</string>
+    <string name="password_label">Contraseña *</string>
+    <string name="confirm_password_label">Confirmar contraseña *</string>
+
+    <!-- 🧩 REQUISITOS DE CONTRASEÑA -->
+    <string name="password_requirements_title">Requisitos de contraseña</string>
+    <string name="password_req_length">• Mínimo 8 caracteres</string>
+    <string name="password_req_upper">• Al menos una letra mayúscula</string>
+    <string name="password_req_number">• Al menos un número</string>
+    <string name="password_req_symbol">• Al menos un símbolo (ej: !, @, #, $)</string>
+    <string name="password_mismatch">Las contraseñas no coinciden</string>
+    <string name="password_too_short">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="password_requirements_failed">La contraseña debe tener:\n• Una letra mayúscula\n• Un número\n• Un símbolo especial</string>
+
+    <!-- ✅ MENSAJES DE ÉXITO -->
+    <string name="registration_success">✅ Registro exitoso! Redirigiendo...</string>
+    <string name="success_registration">✅ Registro exitoso. Redirigiendo...</string>
+    <string name="registration_error">Ocurrió un error al registrar el usuario</string>
+
+    <!-- 🔄 ESTADOS -->
+    <string name="registering">🔄 Registrando...</string>
+    <string name="continue_button">Continuar</string>
+
+    <!-- 🏠 HOME EMPRESA -->
+    <string name="company_home_title">Panel de Empresa</string>
+    <string name="company_home_welcome">Bienvenido, %1$s</string>
+    <string name="company_home_published_jobs">Ver ofertas publicadas</string>
+    <string name="company_home_create_offer">Crear nueva oferta</string>
+    <string name="company_home_profile">Perfil de la empresa</string>
+    <string name="company_home_logout">Cerrar sesión</string>
+
+
+    <string name="createjob_error_no_user">Error: No hay usuario autenticado</string>
+    <string name="createjob_title_topbar">Crear Nueva Oferta</string>
+    <string name="createjob_label_title">Título del puesto</string>
+    <string name="createjob_label_description">Descripción</string>
+    <string name="createjob_label_requirements">Requisitos (separados por coma)</string>
+    <string name="createjob_label_salary">Salario</string>
+    <string name="createjob_label_location">Ubicación</string>
+    <string name="createjob_required_fields_note">* Campos obligatorios</string>
+    <string name="createjob_toast_complete_fields">Completa todos los campos obligatorios</string>
+    <string name="createjob_toast_created">Empleo creado exitosamente</string>
+    <string name="createjob_error_fmt">Error: %s</string>
+    <string name="createjob_button_publish">Publicar Empleo</string>
+
+    <string name="empleo_back">Atrás</string>
+    <string name="empleo_create_job">Crear Empleo</string>
+    <string name="empleo_icon_job">Icono de empleo</string>
+    <string name="empleo_icon_finished">Icono finalizado</string>
+    <string name="empleo_status_in_process">En Proceso</string>
+    <string name="empleo_status_finished">Proceso finalizado</string>
+    <string name="empleo_sample_company">Microsoft</string>
+    <string name="empleo_sample_title">Full Stack Developer</string>
+    <string name="empleo_date_pattern">dd/MM/yyyy</string>
+    <string name="companydocs_instruction">En este módulo, por favor, adjunte los documentos solicitados (opcionales).</string>
+    <string name="companydocs_upload_rut">Suba copia del RUT (opcional).</string>
+    <string name="companydocs_label_rut">Por favor, adjunte copia del RUT (opcional).</string>
+    <string name="companydocs_upload_camara">Suba copia de la Cámara de Comercio (opcional).</string>
+    <string name="companydocs_label_camara">Por favor, adjunte copia de la Cámara de Comercio (opcional).</string>
+    <string name="companydocs_continue_without">Puede continuar sin subir documentos si lo prefiere.</string>
+    <string name="companydocs_error_no_registered">Empresa no registrada. Por favor, reinicie el proceso.</string>
+    <string name="companydocs_error_fmt">Error: %s</string>
+    <string name="companydocs_processing">Procesando...</string>
+    <string name="companydocs_button_continue">Continuar</string>
+
+
+    <string name="bottom_perfil_label">Perfil</string>
+    <string name="bottom_perfil_desc">Perfil</string>
+    <string name="bottom_chat_label">Chat</string>
+    <string name="bottom_chat_desc">Chat</string>
+    <string name="bottom_home_label">Hoger</string>
+    <string name="bottom_home_desc">Inicio</string>
+    <string name="bottom_notifications_label">Notificaciones</string>
+    <string name="bottom_notifications_desc">Notificaciones</string>
+    <string name="bottom_empleo_label">Empieo</string>
+    <string name="bottom_empleo_desc">Empleo</string>
+    <string name="company_header_title">Buscador</string>
+    <string name="company_header_subtitle">Descubre candidatos interesados en crecer contigo</string>
+    <string name="company_sample_candidate_name">Carlos Lopez</string>
+    <string name="company_sample_candidate_position">Full Stack Developer</string>
+
+
+    <string name="companyrep_instruction">Nombre del representante legal.</string>
+    <string name="companyrep_label_name">Nombre del representante legal *</string>
+    <string name="companyrep_label_type">Tipo de documento *</string>
+    <string name="companyrep_label_number">Número de documento *</string>
+    <string name="companyrep_upload_text">Suba copia del documento del representante legal (opcional).</string>
+    <string name="companyrep_label_upload">Por favor, adjunte copia del documento (opcional)</string>
+    <string name="companyrep_error_fill_fields">Por favor complete todos los campos obligatorios</string>
+    <string name="companyrep_error_no_registered">Empresa no registrada. Por favor, reinicie el proceso.</string>
+    <string name="companyrep_error_fmt">Error: %s</string>
+    <string name="companyrep_saving">Guardando...</string>
+    <string name="companyrep_next">Siguiente</string>
+    <string name="completecompany_title">Completa tu Usuario</string>
+    <string name="completecompany_avatar_desc">Avatar de la empresa</string>
+    <string name="completecompany_label_nit">NIT y Nombre de la empresa</string>
+    <string name="completecompany_label_phone">Número Telefónico de la empresa</string>
+    <string name="completecompany_label_email">Correo de la empresa</string>
+    <string name="completecompany_label_workers">Número de trabajadores</string>
+    <string name="completecompany_button_next">Siguiente</string>
+    <string name="jobcreated_title">¡Empleo Creado Exitosamente!</string>
+    <string name="jobcreated_subtitle">La oferta laboral ha sido guardada en la base de datos y está activa para que los estudiantes la vean.</string>
+    <string name="jobcreated_icon_success_desc">Éxito</string>
+    <string name="jobcreated_icon_home_desc">Ir al inicio</string>
+    <string name="jobcreated_icon_work_desc">Crear empleo</string>
+    <string name="jobcreated_icon_chat_desc">Ir al chat</string>
+    <string name="jobcreated_btn_home">Volver al Inicio</string>
+    <string name="jobcreated_btn_create_another">Crear Otro Empleo</string>
+    <string name="jobcreated_btn_chat">Ir al Chat</string>
+    <string name="jobslist_header_title">Buscador</string>
+    <string name="jobslist_header_subtitle">Encuentra el trabajo de tus sueños</string>
+    <string name="jobslist_search_placeholder">Buscar trabajos...</string>
+    <string name="jobslist_view_details">Ver detalles</string>
+    <string name="jobslist_view_details_desc">Ver detalles del empleo</string>
+    <string name="login_logo">UT</string>
+    <string name="login_slogan">Tu futuro profesional comienza aquí.</string>
+    <string name="profile_title">Mi Perfil</string>
+    <string name="profile_avatar_desc">Avatar</string>
+    <string name="profile_avatar_edit_desc">Editar avatar</string>
+    <string name="profile_user_not_authenticated">Usuario no autenticado</string>
+
+    <string name="profile_name_not_defined">Nombre no definido</string>
+    <string name="profile_no_phone">Sin teléfono</string>
+    <string name="profile_no_address">Sin dirección</string>
+
+    <string name="profile_label_phone">Teléfono</string>
+    <string name="profile_label_address">Dirección</string>
+
+    <string name="profile_save_phone_desc">Guardar teléfono</string>
+    <string name="profile_save_address_desc">Guardar dirección</string>
+
+    <string name="profile_edit_phone_desc">Editar teléfono</string>
+    <string name="profile_edit_address_desc">Editar dirección</string>
+    <string name="profile_edit_all_desc">Editar teléfono y dirección</string>
+
+    <string name="profile_saving">Guardando...</string>
+    <string name="profile_saved">Perfil actualizado</string>
+    <string name="profile_phone_saved">Teléfono actualizado</string>
+    <string name="profile_address_saved">Dirección actualizada</string>
+
+    <string name="profile_uploading_avatar">Subiendo avatar...</string>
+    <string name="profile_avatar_updated">Avatar actualizado</string>
+    <string name="profile_error_upload_avatar_fmt">Error subiendo avatar: %s</string>
+
+    <string name="profile_uploading_cv">Subiendo CV...</string>
+    <string name="profile_cv_uploaded">CV subido correctamente</string>
+    <string name="profile_error_upload_cv_fmt">Error subiendo CV: %s</string>
+
+    <string name="profile_error_saving_fmt">Error guardando: %s</string>
+    <string name="profile_error_reading_fmt">Error leyendo perfil: %s</string>
+
+    <string name="profile_button_save">Guardar</string>
+    <string name="profile_button_cancel">Cancelar</string>
+    <string name="profile_button_upload_cv">Subir Hoja de Vida</string>
+    <string name="profile_cv_loaded">HV cargada correctamente</string>
+    <string name="profile_cv_not_loaded">No hay HV cargada</string>
+    <string name="profile_button_logout">Cerrar sesión</string>
+
+    <string name="recover_instruction">Ingrese el usuario o correo de la cuenta que desea recuperar.</string>
+    <string name="recover_label_identifier">Usuario o correo</string>
+    <string name="recover_button_next">Siguiente</string>
+    <string name="recover_note_wait_period">Tenga en cuenta que, una vez restablecida la contraseña, deberá esperar un plazo de 1 mes para volver a restablecerla</string>
+
+    <string name="recover_success_message">Contraseña restablecida con éxito.</string>
+    <string name="recover_success_button">Siguiente</string>
+
+    <string name="registercompany_label_nit">NIT y Nombre de la empresa *</string>
+    <string name="registercompany_label_phone">Número Telefónico de la empresa *</string>
+    <string name="registercompany_label_email">Correo de la empresa *</string>
+    <string name="registercompany_label_workers">Número de trabajadores *</string>
+    <string name="registercompany_label_password">Contraseña *</string>
+    <string name="registercompany_label_confirm_password">Confirmar Contraseña *</string>
+    <string name="registercompany_error_fill_all">Por favor complete todos los campos</string>
+    <string name="registercompany_error_invalid_email">Por favor ingrese un correo electrónico válido</string>
+    <string name="registercompany_error_passwords_mismatch">Las contraseñas no coinciden</string>
+    <string name="registercompany_error_password_short">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="registercompany_registering">Registrando...</string>
+    <string name="registercompany_next">Siguiente</string>
+
+
+    <string name="registerstudent_label_fullname">Nombre Completo *</string>
+    <string name="registerstudent_label_email">Email *</string>
+    <string name="registerstudent_label_password">Contraseña *</string>
+    <string name="registerstudent_label_confirm_password">Confirmar Contraseña *</string>
+
+
+    <string name="registerstudent_pw_requirements_title">Requisitos de contraseña</string>
+    <string name="registerstudent_pw_requirements_list">• Mínimo 8 caracteres\n• Al menos una letra mayúscula\n• Al menos un número\n• Al menos un símbolo (ej: !, @, #, $)</string>
+
+
+    <string name="registerstudent_error_fill_all">Por favor complete todos los campos</string>
+    <string name="registerstudent_error_invalid_email">Por favor ingrese un email válido</string>
+    <string name="registerstudent_error_passwords_mismatch">Las contraseñas no coinciden</string>
+    <string name="registerstudent_error_password_short">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="registerstudent_error_password_rules">La contraseña debe tener:\n• Una letra mayúscula\n• Un número\n• Un símbolo especial</string>
+    <string name="registerstudent_registering">🔄 Registrando...</string>
+    <string name="registerstudent_continue">Continuar</string>
+    <string name="registerstudent_success_registered">✅ Registro exitoso! Redirigiendo...</string>
+    <string name="registerstudent_user_check_error_fmt">Error: %s</string>
+
+    <string name="registration_complete_message">Tu registro fue completado con éxito.</string>
+    <string name="registration_complete_button">Finalizar</string>
+    <string name="registration_complete_note">Para verificar tu perfil, por favor, ingresa al link enviado al correo que registraste.</string>
+    <string name="resetpw_title">Ingrese la nueva contraseña:</string>
+    <string name="resetpw_label_new">Nueva contraseña</string>
+    <string name="resetpw_label_confirm">Confirmar contraseña</string>
+    <string name="resetpw_requirements_title">Requisitos de contraseña</string>
+    <string name="resetpw_req_1">• Mínimo 8 caracteres</string>
+    <string name="resetpw_req_2">• Al menos una letra mayúscula</string>
+    <string name="resetpw_req_3">• Al menos un número</string>
+    <string name="resetpw_req_4">• Al menos un símbolo (ej: !, @, #, $)</string>
+    <string name="resetpw_error_fill">Por favor complete todos los campos</string>
+    <string name="resetpw_error_invalid">La contraseña no cumple los requisitos</string>
+    <string name="resetpw_error_mismatch">Las contraseñas no coinciden</string>
+    <string name="resetpw_success_changed">Contraseña cambiada exitosamente</string>
+    <string name="resetpw_button_next">Siguiente</string>
+    <string name="resetpw_note_wait_period">Tenga en cuenta que, una vez restablecida la contraseña, deberá esperar un plazo de 1 mes para volver a restablecerla</string>
+
+    <string name="role_selection_title">UT</string>
+    <string name="role_selection_student">Estudiante</string>
+    <string name="role_selection_company">Empresa</string>
+
+    <string name="splash_title">UT</string>
+    <string name="splash_slogan">Tu futuro profesional comienza aquí.</string>
+    <string name="splash_sign_in">Iniciar Sesión</string>
+    <string name="splash_register">Registro</string>
+
+    <string name="studentskills_title">Habilidades</string>
+    <string name="studentskills_add_skill">+ Añadir habilidad</string>
+
+    <string name="studentskills_error_unauthenticated">Error: Usuario no autenticado</string>
+    <string name="studentskills_error_at_least_one">Por favor ingrese al menos una habilidad</string>
+    <string name="studentskills_saving">Guardando...</string>
+    <string name="studentskills_continue">Continuar</string>
+    <string name="studentskills_error_fmt">Error: %s</string>
+
+    <string name="studentupload_title">Subir HV</string>
+    <string name="studentupload_field_label">Adjunte su hoja de vida (PDF) - Opcional</string>
+    <string name="studentupload_error_unauthenticated">Usuario no autenticado</string>
+    <string name="studentupload_uploading">Subiendo...</string>
+    <string name="studentupload_button_upload_and_finish">Subir HV y Finalizar</string>
+    <string name="studentupload_button_uploading">Subiendo...</string>
+    <string name="studentupload_continue_with_file">Continuar sin subir HV</string>
+    <string name="studentupload_continue_without_file">Finalizar sin subir HV</string>
+    <string name="studentupload_error_fmt">Error: %s</string>
+
+    <string name="studentwork_title">¿Trabajas actualmente?</string>
+    <string name="studentwork_yes">Si</string>
+    <string name="studentwork_no">No</string>
+    <string name="studentwork_company_label">Nombre de la empresa</string>
+    <string name="studentwork_role_label">Rol que desempeñas</string>
+    <string name="studentwork_error_unauthenticated">Error: Usuario no autenticado</string>
+    <string name="studentwork_saving">Guardando...</string>
+    <string name="studentwork_continue">Continuar</string>
+    <string name="studentwork_error_fmt">Error: %s</string>
+
+    <string name="verifycode_instruction">Por favor, ingrese el código de 5 dígitos enviado al correo o teléfono de la cuenta asociada</string>
+    <string name="verifycode_label">Código (5 dígitos)</string>
+    <string name="verifycode_button_next">Siguiente</string>
+    <string name="verifycode_button_resend">Reenviar código</string>
+    <string name="verifycode_sent_fmt">Código enviado a %1$s: %2$s</string>
+    <string name="verifycode_incorrect">Código incorrecto</string>
+    <string name="verifycode_length_error">El código debe tener 5 dígitos</string>
+    <string name="verifycode_expire_note">Tenga en cuenta que el código tiene una duración de 2 minutos. En caso de necesitar otro código, haga clic en Reenviar código.</string>
+
+    <!-- Strings para Chat y Postulaciones -->
+    <string name="chat_list_title">Mis Chats</string>
+    <string name="chat_list_subtitle">Conversaciones con empleadores</string>
+    <string name="chat_list_empty">No tienes chats activos</string>
+    <string name="chat_list_empty_subtitle">Aplica a empleos para empezar a chatear</string>
+
+    <string name="chat_detail_input_placeholder">Escribe un mensaje...</string>
+    <string name="chat_detail_back">Volver</string>
+
+    <string name="applications_title">Mis Postulaciones</string>
+    <string name="applications_subtitle">Empleos a los que has aplicado</string>
+    <string name="applications_empty">No has aplicado a ningún empleo</string>
+    <string name="applications_empty_subtitle">Encuentra empleos y aplica para empezar</string>
+    <string name="applications_button_chat">Abrir Chat</string>
+    <string name="applications_button_cancel">Cancelar Postulación</string>
+
+    <string name="apply_button">Aplicar</string>
+    <string name="application_success">Postulación enviada</string>
+    <string name="application_error">Error al aplicar</string>
+    <string name="cancel_success">Postulación cancelada</string>
+
+
+
+</resources>

@@ -1,0 +1,88 @@
+name: UTrabajo CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: utrabajo-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16.14-alpine
+        env:
+          POSTGRES_DB: utrabajo
+          POSTGRES_USER: utrabajo
+          POSTGRES_PASSWORD: utrabajo_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U utrabajo -d utrabajo"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 15
+    env:
+      DB_URL: jdbc:postgresql://localhost:5432/utrabajo
+      DB_USER: utrabajo
+      DB_PASSWORD: utrabajo_ci
+      SEED_DEMO: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x backend/gradlew
+      - name: Integration tests against PostgreSQL 16
+        run: ./backend/gradlew -p backend test --stacktrace
+      - name: Upload backend reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-reports
+          path: backend/build/reports/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+      - uses: gradle/actions/setup-gradle@v4
+      - uses: android-actions/setup-android@v3
+      - name: Install Android API 36
+        run: sdkmanager "platforms;android-36"
+      - name: Make wrapper executable
+        run: chmod +x gradlew
+      - name: Verify experiment calculations
+        run: python -m unittest discover -s experiments/postgresql/tests -v
+      - name: Unit tests, lint and debug APK
+        run: ./gradlew testDebugUnitTest lintDebug assembleDebug --stacktrace
+      - name: Upload Android reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-reports
+          path: |
+            app/build/reports/
+            app/build/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
