@@ -1,6 +1,6 @@
 # Registro de decisiones
 
-Estado: **categoría confirmada por el profesor y experimento de mensajería en preparación**.
+Estado: **categoría confirmada por el profesor y experimento de mensajería ejecutado**.
 
 | Decisión | Estado | Evidencia disponible |
 | --- | --- | --- |
@@ -20,6 +20,7 @@ extrema y está documentado en `dossier/` y `experimentos/medicion-escenario-01/
 ## Sello previo
 
 El prerregistro de ofertas fue sellado en `03c61d0` antes de su línea base
-histórica. El escenario de mensajería se sella por separado en
-`dossier/04-escenarios-calidad.md` antes de ejecutar k6; ambas evidencias se
-conservan sin reemplazarse.
+histórica. El escenario de mensajería se selló por separado en `e7e84d9`, antes
+de ejecutar k6. El resultado principal está en
+`experimentos/medicion-escenario-01/resultados/`; ambas evidencias se conservan
+sin reemplazarse.

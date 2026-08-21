@@ -121,3 +121,9 @@ Para ejecutar la medición de mensajería con k6:
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-baseline.ps1
 ```
+
+La línea base registrada el 2026-08-20 produjo p95 válidos de 9,451; 8,265 y
+9,109 ms, con mediana **9,109 ms** frente al umbral prerregistrado de 500 ms.
+k6, la API y PostgreSQL 16.14 compartieron Docker Desktop y el mismo equipo
+físico durante la medición. El conteo SQL verificó 1.000 conversaciones y
+289.000 mensajes con distribución extrema 900/90/9/1.

@@ -1,5 +1,10 @@
 # Protocolo reproducible
 
+> Protocolo histórico de la exploración de ofertas. La categoría confirmada es
+> **Mensajería y mesa de ayuda**; el protocolo evaluado está en
+> `experimentos/medicion-escenario-01/README.md` y se ejecuta con
+> `scripts/run-messaging-baseline.ps1`.
+
 El protocolo solo usa servicios locales y datos sintéticos. Requiere Docker Desktop con Compose y Python 3.10 o posterior.
 
 ## 1. Sellar la hipótesis
@@ -94,13 +99,15 @@ git add -f docs/experiment/results/baseline-s4-audit.json
 
 No modificar el JSON manualmente ni reemplazar líneas base anteriores.
 
-## 7. Comprobar correspondencia con la categoría
+## 7. Correspondencia histórica con la categoría
 
 Este instrumento mide únicamente el trayecto HTTP API + PostgreSQL que consume
 el cliente Android. No mide red móvil, decodificación en Retrofit ni renderizado
 en Compose. Por ello, sus resultados respaldan solo el componente servidor.
 
-Antes de declarar la validez completa, se debe anexar la confirmación de categoría
-del docente. Si la categoría confirmada es **aplicación móvil**, se requiere además
-un instrumento Android de extremo a extremo (dispositivo o emulador identificado)
-que mida desde la acción de abrir la lista hasta que las ofertas sean visibles.
+La categoría confirmada posteriormente fue **Mensajería y mesa de ayuda**. Por
+ello, este instrumento de ofertas se conserva como antecedente y no se presenta
+como evidencia de correspondencia con la categoría. El instrumento vigente mide
+los últimos 50 mensajes de una conversación de 100.000 mensajes mediante k6;
+su método, límites y resultado están en `dossier/04-escenarios-calidad.md` y
+`experimentos/medicion-escenario-01/`.

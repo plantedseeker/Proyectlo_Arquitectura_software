@@ -1,6 +1,6 @@
 # 04 — Escenario principal y línea base
 
-Estado: **prerregistro sellado antes de medir**.
+Estado: **prerregistro sellado y contrastado con medición real**.
 
 Categoría: **Mensajería y mesa de ayuda**, confirmada por el profesor.
 
@@ -50,8 +50,38 @@ La corrida no se acepta como línea base si ocurre cualquiera de estas condicion
 
 ## Contraste con el dato real
 
-Pendiente hasta ejecutar la medición posterior al commit de sellado. Se deben
-registrar los p95 individuales, su mediana, la decisión y cualquier desviación.
+La medición se ejecutó el 2026-08-20, hora de Colombia
+(`2026-08-21T03:32:21Z`), después del commit de sellado. La primera corrida se
+descartó como calentamiento, tal como se había definido antes de medir.
+
+| Corrida | Uso | Solicitudes | p95 | Comprobaciones | Fallos HTTP |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 1 | Calentamiento descartado | 40 | 83,553 ms | 100 % | 0 % |
+| 2 | Válida | 40 | 9,451 ms | 100 % | 0 % |
+| 3 | Válida | 40 | 8,265 ms | 100 % | 0 % |
+| 4 | Válida | 40 | 9,109 ms | 100 % | 0 % |
+
+La mediana de los p95 válidos fue **9,109 ms**. Las tres corridas válidas
+quedaron por debajo de 500 ms, devolvieron exactamente 50 mensajes por solicitud
+y no tuvieron respuestas fallidas. Por tanto, el dato **respalda H1** bajo las
+condiciones declaradas; no demuestra el mismo comportamiento en Internet, con
+varios nodos o con una carga diferente.
+
+Condiciones auditadas:
+
+- equipo Acer Predator PH16-71, Intel Core i9-13900HX, 95,7 GiB de RAM y 32 CPU
+  lógicas;
+- conectado a corriente antes y después, batería al 80 % y plan Equilibrado;
+- k6, API Spring Boot y PostgreSQL 16.14 compartieron Docker Desktop y el mismo
+  equipo físico;
+- `grafana/k6:0.54.0`, 10 VU, 40 solicitudes por corrida y páginas de 50;
+- revisión medida `c7c0edd66f49ed28fb694cf9c1970bab03c4b640`;
+- conteo real posterior: 1.000 conversaciones, 289.000 mensajes y distribución
+  900/90/9/1, incluida una conversación de 100.000 mensajes.
+
+La evidencia primaria está en `../experimentos/medicion-escenario-01/resultados/`:
+`contexto.json`, `run-1.json` a `run-4.json`, `resultado.json` y
+`verificacion-semilla.json`. No se observó ninguna condición de invalidación.
 
 ## Presiones que obligan a redecidir
 

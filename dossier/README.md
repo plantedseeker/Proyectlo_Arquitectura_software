@@ -10,6 +10,7 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | Atributos, escenarios y mapa atributo–decisión | `03-atributos-calidad.md` |
 | Prerregistro, método, invalidación y contraste | `04-escenarios-calidad.md` |
 | Experimento reproducible | `../experimentos/medicion-escenario-01/` |
+| Verificación literal del checklist | `05-checklist-semanas-1-4.md` |
 
 ## Contribución individual y pull requests
 

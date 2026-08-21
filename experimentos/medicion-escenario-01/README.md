@@ -28,3 +28,25 @@ exactamente 50 mensajes, tasa de fallos 0 y `p95 <= 500 ms`.
 
 El método, hipótesis e invalidaciones están registrados antes de medir en
 `../../dossier/04-escenarios-calidad.md`.
+
+## Resultado registrado
+
+La línea base se ejecutó el 2026-08-20, hora de Colombia. La primera corrida se
+descartó como calentamiento. Los p95 de las corridas válidas fueron 9,451;
+8,265 y 9,109 ms; su mediana fue **9,109 ms**, por debajo del umbral
+prerregistrado de 500 ms. Las 120 solicitudes válidas tuvieron 100 % de
+comprobaciones y 0 % de fallos.
+
+La medición usó la revisión
+`c7c0edd66f49ed28fb694cf9c1970bab03c4b640`. El generador k6, la API y
+PostgreSQL 16.14 compartieron Docker Desktop y el mismo Acer Predator PH16-71,
+conectado a corriente antes y después. `resultados/verificacion-semilla.json`
+documenta el conteo SQL real de 1.000 conversaciones y 289.000 mensajes.
+
+Archivos primarios:
+
+- `resultados/contexto.json`: máquina, energía, versión y topología;
+- `resultados/run-1.json` a `run-4.json`: salida resumida de cada corrida;
+- `resultados/resultado.json`: mediana, decisión y condiciones agregadas;
+- `resultados/verificacion-semilla.json`: conteo directo en PostgreSQL e índice.
+- `resultados/SHA256SUMS.txt`: huellas SHA-256 de la evidencia primaria.

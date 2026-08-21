@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "run": 3,
+  "discarded": false,
+  "captured_at_utc": "2026-08-21T03:32:18.401Z",
+  "tool": "k6",
+  "scenario": "latest_messages",
+  "requests": 40,
+  "checks_rate": 1,
+  "failed_request_rate": 0,
+  "valid_page_rate": 1,
+  "min_ms": 4.390689,
+  "mean_ms": 6.714116649999999,
+  "p50_ms": 6.687079000000001,
+  "p95_ms": 8.264639899999999,
+  "max_ms": 9.014237,
+  "thresholds_passed": true
+}
