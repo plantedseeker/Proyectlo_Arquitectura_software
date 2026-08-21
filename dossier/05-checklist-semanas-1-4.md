@@ -14,7 +14,7 @@ acciones que dependen de una persona o de GitHub.
 | 2 | Inventario inicial de riesgos | Cumple | R-01 a R-10 en `02-stakeholders-drivers.md` |
 | 2 | Drivers priorizados | Cumple | Tabla de cinco drivers con justificación |
 | 2 | Clasificar riesgos de IA | Cumple | Válido, genérico, irrelevante y falso con juicio del equipo |
-| 2 | Un PR fusionado por integrante | Cumple para `plantedseeker` | PR #1 fusionado; confirmar el número de integrantes para saber si hacen falta más PR |
+| 2 | Un PR fusionado por integrante | Parcial: 1 de 3 | PR #1 demuestra a `plantedseeker`; faltan dos PR reales desde las cuentas de los demás integrantes |
 | 3 | Estructura de escenarios | Cumple | Fuente, estímulo, artefacto, entorno, respuesta y medida |
 | 3 | Matriz priorizada de atributos | Cumple | Impacto, urgencia, puntaje y justificación |
 | 3 | RNF como escenarios | Cumple | MSG-PERF-01, MSG-SEC-01, MSG-REL-01 y MSG-MOD-01 |
@@ -30,6 +30,6 @@ acciones que dependen de una persona o de GitHub.
 
 1. Adjuntar captura o mensaje original con la categoría confirmada por el profesor.
 2. Transcribir la letra A/B/C y el significado definido en la guía del curso.
-3. Confirmar cuántos integrantes humanos tiene el equipo.
-4. Si hay más integrantes además de `plantedseeker`, obtener un PR fusionado y
-   atribuible por cada uno.
+3. Registrar nombres y cuentas de GitHub de los otros dos integrantes.
+4. Obtener un PR real, fusionado y atribuible para cada uno de esos dos
+   integrantes.
