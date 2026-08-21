@@ -11,6 +11,7 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | Prerregistro, método, invalidación y contraste | `04-escenarios-calidad.md` |
 | Experimento reproducible | `../experimentos/medicion-escenario-01/` |
 | Verificación literal del checklist | `05-checklist-semanas-1-4.md` |
+| Guion de exposición para tres personas | `06-guion-exposicion-3-personas.md` |
 
 ## Contribución individual y pull requests
 
@@ -21,8 +22,10 @@ y revisión mediante PR.
 | Integrante | Rama | PR fusionado | Estado |
 | --- | --- | --- | --- |
 | `plantedseeker` | `dossier/mensajeria-s1-s4` | [PR #1](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/1) | Fusionado el 2026-08-20 |
+| Integrante 2 — nombre y cuenta pendientes | Pendiente | Pendiente | Debe aportar un PR real |
+| Integrante 3 — nombre y cuenta pendientes | Pendiente | Pendiente | Debe aportar un PR real |
 
 El PR #1 contiene el contexto, los drivers, los escenarios, el instrumento y la
-línea base. Si existen más integrantes humanos, cada uno debe aportar y fusionar
-otro PR real con una contribución identificable. No se fabrican autores ni
-revisiones.
+línea base. Como el equipo expondrá con tres integrantes, los otros dos deben
+aportar y fusionar otro PR real con una contribución identificable. No se
+fabrican autores ni revisiones.
