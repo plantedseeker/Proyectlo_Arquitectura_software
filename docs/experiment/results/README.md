@@ -1,5 +1,9 @@
 # Resultados de línea base
 
+> Evidencia histórica de la exploración de ofertas. La categoría confirmada
+> posteriormente es **Mensajería y mesa de ayuda**; el resultado principal se
+> genera en `experimentos/medicion-escenario-01/` y no reemplaza estos archivos.
+
 Línea base capturada el 2026-08-20 después del prerregistro y almacenada en
 `baseline.json`. El archivo fue generado por el instrumento; no fue editado
 manualmente.

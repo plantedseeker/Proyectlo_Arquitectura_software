@@ -349,11 +349,27 @@ class UTrabajoService(private val jdbc: JdbcClient) {
         }.list()
     }
 
-    fun messages(principal: ApiPrincipal, chatId: UUID): List<Map<String, Any?>> {
+    fun messages(principal: ApiPrincipal, chatId: UUID, limit: Int, offset: Int): List<Map<String, Any?>> {
         requireChatParticipant(principal.userId, chatId)
+        require(limit in 1..100) { "limit debe estar entre 1 y 100" }
+        require(offset in 0..1_000_000) { "offset debe estar entre 0 y 1000000" }
         return jdbc.sql(
-            "SELECT id, chat_id, sender_id, body, sent_at FROM message WHERE chat_id = :chatId ORDER BY sent_at"
-        ).param("chatId", chatId).query { rs, _ ->
+            """
+            SELECT id, chat_id, sender_id, body, sent_at
+            FROM (
+                SELECT id, chat_id, sender_id, body, sent_at
+                FROM message
+                WHERE chat_id = :chatId
+                ORDER BY sent_at DESC, id DESC
+                LIMIT :limit OFFSET :offset
+            ) recent
+            ORDER BY sent_at ASC, id ASC
+            """.trimIndent()
+        )
+            .param("chatId", chatId)
+            .param("limit", limit)
+            .param("offset", offset)
+            .query { rs, _ ->
             linkedMapOf(
                 "id" to rs.getObject("id", UUID::class.java).toString(),
                 "chatId" to rs.getObject("chat_id", UUID::class.java).toString(),

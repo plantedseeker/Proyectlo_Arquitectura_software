@@ -39,6 +39,18 @@ services:
       retries: 15
     restart: unless-stopped
 
+  k6:
+    image: grafana/k6:0.54.0
+    profiles: ["load"]
+    environment:
+      BASE_URL: http://api:8080
+      CHAT_ID: 3fb4ce25-b840-4685-d2ea-53f9a4bdedc6
+    volumes:
+      - ./experimentos/medicion-escenario-01:/experiment
+    depends_on:
+      api:
+        condition: service_healthy
+
 volumes:
   postgres_data:
   upload_data:

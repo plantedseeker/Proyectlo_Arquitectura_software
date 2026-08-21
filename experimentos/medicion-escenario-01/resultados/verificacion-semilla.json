@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-08-21T03:35:54.282181+00:00",
+  "git_revision": "c7c0edd66f49ed28fb694cf9c1970bab03c4b640",
+  "verification_method": "Consulta SQL de solo lectura ejecutada directamente contra PostgreSQL después de la medición",
+  "postgresql_version": "16.14",
+  "seeded_conversations": 1000,
+  "total_messages": 289000,
+  "distribution": {
+    "conversations_with_10_messages": 900,
+    "conversations_with_1000_messages": 90,
+    "conversations_with_10000_messages": 9,
+    "conversations_with_100000_messages": 1
+  },
+  "minimum_messages_per_conversation": 10,
+  "maximum_messages_per_conversation": 100000,
+  "recent_messages_index": "CREATE INDEX idx_message_chat_recent ON public.message USING btree (chat_id, sent_at DESC, id DESC)",
+  "matches_preregistered_seed": true
+}

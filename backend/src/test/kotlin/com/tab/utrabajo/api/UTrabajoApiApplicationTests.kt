@@ -63,9 +63,39 @@ class UTrabajoApiApplicationTests(@Autowired private val mockMvc: MockMvc) {
                 .content("""{"message":"Hola, me interesa la oferta"}""")
         ).andExpect(status().isCreated)
 
-        mockMvc.perform(get("/api/chats/$chatId/messages").header("Authorization", "Bearer $companyToken"))
+        mockMvc.perform(
+            post("/api/chats/$chatId/messages")
+                .header("Authorization", "Bearer $companyToken")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""{"message":"Gracias por escribirnos"}""")
+        ).andExpect(status().isCreated)
+
+        mockMvc.perform(
+            post("/api/chats/$chatId/messages")
+                .header("Authorization", "Bearer $studentToken")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""{"message":"Quedo atento"}""")
+        ).andExpect(status().isCreated)
+
+        mockMvc.perform(
+            get("/api/chats/$chatId/messages?limit=2&offset=0")
+                .header("Authorization", "Bearer $companyToken")
+        )
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$[0].message").value("Hola, me interesa la oferta"))
+            .andExpect(jsonPath("$.length()").value(2))
+            .andExpect(jsonPath("$[0].message").value("Gracias por escribirnos"))
+            .andExpect(jsonPath("$[1].message").value("Quedo atento"))
+
+        mockMvc.perform(
+            get("/api/chats/$chatId/messages?limit=101")
+                .header("Authorization", "Bearer $companyToken")
+        ).andExpect(status().isBadRequest)
+
+        val outsiderToken = registerStudent("outsider-$unique@utrabajo.test")
+        mockMvc.perform(
+            get("/api/chats/$chatId/messages?limit=50")
+                .header("Authorization", "Bearer $outsiderToken")
+        ).andExpect(status().isForbidden)
 
         mockMvc.perform(delete("/api/applications/$applicationId").header("Authorization", "Bearer $studentToken"))
             .andExpect(status().isNoContent)
