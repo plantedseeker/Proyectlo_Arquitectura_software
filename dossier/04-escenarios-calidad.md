@@ -1,7 +1,9 @@
 # 04 — Escenario principal y línea base
 
-Estado: **prerregistro sellado antes de medir**.  
-Categoría: **Mensajería y mesa de ayuda**, confirmada por el profesor.  
+Estado: **prerregistro sellado antes de medir**.
+
+Categoría: **Mensajería y mesa de ayuda**, confirmada por el profesor.
+
 Commit de sellado: `e7e84d98b866cc0455fff8e45fb6bf2bdd00b983`.
 
 ## Hipótesis previa MSG-PERF-01

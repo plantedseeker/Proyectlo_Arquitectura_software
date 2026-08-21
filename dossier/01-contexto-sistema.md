@@ -1,7 +1,9 @@
 # 01 — Contexto del sistema
 
-Estado: **sistema base adoptado y ejecutado localmente**.  
-Categoría confirmada por el profesor: **Mensajería y mesa de ayuda**.  
+Estado: **sistema base adoptado y ejecutado localmente**.
+
+Categoría confirmada por el profesor: **Mensajería y mesa de ayuda**.
+
 Fuente de confirmación: comunicación del profesor reportada por el equipo el
 2026-08-20; la captura o mensaje original debe anexarse a la entrega.
 
