@@ -15,7 +15,7 @@ repositorio.
 | S2 | Base con código existente | Cumple | Aplicación Kotlin/Compose migrada a API REST |
 | S2 | Instrucciones para arrancar | Verificadas | `README.md`, Docker Compose y `scripts/run-messaging-baseline.ps1`, ejecutado de extremo a extremo |
 | S2 | Pruebas reales | Cumple | reglas Android, pruebas del instrumento e integración API/PostgreSQL |
-| S2 | CI en verde | Cumple | `UTrabajo CI` aprobó Android y backend en la [corrida 32343026489](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/32343026489) |
+| S2 | CI en verde | Cumple | `UTrabajo CI` aprobó Android, backend e instrumento en la [corrida del PR #1](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/32444217625) |
 | S2 | Persistencia PostgreSQL 16 | Cumple | imagen 16.14, Flyway, restricciones e índices verificados localmente |
 | S2 | Semilla sesgada | Cumple | `seed-mensajeria.sql` y `verificacion-semilla.json`: 900×10, 90×1.000, 9×10.000 y 1×100.000 |
 | S3 | Instrumentación | Cumple | `grafana/k6:0.54.0` ejecutó cuatro corridas en `/experimentos/medicion-escenario-01` |

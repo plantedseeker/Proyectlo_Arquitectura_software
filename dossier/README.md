@@ -20,7 +20,9 @@ y revisión mediante PR.
 
 | Integrante | Rama | PR fusionado | Estado |
 | --- | --- | --- | --- |
-| `plantedseeker` | `dossier/mensajeria-s1-s4` | Se completa al crear el PR | En preparación |
+| `plantedseeker` | `dossier/mensajeria-s1-s4` | [PR #1](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/1) | Fusionado el 2026-08-20 |
 
-Si existen más integrantes humanos, cada uno debe aportar y fusionar un PR real
-con una contribución identificable. No se fabrican autores ni revisiones.
+El PR #1 contiene el contexto, los drivers, los escenarios, el instrumento y la
+línea base. Si existen más integrantes humanos, cada uno debe aportar y fusionar
+otro PR real con una contribución identificable. No se fabrican autores ni
+revisiones.
