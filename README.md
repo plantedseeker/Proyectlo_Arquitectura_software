@@ -99,9 +99,13 @@ GitHub Actions ejecuta las pruebas de Android y una integración real del backen
 
 ## Experimento S1–S4
 
-La evidencia está en `docs/experiment/`:
+El dossier exigido por el checklist está en `dossier/` y el experimento principal
+en `experimentos/medicion-escenario-01/`. La categoría confirmada es
+**Mensajería y mesa de ayuda**.
 
-- `00-decision-gates.md`: decisiones del equipo y confirmaciones externas pendientes.
+La evidencia histórica de la primera exploración permanece en `docs/experiment/`:
+
+- `00-decision-gates.md`: decisiones y transición al experimento de mensajería.
 - `01-preregistration.md`: hipótesis, métrica, semilla y presión externa.
 - `02-protocol.md`: semilla y medición reproducibles.
 - `03-evidence-matrix.md`: estado honesto requisito por requisito.
@@ -109,5 +113,11 @@ La evidencia está en `docs/experiment/`:
 La línea base histórica está conservada en `docs/experiment/results/baseline.json`.
 Después de la observación de auditoría se generó una segunda evidencia sin
 sobrescribirla: `baseline-s4-audit.json`, con mediana, identificación de la
-máquina, energía y topología. La matriz mantiene abierta la validez por categoría
-hasta anexar la confirmación del docente y ajustar el instrumento si corresponde.
+máquina, energía y topología. Estos resultados de ofertas se conservan como
+históricos; el experimento evaluado por categoría es ahora el de mensajería.
+
+Para ejecutar la medición de mensajería con k6:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-baseline.ps1
+```

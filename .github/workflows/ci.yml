@@ -47,6 +47,13 @@ jobs:
       - run: chmod +x backend/gradlew
       - name: Integration tests against PostgreSQL 16
         run: ./backend/gradlew -p backend test --stacktrace
+      - name: Verify messaging experiment artifacts
+        run: |
+          python -m py_compile experimentos/medicion-escenario-01/resumir_resultados.py
+          docker compose --profile load config >/dev/null
+          docker run --rm \
+            -v "$PWD/experimentos/medicion-escenario-01:/experiment:ro" \
+            grafana/k6:0.54.0 inspect /experiment/carga-mensajeria.js
       - name: Upload backend reports on failure
         if: failure()
         uses: actions/upload-artifact@v4
