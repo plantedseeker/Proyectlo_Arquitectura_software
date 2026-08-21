@@ -6,7 +6,7 @@ Fecha de preparación: 2026-08-20. “Preparado” significa que existe el artef
 | --- | --- | --- | --- |
 | S1 | Sistema real identificado | Cumple | `README.md`: actores, flujos y arquitectura |
 | S1 | Categoría confirmada | Confirmada | Mensajería y mesa de ayuda; anexar la comunicación original del profesor |
-| S1 | Hipótesis antes de medir | Preparada para sellar | `dossier/04-escenarios-calidad.md`; aún no ejecutar la corrida de mensajería |
+| S1 | Hipótesis antes de medir | Sellada | `dossier/04-escenarios-calidad.md`; commit previo `e7e84d9` |
 | S1 | Métrica y escenario | Preparado | últimos 50 de 100.000 mensajes, p95 500 ms, 40 solicitudes y 10 VU |
 | S1 | Semilla identificada | Preparado | 1.000 conversaciones y 289.000 mensajes con distribución 900/90/9/1 |
 | S1 | Presión externa | Preparado | SLA 250 ms, más de 100.000 mensajes, Internet, páginas profundas o tiempo real |

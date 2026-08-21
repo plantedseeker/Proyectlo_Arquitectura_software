@@ -1,9 +1,8 @@
 # 04 — Escenario principal y línea base
 
-Estado: **prerregistro preparado; medir únicamente después de sellar este archivo
-en un commit**.  
+Estado: **prerregistro sellado antes de medir**.  
 Categoría: **Mensajería y mesa de ayuda**, confirmada por el profesor.  
-Commit de sellado: `PENDIENTE_DE_SELLAR`.
+Commit de sellado: `e7e84d98b866cc0455fff8e45fb6bf2bdd00b983`.
 
 ## Hipótesis previa MSG-PERF-01
 
