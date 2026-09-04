@@ -2,8 +2,8 @@
   "schema_version": 1,
   "scenario_id": "MSG-LOC-01",
   "category": "Mensajería y mesa de ayuda",
-  "captured_at_utc": "2026-09-04T20:43:40.268616+00:00",
-  "git_revision": "bdfd6f82c85bf295b550364a61541fb932bb87f7",
+  "captured_at_utc": "2026-09-04T21:27:33.518551+00:00",
+  "git_revision": "78d8b380ae0fdbaa5e0b595486e652ac71666cb3",
   "conditions": {
     "host": "PortatilCamilo",
     "platform": "Windows-10-10.0.26200-SP0",
@@ -33,14 +33,14 @@
     }
   },
   "derived_comparison": {
-    "deep_offset_to_keyset_execution_time_ratio": 315.515
+    "deep_offset_to_keyset_execution_time_ratio": 829.675
   },
   "scenarios": {
     "participant_authorization": {
       "query": "SELECT count(*) FROM chat WHERE id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid AND (student_id = '0d54f76b-f09b-30c9-a24f-1e204ca60c7a'::uuid OR company_id = '0d54f76b-f09b-30c9-a24f-1e204ca60c7a'::uuid)",
       "summary": {
-        "planning_time_ms": 0.558,
-        "execution_time_ms": 0.07,
+        "planning_time_ms": 0.604,
+        "execution_time_ms": 0.081,
         "returned_rows": 1,
         "root_node": "Aggregate",
         "node_types": [
@@ -66,8 +66,8 @@
           "Total Cost": 8.31,
           "Plan Rows": 1,
           "Plan Width": 8,
-          "Actual Startup Time": 0.018,
-          "Actual Total Time": 0.019,
+          "Actual Startup Time": 0.021,
+          "Actual Total Time": 0.021,
           "Actual Rows": 1,
           "Actual Loops": 1,
           "Shared Hit Blocks": 3,
@@ -94,8 +94,8 @@
               "Total Cost": 8.3,
               "Plan Rows": 1,
               "Plan Width": 0,
-              "Actual Startup Time": 0.016,
-              "Actual Total Time": 0.017,
+              "Actual Startup Time": 0.019,
+              "Actual Total Time": 0.019,
               "Actual Rows": 1,
               "Actual Loops": 1,
               "Index Cond": "(id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid)",
@@ -116,7 +116,7 @@
           ]
         },
         "Planning": {
-          "Shared Hit Blocks": 122,
+          "Shared Hit Blocks": 120,
           "Shared Read Blocks": 0,
           "Shared Dirtied Blocks": 0,
           "Shared Written Blocks": 0,
@@ -127,16 +127,16 @@
           "Temp Read Blocks": 0,
           "Temp Written Blocks": 0
         },
-        "Planning Time": 0.558,
+        "Planning Time": 0.604,
         "Triggers": [],
-        "Execution Time": 0.07
+        "Execution Time": 0.081
       }
     },
     "recent_offset_0": {
       "query": "SELECT id, chat_id, sender_id, body, sent_at FROM ( SELECT id, chat_id, sender_id, body, sent_at FROM message WHERE chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid ORDER BY sent_at DESC, id DESC LIMIT 50 OFFSET 0 ) recent ORDER BY sent_at ASC, id ASC",
       "summary": {
-        "planning_time_ms": 0.68,
-        "execution_time_ms": 0.112,
+        "planning_time_ms": 0.818,
+        "execution_time_ms": 0.12,
         "returned_rows": 50,
         "root_node": "Sort",
         "node_types": [
@@ -161,8 +161,8 @@
           "Total Cost": 45.75,
           "Plan Rows": 50,
           "Plan Width": 298,
-          "Actual Startup Time": 0.071,
-          "Actual Total Time": 0.073,
+          "Actual Startup Time": 0.073,
+          "Actual Total Time": 0.075,
           "Actual Rows": 50,
           "Actual Loops": 1,
           "Sort Key": [
@@ -193,7 +193,7 @@
               "Plan Rows": 50,
               "Plan Width": 298,
               "Actual Startup Time": 0.023,
-              "Actual Total Time": 0.036,
+              "Actual Total Time": 0.037,
               "Actual Rows": 50,
               "Actual Loops": 1,
               "Shared Hit Blocks": 7,
@@ -221,7 +221,7 @@
                   "Plan Rows": 100919,
                   "Plan Width": 298,
                   "Actual Startup Time": 0.022,
-                  "Actual Total Time": 0.033,
+                  "Actual Total Time": 0.034,
                   "Actual Rows": 50,
                   "Actual Loops": 1,
                   "Index Cond": "(chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid)",
@@ -253,16 +253,16 @@
           "Temp Read Blocks": 0,
           "Temp Written Blocks": 0
         },
-        "Planning Time": 0.68,
+        "Planning Time": 0.818,
         "Triggers": [],
-        "Execution Time": 0.112
+        "Execution Time": 0.12
       }
     },
     "deep_offset_50000": {
       "query": "SELECT id, chat_id, sender_id, body, sent_at FROM ( SELECT id, chat_id, sender_id, body, sent_at FROM message WHERE chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid ORDER BY sent_at DESC, id DESC LIMIT 50 OFFSET 50000 ) recent ORDER BY sent_at ASC, id ASC",
       "summary": {
-        "planning_time_ms": 0.715,
-        "execution_time_ms": 41.017,
+        "planning_time_ms": 0.741,
+        "execution_time_ms": 102.05,
         "returned_rows": 50,
         "root_node": "Sort",
         "node_types": [
@@ -272,10 +272,10 @@
           "Sort"
         ],
         "indexes": [],
-        "shared_hit_blocks": 13452,
-        "shared_read_blocks": 10688,
-        "temp_read_blocks": 2617,
-        "temp_written_blocks": 3864
+        "shared_hit_blocks": 13548,
+        "shared_read_blocks": 10592,
+        "temp_read_blocks": 2528,
+        "temp_written_blocks": 3865
       },
       "plan": {
         "Plan": {
@@ -286,8 +286,8 @@
           "Total Cost": 41519.74,
           "Plan Rows": 50,
           "Plan Width": 298,
-          "Actual Startup Time": 37.056,
-          "Actual Total Time": 40.38,
+          "Actual Startup Time": 98.329,
+          "Actual Total Time": 101.45,
           "Actual Rows": 50,
           "Actual Loops": 1,
           "Sort Key": [
@@ -297,16 +297,16 @@
           "Sort Method": "quicksort",
           "Sort Space Used": 41,
           "Sort Space Type": "Memory",
-          "Shared Hit Blocks": 13452,
-          "Shared Read Blocks": 10688,
+          "Shared Hit Blocks": 13548,
+          "Shared Read Blocks": 10592,
           "Shared Dirtied Blocks": 0,
           "Shared Written Blocks": 0,
           "Local Hit Blocks": 0,
           "Local Read Blocks": 0,
           "Local Dirtied Blocks": 0,
           "Local Written Blocks": 0,
-          "Temp Read Blocks": 2617,
-          "Temp Written Blocks": 3864,
+          "Temp Read Blocks": 2528,
+          "Temp Written Blocks": 3865,
           "Plans": [
             {
               "Node Type": "Limit",
@@ -317,20 +317,20 @@
               "Total Cost": 41518.21,
               "Plan Rows": 50,
               "Plan Width": 298,
-              "Actual Startup Time": 37.028,
-              "Actual Total Time": 40.358,
+              "Actual Startup Time": 98.304,
+              "Actual Total Time": 101.431,
               "Actual Rows": 50,
               "Actual Loops": 1,
-              "Shared Hit Blocks": 13452,
-              "Shared Read Blocks": 10688,
+              "Shared Hit Blocks": 13548,
+              "Shared Read Blocks": 10592,
               "Shared Dirtied Blocks": 0,
               "Shared Written Blocks": 0,
               "Local Hit Blocks": 0,
               "Local Read Blocks": 0,
               "Local Dirtied Blocks": 0,
               "Local Written Blocks": 0,
-              "Temp Read Blocks": 2617,
-              "Temp Written Blocks": 3864,
+              "Temp Read Blocks": 2528,
+              "Temp Written Blocks": 3865,
               "Plans": [
                 {
                   "Node Type": "Gather Merge",
@@ -341,22 +341,22 @@
                   "Total Cost": 45490.99,
                   "Plan Rows": 84100,
                   "Plan Width": 298,
-                  "Actual Startup Time": 26.651,
-                  "Actual Total Time": 39.35,
+                  "Actual Startup Time": 88.164,
+                  "Actual Total Time": 100.383,
                   "Actual Rows": 50050,
                   "Actual Loops": 1,
                   "Workers Planned": 2,
                   "Workers Launched": 2,
-                  "Shared Hit Blocks": 13452,
-                  "Shared Read Blocks": 10688,
+                  "Shared Hit Blocks": 13548,
+                  "Shared Read Blocks": 10592,
                   "Shared Dirtied Blocks": 0,
                   "Shared Written Blocks": 0,
                   "Local Hit Blocks": 0,
                   "Local Read Blocks": 0,
                   "Local Dirtied Blocks": 0,
                   "Local Written Blocks": 0,
-                  "Temp Read Blocks": 2617,
-                  "Temp Written Blocks": 3864,
+                  "Temp Read Blocks": 2528,
+                  "Temp Written Blocks": 3865,
                   "Plans": [
                     {
                       "Node Type": "Sort",
@@ -367,38 +367,38 @@
                       "Total Cost": 34783.74,
                       "Plan Rows": 42050,
                       "Plan Width": 298,
-                      "Actual Startup Time": 24.685,
-                      "Actual Total Time": 26.32,
-                      "Actual Rows": 16808,
+                      "Actual Startup Time": 80.1,
+                      "Actual Total Time": 81.695,
+                      "Actual Rows": 16793,
                       "Actual Loops": 3,
                       "Sort Key": [
                         "message.sent_at DESC",
                         "message.id DESC"
                       ],
                       "Sort Method": "external merge",
-                      "Sort Space Used": 9472,
+                      "Sort Space Used": 9624,
                       "Sort Space Type": "Disk",
-                      "Shared Hit Blocks": 13452,
-                      "Shared Read Blocks": 10688,
+                      "Shared Hit Blocks": 13548,
+                      "Shared Read Blocks": 10592,
                       "Shared Dirtied Blocks": 0,
                       "Shared Written Blocks": 0,
                       "Local Hit Blocks": 0,
                       "Local Read Blocks": 0,
                       "Local Dirtied Blocks": 0,
                       "Local Written Blocks": 0,
-                      "Temp Read Blocks": 2617,
-                      "Temp Written Blocks": 3864,
+                      "Temp Read Blocks": 2528,
+                      "Temp Written Blocks": 3865,
                       "Workers": [
                         {
                           "Worker Number": 0,
                           "Sort Method": "external merge",
-                          "Sort Space Used": 11600,
+                          "Sort Space Used": 11840,
                           "Sort Space Type": "Disk"
                         },
                         {
                           "Worker Number": 1,
                           "Sort Method": "external merge",
-                          "Sort Space Used": 9736,
+                          "Sort Space Used": 9352,
                           "Sort Space Type": "Disk"
                         }
                       ],
@@ -414,14 +414,14 @@
                           "Total Cost": 25555.21,
                           "Plan Rows": 42050,
                           "Plan Width": 298,
-                          "Actual Startup Time": 3.921,
-                          "Actual Total Time": 12.053,
+                          "Actual Startup Time": 29.249,
+                          "Actual Total Time": 66.403,
                           "Actual Rows": 33333,
                           "Actual Loops": 3,
                           "Filter": "(chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid)",
                           "Rows Removed by Filter": 63000,
-                          "Shared Hit Blocks": 13362,
-                          "Shared Read Blocks": 10688,
+                          "Shared Hit Blocks": 13458,
+                          "Shared Read Blocks": 10592,
                           "Shared Dirtied Blocks": 0,
                           "Shared Written Blocks": 0,
                           "Local Hit Blocks": 0,
@@ -452,16 +452,16 @@
           "Temp Read Blocks": 0,
           "Temp Written Blocks": 0
         },
-        "Planning Time": 0.715,
+        "Planning Time": 0.741,
         "Triggers": [],
-        "Execution Time": 41.017
+        "Execution Time": 102.05
       }
     },
     "keyset_after_49999": {
       "query": "SELECT id, chat_id, sender_id, body, sent_at FROM ( SELECT id, chat_id, sender_id, body, sent_at FROM message WHERE chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid AND (sent_at, id) < ('2026-01-02 00:00:50.001+00'::timestamptz, '3932beb3-401e-f61d-a864-787511691e64'::uuid) ORDER BY sent_at DESC, id DESC LIMIT 50 ) recent ORDER BY sent_at ASC, id ASC",
       "summary": {
-        "planning_time_ms": 0.69,
-        "execution_time_ms": 0.13,
+        "planning_time_ms": 0.699,
+        "execution_time_ms": 0.123,
         "returned_rows": 50,
         "root_node": "Sort",
         "node_types": [
@@ -486,7 +486,7 @@
           "Total Cost": 127.65,
           "Plan Rows": 50,
           "Plan Width": 298,
-          "Actual Startup Time": 0.065,
+          "Actual Startup Time": 0.066,
           "Actual Total Time": 0.067,
           "Actual Rows": 50,
           "Actual Loops": 1,
@@ -517,8 +517,8 @@
               "Total Cost": 126.11,
               "Plan Rows": 50,
               "Plan Width": 298,
-              "Actual Startup Time": 0.02,
-              "Actual Total Time": 0.03,
+              "Actual Startup Time": 0.019,
+              "Actual Total Time": 0.028,
               "Actual Rows": 50,
               "Actual Loops": 1,
               "Shared Hit Blocks": 6,
@@ -545,8 +545,8 @@
                   "Total Cost": 44814.54,
                   "Plan Rows": 17827,
                   "Plan Width": 298,
-                  "Actual Startup Time": 0.019,
-                  "Actual Total Time": 0.027,
+                  "Actual Startup Time": 0.018,
+                  "Actual Total Time": 0.025,
                   "Actual Rows": 50,
                   "Actual Loops": 1,
                   "Index Cond": "((chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid) AND (ROW(sent_at, id) < ROW('2026-01-02 00:00:50.001+00'::timestamp with time zone, '3932beb3-401e-f61d-a864-787511691e64'::uuid)))",
@@ -578,9 +578,9 @@
           "Temp Read Blocks": 0,
           "Temp Written Blocks": 0
         },
-        "Planning Time": 0.69,
+        "Planning Time": 0.699,
         "Triggers": [],
-        "Execution Time": 0.13
+        "Execution Time": 0.123
       }
     }
   }

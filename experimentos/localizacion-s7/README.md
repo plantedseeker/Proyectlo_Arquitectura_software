@@ -92,17 +92,17 @@ como alternativa para navegación profunda.
 
 | Escenario | Ejecución | Evidencia del plan |
 | --- | ---: | --- |
-| Autorizar participante | 0,070 ms | `chat_pkey`, 3 buffers hit |
-| Página reciente `OFFSET 0` | 0,112 ms | `idx_message_chat_recent`, 13 buffers hit |
-| Página profunda `OFFSET 50000` | 41,017 ms | `Seq Scan`, 24.140 buffers hit/read y trabajo temporal |
-| Cursor equivalente | 0,130 ms | `idx_message_chat_recent`, 12 buffers hit |
+| Autorizar participante | 0,081 ms | `chat_pkey`, 3 buffers hit |
+| Página reciente `OFFSET 0` | 0,120 ms | `idx_message_chat_recent`, 13 buffers hit |
+| Página profunda `OFFSET 50000` | 102,050 ms | `Seq Scan`, 24.140 buffers hit/read y trabajo temporal |
+| Cursor equivalente | 0,123 ms | `idx_message_chat_recent`, 12 buffers hit |
 
-El offset profundo tardó **315,515×** el cursor en esta observación. Los datos y
+El offset profundo tardó **829,675×** el cursor en esta observación. Los datos y
 planes completos están en [`resultados/localizacion.json`](resultados/localizacion.json);
 la interpretación auditada está en [`resultados/README.md`](resultados/README.md).
 
-La primera captura precede al commit que incorporará el instrumento. Debe
-repetirse después de ese commit para que el `git_revision` final lo incluya.
+La captura final se ejecutó después del commit del instrumento y registra
+`78d8b380ae0fdbaa5e0b595486e652ac71666cb3` como `git_revision`.
 
 ## Relación con decisiones
 

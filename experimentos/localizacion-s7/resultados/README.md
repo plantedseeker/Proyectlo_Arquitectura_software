@@ -1,6 +1,6 @@
 # Resultado MSG-LOC-01
 
-Ejecución: 2026-09-04T20:43:40Z.
+Ejecución final: 2026-09-04T21:27:33Z.
 
 ## Condiciones
 
@@ -9,19 +9,19 @@ Ejecución: 2026-09-04T20:43:40Z.
 - PostgreSQL: 16.14 en Docker Desktop local.
 - Instrumento: Python en el mismo equipo físico; API no incluida.
 - Conversación: 100.000 mensajes; páginas comparadas de 50 elementos.
-- Revisión del sistema base: `bdfd6f82c85bf295b550364a61541fb932bb87f7`.
+- Revisión con el instrumento: `78d8b380ae0fdbaa5e0b595486e652ac71666cb3`.
 
 ## Datos medidos
 
 | Escenario SQL | Planificación | Ejecución | Buffers hit/read | Temporales read/write | Índice |
 | --- | ---: | ---: | ---: | ---: | --- |
-| Autorizar participante | 0,558 ms | **0,070 ms** | 3 / 0 | 0 / 0 | `chat_pkey` |
-| Página reciente, `OFFSET 0` | 0,680 ms | **0,112 ms** | 13 / 0 | 0 / 0 | `idx_message_chat_recent` |
-| Página profunda, `OFFSET 50000` | 0,715 ms | **41,017 ms** | 13.452 / 10.688 | 2.617 / 3.864 | ninguno; `Seq Scan` |
-| Cursor después de posición 49.999 | 0,690 ms | **0,130 ms** | 12 / 0 | 0 / 0 | `idx_message_chat_recent` |
+| Autorizar participante | 0,604 ms | **0,081 ms** | 3 / 0 | 0 / 0 | `chat_pkey` |
+| Página reciente, `OFFSET 0` | 0,818 ms | **0,120 ms** | 13 / 0 | 0 / 0 | `idx_message_chat_recent` |
+| Página profunda, `OFFSET 50000` | 0,741 ms | **102,050 ms** | 13.548 / 10.592 | 2.528 / 3.865 | ninguno; `Seq Scan` |
+| Cursor después de posición 49.999 | 0,699 ms | **0,123 ms** | 12 / 0 | 0 / 0 | `idx_message_chat_recent` |
 
 Los cuatro escenarios devolvieron las filas esperadas. El cociente derivado
-`OFFSET 50000 / cursor` fue **315,515×**. Este cociente se calcula con los
+`OFFSET 50000 / cursor` fue **829,675×**. Este cociente se calcula con los
 tiempos de ejecución registrados; no es una nueva corrida.
 
 ## Interpretación
@@ -37,13 +37,12 @@ diferentes. S4 mide HTTP completo; S7 localiza trabajo dentro de PostgreSQL.
 
 ## Estado de reproducibilidad
 
-La ejecución es real y el JSON está íntegro, pero ocurrió antes del commit que
-incorporará el instrumento S7. Por eso la revisión registrada corresponde al
-último `HEAD` del sistema base. Después de que el responsable revise y haga el
-primer commit del instrumento, se repetirá con `-SkipBuild -SkipSeed` para que
-la revisión final contenga el propio instrumento.
+La ejecución es real, el JSON está íntegro y se produjo después del commit que
+incorporó el instrumento S7. El campo `git_revision` coincide con
+`78d8b380ae0fdbaa5e0b595486e652ac71666cb3`, por lo que la evidencia puede
+trazarse a la versión exacta del instrumento.
 
 ## Integridad
 
 - [`localizacion.json`](localizacion.json): evidencia primaria y planes completos.
-- SHA-256 actual: `2A847FE02DB4B2E0EDE0A2599647E6974AC8EBFB6F6D2E26C9D3FAC95A529F38`.
+- SHA-256 actual: `B7EE659CDB1D2D231680D3397AFAFC5A908C817F9C081F8100DBCD89528DF0BE`.

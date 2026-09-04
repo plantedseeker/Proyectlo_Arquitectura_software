@@ -14,8 +14,8 @@ paginación de datos:
   conversación de 100.000, con 10 VU y 40 solicitudes por corrida válida.
 - S4: 100 % de comprobaciones y 0 % de fallos en 120 solicitudes válidas.
 - S4: k6, API y PostgreSQL compartieron el mismo equipo físico.
-- S7: autorización 0,070 ms; `OFFSET 0` 0,112 ms; `OFFSET 50000`
-  41,017 ms; cursor equivalente 0,130 ms. El offset profundo costó 315,515× el
+- S7: autorización 0,081 ms; `OFFSET 0` 0,120 ms; `OFFSET 50000`
+  102,050 ms; cursor equivalente 0,123 ms. El offset profundo costó 829,675× el
   cursor y usó escaneo secuencial/trabajo temporal; reciente y cursor usaron
   `idx_message_chat_recent`.
 

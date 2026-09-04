@@ -25,7 +25,7 @@ personales de usuarios reales para construir la semilla.
 | --- | --- |
 | Trazar k6 → API → servicio/JDBC → PostgreSQL | Aceptado porque coincide con código y protocolo |
 | Aclarar que JDBC/Flyway no son contenedores independientes | Aceptado tras contraste con despliegue |
-| Usar EXPLAIN para comparar página reciente, profunda y cursor | Aceptado y ejecutado como MSG-LOC-01; la primera captura queda identificada como preliminar hasta repetirla sobre el commit del instrumento |
+| Usar EXPLAIN para comparar página reciente, profunda y cursor | Aceptado y ejecutado como MSG-LOC-01; la captura final registra el commit que contiene el instrumento |
 | Extraer un microservicio de mensajería | Rechazado por ahora: no hay presión medida suficiente |
 | Adoptar cursor inmediatamente | Modificado: migración compatible solo con evidencia y necesidad real |
 | Registrar revisión par/comité como cumplidos | Rechazado: requieren personas y hechos verificables |

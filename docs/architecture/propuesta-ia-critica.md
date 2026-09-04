@@ -18,7 +18,7 @@ solo hecho de haber sido generada ni se presenta como código implementado.
 | --- | --- | --- |
 | Identificar mensajería como frontera observable | Aceptada | Coincide con la categoría confirmada y el flujo C3 real |
 | Mantener tamaño máximo de página e índice compuesto | Aceptada | Existe en código y S4 respalda la página reciente bajo condiciones declaradas |
-| Comparar cursor con `OFFSET` profundo | Aceptada como experimento | MSG-LOC-01 observó 41,017 ms con `OFFSET 50000` y 0,130 ms con cursor; la captura debe repetirse sobre el commit del instrumento |
+| Comparar cursor con `OFFSET` profundo | Aceptada como experimento | MSG-LOC-01 observó 102,050 ms con `OFFSET 50000` y 0,123 ms con cursor en la captura final |
 | Migrar inmediatamente Android a cursor | Modificada | Se propone compatibilidad gradual y solo si existe navegación profunda y evidencia |
 | Extraer ya un microservicio de chat | Rechazada por ahora | S4 no muestra incumplimiento ni necesidad de escalado independiente; aumenta operación y seguridad distribuida |
 | Incorporar Redis como caché | Rechazada | No se midió repetición que justifique caché ni se definió invalidación de mensajes |

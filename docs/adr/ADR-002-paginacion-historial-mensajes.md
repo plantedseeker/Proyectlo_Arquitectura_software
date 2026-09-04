@@ -14,9 +14,9 @@ por defecto de 50 mensajes y no expone hoy navegación profunda.
 
 S4 midió exclusivamente `limit=50&offset=0` sobre una conversación de 100.000
 mensajes. Su mediana de p95 fue 9,109 ms; no permite extrapolar páginas
-profundas. MSG-LOC-01 observó 0,112 ms para la consulta reciente, 41,017 ms
-para `OFFSET 50000` y 0,130 ms para el cursor equivalente. El offset profundo
-costó 315,515× el cursor bajo las condiciones registradas.
+profundas. MSG-LOC-01 observó 0,120 ms para la consulta reciente, 102,050 ms
+para `OFFSET 50000` y 0,123 ms para el cursor equivalente. El offset profundo
+costó 829,675× el cursor bajo las condiciones registradas.
 
 ## Decisión propuesta
 
@@ -95,7 +95,7 @@ anterior.
 
 ## Confirmación requerida
 
-El equipo debe revisar el JSON y ratificar o ajustar la decisión. Además debe
-repetir la captura después del commit que contiene el instrumento, porque la
-primera ejecución registró la revisión base previa. No se rellenarán resultados
-estimados como si fueran mediciones.
+El equipo debe revisar el JSON y ratificar o ajustar la decisión. La captura
+final registra el commit `78d8b380ae0fdbaa5e0b595486e652ac71666cb3`, que ya
+contiene el instrumento. No se rellenarán resultados estimados como si fueran
+mediciones.
