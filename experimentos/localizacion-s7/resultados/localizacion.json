@@ -1,0 +1,587 @@
+{
+  "schema_version": 1,
+  "scenario_id": "MSG-LOC-01",
+  "category": "Mensajería y mesa de ayuda",
+  "captured_at_utc": "2026-09-04T21:27:33.518551+00:00",
+  "git_revision": "78d8b380ae0fdbaa5e0b595486e652ac71666cb3",
+  "conditions": {
+    "host": "PortatilCamilo",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpus": 32,
+    "manufacturer": "Acer",
+    "model": "Predator PH16-71",
+    "physical_memory_gib": "95.7",
+    "energy_condition": "plugged_in",
+    "battery_percent": "79",
+    "active_power_scheme": "GUID de plan de energía: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+    "postgres_version": "16.14",
+    "shared_physical_machine": true,
+    "load_generator": "Python script on host",
+    "database": "PostgreSQL container in local Docker Desktop",
+    "api_included": false
+  },
+  "controls": {
+    "chat_id": "3fb4ce25-b840-4685-d2ea-53f9a4bdedc6",
+    "message_count": 100000,
+    "page_size": 50,
+    "deep_offset": 50000,
+    "participant_id": "0d54f76b-f09b-30c9-a24f-1e204ca60c7a",
+    "cursor": {
+      "sent_at": "2026-01-02 00:00:50.001+00",
+      "id": "3932beb3-401e-f61d-a864-787511691e64"
+    }
+  },
+  "derived_comparison": {
+    "deep_offset_to_keyset_execution_time_ratio": 829.675
+  },
+  "scenarios": {
+    "participant_authorization": {
+      "query": "SELECT count(*) FROM chat WHERE id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid AND (student_id = '0d54f76b-f09b-30c9-a24f-1e204ca60c7a'::uuid OR company_id = '0d54f76b-f09b-30c9-a24f-1e204ca60c7a'::uuid)",
+      "summary": {
+        "planning_time_ms": 0.604,
+        "execution_time_ms": 0.081,
+        "returned_rows": 1,
+        "root_node": "Aggregate",
+        "node_types": [
+          "Aggregate",
+          "Index Scan"
+        ],
+        "indexes": [
+          "chat_pkey"
+        ],
+        "shared_hit_blocks": 3,
+        "shared_read_blocks": 0,
+        "temp_read_blocks": 0,
+        "temp_written_blocks": 0
+      },
+      "plan": {
+        "Plan": {
+          "Node Type": "Aggregate",
+          "Strategy": "Plain",
+          "Partial Mode": "Simple",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 8.3,
+          "Total Cost": 8.31,
+          "Plan Rows": 1,
+          "Plan Width": 8,
+          "Actual Startup Time": 0.021,
+          "Actual Total Time": 0.021,
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 3,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Index Scan",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Scan Direction": "Forward",
+              "Index Name": "chat_pkey",
+              "Relation Name": "chat",
+              "Alias": "chat",
+              "Startup Cost": 0.28,
+              "Total Cost": 8.3,
+              "Plan Rows": 1,
+              "Plan Width": 0,
+              "Actual Startup Time": 0.019,
+              "Actual Total Time": 0.019,
+              "Actual Rows": 1,
+              "Actual Loops": 1,
+              "Index Cond": "(id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid)",
+              "Rows Removed by Index Recheck": 0,
+              "Filter": "((student_id = '0d54f76b-f09b-30c9-a24f-1e204ca60c7a'::uuid) OR (company_id = '0d54f76b-f09b-30c9-a24f-1e204ca60c7a'::uuid))",
+              "Rows Removed by Filter": 0,
+              "Shared Hit Blocks": 3,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 120,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.604,
+        "Triggers": [],
+        "Execution Time": 0.081
+      }
+    },
+    "recent_offset_0": {
+      "query": "SELECT id, chat_id, sender_id, body, sent_at FROM ( SELECT id, chat_id, sender_id, body, sent_at FROM message WHERE chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid ORDER BY sent_at DESC, id DESC LIMIT 50 OFFSET 0 ) recent ORDER BY sent_at ASC, id ASC",
+      "summary": {
+        "planning_time_ms": 0.818,
+        "execution_time_ms": 0.12,
+        "returned_rows": 50,
+        "root_node": "Sort",
+        "node_types": [
+          "Index Scan",
+          "Limit",
+          "Sort"
+        ],
+        "indexes": [
+          "idx_message_chat_recent"
+        ],
+        "shared_hit_blocks": 13,
+        "shared_read_blocks": 0,
+        "temp_read_blocks": 0,
+        "temp_written_blocks": 0
+      },
+      "plan": {
+        "Plan": {
+          "Node Type": "Sort",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 45.63,
+          "Total Cost": 45.75,
+          "Plan Rows": 50,
+          "Plan Width": 298,
+          "Actual Startup Time": 0.073,
+          "Actual Total Time": 0.075,
+          "Actual Rows": 50,
+          "Actual Loops": 1,
+          "Sort Key": [
+            "message.sent_at",
+            "message.id"
+          ],
+          "Sort Method": "quicksort",
+          "Sort Space Used": 41,
+          "Sort Space Type": "Memory",
+          "Shared Hit Blocks": 13,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Limit",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 0.42,
+              "Total Cost": 44.22,
+              "Plan Rows": 50,
+              "Plan Width": 298,
+              "Actual Startup Time": 0.023,
+              "Actual Total Time": 0.037,
+              "Actual Rows": 50,
+              "Actual Loops": 1,
+              "Shared Hit Blocks": 7,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Index Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Scan Direction": "Forward",
+                  "Index Name": "idx_message_chat_recent",
+                  "Relation Name": "message",
+                  "Alias": "message",
+                  "Startup Cost": 0.42,
+                  "Total Cost": 88395.15,
+                  "Plan Rows": 100919,
+                  "Plan Width": 298,
+                  "Actual Startup Time": 0.022,
+                  "Actual Total Time": 0.034,
+                  "Actual Rows": 50,
+                  "Actual Loops": 1,
+                  "Index Cond": "(chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid)",
+                  "Rows Removed by Index Recheck": 0,
+                  "Shared Hit Blocks": 7,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 164,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.818,
+        "Triggers": [],
+        "Execution Time": 0.12
+      }
+    },
+    "deep_offset_50000": {
+      "query": "SELECT id, chat_id, sender_id, body, sent_at FROM ( SELECT id, chat_id, sender_id, body, sent_at FROM message WHERE chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid ORDER BY sent_at DESC, id DESC LIMIT 50 OFFSET 50000 ) recent ORDER BY sent_at ASC, id ASC",
+      "summary": {
+        "planning_time_ms": 0.741,
+        "execution_time_ms": 102.05,
+        "returned_rows": 50,
+        "root_node": "Sort",
+        "node_types": [
+          "Gather Merge",
+          "Limit",
+          "Seq Scan",
+          "Sort"
+        ],
+        "indexes": [],
+        "shared_hit_blocks": 13548,
+        "shared_read_blocks": 10592,
+        "temp_read_blocks": 2528,
+        "temp_written_blocks": 3865
+      },
+      "plan": {
+        "Plan": {
+          "Node Type": "Sort",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 41519.62,
+          "Total Cost": 41519.74,
+          "Plan Rows": 50,
+          "Plan Width": 298,
+          "Actual Startup Time": 98.329,
+          "Actual Total Time": 101.45,
+          "Actual Rows": 50,
+          "Actual Loops": 1,
+          "Sort Key": [
+            "message.sent_at",
+            "message.id"
+          ],
+          "Sort Method": "quicksort",
+          "Sort Space Used": 41,
+          "Sort Space Type": "Memory",
+          "Shared Hit Blocks": 13548,
+          "Shared Read Blocks": 10592,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 2528,
+          "Temp Written Blocks": 3865,
+          "Plans": [
+            {
+              "Node Type": "Limit",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 41512.37,
+              "Total Cost": 41518.21,
+              "Plan Rows": 50,
+              "Plan Width": 298,
+              "Actual Startup Time": 98.304,
+              "Actual Total Time": 101.431,
+              "Actual Rows": 50,
+              "Actual Loops": 1,
+              "Shared Hit Blocks": 13548,
+              "Shared Read Blocks": 10592,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 2528,
+              "Temp Written Blocks": 3865,
+              "Plans": [
+                {
+                  "Node Type": "Gather Merge",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Startup Cost": 35678.63,
+                  "Total Cost": 45490.99,
+                  "Plan Rows": 84100,
+                  "Plan Width": 298,
+                  "Actual Startup Time": 88.164,
+                  "Actual Total Time": 100.383,
+                  "Actual Rows": 50050,
+                  "Actual Loops": 1,
+                  "Workers Planned": 2,
+                  "Workers Launched": 2,
+                  "Shared Hit Blocks": 13548,
+                  "Shared Read Blocks": 10592,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 2528,
+                  "Temp Written Blocks": 3865,
+                  "Plans": [
+                    {
+                      "Node Type": "Sort",
+                      "Parent Relationship": "Outer",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Startup Cost": 34678.61,
+                      "Total Cost": 34783.74,
+                      "Plan Rows": 42050,
+                      "Plan Width": 298,
+                      "Actual Startup Time": 80.1,
+                      "Actual Total Time": 81.695,
+                      "Actual Rows": 16793,
+                      "Actual Loops": 3,
+                      "Sort Key": [
+                        "message.sent_at DESC",
+                        "message.id DESC"
+                      ],
+                      "Sort Method": "external merge",
+                      "Sort Space Used": 9624,
+                      "Sort Space Type": "Disk",
+                      "Shared Hit Blocks": 13548,
+                      "Shared Read Blocks": 10592,
+                      "Shared Dirtied Blocks": 0,
+                      "Shared Written Blocks": 0,
+                      "Local Hit Blocks": 0,
+                      "Local Read Blocks": 0,
+                      "Local Dirtied Blocks": 0,
+                      "Local Written Blocks": 0,
+                      "Temp Read Blocks": 2528,
+                      "Temp Written Blocks": 3865,
+                      "Workers": [
+                        {
+                          "Worker Number": 0,
+                          "Sort Method": "external merge",
+                          "Sort Space Used": 11840,
+                          "Sort Space Type": "Disk"
+                        },
+                        {
+                          "Worker Number": 1,
+                          "Sort Method": "external merge",
+                          "Sort Space Used": 9352,
+                          "Sort Space Type": "Disk"
+                        }
+                      ],
+                      "Plans": [
+                        {
+                          "Node Type": "Seq Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": true,
+                          "Async Capable": false,
+                          "Relation Name": "message",
+                          "Alias": "message",
+                          "Startup Cost": 0.0,
+                          "Total Cost": 25555.21,
+                          "Plan Rows": 42050,
+                          "Plan Width": 298,
+                          "Actual Startup Time": 29.249,
+                          "Actual Total Time": 66.403,
+                          "Actual Rows": 33333,
+                          "Actual Loops": 3,
+                          "Filter": "(chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid)",
+                          "Rows Removed by Filter": 63000,
+                          "Shared Hit Blocks": 13458,
+                          "Shared Read Blocks": 10592,
+                          "Shared Dirtied Blocks": 0,
+                          "Shared Written Blocks": 0,
+                          "Local Hit Blocks": 0,
+                          "Local Read Blocks": 0,
+                          "Local Dirtied Blocks": 0,
+                          "Local Written Blocks": 0,
+                          "Temp Read Blocks": 0,
+                          "Temp Written Blocks": 0,
+                          "Workers": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 164,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.741,
+        "Triggers": [],
+        "Execution Time": 102.05
+      }
+    },
+    "keyset_after_49999": {
+      "query": "SELECT id, chat_id, sender_id, body, sent_at FROM ( SELECT id, chat_id, sender_id, body, sent_at FROM message WHERE chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid AND (sent_at, id) < ('2026-01-02 00:00:50.001+00'::timestamptz, '3932beb3-401e-f61d-a864-787511691e64'::uuid) ORDER BY sent_at DESC, id DESC LIMIT 50 ) recent ORDER BY sent_at ASC, id ASC",
+      "summary": {
+        "planning_time_ms": 0.699,
+        "execution_time_ms": 0.123,
+        "returned_rows": 50,
+        "root_node": "Sort",
+        "node_types": [
+          "Index Scan",
+          "Limit",
+          "Sort"
+        ],
+        "indexes": [
+          "idx_message_chat_recent"
+        ],
+        "shared_hit_blocks": 12,
+        "shared_read_blocks": 0,
+        "temp_read_blocks": 0,
+        "temp_written_blocks": 0
+      },
+      "plan": {
+        "Plan": {
+          "Node Type": "Sort",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 127.53,
+          "Total Cost": 127.65,
+          "Plan Rows": 50,
+          "Plan Width": 298,
+          "Actual Startup Time": 0.066,
+          "Actual Total Time": 0.067,
+          "Actual Rows": 50,
+          "Actual Loops": 1,
+          "Sort Key": [
+            "message.sent_at",
+            "message.id"
+          ],
+          "Sort Method": "quicksort",
+          "Sort Space Used": 41,
+          "Sort Space Type": "Memory",
+          "Shared Hit Blocks": 12,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Limit",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 0.42,
+              "Total Cost": 126.11,
+              "Plan Rows": 50,
+              "Plan Width": 298,
+              "Actual Startup Time": 0.019,
+              "Actual Total Time": 0.028,
+              "Actual Rows": 50,
+              "Actual Loops": 1,
+              "Shared Hit Blocks": 6,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Index Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Scan Direction": "Forward",
+                  "Index Name": "idx_message_chat_recent",
+                  "Relation Name": "message",
+                  "Alias": "message",
+                  "Startup Cost": 0.42,
+                  "Total Cost": 44814.54,
+                  "Plan Rows": 17827,
+                  "Plan Width": 298,
+                  "Actual Startup Time": 0.018,
+                  "Actual Total Time": 0.025,
+                  "Actual Rows": 50,
+                  "Actual Loops": 1,
+                  "Index Cond": "((chat_id = '3fb4ce25-b840-4685-d2ea-53f9a4bdedc6'::uuid) AND (ROW(sent_at, id) < ROW('2026-01-02 00:00:50.001+00'::timestamp with time zone, '3932beb3-401e-f61d-a864-787511691e64'::uuid)))",
+                  "Rows Removed by Index Recheck": 0,
+                  "Shared Hit Blocks": 6,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 163,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.699,
+        "Triggers": [],
+        "Execution Time": 0.123
+      }
+    }
+  }
+}
