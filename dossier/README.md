@@ -12,6 +12,8 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | Experimento reproducible | `../experimentos/medicion-escenario-01/` |
 | Verificación literal del checklist | `05-checklist-semanas-1-4.md` |
 | Guion de exposición para tres personas | `06-guion-exposicion-3-personas.md` |
+| Walking skeleton de mensajería | `../docs/architecture/walking-skeleton.md` |
+| Modos de fallo y recuperación | `../docs/architecture/failure-modes-walking-skeleton.md` |
 
 ## Contribución individual y pull requests
 

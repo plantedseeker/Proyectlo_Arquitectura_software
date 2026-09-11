@@ -1,0 +1,80 @@
+﻿{
+    "schema_version":  1,
+    "captured_at_utc":  "2026-09-11T21:02:00.6237930Z",
+    "decision":  "supported",
+    "walking_skeleton":  "PostgreSQL -\u003e Flyway/seed -\u003e API -\u003e auth -\u003e job -\u003e chat -\u003e message -\u003e API/DB verification",
+    "conditions":  {
+                       "base_url":  "http://localhost:8080",
+                       "deployment_topology":  "Docker Desktop local; API y PostgreSQL comparten equipo",
+                       "docker_version":  "29.7.2",
+                       "compose_version":  "5.4.0",
+                       "postgres_version":  "16.14",
+                       "powershell_version":  "5.1.26100.9444",
+                       "os":  "Microsoft Windows NT 10.0.26200.0",
+                       "logical_cpus":  32,
+                       "git_revision":  "870901051a38154c829822fba50026cac8142841"
+                   },
+    "artifacts":  {
+                      "chat_id":  "a03d76df-d2b7-4f95-9b66-12cabbf1a8fd",
+                      "message_id":  "4d96bd67-75bc-46de-b7d9-b168617bad21",
+                      "message_marker":  "walking-skeleton-20260911T210200251Z"
+                  },
+    "checks":  [
+                   {
+                       "name":  "Motor local disponible",
+                       "status":  "PASS",
+                       "evidence":  "Docker 29.7.2; Compose 5.4.0"
+                   },
+                   {
+                       "name":  "Puertos del despliegue disponibles",
+                       "status":  "PASS",
+                       "evidence":  "No hay contenedores ajenos publicando 5432 o 8080"
+                   },
+                   {
+                       "name":  "Contenedores solicitados",
+                       "status":  "PASS",
+                       "evidence":  "docker compose up -d"
+                   },
+                   {
+                       "name":  "API saludable",
+                       "status":  "PASS",
+                       "evidence":  "http://localhost:8080/actuator/health = UP"
+                   },
+                   {
+                       "name":  "PostgreSQL disponible",
+                       "status":  "PASS",
+                       "evidence":  "PostgreSQL 16.14; /var/run/postgresql:5432 - accepting connections"
+                   },
+                   {
+                       "name":  "Esquema migrado",
+                       "status":  "PASS",
+                       "evidence":  "flyway_schema_history no contiene migraciones fallidas"
+                   },
+                   {
+                       "name":  "Autenticacion y sesion",
+                       "status":  "PASS",
+                       "evidence":  "estudiante@utrabajo.local, rol student"
+                   },
+                   {
+                       "name":  "Flujo vertical de mensajeria",
+                       "status":  "PASS",
+                       "evidence":  "oferta 138cbae2-84e6-3952-9f49-bf7fcb3487ca; chat a03d76df-d2b7-4f95-9b66-12cabbf1a8fd; mensaje 4d96bd67-75bc-46de-b7d9-b168617bad21"
+                   },
+                   {
+                       "name":  "Persistencia comprobada",
+                       "status":  "PASS",
+                       "evidence":  "message.id=4d96bd67-75bc-46de-b7d9-b168617bad21 existe una vez en PostgreSQL"
+                   },
+                   {
+                       "name":  "Ruta protegida sin token",
+                       "status":  "PASS",
+                       "evidence":  "GET /api/chats devolvio HTTP 403"
+                   }
+               ],
+    "manual_android_checkpoint":  {
+                                       "status":  "PASS",
+                                       "verified_at_utc":  "2026-09-11T21:06:18.1277246Z",
+                                       "observed_message_marker":  "walking-skeleton-20260911T210200251Z",
+                                       "evidence":  "checkpoint-android.png"
+                                   }
+}
