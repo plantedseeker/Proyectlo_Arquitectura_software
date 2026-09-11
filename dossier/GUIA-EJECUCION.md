@@ -1,6 +1,8 @@
-# Guía única de ejecución — UTrabajo y línea base de mensajería
+# Guía única de ejecución — UTrabajo, walking skeleton y línea base
 
-> **Objetivo:** permitir que cualquier lector clone el repositorio, levante UTrabajo y reproduzca la medición de línea base de mensajería sin tener que buscar instrucciones en distintos archivos.
+> **Objetivo:** permitir que cualquier lector clone el repositorio, levante
+> UTrabajo, compruebe el recorrido vertical de mensajería y reproduzca su línea
+> base sin tener que buscar instrucciones en distintos archivos.
 
 Repositorio: https://github.com/plantedseeker/Proyectlo_Arquitectura_software
 
@@ -52,6 +54,19 @@ El resultado final queda en:
 
 ```text
 experimentos/medicion-escenario-01/resultados/resultado.json
+```
+
+Si primero se quiere comprobar que las partes críticas están conectadas, sin
+ejecutar todavía la prueba de carga:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-walking-skeleton.ps1
+```
+
+Ese recorrido deja su resultado en:
+
+```text
+experimentos/walking-skeleton/resultados/ultima-ejecucion.json
 ```
 
 > La ejecución automatizada de la línea base está preparada principalmente para **Windows + PowerShell + Docker Desktop**.
@@ -438,6 +453,10 @@ docker compose down -v
 
 > `-v` elimina los volúmenes del proyecto.
 
+Este comando solo debe usarse deliberadamente con los datos sintéticos locales.
+No es una estrategia de recuperación para una base con información que deba
+conservarse.
+
 ---
 
 ## 16. Ver servicios y logs
@@ -533,6 +552,10 @@ Si el profesor pide demostrar la reproducibilidad, mostrar en este orden:
 3. experimentos/medicion-escenario-01/seed-mensajeria.sql
 4. experimentos/medicion-escenario-01/carga-mensajeria.js
 5. experimentos/medicion-escenario-01/resultados/resultado.json
+6. docs/architecture/walking-skeleton.md
+7. experimentos/walking-skeleton/resultados/ultima-ejecucion.json
+8. docs/architecture/failure-modes-walking-skeleton.md
+9. scripts/check_architecture.py
 ```
 
 Después ejecutar:
@@ -564,3 +587,59 @@ experimentos/medicion-escenario-01/resultados/resultado.json
 ```
 
 Ese comando es el **punto de entrada único** para reproducir la línea base de mensajería.
+
+---
+
+## 21. Comprobar el walking skeleton
+
+El walking skeleton valida una rebanada vertical funcional diferente a la
+medición de rendimiento. Recorre Docker, PostgreSQL, Flyway, salud de la API,
+autenticación, oferta, chat, envío/lectura del mensaje, persistencia SQL y
+rechazo de una ruta protegida sin token.
+
+Desde la raíz:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-walking-skeleton.ps1
+```
+
+Un resultado correcto termina con `WALKING SKELETON: SOPORTADO`. El JSON genera
+un `message_marker`; para cerrar la comprobación del cliente Android se inicia
+sesión como estudiante y se busca exactamente ese marcador en el chat indicado.
+
+Evidencia:
+
+```text
+docs/architecture/walking-skeleton.md
+docs/architecture/failure-modes-walking-skeleton.md
+experimentos/walking-skeleton/resultados/ultima-ejecucion.json
+experimentos/walking-skeleton/resultados/checkpoint-android.md
+experimentos/walking-skeleton/resultados/checkpoint-android.png
+```
+
+## 22. Comprobar la restricción arquitectónica de S8
+
+La primera protección ejecutable impide que los controladores del backend
+accedan directamente a JDBC o SQL:
+
+```powershell
+python .\scripts\check_architecture.py
+```
+
+La salida esperada es `ADR-001 OK`. La misma comprobación se ejecuta en GitHub
+Actions antes de las pruebas del backend. Su alcance y la demostración de una
+violación controlada se documentan en:
+
+```text
+docs/adr/ADR-001-limites-modulo-mensajeria.md
+docs/architecture/evidencia-restriccion-ci.md
+```
+
+## 23. Elegir el comando correcto
+
+| Objetivo | Comando | Evidencia principal |
+|---|---|---|
+| Levantar solamente API y PostgreSQL | `docker compose up --build -d` | `docker compose ps` y `/actuator/health` |
+| Probar el recorrido funcional completo | `powershell -ExecutionPolicy Bypass -File .\scripts\run-walking-skeleton.ps1` | `experimentos/walking-skeleton/resultados/ultima-ejecucion.json` |
+| Repetir la línea base de rendimiento | `powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-baseline.ps1` | `experimentos/medicion-escenario-01/resultados/resultado.json` |
+| Verificar el límite de ADR-001 | `python .\scripts\check_architecture.py` | salida local y job `backend` de CI |

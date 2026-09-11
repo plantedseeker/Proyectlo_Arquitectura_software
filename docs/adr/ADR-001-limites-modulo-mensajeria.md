@@ -101,7 +101,9 @@ pasar CI.
 - [`C3 backend`](../../dossier/07-c4-componentes-backend.md)
 - [`Trazabilidad del flujo`](../../dossier/09-c4-trazabilidad-localizacion.md)
 - [`Resultado S4`](../../experimentos/medicion-escenario-01/resultados/resultado.json)
-- Restricción ejecutable de S8: pendiente de incorporar y ejecutar en CI.
+- Restricción ejecutable de S8: `scripts/check_architecture.py`, incorporada y
+  enlazada al workflow; pendiente de conservar la URL de su primera corrida en
+  GitHub.
 - Evidencia de fallo deliberado de S8: pendiente de un PR de demostración real.
 
 ## Confirmación requerida
