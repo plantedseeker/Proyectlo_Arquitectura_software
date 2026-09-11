@@ -85,7 +85,8 @@ registrado en un PR y en un nuevo ADR o actualización explícita de este.
 
 ## Evidencia
 
-- [`Decisión de estilo S7`](../architecture/08-decision-estilo-arquitectonico.md)
+- [`Decisión de estilo S7`](../../dossier/08-decision-estilo-arquitectonico.md)
+- [`Drivers priorizados`](../../dossier/02-stakeholders-drivers.md)
 - [`C3 backend`](../../dossier/07-c4-componentes-backend.md)
 - [`Trazabilidad del flujo`](../../dossier/09-c4-trazabilidad-localizacion.md)
 - [`Resultado S4`](../../experimentos/medicion-escenario-01/resultados/resultado.json)
