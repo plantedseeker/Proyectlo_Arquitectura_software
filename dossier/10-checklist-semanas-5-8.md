@@ -34,11 +34,14 @@ Estados usados:
 | Método y condiciones | Cumple documental | README y script del experimento S7 |
 | Separar dato de interpretación/supuesto | Cumple documental | Secciones separadas en la evidencia S7 y comparación |
 | Comparar estilos/alternativas reales | Cumple documental | `docs/architecture/alternativas-s7.md` |
-| Mínimo dos alternativas y costos | Cumple documental | Comparación y ADR 001/002 |
+| Mínimo dos alternativas y costos | Cumple documental | Comparación y ADR-001/002/003 |
 | Complejidad, seguridad, operación y reversibilidad | Cumple documental | Matrices de alternativas y ADR |
-| Empezar ADR 1 y ADR 2 | Cumple documental | `docs/adr/ADR-001-*` y `ADR-002-*` |
+| Mapa modular objetivo | Cumple documental | `docs/architecture/modulos-y-limites.md`, sección “Mapa modular objetivo inmediato” |
+| Decisión de estilo consolidada | Cumple documental | `docs/architecture/08-decision-estilo-arquitectonico.md` |
+| Empezar ADR 1 y ADR 2 | Cumple documental | ADR-001 estilo y ADR-002 límites/dependencias; paginación se conserva separada como ADR-003 |
 | Criticar propuesta generada por IA | Cumple documental | `docs/architecture/propuesta-ia-critica.md` |
 | Registrar aceptado/modificado/rechazado de IA | Cumple documental | Tabla de decisiones en la crítica |
+| PR con decisión de estilo | En curso | Rama `docs/s7-s8-alineacion`; fusionar solo después de revisión/CI |
 
 ## Semana 8 — ADR, comité y restricción ejecutable
 
@@ -46,14 +49,18 @@ Estados usados:
 | --- | --- | --- |
 | Comparación de estilos terminada | Cumple documental | `docs/architecture/alternativas-s7.md` |
 | Diseño modular y límites | Cumple documental | `docs/architecture/modulos-y-limites.md` |
-| ADR 1 y ADR 2 completos | Cumple documental | Contexto, decisión, alternativas, costos, consecuencias y reversibilidad |
+| ADR 1 — decisión de estilo | Cumple documental | `docs/adr/ADR-001-limites-modulo-mensajeria.md` |
+| ADR 2 — límites y dependencias permitidas | Cumple documental | `docs/adr/ADR-002-limites-modulos-dependencias.md` |
+| ADR 3 — paginación | Cumple documental | `docs/adr/ADR-003-paginacion-historial-mensajes.md`; conserva la decisión técnica antes numerada ADR-002 |
+| Implicaciones de seguridad | Cumple documental | ADR-001/002 y `08-decision-estilo-arquitectonico.md` |
 | Crítica de propuesta IA | Cumple documental | `docs/architecture/propuesta-ia-critica.md` |
 | Preparación de mini-comité | Preparado | `docs/architecture/mini-comite-s8.md` |
+| Soporte máximo 5 diapositivas | Cumple documental | `docs/architecture/mini-comite-s8-5-diapositivas.md` |
 | Veredicto posterior al comité | Pendiente humano | Registrar solo después del comité: confirmada, ajustada o reconsiderada |
 | Primera restricción ejecutable | Cumple técnico local | `scripts/check_architecture.py` prohíbe JDBC/SQL en controladores |
-| Restricción automática en CI | Preparado | El workflow ejecuta todas las pruebas de backend en push y PR; falta la primera corrida con la regla |
+| Restricción automática en CI | Cumple configuración | `.github/workflows/ci.yml` ejecuta `python scripts/check_architecture.py` en PR y push a `main` |
 | Violación deliberada y CI rojo | Pendiente de GitHub | Crear PR temporal, capturar URL de la corrida roja y retirar la violación |
-| Restricción referencia su ADR | Cumple documental/técnico | Prueba y evidencia enlazan ADR-001 |
+| Restricción referencia su ADR | Cumple documental/técnico | ADR-002 y documentos relacionados enlazan la regla ejecutable |
 
 ## Lo que no debe presentarse como terminado
 
