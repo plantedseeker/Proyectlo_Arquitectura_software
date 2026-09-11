@@ -15,7 +15,7 @@ Estados usados:
 | --- | --- | --- |
 | C4 contexto as-is | Cumple | [`05-c4-contexto.md`](05-c4-contexto.md), proveniente del paquete aprobado |
 | C4 contenedores as-is | Cumple | [`06-c4-contenedores.md`](06-c4-contenedores.md) |
-| C4 componentes del contenedor crítico | Cumple | [`07-c4-componentes-backend.md`](07-c4-componentes-backend.md); se complementa con Android en `08` |
+| C4 componentes del contenedor crítico | Cumple | [`07-c4-componentes-backend.md`](07-c4-componentes-backend.md); se complementa con Android en `08-c4-componentes-android.md` |
 | Trazado C4 → código real | Cumple | Tabla de [`09-c4-trazabilidad-localizacion.md`](09-c4-trazabilidad-localizacion.md) |
 | Audiencia y propósito por vista | Cumple | Sección específica en `05`–`09` |
 | Correcciones/eliminaciones frente al código | Cumple | Registro de correcciones en `09` |
@@ -34,14 +34,15 @@ Estados usados:
 | Método y condiciones | Cumple documental | README y script del experimento S7 |
 | Separar dato de interpretación/supuesto | Cumple documental | Secciones separadas en la evidencia S7 y comparación |
 | Comparar estilos/alternativas reales | Cumple documental | `docs/architecture/alternativas-s7.md` |
+| **Comparar alternativas contra drivers priorizados** | **Cumple documental** | `08-decision-estilo-arquitectonico.md` y `docs/architecture/alternativas-s7.md` trazan explícitamente los cinco drivers de `02-stakeholders-drivers.md` |
 | Mínimo dos alternativas y costos | Cumple documental | Comparación y ADR-001/002/003 |
 | Complejidad, seguridad, operación y reversibilidad | Cumple documental | Matrices de alternativas y ADR |
-| Mapa modular objetivo | Cumple documental | `docs/architecture/modulos-y-limites.md`, sección “Mapa modular objetivo inmediato” |
-| Decisión de estilo consolidada | Cumple documental | `docs/architecture/08-decision-estilo-arquitectonico.md` |
+| **Mapa modular objetivo** | **Cumple documental** | `docs/architecture/modulos-y-limites.md` separa “Base As-Is verificada” de “Mapa modular objetivo S7–S8” |
+| **Decisión de estilo consolidada** | **Cumple documental** | **`08-decision-estilo-arquitectonico.md` en el dossier** |
 | Empezar ADR 1 y ADR 2 | Cumple documental | ADR-001 estilo y ADR-002 límites/dependencias; paginación se conserva separada como ADR-003 |
 | Criticar propuesta generada por IA | Cumple documental | `docs/architecture/propuesta-ia-critica.md` |
 | Registrar aceptado/modificado/rechazado de IA | Cumple documental | Tabla de decisiones en la crítica |
-| PR con decisión de estilo | En curso | Rama `docs/s7-s8-alineacion`; fusionar solo después de revisión/CI |
+| PR con decisión de estilo | Cumple | [PR #11](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/11), CI en verde y fusionado a `main` |
 
 ## Semana 8 — ADR, comité y restricción ejecutable
 
