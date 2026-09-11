@@ -2,18 +2,19 @@
 
 ## Decisiones a defender
 
-- ADR-001: monolito modular con límite automático entre controladores y JDBC.
-- ADR-002: `LIMIT/OFFSET` indexado para la página reciente y migración gradual a
-  cursor solo ante evidencia/necesidad de historial profundo.
+- ADR-001: monolito modular para mensajería y permanencia dentro del backend actual.
+- ADR-002: límites de módulos y dependencias permitidas/prohibidas; los controladores no acceden directamente a JDBC/SQL.
+- ADR-003: `LIMIT/OFFSET` indexado para la página reciente y migración gradual a cursor solo ante evidencia/necesidad de historial profundo.
 
 ## Evidencia que debe abrirse
 
-1. `dossier/07-c4-componentes-backend.md`: recorrido interno.
-2. `experimentos/medicion-escenario-01/resultados/resultado.json`: dato S4.
-3. `experimentos/localizacion-s7/resultados/localizacion.json`: dato causal S7.
-4. `docs/architecture/alternativas-s7.md`: comparación justa.
-5. `scripts/check_architecture.py`: protección ejecutable.
-6. URL de la corrida roja deliberada y URL verde posterior.
+1. `docs/architecture/08-decision-estilo-arquitectonico.md`: consolidado S7.
+2. `dossier/07-c4-componentes-backend.md`: recorrido interno.
+3. `experimentos/medicion-escenario-01/resultados/resultado.json`: dato S4.
+4. `experimentos/localizacion-s7/resultados/localizacion.json`: dato causal S7.
+5. `docs/architecture/modulos-y-limites.md`: dependencias permitidas/prohibidas.
+6. `scripts/check_architecture.py`: protección ejecutable de ADR-002.
+7. URL de la corrida roja deliberada y URL verde posterior, cuando existan.
 
 ## Guion por rol
 
@@ -44,6 +45,10 @@
 - Pregunta: ¿por qué no Redis?
 - Respuesta: no hay patrón medido que pague caché ni estrategia de invalidación.
 
+## Soporte de máximo 5 diapositivas
+
+Usar `docs/architecture/mini-comite-s8-5-diapositivas.md` como estructura de la defensa. El archivo resume problema, alternativas, decisión, límites/seguridad y evidencia/conclusión sin inventar que el comité ya ocurrió.
+
 ## Minuta que debe completar el equipo después del comité
 
 No completar anticipadamente.
@@ -57,6 +62,7 @@ No completar anticipadamente.
 - Respuestas o cambios acordados:
 - Veredicto ADR-001: `CONFIRMADA / AJUSTADA / RECONSIDERADA`
 - Veredicto ADR-002: `CONFIRMADA / AJUSTADA / RECONSIDERADA`
+- Veredicto ADR-003: `CONFIRMADA / AJUSTADA / RECONSIDERADA`
 - Responsable y fecha de cada acción:
 - Enlace al PR/acta:
 

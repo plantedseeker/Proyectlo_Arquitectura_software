@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Restricción ejecutable de ADR-001 para los controladores del backend."""
+"""Restricción ejecutable de ADR-002 para los controladores del backend."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONTROLLER_DIR = (
     PROJECT_ROOT / "backend/src/main/kotlin/com/tab/utrabajo/api/controller"
 )
-ADR_PATH = "docs/adr/ADR-001-limites-modulo-mensajeria.md"
+ADR_PATH = "docs/adr/ADR-002-limites-modulos-dependencias.md"
 FORBIDDEN_PATTERNS = {
     "Spring JDBC": re.compile(r"\borg\.springframework\.jdbc(?:\.|\b)"),
     "JdbcClient": re.compile(r"\bJdbcClient\b"),
@@ -47,17 +47,17 @@ def main() -> int:
     try:
         violations = find_violations(args.controller_dir.resolve())
     except (OSError, UnicodeError) as error:
-        print(f"No se pudo ejecutar la restricción ADR-001: {error}", file=sys.stderr)
+        print(f"No se pudo ejecutar la restricción ADR-002: {error}", file=sys.stderr)
         return 2
 
     if violations:
-        print("ADR-001 violado: los controladores deben delegar en servicios.", file=sys.stderr)
+        print("ADR-002 violado: los controladores deben delegar en servicios.", file=sys.stderr)
         print(f"Decisión protegida: {ADR_PATH}", file=sys.stderr)
         for violation in violations:
             print(f"- {violation}", file=sys.stderr)
         return 1
 
-    print("ADR-001 OK: ningún controlador referencia JDBC/SQL directamente.")
+    print("ADR-002 OK: ningún controlador referencia JDBC/SQL directamente.")
     return 0
 
 

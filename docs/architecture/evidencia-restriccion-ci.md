@@ -2,7 +2,7 @@
 
 ## Decisión protegida
 
-[`ADR-001`](../adr/ADR-001-limites-modulo-mensajeria.md): los controladores del
+[`ADR-002`](../adr/ADR-002-limites-modulos-dependencias.md): los controladores del
 backend no acceden directamente a JDBC/SQL; delegan en servicios.
 
 ## Restricción ejecutable
@@ -15,8 +15,8 @@ falla si encuentra referencias a:
 - `java.sql`;
 - `javax.sql`.
 
-El workflow `UTrabajo CI` ejecuta las pruebas de backend en cada `push` a `main`
-y en cada pull request a `main`.
+El workflow `UTrabajo CI` ejecuta esta restricción en cada `push` a `main` y en
+cada pull request a `main`.
 
 ## Prueba local esperada
 
@@ -31,7 +31,7 @@ Procedimiento seguro:
 1. crear una rama temporal desde el commit que contiene la prueba;
 2. añadir a `ChatController.kt` una referencia prohibida a `JdbcClient`;
 3. abrir un PR y conservar la URL de la corrida roja;
-4. comprobar que el fallo menciona `ADR-001` y el archivo infractor;
+4. comprobar que el fallo menciona `ADR-002` y el archivo infractor;
 5. retirar la violación en la misma rama y conservar la corrida verde;
 6. cerrar el PR sin fusionar la violación.
 

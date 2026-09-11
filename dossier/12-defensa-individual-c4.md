@@ -48,13 +48,14 @@ Abrir `ChatController.kt`, método `messages`; luego `UTrabajoService.kt`, méto
 ### 4:10–5:15 — Medición y límite
 
 Decir el dato exacto: p95 válidos 9,451; 8,265; 9,109 ms y mediana 9,109 ms.
-k6, API y PostgreSQL compartieron equipo. Android e Internet no participaron.
+k6, la API y PostgreSQL compartieron equipo. Android e Internet no participaron.
 S4 mide total HTTP; no reparte el costo interno.
 
 ### 5:15–6:00 — Decisión y siguiente evidencia
 
 Explicar que S7 usa EXPLAIN para comparar `OFFSET 0`, `OFFSET 50000` y cursor.
-Relacionar el resultado con ADR-002 y la regla de límites con ADR-001.
+Relacionar el resultado de paginación con ADR-003, el estilo monolito modular con
+ADR-001 y los límites/dependencias con ADR-002.
 
 ## Preguntas probables
 
@@ -69,10 +70,17 @@ consulta.
 **¿Los 9,109 ms prueban rendimiento móvil?** No. Prueban el endpoint local en la
 topología declarada.
 
-**¿Ya demostraron que offset es lento?** No hasta ejecutar y citar MSG-LOC-01.
+**¿Ya demostraron que offset profundo es más costoso?** Sí, MSG-LOC-01 registró
+0,120 ms en `OFFSET 0`, 102,050 ms en `OFFSET 50000` y 0,123 ms con cursor bajo
+las condiciones declaradas. No debe extrapolarse a producción sin nuevas
+mediciones.
 
 **¿Por qué no microservicio?** No existe presión medida que compense costo,
 seguridad y operación distribuidos; la alternativa queda reversible.
+
+**¿Qué protege ADR-002?** La dirección de dependencias. En particular, los
+controladores no deben acceder directamente a JDBC/SQL; la regla se ejecuta en
+CI mediante `scripts/check_architecture.py`.
 
 ## Asignación sugerida para tres personas
 

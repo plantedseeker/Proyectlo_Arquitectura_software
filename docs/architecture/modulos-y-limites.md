@@ -25,6 +25,24 @@ Cliente Android
 | Persistencia Flyway | Esquema, restricciones e índices | PostgreSQL | HTTP o UI |
 | FileStorageService | Validación y persistencia de archivos | Sistema de archivos configurado | Control de navegación Android |
 
+## Mapa modular objetivo inmediato
+
+El objetivo de S7–S8 no cambia el despliegue actual; hace explícitas y protegibles
+las fronteras ya observadas en el sistema real. La evolución objetivo inmediata
+es conservar el mismo flujo y evitar saltos de capa:
+
+```text
+Android presentation
+  → Android data / Retrofit
+    → Backend controller
+      → Backend service / auth
+        → JDBC / PostgreSQL
+```
+
+No se presenta como objetivo inmediato extraer microservicios, introducir broker,
+Redis o WebSocket. Esas alternativas quedan sujetas a presión medible y a un ADR
+posterior.
+
 ## Límite crítico de mensajería
 
 Lectura:
@@ -58,9 +76,13 @@ autorización, transacciones y contratos. No se presenta como implementada hoy.
 
 ## Relación con decisiones
 
+- [`Decisión de estilo S7`](08-decision-estilo-arquitectonico.md) consolida drivers,
+  alternativas y el mapa modular objetivo inmediato.
 - [`ADR-001`](../adr/ADR-001-limites-modulo-mensajeria.md) selecciona monolito
   modular y da origen a la regla CI.
-- [`ADR-002`](../adr/ADR-002-paginacion-historial-mensajes.md) protege el límite
-  de persistencia y la evolución del contrato de historial.
+- [`ADR-002`](../adr/ADR-002-limites-modulos-dependencias.md) formaliza las
+  dependencias permitidas/prohibidas y la restricción controller → JDBC.
+- [`ADR-003`](../adr/ADR-003-paginacion-historial-mensajes.md) documenta la
+  evolución del contrato de historial sin mezclarla con la decisión de módulos.
 - [`C3 backend`](../../dossier/07-c4-componentes-backend.md) representa el diseño
   as-is contrastado con código.
