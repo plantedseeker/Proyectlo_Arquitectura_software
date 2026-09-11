@@ -8,6 +8,15 @@ paginación de datos:
 1. ubicación y límites del módulo de mensajería;
 2. lectura del historial de mensajes.
 
+Los **drivers priorizados** usados para juzgar las alternativas provienen de
+[`dossier/02-stakeholders-drivers.md`](../../dossier/02-stakeholders-drivers.md):
+
+1. rendimiento al abrir conversaciones extremas;
+2. confidencialidad entre conversaciones;
+3. orden e integridad de mensajes;
+4. modificabilidad del cliente;
+5. reproducibilidad.
+
 ## Datos medidos disponibles
 
 - S4: mediana de p95 de **9,109 ms** al pedir los últimos 50 mensajes de una
@@ -47,6 +56,20 @@ paginación de datos:
 | Evidencia actual a favor | Ninguna para omitir límites | C4, código y S4 | Ninguna presión medida |
 | Resultado propuesto | Descartar | **Seleccionar** | Diferir |
 
+### Alternativas ↔ drivers priorizados
+
+| Driver de `02-stakeholders-drivers.md` | Monolito sin regla | Monolito modular + regla | Microservicio + broker |
+| --- | --- | --- | --- |
+| **Rendimiento** | No mejora el escenario actual | **Satisface la evidencia actual** sin infraestructura adicional | Puede escalar de forma independiente, pero no existe presión medida que lo requiera |
+| **Confidencialidad** | Riesgo de dispersar autorización al permitir saltos de capa | **Favorece autorización localizable antes de persistencia** | Exige autorización distribuida, más red y secretos |
+| **Orden e integridad** | Depende de disciplina manual y BD | **Conserva transacciones, PK/FK y orden estable** | Aumenta complejidad de consistencia y reintentos |
+| **Modificabilidad del cliente** | El acoplamiento interno puede crecer | **Mantiene HTTP/Retrofit estable y permite refactor interno** | Agrega contratos y migraciones distribuidas |
+| **Reproducibilidad** | Despliegue simple, límites manuales | **Un despliegue + Docker + CI + regla verificable** | Más componentes e infraestructura que reproducir |
+
+La selección del monolito modular no se basa solo en complejidad o costo: es la
+alternativa que mejor satisface los cinco drivers priorizados con la menor
+complejidad adicional necesaria según la evidencia disponible.
+
 ## Decisión 2 — paginación
 
 | Criterio | Historial completo | `LIMIT/OFFSET` indexado | Cursor `(sent_at,id)` |
@@ -62,13 +85,15 @@ paginación de datos:
 
 ## Criterio de decisión
 
-Se elige la alternativa menos compleja que satisfaga el escenario medido y
-proteja una evolución reversible. Tener una tecnología más distribuida no es
-una mejora por sí misma; debe responder a una presión demostrada.
+Se elige la alternativa menos compleja que satisfaga el escenario medido y los
+drivers priorizados, y que proteja una evolución reversible. Tener una tecnología
+más distribuida no es una mejora por sí misma; debe responder a una presión
+demostrada.
 
 ## Trazabilidad
 
-- [`Decisión de estilo S7`](08-decision-estilo-arquitectonico.md)
+- [`Decisión de estilo S7`](../../dossier/08-decision-estilo-arquitectonico.md)
+- [`Drivers priorizados`](../../dossier/02-stakeholders-drivers.md)
 - [`ADR-001`](../adr/ADR-001-limites-modulo-mensajeria.md): mantener mensajería en el monolito modular.
 - [`ADR-002`](../adr/ADR-002-limites-modulos-dependencias.md): límites y dependencias permitidas/prohibidas.
 - [`ADR-003`](../adr/ADR-003-paginacion-historial-mensajes.md): estrategia de paginación.
