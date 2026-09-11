@@ -57,6 +57,23 @@ docker compose down
 
 Los volúmenes conservan datos. Para eliminarlos deliberadamente y reiniciar la base: `docker compose down -v`.
 
+## Walking skeleton
+
+El recorrido mínimo de mensajería comprueba Docker, PostgreSQL, Flyway, salud de
+la API, autenticación, oferta, chat, envío/lectura del mensaje, persistencia SQL
+y rechazo de acceso sin token:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-walking-skeleton.ps1
+```
+
+Después se completa un checkpoint manual en el emulador buscando el mismo
+`message_marker` que aparece en el JSON de resultados. El alcance, los criterios
+y los modos de fallo están en
+[`docs/architecture/walking-skeleton.md`](docs/architecture/walking-skeleton.md)
+y
+[`docs/architecture/failure-modes-walking-skeleton.md`](docs/architecture/failure-modes-walking-skeleton.md).
+
 ## Configuración
 
 La configuración local predeterminada vive en `docker-compose.yml`. `.env.example` documenta las variables. No guardar contraseñas reales en Git.
