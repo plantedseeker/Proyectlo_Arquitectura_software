@@ -106,7 +106,8 @@ La captura final se ejecutó después del commit del instrumento y registra
 
 ## Relación con decisiones
 
-- [`Decisión de estilo S7`](../../docs/architecture/08-decision-estilo-arquitectonico.md): consolidación de drivers, alternativas y mapa modular.
+- [`Decisión de estilo S7`](../../dossier/08-decision-estilo-arquitectonico.md): consolidación de drivers, alternativas y mapa modular.
+- [`Drivers priorizados`](../../dossier/02-stakeholders-drivers.md): fuente de los criterios de evaluación arquitectónica.
 - [`ADR-001`](../../docs/adr/ADR-001-limites-modulo-mensajeria.md): permanencia en el monolito modular.
 - [`ADR-002`](../../docs/adr/ADR-002-limites-modulos-dependencias.md): límites de módulos y dependencias permitidas/prohibidas.
 - [`ADR-003`](../../docs/adr/ADR-003-paginacion-historial-mensajes.md): estrategia de paginación e índice.
