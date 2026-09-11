@@ -144,3 +144,23 @@ La línea base registrada el 2026-08-20 produjo p95 válidos de 9,451; 8,265 y
 k6, la API y PostgreSQL 16.14 compartieron Docker Desktop y el mismo equipo
 físico durante la medición. El conteo SQL verificó 1.000 conversaciones y
 289.000 mensajes con distribución extrema 900/90/9/1.
+
+## C4 y decisiones S5–S8
+
+La secuencia completa para levantar el sistema, comprobar el walking skeleton y
+repetir la línea base está en [`dossier/GUIA-EJECUCION.md`](dossier/GUIA-EJECUCION.md).
+
+Las vistas C4 as-is aprobadas, su audiencia y la trazabilidad a código están en
+`dossier/05-c4-contexto.md` a `dossier/09-c4-trazabilidad-localizacion.md`.
+
+Para localizar el costo SQL de mensajería y comparar página reciente, offset
+profundo y cursor:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-s7-localization.ps1
+```
+
+El método separa datos, interpretaciones y supuestos en
+`experimentos/localizacion-s7/README.md`. Las decisiones propuestas y sus
+alternativas están en `docs/adr/`; el mini-comité y la evidencia de la primera
+restricción arquitectónica están en `docs/architecture/`.

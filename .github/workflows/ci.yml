@@ -45,11 +45,14 @@ jobs:
           cache: gradle
       - uses: gradle/actions/setup-gradle@v4
       - run: chmod +x backend/gradlew
+      - name: Enforce ADR-001 architecture boundary
+        run: python scripts/check_architecture.py
       - name: Integration tests against PostgreSQL 16
         run: ./backend/gradlew -p backend test --stacktrace
       - name: Verify messaging experiment artifacts
         run: |
           python -m py_compile experimentos/medicion-escenario-01/resumir_resultados.py
+          python -m py_compile experimentos/localizacion-s7/ejecutar_explain.py
           docker compose --profile load config >/dev/null
           docker run --rm \
             -v "$PWD/experimentos/medicion-escenario-01:/experiment:ro" \
