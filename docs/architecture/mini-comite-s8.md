@@ -8,13 +8,14 @@
 
 ## Evidencia que debe abrirse
 
-1. `docs/architecture/08-decision-estilo-arquitectonico.md`: consolidado S7.
-2. `dossier/07-c4-componentes-backend.md`: recorrido interno.
-3. `experimentos/medicion-escenario-01/resultados/resultado.json`: dato S4.
-4. `experimentos/localizacion-s7/resultados/localizacion.json`: dato causal S7.
-5. `docs/architecture/modulos-y-limites.md`: dependencias permitidas/prohibidas.
-6. `scripts/check_architecture.py`: protección ejecutable de ADR-002.
-7. URL de la corrida roja deliberada y URL verde posterior, cuando existan.
+1. `dossier/08-decision-estilo-arquitectonico.md`: consolidado S7 y artefacto canónico del dossier.
+2. `dossier/02-stakeholders-drivers.md`: fuente de los drivers priorizados.
+3. `dossier/07-c4-componentes-backend.md`: recorrido interno.
+4. `experimentos/medicion-escenario-01/resultados/resultado.json`: dato S4.
+5. `experimentos/localizacion-s7/resultados/localizacion.json`: dato causal S7.
+6. `docs/architecture/modulos-y-limites.md`: base As-Is y mapa modular objetivo.
+7. `scripts/check_architecture.py`: protección ejecutable de ADR-002.
+8. URL de la corrida roja deliberada y URL verde posterior, cuando existan.
 
 ## Guion por rol
 

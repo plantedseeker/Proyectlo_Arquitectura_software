@@ -51,7 +51,8 @@ responsabilidad de la decisión y de su defensa es humana.
 
 ## Evidencia relacionada
 
-- [`Decisión de estilo S7`](08-decision-estilo-arquitectonico.md)
+- [`Decisión de estilo S7`](../../dossier/08-decision-estilo-arquitectonico.md)
+- [`Drivers priorizados`](../../dossier/02-stakeholders-drivers.md)
 - [`Comparación de alternativas`](alternativas-s7.md)
 - [`ADR-001`](../adr/ADR-001-limites-modulo-mensajeria.md)
 - [`ADR-002`](../adr/ADR-002-limites-modulos-dependencias.md)

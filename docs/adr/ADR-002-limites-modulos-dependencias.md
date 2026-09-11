@@ -108,7 +108,8 @@ No se elimina una restricción solo para hacer pasar CI: cualquier cambio de fro
 ## Evidencia
 
 - [`Mapa modular`](../architecture/modulos-y-limites.md)
-- [`Decisión de estilo S7`](../architecture/08-decision-estilo-arquitectonico.md)
+- [`Decisión de estilo S7`](../../dossier/08-decision-estilo-arquitectonico.md)
+- [`Drivers priorizados`](../../dossier/02-stakeholders-drivers.md)
 - [`ADR-001`](ADR-001-limites-modulo-mensajeria.md)
 - [`C3 backend`](../../dossier/07-c4-componentes-backend.md)
 - [`Trazabilidad`](../../dossier/09-c4-trazabilidad-localizacion.md)
