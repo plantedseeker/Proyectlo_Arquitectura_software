@@ -45,7 +45,7 @@ jobs:
           cache: gradle
       - uses: gradle/actions/setup-gradle@v4
       - run: chmod +x backend/gradlew
-      - name: Enforce ADR-001 architecture boundary
+      - name: Enforce ADR-002 module dependency boundary
         run: python scripts/check_architecture.py
       - name: Integration tests against PostgreSQL 16
         run: ./backend/gradlew -p backend test --stacktrace
