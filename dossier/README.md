@@ -13,6 +13,8 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | Verificación literal del checklist | `05-checklist-semanas-1-4.md` |
 | Guion de exposición para tres personas | `06-guion-exposicion-3-personas.md` |
 | Guía única de ejecución | `GUIA-EJECUCION.md` |
+| **Guía integral de exposición S5–S8** | **`15-guia-exposicion-integral-s5-s8.md`** |
+| Capturas y datos de la exposición | `evidencias-exposicion/` |
 | Matriz detallada de trazabilidad C4 | `MATRIZ-TRAZABILIDAD-C4.md` |
 | C4 C1 contexto as-is aprobado | `05-c4-contexto.md` |
 | C4 C2 contenedores as-is aprobado | `06-c4-contenedores.md` |
@@ -51,6 +53,7 @@ y revisión mediante PR.
 | Santiago Jaramillo Sánchez (`Sanw0lk`) | `evidence/s7-localization` | [PR #6](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/6) | Fusionado el 2026-09-04 |
 | Juan Carlos Barragán Arévalo (`juan147157`) | `architecture/s8-adr-ci` | [PR #10](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/10) | Fusionado el 2026-09-11 |
 | `plantedseeker` | `docs/s7-s8-alineacion` | [PR #11](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/11) | Fusionado el 2026-09-11 |
+| `plantedseeker` | `docs/tutor-ajustes-literales` | [PR #12](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/12) | Fusionado el 2026-09-11 |
 
 El PR #1 contiene el contexto, los drivers, los escenarios, el instrumento y la
 línea base. Los PR posteriores registran contribuciones reales de S7–S8. Cada

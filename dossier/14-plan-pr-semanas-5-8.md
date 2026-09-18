@@ -1,5 +1,9 @@
 # Plan de contribuciones y PR — semanas 5 a 8
 
+> **Estado histórico:** este documento registra el plan previo. Los PR realmente
+> fusionados se enumeran en [`README.md`](README.md) y la defensa vigente está en
+> [`15-guia-exposicion-integral-s5-s8.md`](15-guia-exposicion-integral-s5-s8.md).
+
 Objetivo: producir contribuciones reales y defendibles, no repartir autoría de
 forma artificial. Cada integrante debe revisar, entender y aprobar su cambio
 antes de autorizar el commit desde su propia cuenta.

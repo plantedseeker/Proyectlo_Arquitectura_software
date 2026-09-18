@@ -1,5 +1,10 @@
 # Guion de exposición para tres personas
 
+> **Estado histórico:** este guion conserva la defensa de las semanas 1–4. Para
+> la sustentación integral de semanas 5–8, los nombres, las capturas, los ADR y
+> el reparto vigente están consolidados en
+> [`15-guia-exposicion-integral-s5-s8.md`](15-guia-exposicion-integral-s5-s8.md).
+
 Duración sugerida: **12 a 15 minutos**, más preguntas. La exposición debe
 contar una historia de decisión arquitectónica respaldada con evidencia; no
 debe consistir en leer archivos o enumerar tecnologías.

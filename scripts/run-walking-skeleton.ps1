@@ -170,7 +170,9 @@ try {
         Where-Object { $_ })
     $foreignPortOwners = [System.Collections.Generic.List[string]]::new()
     foreach ($port in @(5432, 8080)) {
-        $owners = & $docker ps --filter "publish=$port" --format '{{.ID}}|{{.Names}}|{{.Ports}}' 2>&1
+        # Compose devuelve IDs completos con `ps -q`; usar `--no-trunc` evita
+        # clasificar los contenedores de este mismo proyecto como ajenos.
+        $owners = & $docker ps --no-trunc --filter "publish=$port" --format '{{.ID}}|{{.Names}}|{{.Ports}}' 2>&1
         if ($LASTEXITCODE -ne 0) {
             throw "No fue posible inspeccionar el puerto $port con Docker."
         }
