@@ -30,7 +30,7 @@ Estados usados:
 
 | Requisito | Estado | Evidencia o acción restante |
 | --- | --- | --- |
-| Instrumento de localización profundo | Cumple; repetir tras commit | Resultado real versionable; la captura final debe referir al commit que contiene el instrumento |
+| Instrumento de localización profundo | Cumple | La captura histórica registra `78d8b380ae0fdbaa5e0b595486e652ac71666cb3`; la repetición en vivo de 2026-09-18 y sus límites están archivados en `evidencias-exposicion/` |
 | Método y condiciones | Cumple documental | README y script del experimento S7 |
 | Separar dato de interpretación/supuesto | Cumple documental | Secciones separadas en la evidencia S7 y comparación |
 | Comparar estilos/alternativas reales | Cumple documental | `docs/architecture/alternativas-s7.md` |
@@ -42,7 +42,7 @@ Estados usados:
 | Empezar ADR 1 y ADR 2 | Cumple documental | ADR-001 estilo y ADR-002 límites/dependencias; paginación se conserva separada como ADR-003 |
 | Criticar propuesta generada por IA | Cumple documental | `docs/architecture/propuesta-ia-critica.md` |
 | Registrar aceptado/modificado/rechazado de IA | Cumple documental | Tabla de decisiones en la crítica |
-| PR con decisión de estilo | Cumple | [PR #11](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/11), CI en verde y fusionado a `main` |
+| PR con decisión de estilo | Cumple | [PR #11](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/11) y ajustes literales de ubicación/trazabilidad en [PR #12](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/12) |
 
 ## Semana 8 — ADR, comité y restricción ejecutable
 

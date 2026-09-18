@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "category": "Mensajería y mesa de ayuda",
+  "scenario_id": "MSG-PERF-01",
+  "captured_at_utc": "2026-09-18T20:56:21.049038+00:00",
+  "decision": "supported",
+  "hypothesis_threshold_p95_ms": 500,
+  "conditions": {
+    "captured_at_utc": "2026-09-18T20:56:12.175809+00:00",
+    "git_revision": "b20e86f93ce3c2e3cd4437538f218dc7d3c89ae9",
+    "machine": {
+      "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+      "manufacturer": "Acer",
+      "model": "Predator PH16-71",
+      "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+      "physical_memory_gib": 95.7,
+      "logical_cpus": 32,
+      "operating_system": "Windows-10-10.0.26200-SP0",
+      "architecture": "AMD64"
+    },
+    "energy_before": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "deployment_topology": {
+      "shared_physical_machine": true,
+      "load_generator": "k6 container in Docker Desktop",
+      "api": "Spring Boot container in Docker Desktop",
+      "database": "PostgreSQL 16 container in Docker Desktop"
+    },
+    "load_tool": {
+      "name": "k6",
+      "container_image": "grafana/k6:0.54.0"
+    },
+    "energy_after": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "seed": {
+      "conversations": 1000,
+      "small_conversations_10_messages": 900,
+      "medium_conversations_1000_messages": 90,
+      "large_conversations_10000_messages": 9,
+      "extreme_conversations_100000_messages": 1,
+      "total_messages": 289000
+    },
+    "operation": "GET latest 50 messages from the 100000-message conversation",
+    "requests_per_run": 40,
+    "virtual_users": 10,
+    "runs": 4,
+    "discarded_run": 1
+  },
+  "valid_runs_summary": {
+    "valid_run_count": 3,
+    "valid_run_numbers": [
+      2,
+      3,
+      4
+    ],
+    "p95_median_ms": 7.535,
+    "p95_min_ms": 7.073,
+    "p95_max_ms": 15.264
+  },
+  "runs": [
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-09-18T20:56:14.092Z",
+      "tool": "k6",
+      "scenario": "latest_messages",
+      "requests": 40,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "min_ms": 4.877536,
+      "mean_ms": 8.635606525000002,
+      "p50_ms": 6.9711875,
+      "p95_ms": 17.186718749999997,
+      "max_ms": 18.988594,
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-09-18T20:56:16.227Z",
+      "tool": "k6",
+      "scenario": "latest_messages",
+      "requests": 40,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "min_ms": 4.061786,
+      "mean_ms": 8.424589825000002,
+      "p50_ms": 6.5630205,
+      "p95_ms": 15.263812949999998,
+      "max_ms": 15.926183,
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-09-18T20:56:18.279Z",
+      "tool": "k6",
+      "scenario": "latest_messages",
+      "requests": 40,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "min_ms": 4.020354,
+      "mean_ms": 5.608941925,
+      "p50_ms": 5.6293105,
+      "p95_ms": 7.0728893,
+      "max_ms": 7.362351,
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-09-18T20:56:20.348Z",
+      "tool": "k6",
+      "scenario": "latest_messages",
+      "requests": 40,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "min_ms": 4.039662,
+      "mean_ms": 5.809661425,
+      "p50_ms": 5.682975000000001,
+      "p95_ms": 7.535036749999999,
+      "max_ms": 8.529195,
+      "thresholds_passed": true
+    }
+  ]
+}

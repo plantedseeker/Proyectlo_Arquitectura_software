@@ -45,9 +45,10 @@ cambiar contrato o infraestructura.
 
 ## Declaración del equipo pendiente
 
-Antes de fusionar, los tres integrantes deben revisar esta tabla y registrar en
-el PR si conservan o ajustan cada veredicto. La IA produjo un borrador; la
-responsabilidad de la decisión y de su defensa es humana.
+Antes de ratificar los ADR, los tres integrantes deben revisar esta tabla y
+declarar durante el mini-comité si conservan o ajustan cada veredicto. La IA
+produjo un borrador; la responsabilidad de la decisión y de su defensa es
+humana.
 
 ## Evidencia relacionada
 

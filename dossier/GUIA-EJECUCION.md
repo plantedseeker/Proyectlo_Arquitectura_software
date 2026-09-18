@@ -626,12 +626,12 @@ accedan directamente a JDBC o SQL:
 python .\scripts\check_architecture.py
 ```
 
-La salida esperada es `ADR-001 OK`. La misma comprobación se ejecuta en GitHub
+La salida esperada es `ADR-002 OK`. La misma comprobación se ejecuta en GitHub
 Actions antes de las pruebas del backend. Su alcance y la demostración de una
 violación controlada se documentan en:
 
 ```text
-docs/adr/ADR-001-limites-modulo-mensajeria.md
+docs/adr/ADR-002-limites-modulos-dependencias.md
 docs/architecture/evidencia-restriccion-ci.md
 ```
 
@@ -642,4 +642,4 @@ docs/architecture/evidencia-restriccion-ci.md
 | Levantar solamente API y PostgreSQL | `docker compose up --build -d` | `docker compose ps` y `/actuator/health` |
 | Probar el recorrido funcional completo | `powershell -ExecutionPolicy Bypass -File .\scripts\run-walking-skeleton.ps1` | `experimentos/walking-skeleton/resultados/ultima-ejecucion.json` |
 | Repetir la línea base de rendimiento | `powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-baseline.ps1` | `experimentos/medicion-escenario-01/resultados/resultado.json` |
-| Verificar el límite de ADR-001 | `python .\scripts\check_architecture.py` | salida local y job `backend` de CI |
+| Verificar el límite de ADR-002 | `python .\scripts\check_architecture.py` | salida local y job `backend` de CI |
