@@ -38,19 +38,6 @@ jobs:
       SEED_DEMO: "true"
     steps:
       - uses: actions/checkout@v4
-      - name: Snapshot participación Git (temporal)
-        shell: bash
-        run: |
-          git fetch --all --tags --prune --unshallow || git fetch --all --tags --prune
-          echo '=== SHORTLOG ==='
-          git shortlog -sne --all
-          echo '=== IDENTIDADES ==='
-          git log --all --format='%an <%ae>' | sort | uniq -c | sort -nr
-          echo '=== CRONOLOGIA ==='
-          git log --all --reverse --date=iso --pretty=format:'%ad | %h | %an <%ae> | %s'
-          echo
-          echo '=== ARCHIVOS POR COMMIT ==='
-          git log --all --date=short --pretty=format:'@@ %ad | %h | %an <%ae> | %s' --name-status
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
