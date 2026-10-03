@@ -4,7 +4,7 @@
 
 - ADR-001: monolito modular para mensajería y permanencia dentro del backend actual.
 - ADR-002: límites de módulos y dependencias permitidas/prohibidas; los controladores no acceden directamente a JDBC/SQL.
-- ADR-003: `LIMIT/OFFSET` indexado para la página reciente y migración gradual a cursor solo ante evidencia/necesidad de historial profundo.
+- ADR-004: `LIMIT/OFFSET` indexado para la página reciente y migración gradual a cursor solo ante evidencia/necesidad de historial profundo.
 
 ## Evidencia que debe abrirse
 
@@ -63,7 +63,7 @@ No completar anticipadamente.
 - Respuestas o cambios acordados:
 - Veredicto ADR-001: `CONFIRMADA / AJUSTADA / RECONSIDERADA`
 - Veredicto ADR-002: `CONFIRMADA / AJUSTADA / RECONSIDERADA`
-- Veredicto ADR-003: `CONFIRMADA / AJUSTADA / RECONSIDERADA`
+- Veredicto ADR-004: `CONFIRMADA / AJUSTADA / RECONSIDERADA`
 - Responsable y fecha de cada acción:
 - Enlace al PR/acta:
 
