@@ -37,14 +37,14 @@ cadena de decisión:
 | --- | --- | --- | --- |
 | [ADR-001](../docs/adr/ADR-001-limites-modulo-mensajeria.md) | ¿Qué estilo y topología convienen ahora? | Mantener mensajería en un **monolito modular** | C4, S4 y costo operativo |
 | [ADR-002](../docs/adr/ADR-002-limites-modulos-dependencias.md) | ¿Cómo impedimos que el monolito se degrade? | Dependencias explícitas y `controller !→ JDBC/SQL` | Mapa modular y prueba automática |
-| [ADR-003](../docs/adr/ADR-003-paginacion-historial-mensajes.md) | ¿Cómo evoluciona el historial profundo? | Conservar offset reciente y migrar gradualmente a cursor cuando exista necesidad | S4, S7 e índice compuesto |
+| [ADR-004](../docs/adr/ADR-004-paginacion-historial-mensajes.md) | ¿Cómo evoluciona el historial profundo? | Conservar offset reciente y migrar gradualmente a cursor cuando exista necesidad | S4, S7 e índice compuesto |
 
 La forma corta de explicarlo es:
 
 ```text
 ADR-001: dónde vive mensajería
 ADR-002: cómo se separan sus responsabilidades
-ADR-003: cómo se consulta y evoluciona su historial
+ADR-004: cómo se consulta y evoluciona su historial
 ```
 
 ## 3. Checklists que responde esta guía
@@ -82,7 +82,7 @@ técnica; no inventa que una conversación humana ocurrió antes de realizarse.
 | 7 | Mapa modular objetivo | [Módulos y límites](../docs/architecture/modulos-y-limites.md) |
 | 7 | Criticar recomendación de IA | [Crítica IA](../docs/architecture/propuesta-ia-critica.md) |
 | 8 | ADR 1 y ADR 2 | [ADR-001](../docs/adr/ADR-001-limites-modulo-mensajeria.md) y [ADR-002](../docs/adr/ADR-002-limites-modulos-dependencias.md) |
-| 8 | Decisión complementaria de paginación | [ADR-003](../docs/adr/ADR-003-paginacion-historial-mensajes.md) |
+| 8 | Decisión complementaria de paginación | [ADR-004](../docs/adr/ADR-004-paginacion-historial-mensajes.md) |
 | 8 | Implicaciones de seguridad | ADR-001/002, `requireChatParticipant` y prueba negativa |
 | 8 | Máximo cinco diapositivas | [Soporte de cinco diapositivas](../docs/architecture/mini-comite-s8-5-diapositivas.md) |
 
@@ -513,11 +513,11 @@ python .\scripts\check_architecture.py
 | ¿Por qué usar mediana? | Resume el centro de tres p95 válidos con menor sensibilidad a una corrida alta |
 | ¿Qué compartió equipo físico? | Generador k6, API y PostgreSQL mediante Docker Desktop |
 | ¿Por qué cambió S7 de 829× a 63×? | Cambió el plan/caché; ambas capturas conservan el fenómeno de mayor trabajo del offset profundo |
-| ¿Cursor ya está implementado en Android? | No; ADR-003 propone migración compatible cuando exista navegación profunda real |
+| ¿Cursor ya está implementado en Android? | No; ADR-004 propone migración compatible cuando exista navegación profunda real |
 | ¿Por qué no afirmar 63× en producción? | Es una observación local de un plan, no una distribución productiva |
 | ¿Por qué no microservicios? | No existe presión medida que compense red, secretos, consistencia y operación distribuida |
 | ¿Qué protege ADR-002? | La dirección de dependencias; en particular impide JDBC/SQL directo en controladores |
-| ¿Para qué sirve ADR-003? | Separa la decisión de paginación y define una ruta reversible hacia cursor |
+| ¿Para qué sirve ADR-004? | Separa la decisión de paginación y define una ruta reversible hacia cursor |
 | ¿Cómo evitan leer chats ajenos? | Bearer y `requireChatParticipant` antes de consultar/escribir |
 | ¿La regla CI prueba toda la arquitectura? | No; protege una frontera concreta y se complementa con pruebas y revisión |
 | ¿Qué aceptaron de la IA? | Frontera de mensajería, límite/índice y experimento cursor-offset |
@@ -545,7 +545,7 @@ python .\scripts\check_architecture.py
 - [ ] El equipo puede recorrer C1 → C2 → C3 → código.
 - [ ] El equipo diferencia S4 HTTP de S7 SQL.
 - [ ] El equipo diferencia resultado histórico de repetición en vivo.
-- [ ] El equipo explica ADR-001, ADR-002 y ADR-003 sin mezclarlos.
+- [ ] El equipo explica ADR-001, ADR-002 y ADR-004 sin mezclarlos.
 - [ ] Los tres pueden explicar por qué no microservicios/Redis/broker ahora.
 - [ ] Docker Desktop está abierto y los puertos están controlados.
 - [ ] Android muestra el mismo marcador del último JSON.
