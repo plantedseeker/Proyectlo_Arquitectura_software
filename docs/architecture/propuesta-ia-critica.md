@@ -30,7 +30,7 @@ solo hecho de haber sido generada ni se presenta como código implementado.
 
 La sugerencia original mezclaba seis decisiones y asumía una causa. Se separaron
 tres decisiones arquitectónicas: estilo/despliegue (ADR-001), límites modulares
-y dependencias permitidas (ADR-002), y paginación del historial (ADR-003).
+y dependencias permitidas (ADR-002), y paginación del historial (ADR-004).
 Además se ejecutó `EXPLAIN (ANALYZE, BUFFERS)` para localizar el costo antes de
 cambiar contrato o infraestructura.
 
@@ -57,6 +57,6 @@ humana.
 - [`Comparación de alternativas`](alternativas-s7.md)
 - [`ADR-001`](../adr/ADR-001-limites-modulo-mensajeria.md)
 - [`ADR-002`](../adr/ADR-002-limites-modulos-dependencias.md)
-- [`ADR-003`](../adr/ADR-003-paginacion-historial-mensajes.md)
+- [`ADR-004`](../adr/ADR-004-paginacion-historial-mensajes.md)
 - [`Resultado S4`](../../experimentos/medicion-escenario-01/resultados/resultado.json)
 - [`Instrumento S7`](../../experimentos/localizacion-s7/README.md)
