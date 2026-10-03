@@ -54,7 +54,7 @@ S4 mide total HTTP; no reparte el costo interno.
 ### 5:15–6:00 — Decisión y siguiente evidencia
 
 Explicar que S7 usa EXPLAIN para comparar `OFFSET 0`, `OFFSET 50000` y cursor.
-Relacionar el resultado de paginación con ADR-003, el estilo monolito modular con
+Relacionar el resultado de paginación con ADR-004, el estilo monolito modular con
 ADR-001 y los límites/dependencias con ADR-002.
 
 ## Preguntas probables
