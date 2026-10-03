@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: UTrabajo - contrato experimental Ofertas -> Mensajería
+  version: 0.1.0-spike
+  description: >
+    Contrato propuesto para el Spike 1 del Módulo 5. No representa un endpoint
+    de producción en main hasta que exista un veredicto y una decisión ADR.
+paths:
+  /internal/integration/v1/jobs/{jobId}/conversation-context:
+    get:
+      summary: Obtener contexto mínimo de una oferta para crear una conversación
+      description: >
+        Proveedor lógico: Ofertas. Consumidor lógico: Mensajería.
+        Devuelve únicamente la información que Mensajería necesita para asociar
+        un chat a una oferta sin conocer el esquema completo de job_offer.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Integration-Token
+          in: header
+          required: true
+          description: Credencial interna usada únicamente en el spike.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Oferta encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [jobId, companyId, active, title]
+                properties:
+                  jobId:
+                    type: string
+                    format: uuid
+                  companyId:
+                    type: string
+                    format: uuid
+                  active:
+                    type: boolean
+                  title:
+                    type: string
+        "401":
+          description: Credencial de integración ausente o inválida
+        "404":
+          description: Oferta inexistente
+        "500":
+          description: Error no controlado del proveedor
