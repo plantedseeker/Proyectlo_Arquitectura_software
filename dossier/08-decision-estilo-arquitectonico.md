@@ -113,7 +113,7 @@ La división futura de `UTrabajoService` en servicios internos es una mejora pos
 
 ## Relación con la paginación
 
-El estilo arquitectónico y la estrategia de paginación son decisiones separadas. S7 demuestra que `OFFSET` profundo puede ser costoso, pero eso no obliga a distribuir mensajería. La evolución de `LIMIT/OFFSET` hacia cursor se conserva como decisión independiente y reversible en ADR-003.
+El estilo arquitectónico y la estrategia de paginación son decisiones separadas. S7 demuestra que `OFFSET` profundo puede ser costoso, pero eso no obliga a distribuir mensajería. La evolución de `LIMIT/OFFSET` hacia cursor se conserva como decisión independiente y reversible en ADR-004.
 
 ## Crítica de la propuesta de IA
 
@@ -141,7 +141,7 @@ La propuesta de IA fue tratada como hipótesis, no como evidencia. Se aceptaron 
 - [`../docs/architecture/modulos-y-limites.md`](../docs/architecture/modulos-y-limites.md) — base As-Is y mapa objetivo.
 - [`../docs/adr/ADR-001-limites-modulo-mensajeria.md`](../docs/adr/ADR-001-limites-modulo-mensajeria.md) — decisión de estilo: monolito modular.
 - [`../docs/adr/ADR-002-limites-modulos-dependencias.md`](../docs/adr/ADR-002-limites-modulos-dependencias.md) — límites y dependencias permitidas/prohibidas.
-- [`../docs/adr/ADR-003-paginacion-historial-mensajes.md`](../docs/adr/ADR-003-paginacion-historial-mensajes.md) — evolución de paginación.
+- [`../docs/adr/ADR-004-paginacion-historial-mensajes.md`](../docs/adr/ADR-004-paginacion-historial-mensajes.md) — evolución de paginación.
 - [`../experimentos/localizacion-s7/README.md`](../experimentos/localizacion-s7/README.md) — localización del costo SQL.
 - [`07-c4-componentes-backend.md`](07-c4-componentes-backend.md) — recorrido As-Is.
 - [`../scripts/check_architecture.py`](../scripts/check_architecture.py) — restricción ejecutable.
