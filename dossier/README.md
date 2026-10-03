@@ -15,6 +15,11 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | Guía única de ejecución | `GUIA-EJECUCION.md` |
 | **Guía integral de exposición S5–S8** | **`15-guia-exposicion-integral-s5-s8.md`** |
 | **Evidencia de participación** | **`16-evidencia-participacion.md`** |
+| **Módulo 5 S9 — API, eventos e integración** | **`09-api-events-integration.md`** |
+| **Checklist Módulo 5 S9–S10** | **`17-checklist-modulo-5.md`** |
+| Modelo de dominio M5 | `../docs/dominio/` |
+| Contratos e integración M5 | `../docs/integracion/` |
+| Spike 1 M5 | `../experimentos/spike-01-integracion/` |
 | Capturas y datos de la exposición | `evidencias-exposicion/` |
 | Matriz detallada de trazabilidad C4 | `MATRIZ-TRAZABILIDAD-C4.md` |
 | C4 C1 contexto as-is aprobado | `05-c4-contexto.md` |
@@ -37,6 +42,11 @@ documento `09`.
 El artefacto **`08-decision-estilo-arquitectonico.md`** pertenece a S7 y se
 mantiene en el dossier porque es una evidencia entregable del curso. No debe
 confundirse con `08-c4-componentes-android.md`, que corresponde al paquete C4.
+
+La evidencia de Módulo 5 (S9–S10) se organiza en `../docs/dominio/`,
+`../docs/integracion/` y `../experimentos/spike-01-integracion/`. El
+preregistro del Spike 1 debe preceder temporalmente a cualquier implementación
+experimental.
 
 La evidencia técnica de apoyo para S7–S8 está en
 `../experimentos/localizacion-s7/`, `../docs/adr/` y `../docs/architecture/`,
