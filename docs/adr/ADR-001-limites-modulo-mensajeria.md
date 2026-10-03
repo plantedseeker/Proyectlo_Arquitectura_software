@@ -27,7 +27,7 @@ o una plataforma de orquestación.
 Los límites concretos entre módulos y las dependencias permitidas/prohibidas se
 formalizan por separado en [`ADR-002`](ADR-002-limites-modulos-dependencias.md).
 La estrategia de paginación se mantiene como una decisión independiente en
-[`ADR-003`](ADR-003-paginacion-historial-mensajes.md).
+[`ADR-004`](ADR-004-paginacion-historial-mensajes.md).
 
 ## Alternativas consideradas
 
@@ -91,7 +91,7 @@ registrado en un PR y en un nuevo ADR o actualización explícita de este.
 - [`Trazabilidad del flujo`](../../dossier/09-c4-trazabilidad-localizacion.md)
 - [`Resultado S4`](../../experimentos/medicion-escenario-01/resultados/resultado.json)
 - [`ADR-002`](ADR-002-limites-modulos-dependencias.md) — dependencias permitidas/prohibidas y restricción CI.
-- [`ADR-003`](ADR-003-paginacion-historial-mensajes.md) — estrategia de paginación.
+- [`ADR-004`](ADR-004-paginacion-historial-mensajes.md) — estrategia de paginación.
 
 ## Confirmación requerida
 
