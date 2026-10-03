@@ -39,7 +39,7 @@ Estados usados:
 | Complejidad, seguridad, operación y reversibilidad | Cumple documental | Matrices de alternativas y ADR |
 | **Mapa modular objetivo** | **Cumple documental** | `docs/architecture/modulos-y-limites.md` separa “Base As-Is verificada” de “Mapa modular objetivo S7–S8” |
 | **Decisión de estilo consolidada** | **Cumple documental** | **`08-decision-estilo-arquitectonico.md` en el dossier** |
-| Empezar ADR 1 y ADR 2 | Cumple documental | ADR-001 estilo y ADR-002 límites/dependencias; paginación se conserva separada como ADR-003 |
+| Empezar ADR 1 y ADR 2 | Cumple documental | ADR-001 estilo y ADR-002 límites/dependencias; paginación se conserva separada como ADR-004 |
 | Criticar propuesta generada por IA | Cumple documental | `docs/architecture/propuesta-ia-critica.md` |
 | Registrar aceptado/modificado/rechazado de IA | Cumple documental | Tabla de decisiones en la crítica |
 | PR con decisión de estilo | Cumple | [PR #11](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/11) y ajustes literales de ubicación/trazabilidad en [PR #12](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/pull/12) |
@@ -52,7 +52,7 @@ Estados usados:
 | Diseño modular y límites | Cumple documental | `docs/architecture/modulos-y-limites.md` |
 | ADR 1 — decisión de estilo | Cumple documental | `docs/adr/ADR-001-limites-modulo-mensajeria.md` |
 | ADR 2 — límites y dependencias permitidas | Cumple documental | `docs/adr/ADR-002-limites-modulos-dependencias.md` |
-| ADR 3 — paginación | Cumple documental | `docs/adr/ADR-003-paginacion-historial-mensajes.md`; conserva la decisión técnica antes numerada ADR-002 |
+| ADR 3 — paginación | Cumple documental | `docs/adr/ADR-004-paginacion-historial-mensajes.md`; conserva la decisión técnica antes numerada ADR-002 |
 | Implicaciones de seguridad | Cumple documental | ADR-001/002 y `08-decision-estilo-arquitectonico.md` |
 | Crítica de propuesta IA | Cumple documental | `docs/architecture/propuesta-ia-critica.md` |
 | Preparación de mini-comité | Preparado | `docs/architecture/mini-comite-s8.md` |

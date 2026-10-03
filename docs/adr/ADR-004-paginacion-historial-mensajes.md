@@ -1,7 +1,8 @@
-# ADR-003 — Estrategia de paginación del historial de mensajes
+# ADR-004 — Estrategia de paginación del historial de mensajes
 
 - Fecha original: 2026-09-04
-- Renumerado: 2026-09-11
+- Renumerado previamente: 2026-09-11
+- Renumerado para Módulo 5: 2026-10-02
 - Estado: **Propuesta sustentada por MSG-LOC-01; pendiente de ratificación humana**
 - Categoría: Mensajería y mesa de ayuda
 - Protege: rendimiento, consistencia de navegación y evolución del contrato
@@ -77,7 +78,7 @@ La migración reversible agrega cursor sin eliminar `offset`, publica contrato y
 
 ## Nota de renumeración
 
-Este contenido correspondía anteriormente a `ADR-002-paginacion-historial-mensajes.md`. Se renumera como ADR-003 para alinear el checklist de S8, donde ADR-002 debe documentar límites de módulos y dependencias permitidas. La decisión técnica de paginación no cambia por esta renumeración.
+Esta decisión nació como ADR-002 de paginación y fue renumerada a ADR-003 durante S8. Las diapositivas oficiales de Módulo 5 establecen que **ADR-003** corresponde a la decisión de integración de S9–S10 respaldada por Context Map y Spike 1. Para conservar esa secuencia pedagógica sin perder la decisión técnica existente, la paginación se renumera como **ADR-004**. El contenido técnico y su evidencia S4/S7 no cambian.
 
 ## Confirmación requerida
 

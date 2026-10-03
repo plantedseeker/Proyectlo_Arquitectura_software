@@ -110,5 +110,5 @@ La captura final se ejecutó después del commit del instrumento y registra
 - [`Drivers priorizados`](../../dossier/02-stakeholders-drivers.md): fuente de los criterios de evaluación arquitectónica.
 - [`ADR-001`](../../docs/adr/ADR-001-limites-modulo-mensajeria.md): permanencia en el monolito modular.
 - [`ADR-002`](../../docs/adr/ADR-002-limites-modulos-dependencias.md): límites de módulos y dependencias permitidas/prohibidas.
-- [`ADR-003`](../../docs/adr/ADR-003-paginacion-historial-mensajes.md): estrategia de paginación e índice.
+- [`ADR-004`](../../docs/adr/ADR-004-paginacion-historial-mensajes.md): estrategia de paginación e índice.
 - [`Trazabilidad C4`](../../dossier/09-c4-trazabilidad-localizacion.md): frontera exacta en C2/C3.

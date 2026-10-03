@@ -96,6 +96,6 @@ demostrada.
 - [`Drivers priorizados`](../../dossier/02-stakeholders-drivers.md)
 - [`ADR-001`](../adr/ADR-001-limites-modulo-mensajeria.md): mantener mensajería en el monolito modular.
 - [`ADR-002`](../adr/ADR-002-limites-modulos-dependencias.md): límites y dependencias permitidas/prohibidas.
-- [`ADR-003`](../adr/ADR-003-paginacion-historial-mensajes.md): estrategia de paginación.
+- [`ADR-004`](../adr/ADR-004-paginacion-historial-mensajes.md): estrategia de paginación.
 - [`Experimento S7`](../../experimentos/localizacion-s7/README.md)
 - [`Crítica de propuesta IA`](propuesta-ia-critica.md)

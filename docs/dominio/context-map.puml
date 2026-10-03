@@ -1,0 +1,31 @@
+@startuml
+title UTrabajo — Context Map S9
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+component "Identidad y Acceso" as IAM
+component "Perfiles" as Profiles
+component "Ofertas" as Jobs
+component "Postulaciones" as Apps
+component "Mensajería" as Msg
+
+IAM --> Profiles : userId + rol autenticado
+IAM --> Jobs : identidad empresa
+IAM --> Apps : identidad estudiante
+IAM --> Msg : userId + rol autenticado
+
+Apps --> Jobs : consulta existencia/estado\ny datos mínimos de oferta
+Msg --> Jobs : consulta empresa propietaria\ny referencia/título de oferta
+
+note right of Msg
+Frontera seleccionada para Spike 1:
+Mensajería -> Ofertas
+end note
+
+note bottom of Jobs
+Contextos lógicos dentro del
+monolito modular actual.
+No implica microservicios.
+end note
+@enduml
