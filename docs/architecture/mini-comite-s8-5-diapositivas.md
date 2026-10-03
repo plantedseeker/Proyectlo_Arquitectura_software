@@ -60,7 +60,7 @@ Android presentation
 **Título:** Evidencia y reversibilidad
 
 - S7: `OFFSET 0` 0,120 ms; `OFFSET 50000` 102,050 ms; cursor 0,123 ms.
-- ADR-003 mantiene `LIMIT/OFFSET` para uso actual y deja migración reversible a cursor.
+- ADR-004 mantiene `LIMIT/OFFSET` para uso actual y deja migración reversible a cursor.
 - Microservicio, Redis y broker se difieren por falta de presión medida.
 - Próximo paso humano: mini-comité y veredicto real sobre ADR-001/002/003.
 
