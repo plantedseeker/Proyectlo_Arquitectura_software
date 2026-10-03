@@ -103,7 +103,7 @@ autorización, transacciones y contratos. No se presenta como implementada hoy.
   modular.
 - [`ADR-002`](../adr/ADR-002-limites-modulos-dependencias.md) formaliza las
   dependencias permitidas/prohibidas y la restricción `controller → JDBC`.
-- [`ADR-003`](../adr/ADR-003-paginacion-historial-mensajes.md) documenta la
+- [`ADR-004`](../adr/ADR-004-paginacion-historial-mensajes.md) documenta la
   evolución del contrato de historial sin mezclarla con la decisión de módulos.
 - [`C3 backend`](../../dossier/07-c4-componentes-backend.md) representa el diseño
   As-Is contrastado con código.
