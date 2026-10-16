@@ -22,6 +22,30 @@ completo y Event Sourcing.
 El resultado no dice que lo asíncrono sea incorrecto. Dice que su complejidad no
 está justificada todavía por esta necesidad y esta evidencia.
 
+## Accesos directos a la evidencia
+
+Todos los enlaces siguientes son relativos al repositorio. En GitHub el docente
+puede seleccionarlos y llegar directamente al archivo correspondiente, tanto
+desde el pull request como después de la fusión en `main`.
+
+| Qué se quiere comprobar | Enlace directo |
+| --- | --- |
+| Resumen integrador de Semana 9 | [`09-api-events-integration.md`](09-api-events-integration.md) |
+| Cobertura literal de la rúbrica S9–S10 | [`17-checklist-modulo-5.md`](17-checklist-modulo-5.md) |
+| Diferencia entre subdominio y bounded context | [`subdominios.md`](../docs/dominio/subdominios.md) |
+| Contextos y relaciones justificadas | [`context-map.md`](../docs/dominio/context-map.md) · [`context-map.puml`](../docs/dominio/context-map.puml) |
+| Responsabilidades y exclusiones | [`responsabilidades-contextos.md`](../docs/dominio/responsabilidades-contextos.md) |
+| Contrato exacto de integración | [`contrato-api.yaml`](../docs/integracion/contrato-api.yaml) |
+| Comparación síncrono/asíncrono | [`sincrono-vs-asincrono.md`](../docs/integracion/sincrono-vs-asincrono.md) |
+| Eventos candidatos y filtro crítico | [`eventos-candidatos.md`](../docs/integracion/eventos-candidatos.md) · [`registro-critico-ia.md`](../docs/integracion/registro-critico-ia.md) |
+| Evaluación CQRS/Event Sourcing | [`cqrs-event-sourcing.md`](../docs/integracion/cqrs-event-sourcing.md) |
+| Hipótesis anterior al código | [`00-preregistro.md`](../experimentos/spike-01-integracion/00-preregistro.md) |
+| Ajuste anterior a la medición | [`01-enmienda-previa-a-medicion.md`](../experimentos/spike-01-integracion/01-enmienda-previa-a-medicion.md) |
+| Resultado estructurado oficial | [`resultado.json`](../experimentos/spike-01-integracion/resultados/20261016T211031Z/resultado.json) |
+| Veredicto posterior | [`veredicto.md`](../experimentos/spike-01-integracion/veredicto.md) |
+| Capturas, fallos y recuperación | [`evidencias/README.md`](../experimentos/spike-01-integracion/evidencias/README.md) |
+| Decisión respaldada por el spike | [`ADR-003-integracion-contextos.md`](../docs/adr/ADR-003-integracion-contextos.md) |
+
 ## Las cuatro evidencias centrales del módulo
 
 | Evidencia exigida | Resultado del equipo | Dónde se comprueba |
@@ -32,11 +56,8 @@ está justificada todavía por esta necesidad y esta evidencia.
 | Análisis de CQRS, eventos y consistencia eventual | Se evalúan utilidad, costos y condiciones de revisión sin adoptar patrones por moda | `docs/integracion/eventos-candidatos.md` y `cqrs-event-sourcing.md` |
 
 El artefacto integrador con el nombre literal solicitado para Semana 9 sí existe
-en esta rama:
-
-```text
-dossier/09-api-events-integration.md
-```
+en esta rama y puede abrirse directamente desde
+[`dossier/09-api-events-integration.md`](09-api-events-integration.md).
 
 Ese archivo conecta el modelo de dominio, las alternativas, el contrato, el
 registro crítico de IA, el preregistro y el resultado del spike.
