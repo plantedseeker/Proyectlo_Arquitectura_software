@@ -122,6 +122,18 @@ La rama se creará únicamente después de que este preregistro esté fusionado 
 
 ## Resultado
 
-**VACÍO — el experimento aún no se ha ejecutado.**
+**Completado después de medir — 2026-10-16.**
 
-No completar esta sección antes de implementar y medir el Spike 1.
+- Commit medido: `1e8bc8767efa3a601522046930332c714b6eeb65`.
+- Resultados versionados después de la medición: commit `b2d59f1`.
+- Experimento: **válido**.
+- Hipótesis: **respaldada** bajo las condiciones registradas.
+- Alcance: **ajustada** mediante `01-enmienda-previa-a-medicion.md`; los campos
+  `active` y `title` de este preregistro original fueron retirados antes de
+  medir para conservar solo `jobId` y `companyId`.
+- Evidencia: `resultados/20261016T211031Z/`.
+- Veredicto detallado: `veredicto.md`.
+
+El texto anterior a esta sección se conserva como preregistro histórico. La
+enmienda y el veredicto documentan los cambios sin reescribir la hipótesis
+original después de conocer los resultados.

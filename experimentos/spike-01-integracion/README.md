@@ -75,4 +75,18 @@ Cada ejecución crea `resultados/<fecha-UTC>/` con:
 - `resultado.json`;
 - `SHA256SUMS.txt`.
 
-El veredicto de alcance será **ajustada** por la reducción previa del payload. `resultado.json` informa además, sin ocultar corridas, si la hipótesis funcional y de rendimiento quedó respaldada o refutada.
+La ejecución oficial del 2026-10-16 está en
+`resultados/20261016T211031Z/`. El commit medido fue `1e8bc87` y la evidencia
+se versionó después en `b2d59f1`.
+
+Resultado:
+
+- experimento válido;
+- hipótesis **respaldada**;
+- alcance **ajustada** por la reducción previa del payload;
+- p95 de las corridas válidas: 4,781 ms, 4,360 ms y 4,710 ms;
+- 0 fallos HTTP inesperados y todos los controles funcionales aprobados.
+
+El análisis completo está en `veredicto.md`. Las capturas de preparación,
+fallos, recuperación y éxito están en `evidencias/`; no sustituyen los datos
+estructurados ni sus hashes.
