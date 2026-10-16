@@ -29,15 +29,31 @@ en el mini-comité 2.
 
 | Evidencia | Resultado | Dónde se comprueba |
 | --- | --- | --- |
-| Crecimiento con carga aumentada | 20 corridas entre 10 y 200 VU, sin degradación sostenida | `experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/` |
-| Dónde y cómo se degrada | creció primero la latencia; no hubo saturación ni límite atribuible | `02-analisis-crecimiento.md` |
-| Matriz de fallos y resiliencia | modos observados, descartados y tácticas justificadas | `03-matriz-fallos.md`, `04-matriz-resiliencia.md` |
-| Táctica antes/después | caché funcional, beneficio parcial y no adopción | `06-resultado-tactica-cache.md`, `comparacion-cache/20261016T230407Z/` |
-| Distribución y costo | cuatro alternativas, dimensiones completas y órdenes de magnitud | `docs/architecture/alternativas-distribucion-s12.md` |
-| ADR 4 | propuesta de mantener Mensajería dentro del monolito modular | `docs/adr/ADR-004-distribucion-mensajeria.md` |
-| Auditoría de IA | patrones aceptados, rechazados y supuestos pendientes | `docs/architecture/auditoria-ia-microservicios-s12.md` |
-| Segunda fitness function | regla, umbral cero y fallo de CI implementados | `scripts/check_distribution_decision.py` |
-| Mini-comité 2 | formato listo; participantes y veredicto pendientes | `docs/architecture/mini-comite-s12.md` |
+| Crecimiento con carga aumentada | 20 corridas entre 10 y 200 VU, sin degradación sostenida | [resultado consolidado](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json), [contexto](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/contexto.json) y [huellas](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/SHA256SUMS.txt) |
+| Dónde y cómo se degrada | creció primero la latencia; no hubo saturación ni límite atribuible | [análisis de crecimiento](../experimentos/crecimiento-mensajeria/02-analisis-crecimiento.md) |
+| Matriz de fallos y resiliencia | modos observados, descartados y tácticas justificadas | [matriz de fallos](../experimentos/crecimiento-mensajeria/03-matriz-fallos.md) y [matriz de resiliencia](../experimentos/crecimiento-mensajeria/04-matriz-resiliencia.md) |
+| Táctica antes/después | caché funcional, beneficio parcial y no adopción | [resultado explicado](../experimentos/crecimiento-mensajeria/06-resultado-tactica-cache.md), [datos de comparación](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/resultado-comparacion.json) y [huellas](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/SHA256SUMS.txt) |
+| Capturas de ejecución | inicio y cierre del crecimiento y de la comparación con caché | [índice visual y comprobación SHA-256](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md) |
+| Distribución y costo | cuatro alternativas, dimensiones completas y órdenes de magnitud | [alternativas de distribución](../docs/architecture/alternativas-distribucion-s12.md) |
+| ADR 4 | propuesta de mantener Mensajería dentro del monolito modular | [ADR-004](../docs/adr/ADR-004-distribucion-mensajeria.md) |
+| Auditoría de IA | patrones aceptados, rechazados y supuestos pendientes | [auditoría de microservicios propuestos por IA](../docs/architecture/auditoria-ia-microservicios-s12.md) |
+| Segunda fitness function | regla, umbral cero y fallo de CI implementados | [regla ejecutable](../scripts/check_distribution_decision.py) |
+| Mini-comité 2 | formato listo; participantes y veredicto pendientes | [formato del mini-comité](../docs/architecture/mini-comite-s12.md) |
+
+## Evidencia visual de ejecución
+
+Las imágenes son evidencia complementaria: permiten mostrar rápidamente la
+ejecución en terminal, mientras que los JSON, logs, contexto y archivos
+`SHA256SUMS.txt` conservan la evidencia primaria y reproducible.
+
+1. [Construcción, semilla e inicio del crecimiento](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/02-crecimiento-construccion-semilla-inicio.png).
+2. [Cierre del crecimiento, ruta del resultado y huellas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/01-crecimiento-cierre-y-huellas.png).
+3. [Construcción y restauración de la semilla para probar la caché](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/03-cache-construccion-y-semilla.png).
+4. [Cierre de la comparación antes/después, ruta y huellas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/04-cache-cierre-y-huellas.png).
+
+El [índice de capturas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md)
+muestra las cuatro imágenes dentro de una sola página, explica qué comprueba
+cada una y registra su SHA-256.
 
 ## Semana 11 — método, datos y conclusión
 
@@ -157,13 +173,14 @@ ADR-004 propuesto → mini-comité 2 pendiente → veredicto humano pendiente
 ## Recorrido para mostrárselo al profesor
 
 1. Abrir este resumen.
-2. Mostrar `resultado.json` del crecimiento y la tabla de escalones.
-3. Abrir matrices de fallos y resiliencia.
-4. Mostrar `resultado-comparacion.json` y el veredicto parcial.
-5. Abrir la tabla de alternativas y costos.
-6. Mostrar ADR-004, especialmente consecuencias y disparadores.
-7. Ejecutar las dos fitness functions.
-8. Aclarar que el mini-comité todavía debe emitir el veredicto humano.
+2. Abrir el [índice de capturas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md) y mostrar el inicio y cierre de ambas mediciones.
+3. Mostrar el [resultado del crecimiento](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json) y la tabla de escalones.
+4. Abrir las [matrices de fallos](../experimentos/crecimiento-mensajeria/03-matriz-fallos.md) y [resiliencia](../experimentos/crecimiento-mensajeria/04-matriz-resiliencia.md).
+5. Mostrar el [resultado antes/después](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/resultado-comparacion.json) y el veredicto parcial.
+6. Abrir la [tabla de alternativas y costos](../docs/architecture/alternativas-distribucion-s12.md).
+7. Mostrar [ADR-004](../docs/adr/ADR-004-distribucion-mensajeria.md), especialmente consecuencias y disparadores.
+8. Ejecutar las dos fitness functions.
+9. Aclarar que el mini-comité todavía debe emitir el veredicto humano.
 
 Comandos breves:
 
@@ -207,3 +224,4 @@ La evidencia técnica de S11 está completa. Los artefactos técnicos de S12 est
 preparados y son ejecutables. Permanecen pendientes actividades humanas que no
 se pueden anticipar: mini-comité 2, veredicto final, revisión del PR y defensa
 individual. Después del comité se actualizará ADR-004 con el resultado real.
+
