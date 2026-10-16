@@ -18,7 +18,7 @@ Mensajería solicita en el momento de crear el chat un contexto mínimo de la of
 Mensajería
    ↓ solicitud
 Ofertas
-   ↓ jobId, companyId, active, title
+   ↓ jobId, companyId
 Mensajería
 ~~~
 

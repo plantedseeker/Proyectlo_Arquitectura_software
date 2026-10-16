@@ -91,11 +91,12 @@ Respuesta mínima:
 ~~~json
 {
   "jobId": "uuid",
-  "companyId": "uuid",
-  "active": true,
-  "title": "Desarrollador Android"
+  "companyId": "uuid"
 }
 ~~~
+
+La reducción respecto al borrador inicial está registrada antes de medir en
+`experimentos/spike-01-integracion/01-enmienda-previa-a-medicion.md`.
 
 El contrato NO permite modificar la oferta, aplicar a ella, cambiar perfiles ni enviar mensajes.
 

@@ -8,6 +8,8 @@ info:
 paths:
   /internal/integration/v1/jobs/{jobId}/conversation-context:
     get:
+      operationId: getJobConversationContext
+      tags: [Integración interna]
       summary: Obtener contexto mínimo de una oferta para crear una conversación
       description: >
         Proveedor lógico: Ofertas. Consumidor lógico: Mensajería.
@@ -33,7 +35,8 @@ paths:
             application/json:
               schema:
                 type: object
-                required: [jobId, companyId, active, title]
+                additionalProperties: false
+                required: [jobId, companyId]
                 properties:
                   jobId:
                     type: string
@@ -41,13 +44,32 @@ paths:
                   companyId:
                     type: string
                     format: uuid
-                  active:
-                    type: boolean
-                  title:
-                    type: string
         "401":
           description: Credencial de integración ausente o inválida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
         "404":
           description: Oferta inexistente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
         "500":
           description: Error no controlado del proveedor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+components:
+  schemas:
+    ApiError:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string

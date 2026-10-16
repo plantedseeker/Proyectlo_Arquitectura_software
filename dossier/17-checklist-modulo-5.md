@@ -15,7 +15,7 @@ Base: checklist de trabajo y diapositivas oficiales de Módulo 5.
 | Evaluar CQRS y Event Sourcing | **Cumple documental** | docs/integracion/cqrs-event-sourcing.md |
 | Registrar uso crítico de IA | **Cumple documental** | docs/integracion/registro-critico-ia.md |
 | Escribir hipótesis, alcance y criterios antes del código | **Cumple temporalmente** | experimentos/spike-01-integracion/00-preregistro.md; commit dedicado anterior al spike |
-| Abrir PR con 09-api-events-integration.md | **Pendiente de abrir PR** | dossier/09-api-events-integration.md |
+| Abrir PR con 09-api-events-integration.md | **Cumple** | dossier/09-api-events-integration.md; PR #16 fusionado |
 
 ## Semana 10
 

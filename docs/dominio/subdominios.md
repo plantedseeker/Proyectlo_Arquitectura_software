@@ -6,17 +6,19 @@
 
 El Módulo 5 pide identificar fronteras del dominio y justificar qué responsabilidad protege cada una. Por eso este mapa no se deriva mecánicamente de las tablas: contrasta controladores, servicios, esquema relacional y flujos ya verificados en S5–S8.
 
-## Subdominios identificados
+## Subdominios identificados y contextos propuestos
 
-| Subdominio / contexto | Tipo propuesto | Responsabilidad que protege | Conceptos que posee | Lo que no le pertenece |
-| --- | --- | --- | --- | --- |
-| **Identidad y Acceso** | Genérico | Autenticar usuarios, resolver rol/principal y administrar sesiones | usuario autenticado, rol, sesión, credenciales | ofertas, postulaciones, mensajes |
-| **Perfiles** | Soporte | Mantener información académica/laboral y documentos de estudiantes/empresas | perfil, habilidades, CV, avatar, datos de empresa | autenticación, disponibilidad de ofertas, historial de chat |
-| **Ofertas** | Núcleo | Gestionar publicación y vigencia de oportunidades laborales | oferta, requisitos, empresa propietaria, estado activo | postulación del estudiante, conversación |
-| **Postulaciones** | Núcleo | Gestionar la relación estudiante–oferta y su estado | postulación, fecha, estado | contenido editable de la oferta, mensajes |
-| **Mensajería** | Soporte crítico para la categoría del curso | Gestionar conversaciones entre estudiante y empresa asociadas a una oferta | chat, mensaje, participante, orden e historial | reglas de publicación, perfil completo, autenticación |
+Un **subdominio** describe una parte del problema de negocio; un **bounded context** delimita el modelo y el lenguaje con que la solución la implementa. Para el alcance actual se propone una correspondencia 1:1, pero no se tratan como sinónimos.
 
-La clasificación núcleo/soporte/genérico es una propuesta de modelado, no una afirmación de que existan cinco despliegues independientes.
+| Subdominio del problema | Bounded context propuesto | Tipo | Responsabilidad que protege | Conceptos que posee | Lo que no le pertenece |
+| --- | --- | --- | --- | --- | --- |
+| Gestión de identidad y acceso | **Identidad y Acceso** | Genérico | Autenticar usuarios, resolver rol/principal y administrar sesiones | usuario autenticado, rol, sesión, credenciales | ofertas, postulaciones, mensajes |
+| Gestión de perfiles | **Perfiles** | Soporte | Mantener información académica/laboral y documentos de estudiantes/empresas | perfil, habilidades, CV, avatar, datos de empresa | autenticación, disponibilidad de ofertas, historial de chat |
+| Gestión de oportunidades laborales | **Ofertas** | Núcleo | Gestionar publicación y vigencia de oportunidades laborales | oferta, requisitos, empresa propietaria, estado activo | postulación del estudiante, conversación |
+| Gestión de candidaturas | **Postulaciones** | Núcleo | Gestionar la relación estudiante–oferta y su estado | postulación, fecha, estado | contenido editable de la oferta, mensajes |
+| Comunicación de soporte | **Mensajería** | Soporte crítico para la categoría del curso | Gestionar conversaciones entre estudiante y empresa asociadas a una oferta | chat, mensaje, participante, orden e historial | reglas de publicación, perfil completo, autenticación |
+
+La clasificación núcleo/soporte/genérico y el mapeo 1:1 son propuestas de modelado, no una afirmación de que existan cinco despliegues independientes.
 
 ## Evidencia As-Is
 
