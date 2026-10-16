@@ -13,7 +13,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPat
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.UUID
 
-@SpringBootTest
+@SpringBootTest(
+    properties = [
+        "app.message-cache.enabled=true",
+        "app.message-cache.ttl-ms=60000",
+    ]
+)
 @AutoConfigureMockMvc
 class UTrabajoApiApplicationTests(@Autowired private val mockMvc: MockMvc) {
     @Test
@@ -85,6 +90,21 @@ class UTrabajoApiApplicationTests(@Autowired private val mockMvc: MockMvc) {
             .andExpect(jsonPath("$.length()").value(2))
             .andExpect(jsonPath("$[0].message").value("Gracias por escribirnos"))
             .andExpect(jsonPath("$[1].message").value("Quedo atento"))
+
+        mockMvc.perform(
+            post("/api/chats/$chatId/messages")
+                .header("Authorization", "Bearer $companyToken")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""{"message":"Mensaje después de caché"}""")
+        ).andExpect(status().isCreated)
+
+        mockMvc.perform(
+            get("/api/chats/$chatId/messages?limit=2&offset=0")
+                .header("Authorization", "Bearer $studentToken")
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$[0].message").value("Quedo atento"))
+            .andExpect(jsonPath("$[1].message").value("Mensaje después de caché"))
 
         mockMvc.perform(
             get("/api/chats/$chatId/messages?limit=101")

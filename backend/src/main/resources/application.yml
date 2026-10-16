@@ -30,3 +30,7 @@ app:
   session-hours: ${SESSION_HOURS:168}
   seed-demo: ${SEED_DEMO:true}
   integration-token: ${INTEGRATION_TOKEN:}
+  message-cache:
+    enabled: ${MESSAGE_CACHE_ENABLED:false}
+    ttl-ms: ${MESSAGE_CACHE_TTL_MS:1000}
+    maximum-entries: ${MESSAGE_CACHE_MAX_ENTRIES:1000}

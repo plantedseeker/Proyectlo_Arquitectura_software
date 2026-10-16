@@ -27,3 +27,26 @@ como resultado experimental y no detiene los escalones restantes.
 
 No se debe editar manualmente un resultado primario. Cualquier exclusión o
 repetición se documenta en el análisis con su causa.
+
+## Lectura del crecimiento observado
+
+- `02-analisis-crecimiento.md`: conclusión y límites de atribución.
+- `03-matriz-fallos.md`: fallos observados, descartados y pendientes.
+- `04-matriz-resiliencia.md`: tácticas justificadas por la evidencia.
+- `resultados/20261016T224331Z/`: 20 corridas primarias, contexto y huellas.
+
+## Comparación de la táctica
+
+`05-protocolo-tactica-cache.md` congela antes de medir una caché local de la
+página reciente. La funcionalidad está deshabilitada por defecto y el runner la
+activa solo durante el experimento. Con el protocolo y el código confirmados y
+el árbol limpio, ejecutar:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-cache-comparison.ps1
+```
+
+El runner reconstruye la API, restaura la misma semilla, reinicia los contadores
+de caché y ejecuta cuatro corridas de 200 VU. `comparar_tactica.py` contrasta las
+corridas 2–4 con el escalón base ya registrado, emite un veredicto y genera
+huellas SHA-256 bajo `comparacion-cache/<fecha>/`.
