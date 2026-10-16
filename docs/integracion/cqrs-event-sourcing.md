@@ -62,6 +62,19 @@ No se acepta de forma uniforme para todo el sistema.
 | Vigencia de oferta al aplicar | preferir estado actual mientras sea barato |
 | Proyección/preview derivado para lectura | podría tolerar consistencia eventual si aparece beneficio medido |
 
-## Conclusión previa al spike
+## Conclusión posterior al Spike 1
 
-Los patrones no se incorporan por sofisticación. La opción de **no adoptar** CQRS/Event Sourcing permanece válida y deberá reabrirse solo ante evidencia que compense su costo.
+Spike 1 respaldó un contrato síncrono mínimo con tres corridas válidas por
+debajo del umbral, 0 fallos HTTP inesperados y sin duplicar estado. No apareció
+una necesidad de separar modelos de lectura/escritura ni de reconstruir estado
+desde eventos.
+
+Por tanto, se mantiene la decisión de **no adoptar CQRS completo ni Event
+Sourcing**. Tampoco se introduce consistencia eventual para crear una
+conversación: Mensajería necesita la existencia y empresa actuales de la oferta.
+
+La conclusión es acotada, no universal. Se reabrirá si se requieren despliegues
+independientes, operación durante indisponibilidad de Ofertas, proyecciones con
+beneficio medido o auditoría/reconstrucción que el modelo actual no pueda
+satisfacer. Referencias: `experimentos/spike-01-integracion/veredicto.md` y
+`docs/adr/ADR-003-integracion-contextos.md`.

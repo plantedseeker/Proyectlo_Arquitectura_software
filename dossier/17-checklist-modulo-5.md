@@ -19,16 +19,16 @@ Base: checklist de trabajo y diapositivas oficiales de Módulo 5.
 
 ## Semana 10
 
-| Requisito | Estado antes de ejecutar | Evidencia esperada |
+| Requisito | Estado | Evidencia |
 | --- | --- | --- |
-| Spike 1 en rama separada | Pendiente | spike/s10-integracion-mensajeria-ofertas |
-| Alcance acotado en tiempo | Preregistrado | 00-preregistro.md |
-| Registrar ejecución/condiciones | Pendiente | condiciones + commit medido |
-| Registrar resultados | Pendiente | experimentos/spike-01-integracion/resultados/ |
-| Emitir veredicto explícito | Pendiente | veredicto.md |
-| ADR-003 referenciando spike | Pendiente y reservado | docs/adr/ADR-003-integracion-contextos.md |
-| Evaluar aplicabilidad real de CQRS/consistencia eventual | Evaluación preliminar hecha; cierre pendiente | cqrs-event-sourcing.md + ADR-003 |
-| Mantener trazabilidad Git | En curso | preregistro < código < resultados < veredicto < ADR |
+| Spike 1 en rama separada | **Cumple** | `spike/s10-integracion-mensajeria-ofertas` |
+| Alcance acotado en tiempo | **Cumple** | 00-preregistro.md + contexto `within_180_minute_timebox: true` |
+| Registrar ejecución/condiciones | **Cumple** | contexto.json; commit medido `1e8bc87` |
+| Registrar resultados | **Cumple** | resultados/20261016T211031Z/; commit `b2d59f1` |
+| Emitir veredicto explícito | **Cumple** | veredicto.md; commit `4072eba` |
+| ADR-003 referenciando spike | **Cumple documental; pendiente ratificación** | docs/adr/ADR-003-integracion-contextos.md |
+| Evaluar aplicabilidad real de CQRS/consistencia eventual | **Cumple** | cqrs-event-sourcing.md + ADR-003 |
+| Mantener trazabilidad Git | **Cumple** | preregistro < código < resultados < veredicto < ADR |
 
 ## Control de numeración ADR
 
@@ -40,10 +40,13 @@ La decisión previa de paginación se conserva sin pérdida de contenido como:
 
 ## Criterios de cierre
 
-M5 no se considera cerrado hasta poder comprobar:
+M5 queda documental y técnicamente preparado para revisión porque puede comprobarse:
 
 1. cada frontera del Context Map tiene responsabilidad y relación explicable;
 2. la flecha Mensajería → Ofertas tiene contrato concreto y comparación sync/async;
 3. fecha(preregistro) < fecha(código spike) < fecha(resultados) < fecha(veredicto);
 4. ADR-003 cita Context Map, alternativas, commit medido y veredicto;
 5. la conclusión sobre CQRS/Event Sourcing se expresa como utilidad vs costo, no como moda.
+
+La ratificación del ADR y la revisión del PR siguen siendo actos humanos; no se
+declaran automáticamente por completar los artefactos.

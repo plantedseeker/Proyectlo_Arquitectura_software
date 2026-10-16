@@ -65,6 +65,7 @@ flowchart LR
 - **Mecanismo As-Is:** esquema PostgreSQL compartido mediante UTrabajoService/JDBC.
 - **Alternativas S9:** contrato síncrono explícito vs proyección mantenida por eventos.
 - **Alternativa llevada al Spike 1:** contrato síncrono.
+- **Resultado S10:** hipótesis síncrona respaldada con alcance ajustado al payload mínimo `jobId` + `companyId`; decisión propuesta en ADR-003.
 
 ## Regla de lectura
 

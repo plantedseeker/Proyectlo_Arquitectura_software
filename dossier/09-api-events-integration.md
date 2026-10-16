@@ -65,7 +65,12 @@ Ofertas publica hechos y Mensajería conserva una proyección mínima.
 
 **Selección para experimentar:** A, contrato síncrono.
 
-**Decisión final:** todavía no existe; depende del resultado del Spike 1 y ADR-003 de M5.
+**Resultado:** hipótesis respaldada bajo las condiciones medidas; alcance
+ajustado antes de medir al payload mínimo `jobId` + `companyId`.
+
+**Decisión propuesta:** ADR-003 recomienda la interacción síncrona mínima y
+mantener diferida la alternativa asíncrona. Continúa pendiente la ratificación
+humana del equipo.
 
 Documento completo: docs/integracion/sincrono-vs-asincrono.md.
 
@@ -135,13 +140,15 @@ Archivo:
 
 - docs/integracion/cqrs-event-sourcing.md
 
-Conclusión previa al spike:
+Conclusión posterior al spike:
 
 - **CQRS completo:** no justificado con la evidencia actual.
 - **Event Sourcing:** no justificado con la evidencia actual.
 - **Consistencia eventual:** podría ser aceptable para proyecciones derivadas, no para autorización, persistencia del mensaje o unicidad de postulación.
 
-Estas conclusiones se reabren si aparece evidencia nueva.
+Spike 1 no necesitó estado replicado y respaldó la consulta síncrona concreta.
+Estas conclusiones se reabren si aparece evidencia de disponibilidad
+independiente, despliegue separado o proyecciones que compensen su costo.
 
 ## 8. Registro crítico de IA
 
@@ -179,7 +186,28 @@ veredicto
 ADR-003 de M5
 ~~~
 
-El resultado debe permanecer vacío antes de implementar el spike.
+La regla temporal se cumplió. La secuencia verificable es:
+
+~~~text
+804d2d2  preregistro original
+de83109  enmienda de alcance antes de medir
+4b1c43d  implementación experimental
+1e8bc87  corrección del runner y commit medido
+b2d59f1  resultados y capturas
+4072eba  veredicto posterior
+~~~
+
+Resultado oficial:
+
+| Corrida | Uso | p95 | Fallos inesperados |
+| ---: | --- | ---: | ---: |
+| 1 | calentamiento | 5,779 ms | 0 % |
+| 2 | válida | 4,781 ms | 0 % |
+| 3 | válida | 4,360 ms | 0 % |
+| 4 | válida | 4,710 ms | 0 % |
+
+Los controles de contrato, `401` y `404` pasaron en las cuatro corridas. La
+evidencia completa está en `experimentos/spike-01-integracion/`.
 
 ## 10. Checklist S9
 
@@ -195,12 +223,14 @@ El resultado debe permanecer vacío antes de implementar el spike.
 | Preregistrar Spike 1 | experimentos/spike-01-integracion/00-preregistro.md |
 | PR S9 | esta rama/PR |
 
-## 11. Qué todavía NO puede afirmarse
+## 11. Qué puede y qué no puede afirmarse
 
-- que el contrato síncrono esté respaldado experimentalmente;
-- que la alternativa asíncrona sea peor;
-- que CQRS nunca vaya a ser útil;
-- que el endpoint experimental forme parte de producción;
-- que ADR-003 de M5 esté aceptado.
+- Sí puede afirmarse que el contrato síncrono cumplió el criterio
+  preregistrado bajo las condiciones locales del spike.
+- No puede afirmarse que la alternativa asíncrona sea universalmente peor.
+- No puede afirmarse que CQRS nunca vaya a ser útil.
+- El endpoint experimental no sustituye todavía el flujo productivo.
+- ADR-003 está redactado y respaldado, pero pendiente de ratificación humana.
 
-Esas afirmaciones dependen de S10.
+El p95 local tampoco se extrapola como SLO de producción o de una topología
+distribuida.

@@ -22,7 +22,7 @@ Ofertas
 Mensajería
 ~~~
 
-El Spike 1 probará una representación HTTP explícita de este contrato.
+El Spike 1 probó una representación HTTP explícita de este contrato.
 
 ### Beneficios esperados
 
@@ -64,18 +64,32 @@ Mensajería mantiene una proyección mínima con jobId, companyId, active y titl
 - Requiere definir publicación confiable; un evento emitido antes del commit o perdido después del commit puede dejar proyecciones incorrectas.
 - Un broker o outbox sería complejidad adicional no justificada todavía por evidencia.
 
-## Alternativa seleccionada para experimentar
+## Alternativa seleccionada y resultado
 
-Se selecciona **A — contrato síncrono** únicamente como hipótesis de Spike 1.
+Se seleccionó **A — contrato síncrono** como hipótesis de Spike 1.
 
-Esto NO es todavía la decisión final del ADR-003 de Módulo 5. La decisión final debe citar:
+La ejecución válida del 2026-10-16 obtuvo p95 de 4,781 ms, 4,360 ms y
+4,710 ms en las tres corridas válidas, con 0 fallos HTTP inesperados y todos
+los checks funcionales aprobados. La hipótesis quedó **respaldada** bajo las
+condiciones registradas y el alcance quedó **ajustado** antes de medir al
+payload mínimo `jobId` + `companyId`.
+
+ADR-003 propone la alternativa síncrona para la necesidad actual. La decisión
+es sobre la frontera lógica: mientras ambos contextos estén en el mismo
+monolito, no se recomienda una llamada HTTP del proceso hacia sí mismo.
+
+La trazabilidad incluye:
 
 1. Context Map;
 2. contrato;
 3. preregistro;
 4. condiciones medidas;
 5. resultado;
-6. veredicto.
+6. veredicto;
+7. ADR-003.
+
+Evidencia: `experimentos/spike-01-integracion/veredicto.md` y
+`docs/adr/ADR-003-integracion-contextos.md`.
 
 ## Condiciones que harían revisar la opción síncrona
 
