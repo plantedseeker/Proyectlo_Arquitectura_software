@@ -18,12 +18,17 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | **Módulo 5 S9 — API, eventos e integración** | **`09-api-events-integration.md`** |
 | **Checklist Módulo 5 S9–S10** | **`17-checklist-modulo-5.md`** |
 | **Resumen ejecutivo Módulo 5** | **`18-resumen-ejecutivo-modulo-5.md`** |
+| **Resumen ejecutivo S11–S12** | **`19-resumen-ejecutivo-s11-s12.md`** |
+| **Checklist S11–S12** | **`20-checklist-semanas-11-12.md`** |
 | Modelo de dominio M5 | `../docs/dominio/` |
 | Contratos e integración M5 | `../docs/integracion/` |
 | Spike 1 M5 | `../experimentos/spike-01-integracion/` |
 | Resultado y veredicto Spike 1 | `../experimentos/spike-01-integracion/resultados/20261016T211031Z/resultado.json`, `../experimentos/spike-01-integracion/veredicto.md` |
 | Capturas del recorrido S10 | `../experimentos/spike-01-integracion/evidencias/` |
 | ADR-003 de integración | `../docs/adr/ADR-003-integracion-contextos.md` |
+| ADR-004 de distribución S12 | `../docs/adr/ADR-004-distribucion-mensajeria.md` |
+| ADR-005 de paginación | `../docs/adr/ADR-005-paginacion-historial-mensajes.md` |
+| Experimento de crecimiento S11 | `../experimentos/crecimiento-mensajeria/` |
 | Capturas y datos de la exposición | `evidencias-exposicion/` |
 | Matriz detallada de trazabilidad C4 | `MATRIZ-TRAZABILIDAD-C4.md` |
 | C4 C1 contexto as-is aprobado | `05-c4-contexto.md` |
