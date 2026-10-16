@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "run": 1,
+  "discarded": true,
+  "captured_at_utc": "2026-10-16T21:10:36.546Z",
+  "tool": "k6",
+  "scenario": "conversation_context",
+  "executor": "shared-iterations",
+  "virtual_users": 10,
+  "requests": 40,
+  "total_http_requests": 44,
+  "checks_rate": 1,
+  "failed_request_rate": 0,
+  "measured_contract_valid_rate": 1,
+  "negative_checks": {
+    "missing_token_rejected_rate": 1,
+    "invalid_token_rejected_rate": 1,
+    "missing_job_not_found_rate": 1
+  },
+  "positive_probe_valid_rate": 1,
+  "latency_ms": {
+    "min": 2.421399,
+    "mean": 4.3339233,
+    "p50": 4.1746885,
+    "p95": 5.778616749999999,
+    "max": 6.330871
+  },
+  "thresholds": {
+    "checks": true,
+    "http_req_failed": true,
+    "measured_requests": true,
+    "measured_contract_valid": true,
+    "measured_contract_duration": true,
+    "positive_probe_valid": true,
+    "missing_token_rejected": true,
+    "invalid_token_rejected": true,
+    "missing_job_not_found": true
+  },
+  "thresholds_passed": true
+}
