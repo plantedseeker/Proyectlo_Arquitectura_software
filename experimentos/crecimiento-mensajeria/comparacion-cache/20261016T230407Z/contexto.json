@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-10-16T23:04:07.720132+00:00",
+  "git_revision": "0849dea148e90f91ff0a07e225d76d844a5c5242",
+  "branch": "experiment/s11-crecimiento-mensajeria",
+  "working_tree_clean_before_measurement": true,
+  "machine": {
+    "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+    "manufacturer": "Acer",
+    "model": "Predator PH16-71",
+    "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+    "physical_memory_gib": 95.7,
+    "logical_cpus": 32,
+    "operating_system": "Windows-10-10.0.26300-SP0",
+    "architecture": "AMD64"
+  },
+  "energy_before": {
+    "condition": "plugged_in",
+    "battery_percent": 80,
+    "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+    "captured_during_measurement": true
+  },
+  "software_versions": {
+    "docker": "29.7.2 client / 29.7.2 server",
+    "docker_compose": "5.4.0",
+    "postgresql": "16.14",
+    "k6_image": "grafana/k6:0.54.0"
+  },
+  "comparison": {
+    "baseline_result": "resultados/20261016T224331Z/resultado.json",
+    "baseline_git_revision": "73895be48e03a35731c53d77a45e471808313168",
+    "load_level_vus": 200,
+    "iterations_per_vu": 4,
+    "requests_per_run": 800,
+    "runs": 4,
+    "discarded_run": 1
+  },
+  "tactic": {
+    "name": "local_latest_message_page_cache",
+    "enabled": true,
+    "ttl_ms": 1000,
+    "maximum_entries": 1000,
+    "cached_offset": 0
+  }
+}

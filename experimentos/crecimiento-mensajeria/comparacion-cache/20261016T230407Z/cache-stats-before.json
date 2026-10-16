@@ -1,0 +1,10 @@
+{
+    "enabled":  true,
+    "ttlMilliseconds":  1000,
+    "maximumEntries":  1000,
+    "currentEntries":  0,
+    "hits":  0,
+    "misses":  0,
+    "puts":  0,
+    "invalidations":  0
+}

@@ -18,7 +18,10 @@ import java.time.Instant
 import java.util.UUID
 
 @Service
-class UTrabajoService(private val jdbc: JdbcClient) {
+class UTrabajoService(
+    private val jdbc: JdbcClient,
+    private val messagePageCache: MessagePageCache,
+) {
     fun profile(userId: UUID): Map<String, Any?> {
         val profile = jdbc.sql(
             """
@@ -353,31 +356,33 @@ class UTrabajoService(private val jdbc: JdbcClient) {
         requireChatParticipant(principal.userId, chatId)
         require(limit in 1..100) { "limit debe estar entre 1 y 100" }
         require(offset in 0..1_000_000) { "offset debe estar entre 0 y 1000000" }
-        return jdbc.sql(
-            """
-            SELECT id, chat_id, sender_id, body, sent_at
-            FROM (
+        return messagePageCache.getOrLoad(chatId, limit, offset) {
+            jdbc.sql(
+                """
                 SELECT id, chat_id, sender_id, body, sent_at
-                FROM message
-                WHERE chat_id = :chatId
-                ORDER BY sent_at DESC, id DESC
-                LIMIT :limit OFFSET :offset
-            ) recent
-            ORDER BY sent_at ASC, id ASC
-            """.trimIndent()
-        )
-            .param("chatId", chatId)
-            .param("limit", limit)
-            .param("offset", offset)
-            .query { rs, _ ->
-            linkedMapOf(
-                "id" to rs.getObject("id", UUID::class.java).toString(),
-                "chatId" to rs.getObject("chat_id", UUID::class.java).toString(),
-                "senderId" to rs.getObject("sender_id", UUID::class.java).toString(),
-                "message" to rs.getString("body"),
-                "timestamp" to rs.getTimestamp("sent_at").toInstant().toString(),
+                FROM (
+                    SELECT id, chat_id, sender_id, body, sent_at
+                    FROM message
+                    WHERE chat_id = :chatId
+                    ORDER BY sent_at DESC, id DESC
+                    LIMIT :limit OFFSET :offset
+                ) recent
+                ORDER BY sent_at ASC, id ASC
+                """.trimIndent()
             )
-        }.list()
+                .param("chatId", chatId)
+                .param("limit", limit)
+                .param("offset", offset)
+                .query { rs, _ ->
+                    linkedMapOf(
+                        "id" to rs.getObject("id", UUID::class.java).toString(),
+                        "chatId" to rs.getObject("chat_id", UUID::class.java).toString(),
+                        "senderId" to rs.getObject("sender_id", UUID::class.java).toString(),
+                        "message" to rs.getString("body"),
+                        "timestamp" to rs.getTimestamp("sent_at").toInstant().toString(),
+                    )
+                }.list()
+        }
     }
 
     @Transactional
@@ -395,6 +400,7 @@ class UTrabajoService(private val jdbc: JdbcClient) {
         jdbc.sql(
             "UPDATE chat SET last_message = :body, last_message_at = CURRENT_TIMESTAMP WHERE id = :chatId"
         ).param("body", message).param("chatId", chatId).update()
+        messagePageCache.invalidateChat(chatId)
         return id
     }
 

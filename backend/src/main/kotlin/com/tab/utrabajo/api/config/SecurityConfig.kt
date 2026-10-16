@@ -30,6 +30,7 @@ class SecurityConfig {
                     "/actuator/health",
                     "/uploads/**",
                     "/internal/integration/v1/jobs/*/conversation-context",
+                    "/internal/integration/v1/message-cache/**",
                 ).permitAll()
                 .anyRequest().authenticated()
         }

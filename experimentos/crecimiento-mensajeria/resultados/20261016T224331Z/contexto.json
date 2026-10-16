@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-10-16T22:43:32.190526+00:00",
+  "git_revision": "73895be48e03a35731c53d77a45e471808313168",
+  "branch": "experiment/s11-crecimiento-mensajeria",
+  "working_tree_clean_before_measurement": true,
+  "machine": {
+    "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+    "manufacturer": "Acer",
+    "model": "Predator PH16-71",
+    "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+    "physical_memory_gib": 95.7,
+    "logical_cpus": 32,
+    "operating_system": "Windows-10-10.0.26300-SP0",
+    "architecture": "AMD64"
+  },
+  "energy_before": {
+    "condition": "plugged_in",
+    "battery_percent": 80,
+    "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+    "captured_during_measurement": true
+  },
+  "deployment_topology": {
+    "shared_physical_machine": true,
+    "load_generator": "k6 container in Docker Desktop",
+    "api": "Spring Boot container in Docker Desktop",
+    "database": "PostgreSQL 16.14 container in Docker Desktop"
+  },
+  "software_versions": {
+    "docker": "29.7.2 client / 29.7.2 server",
+    "docker_compose": "5.4.0",
+    "postgresql": "16.14"
+  },
+  "instrument": {
+    "name": "grafana/k6",
+    "image": "grafana/k6:0.54.0",
+    "executor": "shared-iterations",
+    "levels_vus": [
+      10,
+      50,
+      100,
+      150,
+      200
+    ],
+    "iterations_per_vu": 4,
+    "runs_per_level": 4,
+    "discarded_run_per_level": 1
+  },
+  "baseline_reference": {
+    "scenario_id": "MSG-PERF-01",
+    "historical_git_revision": "c7c0edd66f49ed28fb694cf9c1970bab03c4b640",
+    "historical_p95_median_ms": 9.109,
+    "historical_vus": 10,
+    "historical_requests_per_run": 40
+  }
+}
