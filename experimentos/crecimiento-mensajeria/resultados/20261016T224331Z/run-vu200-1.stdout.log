@@ -1,0 +1,58 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: /growth/carga-crecimiento.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 200 max VUs, 2m30s max duration (incl. graceful stop):
+              * latest_messages_growth: 800 iterations shared among 200 VUs (maxDuration: 2m0s, gracefulStop: 30s)
+
+{
+  "schema_version": 1,
+  "run": 1,
+  "discarded": true,
+  "captured_at_utc": "2026-10-16T22:44:38.912Z",
+  "tool": "k6",
+  "scenario": "latest_messages_growth",
+  "load_level_vus": 200,
+  "iterations_per_vu": 4,
+  "expected_requests": 800,
+  "requests": 800,
+  "throughput_rps": 2352.3611948992766,
+  "checks_rate": 1,
+  "failed_request_rate": 0,
+  "valid_page_rate": 1,
+  "latency_ms": {
+    "min": 0.840534,
+    "mean": 23.928669191250005,
+    "p50": 20.2361925,
+    "p90": 51.872522800000006,
+    "p95": 55.719498949999995,
+    "p99": 73.64598753999998,
+    "max": 93.799317
+  },
+  "iteration_duration_ms": {
+    "mean": 27.56239077249998,
+    "p95": 59.13084054999997,
+    "max": 116.921471
+  },
+  "response_status_counts": {
+    "200": 800,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "429": 0,
+    "5xx": 0,
+    "other": 0
+  },
+  "integrity_valid": true,
+  "thresholds_passed": true
+}
+
+running (0m00.3s), 000/200 VUs, 800 complete and 0 interrupted iterations
+latest_messages_growth ✓ [ 100% ] 200 VUs  0m00.1s/2m0s  800/800 shared iters

@@ -1,0 +1,1390 @@
+{
+  "schema_version": 1,
+  "category": "Mensajería y mesa de ayuda",
+  "scenario_id": "MSG-PERF-GROWTH-01",
+  "captured_at_utc": "2026-10-16T22:44:53.389600+00:00",
+  "measured_git_revision": "73895be48e03a35731c53d77a45e471808313168",
+  "hypothesis": "supported",
+  "first_sustained_degradation_vus": null,
+  "highest_tested_vus": 200,
+  "interpretation_boundary": "No se observó degradación sostenida hasta 200 VU; no se extrapola más allá.",
+  "thresholds": {
+    "p95_ms": 500.0,
+    "failed_request_rate": 0,
+    "valid_page_rate": 1,
+    "sustained_rule": "al menos 2 de 3 corridas válidas degradadas"
+  },
+  "conditions": {
+    "schema_version": 1,
+    "captured_at_utc": "2026-10-16T22:43:32.190526+00:00",
+    "git_revision": "73895be48e03a35731c53d77a45e471808313168",
+    "branch": "experiment/s11-crecimiento-mensajeria",
+    "working_tree_clean_before_measurement": true,
+    "machine": {
+      "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+      "manufacturer": "Acer",
+      "model": "Predator PH16-71",
+      "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+      "physical_memory_gib": 95.7,
+      "logical_cpus": 32,
+      "operating_system": "Windows-10-10.0.26300-SP0",
+      "architecture": "AMD64"
+    },
+    "energy_before": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "deployment_topology": {
+      "shared_physical_machine": true,
+      "load_generator": "k6 container in Docker Desktop",
+      "api": "Spring Boot container in Docker Desktop",
+      "database": "PostgreSQL 16.14 container in Docker Desktop"
+    },
+    "software_versions": {
+      "docker": "29.7.2 client / 29.7.2 server",
+      "docker_compose": "5.4.0",
+      "postgresql": "16.14"
+    },
+    "instrument": {
+      "name": "grafana/k6",
+      "image": "grafana/k6:0.54.0",
+      "executor": "shared-iterations",
+      "levels_vus": [
+        10,
+        50,
+        100,
+        150,
+        200
+      ],
+      "iterations_per_vu": 4,
+      "runs_per_level": 4,
+      "discarded_run_per_level": 1
+    },
+    "baseline_reference": {
+      "scenario_id": "MSG-PERF-01",
+      "historical_git_revision": "c7c0edd66f49ed28fb694cf9c1970bab03c4b640",
+      "historical_p95_median_ms": 9.109,
+      "historical_vus": 10,
+      "historical_requests_per_run": 40
+    },
+    "energy_after": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "seed": {
+      "schema_version": 1,
+      "captured_at_utc": "2026-10-16T22:43:31.843766+00:00",
+      "verification_method": "SQL de solo lectura posterior a la semilla",
+      "seeded_conversations": 1000,
+      "total_messages": 289000,
+      "distribution": {
+        "conversations_with_10_messages": 900,
+        "conversations_with_1000_messages": 90,
+        "conversations_with_10000_messages": 9,
+        "conversations_with_100000_messages": 1
+      },
+      "maximum_messages_per_conversation": 100000,
+      "matches_preregistered_seed": true
+    }
+  },
+  "level_summaries": [
+    {
+      "load_level_vus": 10,
+      "requests_per_run": 40,
+      "valid_run_numbers": [
+        2,
+        3,
+        4
+      ],
+      "degraded_valid_runs": 0,
+      "sustained_degradation": false,
+      "p95_median_ms": 8.963,
+      "p95_min_ms": 7.895,
+      "p95_max_ms": 9.504,
+      "throughput_median_rps": 177.431,
+      "throughput_min_rps": 169.037,
+      "throughput_max_rps": 177.777
+    },
+    {
+      "load_level_vus": 50,
+      "requests_per_run": 200,
+      "valid_run_numbers": [
+        2,
+        3,
+        4
+      ],
+      "degraded_valid_runs": 0,
+      "sustained_degradation": false,
+      "p95_median_ms": 18.768,
+      "p95_min_ms": 15.112,
+      "p95_max_ms": 22.836,
+      "throughput_median_rps": 813.531,
+      "throughput_min_rps": 778.26,
+      "throughput_max_rps": 830.017
+    },
+    {
+      "load_level_vus": 100,
+      "requests_per_run": 400,
+      "valid_run_numbers": [
+        2,
+        3,
+        4
+      ],
+      "degraded_valid_runs": 0,
+      "sustained_degradation": false,
+      "p95_median_ms": 39.258,
+      "p95_min_ms": 30.263,
+      "p95_max_ms": 42.305,
+      "throughput_median_rps": 1395.339,
+      "throughput_min_rps": 1374.424,
+      "throughput_max_rps": 1443.754
+    },
+    {
+      "load_level_vus": 150,
+      "requests_per_run": 600,
+      "valid_run_numbers": [
+        2,
+        3,
+        4
+      ],
+      "degraded_valid_runs": 0,
+      "sustained_degradation": false,
+      "p95_median_ms": 41.06,
+      "p95_min_ms": 39.962,
+      "p95_max_ms": 58.6,
+      "throughput_median_rps": 1879.413,
+      "throughput_min_rps": 1761.236,
+      "throughput_max_rps": 1924.31
+    },
+    {
+      "load_level_vus": 200,
+      "requests_per_run": 800,
+      "valid_run_numbers": [
+        2,
+        3,
+        4
+      ],
+      "degraded_valid_runs": 0,
+      "sustained_degradation": false,
+      "p95_median_ms": 58.235,
+      "p95_min_ms": 47.014,
+      "p95_max_ms": 74.306,
+      "throughput_median_rps": 2303.017,
+      "throughput_min_rps": 2254.076,
+      "throughput_max_rps": 2417.286
+    }
+  ],
+  "runs": [
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-10-16T22:43:34.567Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 10,
+      "iterations_per_vu": 4,
+      "expected_requests": 40,
+      "requests": 40,
+      "throughput_rps": 97.49697978121526,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 6.738665,
+        "mean": 24.93632859999999,
+        "p50": 9.286866,
+        "p90": 73.10356800000001,
+        "p95": 73.6923999,
+        "p99": 74.08200608,
+        "max": 74.084942
+      },
+      "iteration_duration_ms": {
+        "mean": 25.558908425,
+        "p95": 75.13348789999999,
+        "max": 75.610109
+      },
+      "response_status_counts": {
+        "200": 40,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 13.27,
+            "max_memory_percent": 0.64,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.15,
+            "max_memory_percent": 0.95,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-10-run-1": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:43:38.636Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 10,
+      "iterations_per_vu": 4,
+      "expected_requests": 40,
+      "requests": 40,
+      "throughput_rps": 169.0372471334315,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 5.027342,
+        "mean": 7.540452999999999,
+        "p50": 7.655571,
+        "p90": 9.468495500000001,
+        "p95": 9.5044184,
+        "p99": 10.982618809999998,
+        "max": 11.916833
+      },
+      "iteration_duration_ms": {
+        "mean": 8.185377375000002,
+        "p95": 10.88025835,
+        "max": 12.312329
+      },
+      "response_status_counts": {
+        "200": 40,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.14,
+            "max_memory_percent": 0.64,
+            "sample_count": 1
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.02,
+            "max_memory_percent": 0.95,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:43:42.636Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 10,
+      "iterations_per_vu": 4,
+      "expected_requests": 40,
+      "requests": 40,
+      "throughput_rps": 177.77733768010185,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 4.13227,
+        "mean": 6.231035825000003,
+        "p50": 6.238587,
+        "p90": 7.6216321,
+        "p95": 7.89482385,
+        "p99": 8.07641593,
+        "max": 8.155006
+      },
+      "iteration_duration_ms": {
+        "mean": 6.838155575000002,
+        "p95": 8.6870529,
+        "max": 9.030639
+      },
+      "response_status_counts": {
+        "200": 40,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.14,
+            "max_memory_percent": 0.64,
+            "sample_count": 1
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 2.01,
+            "max_memory_percent": 0.95,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:43:46.617Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 10,
+      "iterations_per_vu": 4,
+      "expected_requests": 40,
+      "requests": 40,
+      "throughput_rps": 177.43147333679363,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 4.126852,
+        "mean": 6.053086900000002,
+        "p50": 5.387553,
+        "p90": 8.816903,
+        "p95": 8.9627723,
+        "p99": 9.10886737,
+        "max": 9.138397
+      },
+      "iteration_duration_ms": {
+        "mean": 6.546535725,
+        "p95": 9.57085315,
+        "max": 9.857893
+      },
+      "response_status_counts": {
+        "200": 40,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.14,
+            "max_memory_percent": 0.65,
+            "sample_count": 1
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.03,
+            "max_memory_percent": 0.96,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-10-16T22:43:50.721Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 50,
+      "iterations_per_vu": 4,
+      "expected_requests": 200,
+      "requests": 200,
+      "throughput_rps": 677.859275668726,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 4.270377,
+        "mean": 20.84629909,
+        "p50": 11.955921,
+        "p90": 49.8577547,
+        "p95": 58.63807624999996,
+        "p99": 70.71637184000001,
+        "max": 75.878566
+      },
+      "iteration_duration_ms": {
+        "mean": 22.151590670000008,
+        "p95": 59.06785754999994,
+        "max": 79.17519
+      },
+      "response_status_counts": {
+        "200": 200,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.2,
+            "max_memory_percent": 0.71,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 1.65,
+            "max_memory_percent": 0.96,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-50-run-1": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:43:54.696Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 50,
+      "iterations_per_vu": 4,
+      "expected_requests": 200,
+      "requests": 200,
+      "throughput_rps": 778.2604644298896,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 4.911759,
+        "mean": 12.17568062499999,
+        "p50": 10.4945175,
+        "p90": 19.9628939,
+        "p95": 22.8358981,
+        "p99": 25.4470739,
+        "max": 26.297862
+      },
+      "iteration_duration_ms": {
+        "mean": 13.2571965,
+        "p95": 23.4284444,
+        "max": 28.039204
+      },
+      "response_status_counts": {
+        "200": 200,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.12,
+            "max_memory_percent": 0.71,
+            "sample_count": 1
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.01,
+            "max_memory_percent": 0.96,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:43:58.691Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 50,
+      "iterations_per_vu": 4,
+      "expected_requests": 200,
+      "requests": 200,
+      "throughput_rps": 813.5310949868616,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 3.244729,
+        "mean": 9.969060565,
+        "p50": 8.8985155,
+        "p90": 16.381417499999998,
+        "p95": 18.767945399999995,
+        "p99": 19.653214389999995,
+        "max": 20.49194
+      },
+      "iteration_duration_ms": {
+        "mean": 11.145949494999991,
+        "p95": 20.533843499999996,
+        "max": 23.04651
+      },
+      "response_status_counts": {
+        "200": 200,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.34,
+            "max_memory_percent": 0.73,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.96,
+            "sample_count": 2
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:02.716Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 50,
+      "iterations_per_vu": 4,
+      "expected_requests": 200,
+      "requests": 200,
+      "throughput_rps": 830.0165181587279,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 3.206955,
+        "mean": 9.355369855000003,
+        "p50": 9.348567500000001,
+        "p90": 13.264407599999998,
+        "p95": 15.112262099999999,
+        "p99": 17.757721079999996,
+        "max": 18.801106
+      },
+      "iteration_duration_ms": {
+        "mean": 10.379940859999998,
+        "p95": 15.702536199999999,
+        "max": 19.532831
+      },
+      "response_status_counts": {
+        "200": 200,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.11,
+            "max_memory_percent": 0.72,
+            "sample_count": 1
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 1.63,
+            "max_memory_percent": 0.96,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-10-16T22:44:06.795Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 100,
+      "iterations_per_vu": 4,
+      "expected_requests": 400,
+      "requests": 400,
+      "throughput_rps": 1358.6106651698037,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 3.517626,
+        "mean": 18.750410557499986,
+        "p50": 17.245435,
+        "p90": 32.5242989,
+        "p95": 34.667063899999995,
+        "p99": 40.58093855999997,
+        "max": 57.168511
+      },
+      "iteration_duration_ms": {
+        "mean": 22.175532517499988,
+        "p95": 39.15982724999993,
+        "max": 83.74581
+      },
+      "response_status_counts": {
+        "200": 400,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.2,
+            "max_memory_percent": 0.76,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.06,
+            "max_memory_percent": 0.95,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-100-run-1": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:10.788Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 100,
+      "iterations_per_vu": 4,
+      "expected_requests": 400,
+      "requests": 400,
+      "throughput_rps": 1374.4242051661013,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 2.779894,
+        "mean": 17.242903659999993,
+        "p50": 13.546320000000001,
+        "p90": 33.6529642,
+        "p95": 39.258020099999975,
+        "p99": 47.070210689999975,
+        "max": 60.857675
+      },
+      "iteration_duration_ms": {
+        "mean": 19.94723703249999,
+        "p95": 41.04336954999997,
+        "max": 80.702933
+      },
+      "response_status_counts": {
+        "200": 400,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.3,
+            "max_memory_percent": 0.77,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 1.89,
+            "max_memory_percent": 0.96,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-100-run-2": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:14.800Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 100,
+      "iterations_per_vu": 4,
+      "expected_requests": 400,
+      "requests": 400,
+      "throughput_rps": 1443.7542941990027,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 2.232265,
+        "mean": 14.545623797499998,
+        "p50": 12.802454000000001,
+        "p90": 24.815514400000005,
+        "p95": 30.26341865,
+        "p99": 38.213665989999996,
+        "max": 44.794926
+      },
+      "iteration_duration_ms": {
+        "mean": 17.799911897500007,
+        "p95": 37.391712799999986,
+        "max": 68.736417
+      },
+      "response_status_counts": {
+        "200": 400,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.15,
+            "max_memory_percent": 0.77,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.01,
+            "max_memory_percent": 0.96,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-100-run-3": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:18.801Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 100,
+      "iterations_per_vu": 4,
+      "expected_requests": 400,
+      "requests": 400,
+      "throughput_rps": 1395.3387648104049,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 2.340059,
+        "mean": 16.662565852499984,
+        "p50": 12.256903,
+        "p90": 37.046675,
+        "p95": 42.305329549999996,
+        "p99": 44.72891012,
+        "max": 48.801046
+      },
+      "iteration_duration_ms": {
+        "mean": 19.955697005,
+        "p95": 44.35882075,
+        "max": 79.401329
+      },
+      "response_status_counts": {
+        "200": 400,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.15,
+            "max_memory_percent": 0.75,
+            "sample_count": 1
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.96,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-10-16T22:44:22.846Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 150,
+      "iterations_per_vu": 4,
+      "expected_requests": 600,
+      "requests": 600,
+      "throughput_rps": 1756.464257590261,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 2.368788,
+        "mean": 24.108906335000007,
+        "p50": 21.8237375,
+        "p90": 45.86167590000001,
+        "p95": 50.54255464999998,
+        "p99": 62.16753482,
+        "max": 66.340877
+      },
+      "iteration_duration_ms": {
+        "mean": 29.73355186666667,
+        "p95": 72.77708114999973,
+        "max": 103.905332
+      },
+      "response_status_counts": {
+        "200": 600,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.15,
+            "max_memory_percent": 0.84,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 1.69,
+            "max_memory_percent": 0.96,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-150-run-1": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:26.868Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 150,
+      "iterations_per_vu": 4,
+      "expected_requests": 600,
+      "requests": 600,
+      "throughput_rps": 1879.4134559845238,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 1.268128,
+        "mean": 19.572089921666677,
+        "p50": 19.0960575,
+        "p90": 35.431783700000004,
+        "p95": 39.96217159999996,
+        "p99": 49.608766749999994,
+        "max": 59.050838
+      },
+      "iteration_duration_ms": {
+        "mean": 25.05190184166666,
+        "p95": 46.162680849999965,
+        "max": 85.158131
+      },
+      "response_status_counts": {
+        "200": 600,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.17,
+            "max_memory_percent": 0.78,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.03,
+            "max_memory_percent": 0.96,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-150-run-2": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:30.910Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 150,
+      "iterations_per_vu": 4,
+      "expected_requests": 600,
+      "requests": 600,
+      "throughput_rps": 1761.236190077318,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 1.927807,
+        "mean": 23.855993283333305,
+        "p50": 22.2294415,
+        "p90": 45.36223590000001,
+        "p95": 58.59951255,
+        "p99": 73.70802124999999,
+        "max": 102.53678
+      },
+      "iteration_duration_ms": {
+        "mean": 28.569228184999993,
+        "p95": 69.25634864999999,
+        "max": 105.283141
+      },
+      "response_status_counts": {
+        "200": 600,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.23,
+            "max_memory_percent": 0.77,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 10.93,
+            "max_memory_percent": 1.01,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-150-run-3": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:34.895Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 150,
+      "iterations_per_vu": 4,
+      "expected_requests": 600,
+      "requests": 600,
+      "throughput_rps": 1924.309825915323,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 1.955619,
+        "mean": 18.466605023333308,
+        "p50": 15.560394500000001,
+        "p90": 36.9379099,
+        "p95": 41.06018189999998,
+        "p99": 46.89357254,
+        "max": 48.294381
+      },
+      "iteration_duration_ms": {
+        "mean": 23.393382701666688,
+        "p95": 53.52471854999998,
+        "max": 87.001558
+      },
+      "response_status_counts": {
+        "200": 600,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.2,
+            "max_memory_percent": 0.78,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 3.19,
+            "max_memory_percent": 1.02,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-150-run-4": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-10-16T22:44:38.912Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 2352.3611948992766,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 0.840534,
+        "mean": 23.928669191250005,
+        "p50": 20.2361925,
+        "p90": 51.872522800000006,
+        "p95": 55.719498949999995,
+        "p99": 73.64598753999998,
+        "max": 93.799317
+      },
+      "iteration_duration_ms": {
+        "mean": 27.56239077249998,
+        "p95": 59.13084054999997,
+        "max": 116.921471
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.2,
+            "max_memory_percent": 0.79,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.34,
+            "max_memory_percent": 1.01,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-200-run-1": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:42.942Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 2303.0167120912242,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 1.296148,
+        "mean": 27.784793287500012,
+        "p50": 21.511102,
+        "p90": 58.8320361,
+        "p95": 74.30634694999996,
+        "p99": 106.20308351999998,
+        "max": 126.803198
+      },
+      "iteration_duration_ms": {
+        "mean": 33.577409554999974,
+        "p95": 78.37396025,
+        "max": 134.814384
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.16,
+            "max_memory_percent": 0.93,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 1.87,
+            "max_memory_percent": 1.01,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-200-run-2": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:46.953Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 2417.2859294940904,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 1.030445,
+        "mean": 19.76230735125002,
+        "p50": 15.8316585,
+        "p90": 43.256874800000006,
+        "p95": 47.014480199999994,
+        "p99": 56.33193790999999,
+        "max": 91.283522
+      },
+      "iteration_duration_ms": {
+        "mean": 24.79812634249999,
+        "p95": 58.53926744999999,
+        "max": 116.441353
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.18,
+            "max_memory_percent": 0.95,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 0.2,
+            "max_memory_percent": 1.01,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-200-run-3": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T22:44:50.979Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 2254.076340685584,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 1.697216,
+        "mean": 25.285355851249978,
+        "p50": 23.3941525,
+        "p90": 47.641839600000004,
+        "p95": 58.23462014999995,
+        "p99": 78.85395347,
+        "max": 91.406239
+      },
+      "iteration_duration_ms": {
+        "mean": 31.761937353750017,
+        "p95": 83.34326674999998,
+        "max": 156.981681
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true,
+      "resource_telemetry": {
+        "sample_count": 2,
+        "containers": {
+          "proyectlo_arquitectura_software-api-1": {
+            "max_cpu_percent": 0.17,
+            "max_memory_percent": 0.95,
+            "sample_count": 2
+          },
+          "proyectlo_arquitectura_software-db-1": {
+            "max_cpu_percent": 1.98,
+            "max_memory_percent": 1.01,
+            "sample_count": 2
+          },
+          "utrabajo-s11-k6-vu-200-run-4": {
+            "max_cpu_percent": 0.0,
+            "max_memory_percent": 0.0,
+            "sample_count": 1
+          }
+        }
+      },
+      "degraded": false
+    }
+  ],
+  "limitation_classification": "pending_evidence_analysis",
+  "selected_tactic": null
+}
