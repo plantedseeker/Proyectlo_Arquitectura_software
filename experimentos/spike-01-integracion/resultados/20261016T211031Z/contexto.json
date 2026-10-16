@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "experiment": "spike-01-integracion",
+  "started_at_utc": "2026-10-16T21:10:34.818174+00:00",
+  "git": {
+    "revision": "1e8bc8767efa3a601522046930332c714b6eeb65",
+    "branch": "spike/s10-integracion-mensajeria-ofertas",
+    "working_tree_clean": true
+  },
+  "machine": {
+    "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+    "manufacturer": "Acer",
+    "model": "Predator PH16-71",
+    "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+    "physical_memory_gib": 95.7,
+    "logical_cpus": 32,
+    "operating_system": "Windows-10-10.0.26300-SP0",
+    "architecture": "AMD64"
+  },
+  "energy_before": {
+    "condition": "plugged_in",
+    "battery_percent": 80,
+    "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+    "captured_during_measurement": true
+  },
+  "deployment_topology": {
+    "shared_physical_machine": true,
+    "load_generator": "k6 0.54.0 container in Docker Desktop",
+    "api": "Spring Boot container in Docker Desktop on the same host",
+    "database": "PostgreSQL 16 container in Docker Desktop on the same host"
+  },
+  "versions": {
+    "docker": "29.7.2",
+    "docker_compose": "5.4.0",
+    "postgresql": "16.14",
+    "k6_image": "grafana/k6:0.54.0"
+  },
+  "test_data": {
+    "job_id": "00011738-7de8-ce9a-830f-10a21adde6b5",
+    "expected_company_id": "61090680-0d93-3e97-9606-01008b28fa4c",
+    "source": "deterministic repository demo data selected before measurement"
+  },
+  "security": {
+    "integration_token_source": "local-default",
+    "integration_token_persisted": false
+  },
+  "measurement_plan": {
+    "executor": "shared-iterations",
+    "virtual_users": 10,
+    "measured_requests_per_run": 40,
+    "runs": 4,
+    "discarded_run": 1,
+    "valid_run_numbers": [
+      2,
+      3,
+      4
+    ],
+    "p95_threshold_ms": 500,
+    "timebox_minutes": 180,
+    "contract_fields": [
+      "jobId",
+      "companyId"
+    ],
+    "negative_cases_per_run": [
+      "missing integration token -> 401",
+      "invalid integration token -> 401",
+      "unknown job -> 404"
+    ]
+  }
+}

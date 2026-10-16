@@ -25,6 +25,7 @@ services:
       DB_PASSWORD: utrabajo_local
       PUBLIC_BASE_URL: http://10.0.2.2:8080
       SEED_DEMO: "true"
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:-spike-local-token}
     ports:
       - "8080:8080"
     volumes:
@@ -45,8 +46,10 @@ services:
     environment:
       BASE_URL: http://api:8080
       CHAT_ID: 3fb4ce25-b840-4685-d2ea-53f9a4bdedc6
+      INTEGRATION_TOKEN: ${INTEGRATION_TOKEN:-spike-local-token}
     volumes:
       - ./experimentos/medicion-escenario-01:/experiment
+      - ./experimentos/spike-01-integracion:/spike
     depends_on:
       api:
         condition: service_healthy

@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "experiment": "spike-01-integracion",
+  "category": "Integración Mensajería -> Ofertas",
+  "started_at_utc": "2026-10-16T21:10:34.818174+00:00",
+  "finished_at_utc": "2026-10-16T21:10:42.743545+00:00",
+  "elapsed_seconds": 7.925,
+  "verdict": "ajustada",
+  "scope_adjustment": {
+    "status": "ajustada",
+    "reason": "payload reducido antes de medir a jobId y companyId",
+    "evidence": "experimentos/spike-01-integracion/01-enmienda-previa-a-medicion.md"
+  },
+  "hypothesis_verdict": "respaldada",
+  "experiment_valid": true,
+  "acceptance_passed": true,
+  "invalid_reasons": [],
+  "refutation_reasons": [],
+  "conditions": {
+    "schema_version": 1,
+    "experiment": "spike-01-integracion",
+    "started_at_utc": "2026-10-16T21:10:34.818174+00:00",
+    "git": {
+      "revision": "1e8bc8767efa3a601522046930332c714b6eeb65",
+      "branch": "spike/s10-integracion-mensajeria-ofertas",
+      "working_tree_clean": true
+    },
+    "machine": {
+      "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+      "manufacturer": "Acer",
+      "model": "Predator PH16-71",
+      "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+      "physical_memory_gib": 95.7,
+      "logical_cpus": 32,
+      "operating_system": "Windows-10-10.0.26300-SP0",
+      "architecture": "AMD64"
+    },
+    "energy_before": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "deployment_topology": {
+      "shared_physical_machine": true,
+      "load_generator": "k6 0.54.0 container in Docker Desktop",
+      "api": "Spring Boot container in Docker Desktop on the same host",
+      "database": "PostgreSQL 16 container in Docker Desktop on the same host"
+    },
+    "versions": {
+      "docker": "29.7.2",
+      "docker_compose": "5.4.0",
+      "postgresql": "16.14",
+      "k6_image": "grafana/k6:0.54.0"
+    },
+    "test_data": {
+      "job_id": "00011738-7de8-ce9a-830f-10a21adde6b5",
+      "expected_company_id": "61090680-0d93-3e97-9606-01008b28fa4c",
+      "source": "deterministic repository demo data selected before measurement"
+    },
+    "security": {
+      "integration_token_source": "local-default",
+      "integration_token_persisted": false
+    },
+    "measurement_plan": {
+      "executor": "shared-iterations",
+      "virtual_users": 10,
+      "measured_requests_per_run": 40,
+      "runs": 4,
+      "discarded_run": 1,
+      "valid_run_numbers": [
+        2,
+        3,
+        4
+      ],
+      "p95_threshold_ms": 500,
+      "timebox_minutes": 180,
+      "contract_fields": [
+        "jobId",
+        "companyId"
+      ],
+      "negative_cases_per_run": [
+        "missing integration token -> 401",
+        "invalid integration token -> 401",
+        "unknown job -> 404"
+      ]
+    },
+    "energy_after": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "energy_condition_stable": true,
+    "within_180_minute_timebox": true
+  },
+  "valid_runs_summary": {
+    "valid_run_count": 3,
+    "valid_run_numbers": [
+      2,
+      3,
+      4
+    ],
+    "p95_median_ms": 4.71,
+    "p95_min_ms": 4.36,
+    "p95_max_ms": 4.781
+  },
+  "run_evaluations": [
+    {
+      "run": 1,
+      "discarded": true,
+      "structure_passed": true,
+      "functional_passed": true,
+      "p95_ms": 5.779,
+      "p95_threshold_passed": true,
+      "acceptance_passed": true
+    },
+    {
+      "run": 2,
+      "discarded": false,
+      "structure_passed": true,
+      "functional_passed": true,
+      "p95_ms": 4.781,
+      "p95_threshold_passed": true,
+      "acceptance_passed": true
+    },
+    {
+      "run": 3,
+      "discarded": false,
+      "structure_passed": true,
+      "functional_passed": true,
+      "p95_ms": 4.36,
+      "p95_threshold_passed": true,
+      "acceptance_passed": true
+    },
+    {
+      "run": 4,
+      "discarded": false,
+      "structure_passed": true,
+      "functional_passed": true,
+      "p95_ms": 4.71,
+      "p95_threshold_passed": true,
+      "acceptance_passed": true
+    }
+  ],
+  "runs": [
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-10-16T21:10:36.546Z",
+      "tool": "k6",
+      "scenario": "conversation_context",
+      "executor": "shared-iterations",
+      "virtual_users": 10,
+      "requests": 40,
+      "total_http_requests": 44,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "measured_contract_valid_rate": 1,
+      "negative_checks": {
+        "missing_token_rejected_rate": 1,
+        "invalid_token_rejected_rate": 1,
+        "missing_job_not_found_rate": 1
+      },
+      "positive_probe_valid_rate": 1,
+      "latency_ms": {
+        "min": 2.421399,
+        "mean": 4.3339233,
+        "p50": 4.1746885,
+        "p95": 5.778616749999999,
+        "max": 6.330871
+      },
+      "thresholds": {
+        "checks": true,
+        "http_req_failed": true,
+        "measured_requests": true,
+        "measured_contract_valid": true,
+        "measured_contract_duration": true,
+        "positive_probe_valid": true,
+        "missing_token_rejected": true,
+        "invalid_token_rejected": true,
+        "missing_job_not_found": true
+      },
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T21:10:38.446Z",
+      "tool": "k6",
+      "scenario": "conversation_context",
+      "executor": "shared-iterations",
+      "virtual_users": 10,
+      "requests": 40,
+      "total_http_requests": 44,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "measured_contract_valid_rate": 1,
+      "negative_checks": {
+        "missing_token_rejected_rate": 1,
+        "invalid_token_rejected_rate": 1,
+        "missing_job_not_found_rate": 1
+      },
+      "positive_probe_valid_rate": 1,
+      "latency_ms": {
+        "min": 2.10545,
+        "mean": 3.5281314250000007,
+        "p50": 3.3829275,
+        "p95": 4.780501249999999,
+        "max": 5.343584
+      },
+      "thresholds": {
+        "checks": true,
+        "http_req_failed": true,
+        "measured_requests": true,
+        "measured_contract_valid": true,
+        "measured_contract_duration": true,
+        "positive_probe_valid": true,
+        "missing_token_rejected": true,
+        "invalid_token_rejected": true,
+        "missing_job_not_found": true
+      },
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T21:10:40.291Z",
+      "tool": "k6",
+      "scenario": "conversation_context",
+      "executor": "shared-iterations",
+      "virtual_users": 10,
+      "requests": 40,
+      "total_http_requests": 44,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "measured_contract_valid_rate": 1,
+      "negative_checks": {
+        "missing_token_rejected_rate": 1,
+        "invalid_token_rejected_rate": 1,
+        "missing_job_not_found_rate": 1
+      },
+      "positive_probe_valid_rate": 1,
+      "latency_ms": {
+        "min": 2.339936,
+        "mean": 3.282792250000001,
+        "p50": 3.1689055,
+        "p95": 4.35989445,
+        "max": 5.390817
+      },
+      "thresholds": {
+        "checks": true,
+        "http_req_failed": true,
+        "measured_requests": true,
+        "measured_contract_valid": true,
+        "measured_contract_duration": true,
+        "positive_probe_valid": true,
+        "missing_token_rejected": true,
+        "invalid_token_rejected": true,
+        "missing_job_not_found": true
+      },
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T21:10:42.145Z",
+      "tool": "k6",
+      "scenario": "conversation_context",
+      "executor": "shared-iterations",
+      "virtual_users": 10,
+      "requests": 40,
+      "total_http_requests": 44,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "measured_contract_valid_rate": 1,
+      "negative_checks": {
+        "missing_token_rejected_rate": 1,
+        "invalid_token_rejected_rate": 1,
+        "missing_job_not_found_rate": 1
+      },
+      "positive_probe_valid_rate": 1,
+      "latency_ms": {
+        "min": 2.126834,
+        "mean": 3.3373109250000015,
+        "p50": 3.35963,
+        "p95": 4.710186249999999,
+        "max": 5.168691
+      },
+      "thresholds": {
+        "checks": true,
+        "http_req_failed": true,
+        "measured_requests": true,
+        "measured_contract_valid": true,
+        "measured_contract_duration": true,
+        "positive_probe_valid": true,
+        "missing_token_rejected": true,
+        "invalid_token_rejected": true,
+        "missing_job_not_found": true
+      },
+      "thresholds_passed": true
+    }
+  ]
+}

@@ -29,3 +29,4 @@ app:
   public-base-url: ${PUBLIC_BASE_URL:http://10.0.2.2:8080}
   session-hours: ${SESSION_HOURS:168}
   seed-demo: ${SEED_DEMO:true}
+  integration-token: ${INTEGRATION_TOKEN:}

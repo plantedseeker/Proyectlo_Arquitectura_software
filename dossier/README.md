@@ -17,9 +17,13 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | **Evidencia de participación** | **`16-evidencia-participacion.md`** |
 | **Módulo 5 S9 — API, eventos e integración** | **`09-api-events-integration.md`** |
 | **Checklist Módulo 5 S9–S10** | **`17-checklist-modulo-5.md`** |
+| **Defensa Spike 1 S10** | **`18-defensa-spike-integracion-s10.md`** |
 | Modelo de dominio M5 | `../docs/dominio/` |
 | Contratos e integración M5 | `../docs/integracion/` |
 | Spike 1 M5 | `../experimentos/spike-01-integracion/` |
+| Resultado y veredicto Spike 1 | `../experimentos/spike-01-integracion/resultados/20261016T211031Z/resultado.json`, `../experimentos/spike-01-integracion/veredicto.md` |
+| Capturas del recorrido S10 | `../experimentos/spike-01-integracion/evidencias/` |
+| ADR-003 de integración | `../docs/adr/ADR-003-integracion-contextos.md` |
 | Capturas y datos de la exposición | `evidencias-exposicion/` |
 | Matriz detallada de trazabilidad C4 | `MATRIZ-TRAZABILIDAD-C4.md` |
 | C4 C1 contexto as-is aprobado | `05-c4-contexto.md` |

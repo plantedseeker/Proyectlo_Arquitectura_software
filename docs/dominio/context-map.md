@@ -1,6 +1,6 @@
 # Context Map S9 — UTrabajo
 
-Este mapa representa **contextos lógicos** dentro del monolito modular actual. Las flechas describen información que cruza fronteras; no implican microservicios.
+Este mapa representa **contextos lógicos** dentro del monolito modular actual. Cada flecha se lee desde el **consumidor hacia el proveedor del que depende**; no implica microservicios ni el sentido físico de una respuesta.
 
 ```mermaid
 flowchart LR
@@ -10,10 +10,10 @@ flowchart LR
     APP["Postulaciones"]
     MSG["Mensajería"]
 
-    IAM -->|"userId + rol autenticado"| PER
-    IAM -->|"identidad empresa"| JOB
-    IAM -->|"identidad estudiante"| APP
-    IAM -->|"userId + rol autenticado"| MSG
+    PER -->|"consume userId + rol autenticado"| IAM
+    JOB -->|"consume identidad empresa"| IAM
+    APP -->|"consume identidad estudiante"| IAM
+    MSG -->|"consume userId + rol autenticado"| IAM
 
     APP -->|"existencia/estado y referencia de oferta"| JOB
     MSG -->|"empresa propietaria + referencia/título"| JOB
@@ -21,28 +21,28 @@ flowchart LR
 
 ## Semántica de relaciones
 
-### Identidad y Acceso → Perfiles
+### Perfiles → Identidad y Acceso
 
 - **Proveedor:** Identidad y Acceso.
 - **Consumidor:** Perfiles.
 - **Fluye:** identificador del usuario autenticado.
 - **Motivo:** Perfiles modifica únicamente el perfil del actor autenticado.
 
-### Identidad y Acceso → Ofertas
+### Ofertas → Identidad y Acceso
 
 - **Proveedor:** Identidad y Acceso.
 - **Consumidor:** Ofertas.
 - **Fluye:** identidad y rol de empresa.
 - **Motivo:** crear/actualizar/eliminar ofertas requiere rol company y propiedad.
 
-### Identidad y Acceso → Postulaciones
+### Postulaciones → Identidad y Acceso
 
 - **Proveedor:** Identidad y Acceso.
 - **Consumidor:** Postulaciones.
 - **Fluye:** identidad y rol de estudiante.
 - **Motivo:** las postulaciones pertenecen al estudiante autenticado.
 
-### Identidad y Acceso → Mensajería
+### Mensajería → Identidad y Acceso
 
 - **Proveedor:** Identidad y Acceso.
 - **Consumidor:** Mensajería.
@@ -65,7 +65,8 @@ flowchart LR
 - **Mecanismo As-Is:** esquema PostgreSQL compartido mediante UTrabajoService/JDBC.
 - **Alternativas S9:** contrato síncrono explícito vs proyección mantenida por eventos.
 - **Alternativa llevada al Spike 1:** contrato síncrono.
+- **Resultado S10:** hipótesis síncrona respaldada con alcance ajustado al payload mínimo `jobId` + `companyId`; decisión propuesta en ADR-003.
 
 ## Regla de lectura
 
-Si una flecha no puede explicarse en términos de proveedor, consumidor, datos, dirección y motivo, no se considera una frontera suficientemente justificada.
+Si una flecha no puede explicarse en términos de proveedor, consumidor, datos, dirección y motivo, no se considera una frontera suficientemente justificada. En este mapa la punta siempre señala al proveedor consultado.
