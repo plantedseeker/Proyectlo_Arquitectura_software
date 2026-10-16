@@ -84,6 +84,23 @@ La medición fue local y en una máquina compartida entre generador, API y base 
 datos. Respalda el criterio del spike, pero no constituye una predicción del p95
 en una topología distribuida o en producción.
 
+### Continuidad de evidencia S4 → S9 → S10
+
+ADR-003 no se apoya en una medición aislada:
+
+- **S4** estableció el método reproducible y la topología local para mensajería;
+  su p95 de últimos mensajes no se compara directamente con este endpoint porque
+  representa otra operación.
+- **S7–S8** localizaron costos, conservaron el monolito modular y formalizaron
+  límites mediante ADR-001 y ADR-002.
+- **S9** identificó la dependencia Mensajería → Ofertas, definió el contrato y
+  comparó las alternativas síncrona y asíncrona.
+- **S10** ejecutó el contrato seleccionado, registró condiciones y emitió un
+  veredicto anterior a esta propuesta de decisión.
+
+La cadena acumulativa justifica experimentar dentro del monolito antes de
+introducir distribución o patrones operativamente más costosos.
+
 ## Alternativas consideradas
 
 ### A. Acceso directo de Mensajería a `job_offer`
@@ -166,6 +183,10 @@ broker solo por anticipación.
 
 ## Trazabilidad
 
+- [`Resultado S4`](../../experimentos/medicion-escenario-01/resultados/resultado.json)
+- [`Decisión de estilo S7`](../../dossier/08-decision-estilo-arquitectonico.md)
+- [`ADR-001 — monolito modular`](ADR-001-limites-modulo-mensajeria.md)
+- [`ADR-002 — límites ejecutables`](ADR-002-limites-modulos-dependencias.md)
 - [`Context Map`](../dominio/context-map.md)
 - [`Responsabilidades de contextos`](../dominio/responsabilidades-contextos.md)
 - [`Contrato OpenAPI`](../integracion/contrato-api.yaml)

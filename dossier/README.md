@@ -17,7 +17,7 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | **Evidencia de participación** | **`16-evidencia-participacion.md`** |
 | **Módulo 5 S9 — API, eventos e integración** | **`09-api-events-integration.md`** |
 | **Checklist Módulo 5 S9–S10** | **`17-checklist-modulo-5.md`** |
-| **Defensa Spike 1 S10** | **`18-defensa-spike-integracion-s10.md`** |
+| **Resumen ejecutivo Módulo 5** | **`18-resumen-ejecutivo-modulo-5.md`** |
 | Modelo de dominio M5 | `../docs/dominio/` |
 | Contratos e integración M5 | `../docs/integracion/` |
 | Spike 1 M5 | `../experimentos/spike-01-integracion/` |

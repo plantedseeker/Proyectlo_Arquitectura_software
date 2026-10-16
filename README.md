@@ -164,3 +164,28 @@ El método separa datos, interpretaciones y supuestos en
 `experimentos/localizacion-s7/README.md`. Las decisiones propuestas y sus
 alternativas están en `docs/adr/`; el mini-comité y la evidencia de la primera
 restricción arquitectónica están en `docs/architecture/`.
+
+## Módulo 5 — dominio e integración (S9–S10)
+
+El recorrido completo y autónomo para presentar el módulo está en el
+[`resumen ejecutivo de M5`](dossier/18-resumen-ejecutivo-modulo-5.md).
+
+Artefactos principales:
+
+- [`09-api-events-integration.md`](dossier/09-api-events-integration.md) — artefacto integrador S9 con el nombre literal del checklist;
+- [`subdominios y bounded contexts`](docs/dominio/subdominios.md) y [`Context Map`](docs/dominio/context-map.md);
+- [`contrato OpenAPI`](docs/integracion/contrato-api.yaml) y [`comparación síncrono/asíncrono`](docs/integracion/sincrono-vs-asincrono.md);
+- [`Spike 1`](experimentos/spike-01-integracion/README.md), [`resultado oficial`](experimentos/spike-01-integracion/resultados/20261016T211031Z/resultado.json) y [`veredicto`](experimentos/spike-01-integracion/veredicto.md);
+- [`ADR-003`](docs/adr/ADR-003-integracion-contextos.md) y [`checklist S9–S10`](dossier/17-checklist-modulo-5.md).
+
+La ejecución oficial del Spike 1 obtuvo p95 de 4,781; 4,360 y 4,710 ms en
+las tres corridas válidas, con todos los controles funcionales aprobados y 0
+fallos HTTP inesperados. La hipótesis quedó respaldada bajo las condiciones
+registradas y el alcance quedó ajustado antes de medir al payload mínimo
+`jobId` + `companyId`.
+
+Para reproducirlo con Docker Desktop disponible y árbol Git limpio:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-spike-01-integracion.ps1
+```
