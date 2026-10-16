@@ -1,4 +1,4 @@
-# ADR-004 — Estrategia de paginación del historial de mensajes
+# ADR-005 — Estrategia de paginación del historial de mensajes
 
 - Fecha original: 2026-09-04
 - Renumerado previamente: 2026-09-11
@@ -78,7 +78,12 @@ La migración reversible agrega cursor sin eliminar `offset`, publica contrato y
 
 ## Nota de renumeración
 
-Esta decisión nació como ADR-002 de paginación y fue renumerada a ADR-003 durante S8. Las diapositivas oficiales de Módulo 5 establecen que **ADR-003** corresponde a la decisión de integración de S9–S10 respaldada por Context Map y Spike 1. Para conservar esa secuencia pedagógica sin perder la decisión técnica existente, la paginación se renumera como **ADR-004**. El contenido técnico y su evidencia S4/S7 no cambian.
+Esta decisión nació como ADR-002 de paginación y cambió de número al incorporar
+la secuencia oficial del curso. ADR-003 quedó reservado para la integración de
+S9–S10 y el material de S12 exige que **ADR-004** documente la decisión de
+distribución respaldada por el experimento de crecimiento. Para conservar ambas
+decisiones sin colisión, paginación pasa a **ADR-005**. El contenido técnico y
+su evidencia S4/S7 no cambian.
 
 ## Confirmación requerida
 
