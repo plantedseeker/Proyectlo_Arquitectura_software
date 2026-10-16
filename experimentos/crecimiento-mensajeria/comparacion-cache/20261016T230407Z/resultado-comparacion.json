@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "scenario_id": "MSG-PERF-CACHE-01",
+  "captured_at_utc": "2026-10-16T23:04:20.387489+00:00",
+  "measured_git_revision": "0849dea148e90f91ff0a07e225d76d844a5c5242",
+  "baseline_git_revision": "73895be48e03a35731c53d77a45e471808313168",
+  "verdict": "partially_supported",
+  "criteria": {
+    "correctness_preserved": true,
+    "cache_hits_observed": true,
+    "median_p95_lower_than_baseline": true,
+    "median_throughput_not_lower_than_baseline": false
+  },
+  "before": {
+    "source": "experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json",
+    "valid_run_numbers": [
+      2,
+      3,
+      4
+    ],
+    "p95_median_ms": 58.235,
+    "throughput_median_rps": 2303.017
+  },
+  "after": {
+    "valid_run_numbers": [
+      2,
+      3,
+      4
+    ],
+    "p95_median_ms": 55.377,
+    "throughput_median_rps": 2260.038,
+    "p95_change_percent": -4.908,
+    "throughput_change_percent": -1.866
+  },
+  "cache_statistics_before": {
+    "enabled": true,
+    "ttlMilliseconds": 1000,
+    "maximumEntries": 1000,
+    "currentEntries": 0,
+    "hits": 0,
+    "misses": 0,
+    "puts": 0,
+    "invalidations": 0
+  },
+  "cache_statistics_after": {
+    "enabled": true,
+    "ttlMilliseconds": 1000,
+    "maximumEntries": 1000,
+    "currentEntries": 1,
+    "hits": 3196,
+    "misses": 4,
+    "puts": 4,
+    "invalidations": 0
+  },
+  "conditions": {
+    "schema_version": 1,
+    "captured_at_utc": "2026-10-16T23:04:07.720132+00:00",
+    "git_revision": "0849dea148e90f91ff0a07e225d76d844a5c5242",
+    "branch": "experiment/s11-crecimiento-mensajeria",
+    "working_tree_clean_before_measurement": true,
+    "machine": {
+      "machine_signature": "Acer; Predator PH16-71; 13th Gen Intel(R) Core(TM) i9-13900HX; 95.7 GiB RAM",
+      "manufacturer": "Acer",
+      "model": "Predator PH16-71",
+      "processor": "13th Gen Intel(R) Core(TM) i9-13900HX",
+      "physical_memory_gib": 95.7,
+      "logical_cpus": 32,
+      "operating_system": "Windows-10-10.0.26300-SP0",
+      "architecture": "AMD64"
+    },
+    "energy_before": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "software_versions": {
+      "docker": "29.7.2 client / 29.7.2 server",
+      "docker_compose": "5.4.0",
+      "postgresql": "16.14",
+      "k6_image": "grafana/k6:0.54.0"
+    },
+    "comparison": {
+      "baseline_result": "resultados/20261016T224331Z/resultado.json",
+      "baseline_git_revision": "73895be48e03a35731c53d77a45e471808313168",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "requests_per_run": 800,
+      "runs": 4,
+      "discarded_run": 1
+    },
+    "tactic": {
+      "name": "local_latest_message_page_cache",
+      "enabled": true,
+      "ttl_ms": 1000,
+      "maximum_entries": 1000,
+      "cached_offset": 0
+    },
+    "energy_after": {
+      "condition": "plugged_in",
+      "battery_percent": 80,
+      "active_power_scheme": "GUID de plan de energ¡a: 381b4222-f694-41f0-9685-ff5bb260df2e  (Equilibrado)",
+      "captured_during_measurement": true
+    },
+    "seed": {
+      "schema_version": 1,
+      "captured_at_utc": "2026-10-16T23:04:07.293388+00:00",
+      "verification_method": "SQL de solo lectura posterior a la semilla",
+      "seeded_conversations": 1000,
+      "total_messages": 289000,
+      "distribution": {
+        "conversations_with_10_messages": 900,
+        "conversations_with_1000_messages": 90,
+        "conversations_with_10000_messages": 9,
+        "conversations_with_100000_messages": 1
+      },
+      "maximum_messages_per_conversation": 100000,
+      "matches_preregistered_seed": true
+    }
+  },
+  "runs": [
+    {
+      "schema_version": 1,
+      "run": 1,
+      "discarded": true,
+      "captured_at_utc": "2026-10-16T23:04:10.022Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 1212.3153001270796,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 4.094954,
+        "mean": 80.88983914875008,
+        "p50": 58.532899,
+        "p90": 186.5952094,
+        "p95": 210.30113335000001,
+        "p99": 240.93716031999998,
+        "max": 257.938251
+      },
+      "iteration_duration_ms": {
+        "mean": 85.24808390500007,
+        "p95": 214.3921466,
+        "max": 264.556301
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 2,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T23:04:12.762Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 2021.713639152935,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 3.530541,
+        "mean": 35.31856615750005,
+        "p50": 31.7071745,
+        "p90": 66.5435653,
+        "p95": 72.39622539999999,
+        "p99": 82.88102029999999,
+        "max": 116.646883
+      },
+      "iteration_duration_ms": {
+        "mean": 41.31821708375,
+        "p95": 84.40934684999999,
+        "max": 165.503317
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 3,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T23:04:15.817Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 2260.038185605184,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 2.312411,
+        "mean": 26.846093157499975,
+        "p50": 24.479335499999998,
+        "p90": 45.526480500000005,
+        "p95": 55.377055749999975,
+        "p99": 68.85471858,
+        "max": 83.214229
+      },
+      "iteration_duration_ms": {
+        "mean": 30.178064598749952,
+        "p95": 64.98757325,
+        "max": 90.224311
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true
+    },
+    {
+      "schema_version": 1,
+      "run": 4,
+      "discarded": false,
+      "captured_at_utc": "2026-10-16T23:04:18.836Z",
+      "tool": "k6",
+      "scenario": "latest_messages_growth",
+      "load_level_vus": 200,
+      "iterations_per_vu": 4,
+      "expected_requests": 800,
+      "requests": 800,
+      "throughput_rps": 2444.4516990338757,
+      "checks_rate": 1,
+      "failed_request_rate": 0,
+      "valid_page_rate": 1,
+      "latency_ms": {
+        "min": 2.005897,
+        "mean": 23.62147887750005,
+        "p50": 20.9168115,
+        "p90": 43.289050400000015,
+        "p95": 49.979458099999995,
+        "p99": 55.653392079999996,
+        "max": 67.456189
+      },
+      "iteration_duration_ms": {
+        "mean": 26.434806181249993,
+        "p95": 55.1611045,
+        "max": 96.227488
+      },
+      "response_status_counts": {
+        "200": 800,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "429": 0,
+        "5xx": 0,
+        "other": 0
+      },
+      "integrity_valid": true,
+      "thresholds_passed": true
+    }
+  ],
+  "interpretation_boundary": "Comparación local de una conversación caliente y un solo nodo de API; no demuestra beneficio para múltiples chats, varios nodos ni caché distribuida."
+}
