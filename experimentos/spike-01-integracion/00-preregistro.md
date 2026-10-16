@@ -109,7 +109,7 @@ Contrato detallado: docs/integracion/contrato-api.yaml.
 - S7 demuestra que una decisión debe localizar el costo antes de introducir complejidad.
 - ADR-001 mantiene monolito modular.
 - ADR-002 protege dependencias internas.
-- ADR-004 conserva la decisión de paginación.
+- ADR-005 conserva la decisión de paginación.
 - Este spike alimentará **ADR-003 de Módulo 5**, que aún no debe redactar una decisión final.
 
 ## Rama experimental prevista

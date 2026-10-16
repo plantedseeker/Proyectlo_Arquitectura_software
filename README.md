@@ -189,3 +189,33 @@ Para reproducirlo con Docker Desktop disponible y árbol Git limpio:
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\run-spike-01-integracion.ps1
 ```
+
+## Crecimiento y distribución (S11–S12)
+
+El recorrido autónomo para presentar estas dos semanas está en el
+[`resumen ejecutivo S11–S12`](dossier/19-resumen-ejecutivo-s11-s12.md) y su
+[`checklist verificable`](dossier/20-checklist-semanas-11-12.md).
+
+S11 aumentó M2 por escalones hasta 200 VU sin encontrar degradación sostenida.
+La comparación de caché fue parcialmente favorable en latencia, pero redujo el
+throughput mediano; por ello permanece deshabilitada. S12 compara cuatro
+alternativas de distribución, explicita costo relativo y propone conservar el
+monolito modular en [`ADR-004`](docs/adr/ADR-004-distribucion-mensajeria.md),
+pendiente de mini-comité 2.
+
+Artefactos principales:
+
+- [`experimento de crecimiento`](experimentos/crecimiento-mensajeria/README.md);
+- [`matrices y resultado antes/después`](experimentos/crecimiento-mensajeria/06-resultado-tactica-cache.md);
+- [`alternativas y costo`](docs/architecture/alternativas-distribucion-s12.md);
+- [`auditoría de microservicios propuestos por IA`](docs/architecture/auditoria-ia-microservicios-s12.md);
+- [`segunda fitness function`](docs/architecture/fitness-function-distribucion-s12.md);
+- [`formato de mini-comité 2`](docs/architecture/mini-comite-s12.md).
+
+Verificación local de decisiones:
+
+```powershell
+python .\scripts\check_architecture.py
+python .\scripts\check_distribution_decision.py
+python -m unittest discover -s .\scripts\tests -v
+```

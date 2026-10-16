@@ -36,7 +36,7 @@ La secuencia oficial del Módulo 5 reserva **ADR-003** para la decisión de inte
 
 La decisión previa de paginación se conserva sin pérdida de contenido como:
 
-- ADR-004 — Estrategia de paginación del historial de mensajes.
+- ADR-005 — Estrategia de paginación del historial de mensajes.
 
 ## Criterios de cierre
 

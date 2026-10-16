@@ -47,6 +47,10 @@ jobs:
       - run: chmod +x backend/gradlew
       - name: Enforce ADR-002 module dependency boundary
         run: python scripts/check_architecture.py
+      - name: Enforce ADR-004 distribution decision
+        run: |
+          python scripts/check_distribution_decision.py
+          python -m unittest discover -s scripts/tests -v
       - name: Integration tests against PostgreSQL 16
         run: ./backend/gradlew -p backend test --stacktrace
       - name: Verify messaging experiment artifacts
