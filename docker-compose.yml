@@ -50,6 +50,7 @@ services:
     volumes:
       - ./experimentos/medicion-escenario-01:/experiment
       - ./experimentos/spike-01-integracion:/spike
+      - ./experimentos/crecimiento-mensajeria:/growth
     depends_on:
       api:
         condition: service_healthy
