@@ -206,8 +206,18 @@ foreach ($run in 1..4) {
         '-e', "SUMMARY_PATH=$summaryContainer",
         'k6', 'run', '--out', "json=$rawContainer", '/spike/carga-integracion.js'
     )
-    $output = & $compose @arguments 2>&1
-    $runExitCode = $LASTEXITCODE
+    # Docker Compose writes normal progress (for example, "Container ... Running")
+    # to stderr. Windows PowerShell turns that stream into NativeCommandError when
+    # ErrorActionPreference is Stop, so relax it only while the native process runs.
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $output = & $compose @arguments 2>&1
+        $runExitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
     $output | Set-Content -LiteralPath $logPath -Encoding utf8
 
     $summaryHost = Join-Path $resultsPath "run-$run.json"
