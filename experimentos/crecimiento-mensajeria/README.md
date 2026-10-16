@@ -50,3 +50,15 @@ El runner reconstruye la API, restaura la misma semilla, reinicia los contadores
 de caché y ejecuta cuatro corridas de 200 VU. `comparar_tactica.py` contrasta las
 corridas 2–4 con el escalón base ya registrado, emite un veredicto y genera
 huellas SHA-256 bajo `comparacion-cache/<fecha>/`.
+
+## Resultado de la táctica
+
+- `06-resultado-tactica-cache.md`: interpretación, veredicto y decisión.
+- `comparacion-cache/20261016T230407Z/`: cuatro corridas, contexto, estadísticas
+  de caché, comparación estructurada y huellas.
+- `evidencias-ejecucion/`: capturas visuales del inicio y cierre de ambas
+  mediciones, con descripción e integridad.
+
+El veredicto fue `partially_supported`: el p95 mediano bajó 4,908 %, pero el
+throughput mediano bajó 1,866 %. La caché permanece deshabilitada por defecto y
+no se recomienda adoptarla con la evidencia actual.
