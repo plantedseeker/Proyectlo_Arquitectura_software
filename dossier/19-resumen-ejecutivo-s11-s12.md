@@ -30,14 +30,16 @@ en el mini-comité 2.
 | Evidencia | Resultado | Dónde se comprueba |
 | --- | --- | --- |
 | Crecimiento con carga aumentada | 20 corridas entre 10 y 200 VU, sin degradación sostenida | [resultado consolidado](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json), [contexto](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/contexto.json) y [huellas](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/SHA256SUMS.txt) |
+| Curvas de degradación | p95 y throughput por escalón; comparación antes/después | [gráficas reproducibles](../experimentos/crecimiento-mensajeria/graficas/README.md) |
 | Dónde y cómo se degrada | creció primero la latencia; no hubo saturación ni límite atribuible | [análisis de crecimiento](../experimentos/crecimiento-mensajeria/02-analisis-crecimiento.md) |
+| Temporalidad del protocolo | criterios confirmados antes de resultados; desviación del formato oficial declarada sin reescribir historia | [trazabilidad del prerregistro](../docs/architecture/trazabilidad-prerregistro-s11.md) |
 | Matriz de fallos y resiliencia | modos observados, descartados y tácticas justificadas | [matriz de fallos](../experimentos/crecimiento-mensajeria/03-matriz-fallos.md) y [matriz de resiliencia](../experimentos/crecimiento-mensajeria/04-matriz-resiliencia.md) |
 | Táctica antes/después | caché funcional, beneficio parcial y no adopción | [resultado explicado](../experimentos/crecimiento-mensajeria/06-resultado-tactica-cache.md), [datos de comparación](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/resultado-comparacion.json) y [huellas](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/SHA256SUMS.txt) |
 | Capturas de ejecución | inicio y cierre del crecimiento y de la comparación con caché | [índice visual y comprobación SHA-256](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md) |
 | Distribución y costo | cuatro alternativas, dimensiones completas y órdenes de magnitud | [alternativas de distribución](../docs/architecture/alternativas-distribucion-s12.md) |
 | ADR 4 | propuesta de mantener Mensajería dentro del monolito modular | [ADR-004](../docs/adr/ADR-004-distribucion-mensajeria.md) |
 | Auditoría de IA | patrones aceptados, rechazados y supuestos pendientes | [auditoría de microservicios propuestos por IA](../docs/architecture/auditoria-ia-microservicios-s12.md) |
-| Segunda fitness function | regla, umbral cero y fallo de CI implementados | [regla ejecutable](../scripts/check_distribution_decision.py) |
+| Fitness functions en CI | ArchUnit protege dependencias internas y la regla de topología protege ADR-004 | [evidencia ArchUnit](../docs/architecture/evidencia-restriccion-ci.md) y [regla de distribución](../scripts/check_distribution_decision.py) |
 | Mini-comité 2 | formato listo; participantes y veredicto pendientes | [formato del mini-comité](../docs/architecture/mini-comite-s12.md) |
 
 ## Evidencia visual de ejecución
@@ -85,6 +87,13 @@ correctas. No se atribuye cuello de botella a API, PostgreSQL ni k6 porque las
 ráfagas fueron cortas y la telemetría tuvo baja resolución. La conclusión
 válida es: **sin límite observado hasta 200 VU; no extrapolar más allá**.
 
+El material oficial recibido después pide además apostar por un componente y
+un escalón exactos dentro de `/docs`. El protocolo versionado antes de medir
+predijo ausencia de degradación sostenida hasta 200 VU, pero no hizo esa apuesta
+exacta y quedó en `/experimentos`. La [desviación formal](../docs/architecture/trazabilidad-prerregistro-s11.md)
+preserva esa verdad histórica y fija el formato obligatorio para la siguiente
+medición.
+
 ## Táctica antes/después
 
 Se descartaron retry, timeout y circuit breaker porque no hubo fallos
@@ -120,6 +129,16 @@ La comparación incluye rendimiento, disponibilidad, complejidad, operación,
 escalabilidad, costo y reversibilidad. La distribución no se rechaza para
 siempre; se condiciona a disparadores medibles.
 
+| Eje de costo | A. Monolito | B. Réplicas | C. Servicio síncrono | D. Eventos |
+| --- | --- | --- | --- | --- |
+| Infraestructura | `O(1)` | `O(10)` | `O(10)` | `O(10)` |
+| Operación | `O(1)` | `O(10)` | `O(10)` | `O(100)` |
+| Coordinación / Conway | `O(1)` | `O(1)` | `O(10)` | `O(100)` |
+
+Estas son bandas ordinales comparativas, no dinero ni complejidad algorítmica.
+La [matriz completa](../docs/architecture/alternativas-distribucion-s12.md)
+explica qué trabajo concreto aumenta en cada eje.
+
 ### ADR-004
 
 La propuesta conserva Mensajería dentro del monolito modular y mantiene:
@@ -135,15 +154,17 @@ nombres, votos ni ratificaciones.
 
 ### Fitness function
 
-La segunda fitness function rompe CI si:
+ArchUnit rompe CI si un controlador depende de JDBC/SQL, si una API de
+persistencia aparece fuera de `service`, `auth` o `config`, o si los paquetes
+superiores forman ciclos. La fitness function de ADR-004 rompe CI si:
 
 - aparece un servicio Compose diferente de `db`, `api` o `k6`;
 - se agrega Kafka, RabbitMQ, Redis, Pulsar o NATS;
 - el backend incorpora sus dependencias cliente;
 - la caché experimental queda habilitada por defecto.
 
-Umbral: **cero violaciones**. La regla obliga a actualizar ADR-004 antes de
-cambiar la topología, no prohíbe una re-decisión sustentada.
+Umbral en ambas: **cero violaciones**. Las reglas obligan a actualizar los ADR
+antes de cambiar fronteras o topología; no prohíben una re-decisión sustentada.
 
 ### Auditoría de IA
 
@@ -174,21 +195,25 @@ ADR-004 propuesto → mini-comité 2 pendiente → veredicto humano pendiente
 
 1. Abrir este resumen.
 2. Abrir el [índice de capturas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md) y mostrar el inicio y cierre de ambas mediciones.
-3. Mostrar el [resultado del crecimiento](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json) y la tabla de escalones.
+3. Mostrar las [curvas de crecimiento](../experimentos/crecimiento-mensajeria/graficas/README.md), el [resultado JSON](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json) y la tabla de escalones.
 4. Abrir las [matrices de fallos](../experimentos/crecimiento-mensajeria/03-matriz-fallos.md) y [resiliencia](../experimentos/crecimiento-mensajeria/04-matriz-resiliencia.md).
 5. Mostrar el [resultado antes/después](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/resultado-comparacion.json) y el veredicto parcial.
 6. Abrir la [tabla de alternativas y costos](../docs/architecture/alternativas-distribucion-s12.md).
 7. Mostrar [ADR-004](../docs/adr/ADR-004-distribucion-mensajeria.md), especialmente consecuencias y disparadores.
-8. Ejecutar las dos fitness functions.
+8. Ejecutar ArchUnit y las dos comprobaciones de decisión.
 9. Aclarar que el mini-comité todavía debe emitir el veredicto humano.
 
 Comandos breves:
 
 ```powershell
+.\backend\gradlew.bat -p backend test --tests "*DatabaseIsolationArchitectureTests"
 python .\scripts\check_architecture.py
 python .\scripts\check_distribution_decision.py
 python -m unittest discover -s .\scripts\tests -v
 ```
+
+La prueba ArchUnit requiere JDK 21. En GitHub se ejecuta como paso explícito del
+job backend.
 
 No es necesario repetir las 24 corridas durante la exposición; los resultados,
 logs, contexto y hashes ya están conservados. Si el profesor pide

@@ -33,7 +33,10 @@ operación, escalabilidad, reversibilidad y costo está en
 [`alternativas-distribucion-s12.md`](../architecture/alternativas-distribucion-s12.md).
 El costo relativo estimado va de `1 C0` (`10^0`) para el estado actual a
 `8–20 C0` (`10^1`) para la alternativa orientada a eventos. Son órdenes de
-magnitud comparativos, no precios ni mediciones productivas.
+magnitud comparativos, no precios ni mediciones productivas. La matriz separa
+además infraestructura, operación y coordinación/Conway; esta última aumenta
+cuando se crean fronteras de propiedad y contratos remotos que el único equipo
+actual tendría que coordinar consigo mismo.
 
 ## Decisión propuesta
 
@@ -99,6 +102,11 @@ experimental. El umbral es **cero violaciones**. Cualquier violación termina co
 código 1 y rompe el job backend de CI. La regla se puede cambiar solo junto con
 una revisión explícita de este ADR.
 
+En paralelo, `DatabaseIsolationArchitectureTests` usa ArchUnit para proteger la
+frontera interna del monolito: controladores sin JDBC/SQL, persistencia limitada
+a los paquetes autorizados y ausencia de ciclos entre paquetes superiores. Así
+la decisión no depende solo de una convención documental.
+
 ## Auditoría de IA
 
 La propuesta de IA de extraer servicios, base por servicio, broker, retry,
@@ -116,6 +124,9 @@ señal causal. Véase
 - [`Matriz de resiliencia`](../../experimentos/crecimiento-mensajeria/04-matriz-resiliencia.md)
 - [`Resultado antes/después`](../../experimentos/crecimiento-mensajeria/06-resultado-tactica-cache.md)
 - [`Comparación estructurada`](../../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/resultado-comparacion.json)
+- [`Gráficas reproducibles`](../../experimentos/crecimiento-mensajeria/graficas/README.md)
+- [`Trazabilidad del prerregistro`](../architecture/trazabilidad-prerregistro-s11.md)
+- [`Fitness function con ArchUnit`](../../backend/src/test/kotlin/com/tab/utrabajo/api/architecture/DatabaseIsolationArchitectureTests.kt)
 - [`ADR-001 — monolito modular`](ADR-001-limites-modulo-mensajeria.md)
 - [`ADR-003 — integración Mensajería → Ofertas`](ADR-003-integracion-contextos.md)
 

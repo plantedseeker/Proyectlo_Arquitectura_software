@@ -33,7 +33,14 @@ repetición se documenta en el análisis con su causa.
 - `02-analisis-crecimiento.md`: conclusión y límites de atribución.
 - `03-matriz-fallos.md`: fallos observados, descartados y pendientes.
 - `04-matriz-resiliencia.md`: tácticas justificadas por la evidencia.
+- `graficas/README.md`: curvas reproducibles de p95/throughput y comparación
+  antes/después generadas desde los JSON versionados.
 - `resultados/20261016T224331Z/`: 20 corridas primarias, contexto y huellas.
+
+La relación entre el prerregistro original y el formato más estricto solicitado
+posteriormente por el material de M6 está registrada en
+[`trazabilidad-prerregistro-s11.md`](../../docs/architecture/trazabilidad-prerregistro-s11.md).
+La diferencia se declara; no se reescribe el pasado experimental.
 
 ## Comparación de la táctica
 
@@ -62,3 +69,9 @@ huellas SHA-256 bajo `comparacion-cache/<fecha>/`.
 El veredicto fue `partially_supported`: el p95 mediano bajó 4,908 %, pero el
 throughput mediano bajó 1,866 %. La caché permanece deshabilitada por defecto y
 no se recomienda adoptarla con la evidencia actual.
+
+Para regenerar las visualizaciones sin cambiar los datos:
+
+```powershell
+python .\experimentos\crecimiento-mensajeria\generar_graficas.py
+```

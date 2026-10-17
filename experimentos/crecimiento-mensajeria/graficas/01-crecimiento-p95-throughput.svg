@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img">
+<title>Crecimiento S11: latencia p95 y throughput</title>
+<desc>Curvas construidas desde resultado.json para los escalones 10, 50, 100, 150 y 200 VU.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif}</style>
+<rect width="1200" height="690" fill="#f4f7fb"/>
+<text x="54.0" y="52.0" font-size="30" fill="#172033" font-weight="700" text-anchor="start">Experimento de crecimiento S11</text>
+<text x="54.0" y="80.0" font-size="15" fill="#526071" font-weight="400" text-anchor="start">Tres corridas válidas por escalón; la primera corrida se descartó como calentamiento.</text>
+<rect x="42.0" y="106.0" width="548.0" height="474.0" rx="14.0" fill="#ffffff"/>
+<text x="66.0" y="142.0" font-size="20" fill="#172033" font-weight="700" text-anchor="start">Latencia p95</text>
+<text x="66.0" y="167.0" font-size="13" fill="#526071" font-weight="400" text-anchor="start">Primera señal creciente; umbral 500 ms fuera de escala</text>
+<line x1="108.0" y1="518.0" x2="562.0" y2="518.0" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="98.0" y="523.0" font-size="12" fill="#526071" font-weight="400" text-anchor="end">0</text>
+<line x1="108.0" y1="438.5" x2="562.0" y2="438.5" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="98.0" y="443.5" font-size="12" fill="#526071" font-weight="400" text-anchor="end">20</text>
+<line x1="108.0" y1="359.0" x2="562.0" y2="359.0" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="98.0" y="364.0" font-size="12" fill="#526071" font-weight="400" text-anchor="end">40</text>
+<line x1="108.0" y1="279.5" x2="562.0" y2="279.5" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="98.0" y="284.5" font-size="12" fill="#526071" font-weight="400" text-anchor="end">60</text>
+<line x1="108.0" y1="200.0" x2="562.0" y2="200.0" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="98.0" y="205.0" font-size="12" fill="#526071" font-weight="400" text-anchor="end">80</text>
+<line x1="108.0" y1="480.2" x2="108.0" y2="486.6" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="102.0" y1="480.2" x2="114.0" y2="480.2" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="102.0" y1="486.6" x2="114.0" y2="486.6" stroke="#2563eb" stroke-width="2.0"/>
+<text x="108.0" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">10</text>
+<line x1="221.5" y1="427.2" x2="221.5" y2="457.9" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="215.5" y1="427.2" x2="227.5" y2="427.2" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="215.5" y1="457.9" x2="227.5" y2="457.9" stroke="#2563eb" stroke-width="2.0"/>
+<text x="221.5" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">50</text>
+<line x1="335.0" y1="349.8" x2="335.0" y2="397.7" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="329.0" y1="349.8" x2="341.0" y2="349.8" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="329.0" y1="397.7" x2="341.0" y2="397.7" stroke="#2563eb" stroke-width="2.0"/>
+<text x="335.0" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">100</text>
+<line x1="448.5" y1="285.1" x2="448.5" y2="359.2" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="442.5" y1="285.1" x2="454.5" y2="285.1" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="442.5" y1="359.2" x2="454.5" y2="359.2" stroke="#2563eb" stroke-width="2.0"/>
+<text x="448.5" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">150</text>
+<line x1="562.0" y1="222.6" x2="562.0" y2="331.1" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="556.0" y1="222.6" x2="568.0" y2="222.6" stroke="#2563eb" stroke-width="2.0"/>
+<line x1="556.0" y1="331.1" x2="568.0" y2="331.1" stroke="#2563eb" stroke-width="2.0"/>
+<text x="562.0" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">200</text>
+<polyline points="108.0,482.4 221.5,443.4 335.0,361.9 448.5,354.8 562.0,286.5" fill="none" stroke="#2563eb" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="108.0" cy="482.4" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2.0"/>
+<text x="108.0" y="470.4" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">8,963</text>
+<circle cx="221.5" cy="443.4" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2.0"/>
+<text x="221.5" y="431.4" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">18,768</text>
+<circle cx="335.0" cy="361.9" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2.0"/>
+<text x="335.0" y="349.9" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">39,258</text>
+<circle cx="448.5" cy="354.8" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2.0"/>
+<text x="448.5" y="342.8" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">41,060</text>
+<circle cx="562.0" cy="286.5" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2.0"/>
+<text x="562.0" y="274.5" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">58,235</text>
+<text x="335.0" y="566.0" font-size="13" fill="#526071" font-weight="400" text-anchor="middle">Usuarios virtuales (VU)</text>
+<text x="108.0" y="186.0" font-size="11" fill="#526071" font-weight="400" text-anchor="start">Unidad: ms. Barras: mínimo–máximo; línea: mediana.</text>
+<rect x="610.0" y="106.0" width="548.0" height="474.0" rx="14.0" fill="#ffffff"/>
+<text x="634.0" y="142.0" font-size="20" fill="#172033" font-weight="700" text-anchor="start">Throughput</text>
+<text x="634.0" y="167.0" font-size="13" fill="#526071" font-weight="400" text-anchor="start">La capacidad observada continuó creciendo</text>
+<line x1="676.0" y1="518.0" x2="1130.0" y2="518.0" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="666.0" y="523.0" font-size="12" fill="#526071" font-weight="400" text-anchor="end">0</text>
+<line x1="676.0" y1="454.4" x2="1130.0" y2="454.4" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="666.0" y="459.4" font-size="12" fill="#526071" font-weight="400" text-anchor="end">500</text>
+<line x1="676.0" y1="390.8" x2="1130.0" y2="390.8" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="666.0" y="395.8" font-size="12" fill="#526071" font-weight="400" text-anchor="end">1000</text>
+<line x1="676.0" y1="327.2" x2="1130.0" y2="327.2" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="666.0" y="332.2" font-size="12" fill="#526071" font-weight="400" text-anchor="end">1500</text>
+<line x1="676.0" y1="263.6" x2="1130.0" y2="263.6" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="666.0" y="268.6" font-size="12" fill="#526071" font-weight="400" text-anchor="end">2000</text>
+<line x1="676.0" y1="200.0" x2="1130.0" y2="200.0" stroke="#d9e1ea" stroke-width="1.0"/>
+<text x="666.0" y="205.0" font-size="12" fill="#526071" font-weight="400" text-anchor="end">2500</text>
+<line x1="676.0" y1="495.4" x2="676.0" y2="496.5" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="670.0" y1="495.4" x2="682.0" y2="495.4" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="670.0" y1="496.5" x2="682.0" y2="496.5" stroke="#0891b2" stroke-width="2.0"/>
+<text x="676.0" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">10</text>
+<line x1="789.5" y1="412.4" x2="789.5" y2="419.0" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="783.5" y1="412.4" x2="795.5" y2="412.4" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="783.5" y1="419.0" x2="795.5" y2="419.0" stroke="#0891b2" stroke-width="2.0"/>
+<text x="789.5" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">50</text>
+<line x1="903.0" y1="334.4" x2="903.0" y2="343.2" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="897.0" y1="334.4" x2="909.0" y2="334.4" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="897.0" y1="343.2" x2="909.0" y2="343.2" stroke="#0891b2" stroke-width="2.0"/>
+<text x="903.0" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">100</text>
+<line x1="1016.5" y1="273.2" x2="1016.5" y2="294.0" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="1010.5" y1="273.2" x2="1022.5" y2="273.2" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="1010.5" y1="294.0" x2="1022.5" y2="294.0" stroke="#0891b2" stroke-width="2.0"/>
+<text x="1016.5" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">150</text>
+<line x1="1130.0" y1="210.5" x2="1130.0" y2="231.3" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="1124.0" y1="210.5" x2="1136.0" y2="210.5" stroke="#0891b2" stroke-width="2.0"/>
+<line x1="1124.0" y1="231.3" x2="1136.0" y2="231.3" stroke="#0891b2" stroke-width="2.0"/>
+<text x="1130.0" y="542.0" font-size="12" fill="#526071" font-weight="400" text-anchor="middle">200</text>
+<polyline points="676.0,495.4 789.5,414.5 903.0,340.5 1016.5,278.9 1130.0,225.1" fill="none" stroke="#0891b2" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="676.0" cy="495.4" r="5.0" fill="#0891b2" stroke="#ffffff" stroke-width="2.0"/>
+<text x="676.0" y="483.4" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">177,431</text>
+<circle cx="789.5" cy="414.5" r="5.0" fill="#0891b2" stroke="#ffffff" stroke-width="2.0"/>
+<text x="789.5" y="402.5" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">813,531</text>
+<circle cx="903.0" cy="340.5" r="5.0" fill="#0891b2" stroke="#ffffff" stroke-width="2.0"/>
+<text x="903.0" y="328.5" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">1395,339</text>
+<circle cx="1016.5" cy="278.9" r="5.0" fill="#0891b2" stroke="#ffffff" stroke-width="2.0"/>
+<text x="1016.5" y="266.9" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">1879,413</text>
+<circle cx="1130.0" cy="225.1" r="5.0" fill="#0891b2" stroke="#ffffff" stroke-width="2.0"/>
+<text x="1130.0" y="213.1" font-size="11" fill="#172033" font-weight="600" text-anchor="middle">2303,017</text>
+<text x="903.0" y="566.0" font-size="13" fill="#526071" font-weight="400" text-anchor="middle">Usuarios virtuales (VU)</text>
+<text x="676.0" y="186.0" font-size="11" fill="#526071" font-weight="400" text-anchor="start">Unidad: solicitudes/s. Barras: mínimo–máximo; línea: mediana.</text>
+<rect x="42.0" y="600.0" width="1116.0" height="56.0" rx="12.0" fill="#e8f5ec"/>
+<text x="64.0" y="626.0" font-size="16" fill="#15803d" font-weight="700" text-anchor="start">Resultado: no hubo degradación sostenida hasta 200 VU; no se extrapola más allá.</text>
+<text x="64.0" y="648.0" font-size="12" fill="#526071" font-weight="400" text-anchor="start">Fuente: resultado.json · commit medido 73895be4 · cero fallos y páginas válidas.</text>
+</svg>

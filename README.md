@@ -206,6 +206,7 @@ pendiente de mini-comité 2.
 Artefactos principales:
 
 - [`experimento de crecimiento`](experimentos/crecimiento-mensajeria/README.md);
+- [`gráficas reproducibles`](experimentos/crecimiento-mensajeria/graficas/README.md) y [`trazabilidad del prerregistro`](docs/architecture/trazabilidad-prerregistro-s11.md);
 - [`matrices y resultado antes/después`](experimentos/crecimiento-mensajeria/06-resultado-tactica-cache.md);
 - [`alternativas y costo`](docs/architecture/alternativas-distribucion-s12.md);
 - [`auditoría de microservicios propuestos por IA`](docs/architecture/auditoria-ia-microservicios-s12.md);
@@ -215,6 +216,7 @@ Artefactos principales:
 Verificación local de decisiones:
 
 ```powershell
+.\backend\gradlew.bat -p backend test --tests "*DatabaseIsolationArchitectureTests"
 python .\scripts\check_architecture.py
 python .\scripts\check_distribution_decision.py
 python -m unittest discover -s .\scripts\tests -v
