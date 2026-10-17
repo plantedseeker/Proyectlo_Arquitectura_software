@@ -51,12 +51,17 @@ jobs:
         run: |
           python scripts/check_distribution_decision.py
           python -m unittest discover -s scripts/tests -v
-      - name: Integration tests against PostgreSQL 16
+      - name: Enforce ADR-002 with ArchUnit
+        run: ./backend/gradlew -p backend test --tests "*DatabaseIsolationArchitectureTests" --stacktrace
+      - name: Backend tests against PostgreSQL 16
         run: ./backend/gradlew -p backend test --stacktrace
       - name: Verify messaging experiment artifacts
         run: |
           python -m py_compile experimentos/medicion-escenario-01/resumir_resultados.py
           python -m py_compile experimentos/localizacion-s7/ejecutar_explain.py
+          python -m py_compile experimentos/crecimiento-mensajeria/generar_graficas.py
+          python experimentos/crecimiento-mensajeria/generar_graficas.py
+          git diff --exit-code -- experimentos/crecimiento-mensajeria/graficas/
           docker compose --profile load config >/dev/null
           docker run --rm \
             -v "$PWD/experimentos/medicion-escenario-01:/experiment:ro" \

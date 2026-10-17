@@ -31,6 +31,18 @@ Los rangos son estimaciones de orden de magnitud para comparar complejidad. No
 son resultados medidos ni cotizaciones. `10^0 C0` significa el mismo orden que
 la solución actual; `10^1 C0`, aproximadamente un orden mayor.
 
+Para hacer visible el costo que el material de M6 separa, la estimación también
+usa tres ejes ordinales:
+
+- **infraestructura:** instancias, base, balanceador, broker y almacenamiento;
+- **operación:** despliegue, observabilidad, respaldo, recuperación y guardia;
+- **coordinación/Conway:** contratos, sincronización entre equipos, propiedad
+  de datos y costo de cambio organizacional.
+
+Las bandas `O(1)`, `O(10)` y `O(100)` significan respectivamente costo relativo
+bajo, medio y alto respecto de la topología actual. Son categorías comparativas,
+no notación de complejidad algorítmica, dinero ni mediciones de producción.
+
 ## Alternativas
 
 ### A. Monolito modular actual — propuesta seleccionada
@@ -101,6 +113,21 @@ la solución actual; `10^1 C0`, aproximadamente un orden mayor.
 | Escalabilidad | gruesa, suficiente en la frontera medida | gruesa | por contexto | por consumidores/particiones |
 | Costo relativo | `1 C0` (`10^0`) | `2–3 C0` (`10^0`) | `4–8 C0` (`10^0–10^1`) | `8–20 C0` (`10^1`) |
 | Reversibilidad | alta | alta | media | baja–media |
+
+## Matriz explícita de costo por dimensión
+
+| Alternativa | Infraestructura | Operación | Coordinación / Conway | Razón dominante |
+| --- | --- | --- | --- | --- |
+| A. Monolito modular | `O(1)` | `O(1)` | `O(1)` | un despliegue, una base y un equipo |
+| B. Réplicas completas | `O(10)` | `O(10)` | `O(1)` | balanceo y más instancias, sin separar propiedad funcional |
+| C. Microservicio síncrono | `O(10)` | `O(10)` | `O(10)` | dos despliegues, frontera de datos y coordinación de contrato |
+| D. Eventos y proyecciones | `O(10)` | `O(100)` | `O(100)` | broker, replay, esquemas, consumidores y coordinación de estados |
+
+El equipo actual es pequeño y no tiene ciclos de despliegue independientes.
+Por eso C y D añaden una frontera organizacional artificial: la coordinación
+sube aunque la infraestructura pudiera ejecutarse en la misma máquina. Esta
+dimensión se revisará si aparecen equipos autónomos o una exigencia real de
+despliegue independiente.
 
 ## Propuesta anterior al comité
 

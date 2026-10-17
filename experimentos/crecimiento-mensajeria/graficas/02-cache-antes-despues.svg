@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img">
+<title>Comparación antes y después de la caché local</title>
+<desc>Comparación de p95 y throughput medianos a 200 VU construida desde resultado-comparacion.json.</desc>
+<style>text{font-family:Segoe UI,Arial,sans-serif}</style>
+<rect width="1200" height="690" fill="#f4f7fb"/>
+<text x="54.0" y="52.0" font-size="30" fill="#172033" font-weight="700" text-anchor="start">Táctica S11: comparación antes/después</text>
+<text x="54.0" y="80.0" font-size="15" fill="#526071" font-weight="400" text-anchor="start">Caché local TTL de un segundo, mismo escalón de 200 VU y tres corridas válidas.</text>
+<rect x="42.0" y="112.0" width="548.0" height="430.0" rx="14.0" fill="#ffffff"/>
+<text x="66.0" y="148.0" font-size="20" fill="#172033" font-weight="700" text-anchor="start">Latencia p95 mediana</text>
+<text x="66.0" y="173.0" font-size="13" fill="#526071" font-weight="400" text-anchor="start">Cambio mediano: -4,908 %</text>
+<rect x="172.3" y="253.8" width="112.0" height="210.2" rx="8.0" fill="#526071"/>
+<text x="228.3" y="239.8" font-size="15" fill="#172033" font-weight="700" text-anchor="middle">58,235 ms</text>
+<text x="228.3" y="492.0" font-size="14" fill="#526071" font-weight="600" text-anchor="middle">Antes</text>
+<rect x="358.6" y="264.1" width="112.0" height="199.9" rx="8.0" fill="#2563eb"/>
+<text x="414.6" y="250.1" font-size="15" fill="#172033" font-weight="700" text-anchor="middle">55,377 ms</text>
+<text x="414.6" y="492.0" font-size="14" fill="#526071" font-weight="600" text-anchor="middle">Después</text>
+<line x1="96.0" y1="464.0" x2="548.0" y2="464.0" stroke="#d9e1ea" stroke-width="2.0"/>
+<rect x="610.0" y="112.0" width="548.0" height="430.0" rx="14.0" fill="#ffffff"/>
+<text x="634.0" y="148.0" font-size="20" fill="#172033" font-weight="700" text-anchor="start">Throughput mediano</text>
+<text x="634.0" y="173.0" font-size="13" fill="#526071" font-weight="400" text-anchor="start">Cambio mediano: -1,866 %</text>
+<rect x="740.3" y="253.8" width="112.0" height="210.2" rx="8.0" fill="#526071"/>
+<text x="796.3" y="239.8" font-size="15" fill="#172033" font-weight="700" text-anchor="middle">2303,017 req/s</text>
+<text x="796.3" y="492.0" font-size="14" fill="#526071" font-weight="600" text-anchor="middle">Antes</text>
+<rect x="926.6" y="257.8" width="112.0" height="206.2" rx="8.0" fill="#2563eb"/>
+<text x="982.6" y="243.8" font-size="15" fill="#172033" font-weight="700" text-anchor="middle">2260,038 req/s</text>
+<text x="982.6" y="492.0" font-size="14" fill="#526071" font-weight="600" text-anchor="middle">Después</text>
+<line x1="664.0" y1="464.0" x2="1116.0" y2="464.0" stroke="#d9e1ea" stroke-width="2.0"/>
+<rect x="42.0" y="564.0" width="1116.0" height="92.0" rx="12.0" fill="#fff4e6"/>
+<text x="64.0" y="593.0" font-size="16" fill="#c2410c" font-weight="700" text-anchor="start">Veredicto: partially_supported; la caché permanece deshabilitada por defecto.</text>
+<text x="64.0" y="618.0" font-size="14" fill="#172033" font-weight="400" text-anchor="start">El p95 bajó 4,908 %, pero el throughput también bajó 1,866 %; los rangos se solapan.</text>
+<text x="64.0" y="641.0" font-size="12" fill="#526071" font-weight="400" text-anchor="start">Fuente: resultado-comparacion.json · commit medido 0849dea1 · corrección preservada.</text>
+</svg>

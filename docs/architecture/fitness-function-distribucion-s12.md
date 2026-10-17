@@ -47,8 +47,10 @@ agregar Kafka o introducir un servicio `broker` son rechazados.
 
 ## Relación con la primera fitness function
 
-- `check_architecture.py` protege ADR-002: los controladores no acceden a
-  JDBC/SQL directamente.
+- `DatabaseIsolationArchitectureTests` protege ADR-002 con ArchUnit: los
+  controladores no acceden a JDBC/SQL, la persistencia queda limitada a los
+  paquetes autorizados y no hay ciclos entre paquetes superiores.
+- `check_architecture.py` conserva una comprobación de fuente complementaria.
 - `check_distribution_decision.py` protege ADR-004: no cambia silenciosamente
   la topología ni la infraestructura de distribución.
 

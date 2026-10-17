@@ -57,9 +57,17 @@ La primera restricción automática de S8 protege el límite más crítico y fá
 controller !→ JDBC/SQL directo
 ```
 
-`scripts/check_architecture.py` inspecciona el paquete de controladores y falla si encuentra referencias a APIs JDBC/SQL prohibidas. `.github/workflows/ci.yml` ejecuta la regla en cada pull request hacia `main` y en `push` a `main`.
+`DatabaseIsolationArchitectureTests.kt` usa ArchUnit sobre las clases compiladas:
+impide dependencias de controladores hacia JDBC/SQL, limita esas APIs a
+`service`, `auth` y `config`, y comprueba ciclos entre paquetes superiores.
+`scripts/check_architecture.py` conserva una verificación ligera de fuente. El
+workflow `.github/workflows/ci.yml` ejecuta ambas en cada pull request hacia
+`main` y en cada `push` a `main`.
 
-La regla es deliberadamente mínima. No afirma detectar todas las formas de acoplamiento; su objetivo es convertir una decisión arquitectónica concreta en una condición verificable.
+La regla es deliberadamente proporcional al código actual. No afirma separar
+tablas por bounded context porque todavía no existen paquetes de repositorio
+independientes; convierte la frontera real HTTP → servicio/autenticación → JDBC
+en una condición verificable.
 
 ## Alternativas consideradas
 
@@ -114,6 +122,8 @@ No se elimina una restricción solo para hacer pasar CI: cualquier cambio de fro
 - [`C3 backend`](../../dossier/07-c4-componentes-backend.md)
 - [`Trazabilidad`](../../dossier/09-c4-trazabilidad-localizacion.md)
 - [`Regla ejecutable`](../../scripts/check_architecture.py)
+- [`Pruebas ArchUnit`](../../backend/src/test/kotlin/com/tab/utrabajo/api/architecture/DatabaseIsolationArchitectureTests.kt)
+- [`Evidencia y procedimiento negativo`](../architecture/evidencia-restriccion-ci.md)
 - [`Workflow CI`](../../.github/workflows/ci.yml)
 
 ## Confirmación requerida
