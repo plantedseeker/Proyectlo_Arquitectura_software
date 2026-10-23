@@ -71,6 +71,15 @@ GitHub Actions:
 - resultado del step: **failure**
 - pasos posteriores de backend: skipped por la violación.
 
+El log del job registró literalmente:
+
+~~~text
+ADR-004 violado: la decisión de distribución requiere revisión explícita.
+Decisión protegida: docs/adr/ADR-004-distribucion-mensajeria.md
+- Compose debe mantener MESSAGE_CACHE_ENABLED=false por defecto
+Process completed with exit code 1.
+~~~
+
 El job Android no es la evidencia causal: la prueba relevante es que backend se detuvo exactamente en la fitness function.
 
 ## Interpretación
@@ -89,20 +98,28 @@ CI ROJO
 
 Esto demuestra que un cambio cotidiano no puede habilitar silenciosamente la táctica experimental que ADR-004 mantiene apagada.
 
-## Corrección requerida antes de merge
+## Corrección aplicada antes de merge
 
-Restaurar:
+Commit de corrección:
+
+~~~text
+a2cdf943f206a186785af0f6110cad42c4d917f1
+~~~
+
+Se restauró:
 
 ~~~yaml
 MESSAGE_CACHE_ENABLED: ${MESSAGE_CACHE_ENABLED:-false}
 ~~~
 
-Después el PR debe ejecutar nuevamente CI y quedar verde. La violación roja queda preservada en el historial del PR/run, pero **no llega a main**.
+Después de la corrección, el run #62 mostró el step **Enforce ADR-004 distribution decision = success** y el job backend completo = **success**. El estado final del PR debe conservar CI completo en verde antes del merge.
+
+La violación roja queda preservada en el historial del PR/run, pero **no llega a main**.
 
 ## Estado
 
 - [x] violación introducida deliberadamente;
 - [x] CI la detectó en la fitness function correcta;
-- [ ] corrección aplicada;
-- [ ] CI verde posterior;
-- [ ] PR fusionado sin la violación.
+- [x] corrección aplicada;
+- [x] fitness function y job backend verdes después de corregir (run #62);
+- [ ] workflow completo verde y PR fusionado sin la violación — se verifica en el cierre del PR #27.
