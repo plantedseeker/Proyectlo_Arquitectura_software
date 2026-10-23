@@ -24,9 +24,16 @@ Grafana rechaza el encabezado `Authorization`. Se debe usar **Regenerate API
 token**, copiar inmediatamente el valor nuevo que se revela y pegarlo en el
 prompt oculto. No se debe guardar el token en capturas, archivos ni mensajes.
 
+El proyecto actual permite hasta **100 VU**. El runner mantiene intactos los
+cinco escalones prerregistrados: transmite 10, 50 y 100 VU a Grafana Cloud, y
+ejecuta 150 y 200 VU localmente con los mismos JSON, logs, telemetría y
+huellas. Si un administrador aumenta la cuota, se puede indicar el nuevo valor
+con `-GrafanaCloudMaxVus 200`.
+
 La ejecución crea:
 
-- 20 paneles: cinco escalones por cuatro corridas;
+- 12 paneles bajo la cuota actual: tres escalones por cuatro corridas;
+- 20 resultados locales: cinco escalones por cuatro corridas;
 - un `grafana-cloud-runs.json` dentro del directorio fechado de resultados;
 - `ultima-ejecucion.md`, con enlaces directos a cada panel;
 - los mismos resúmenes, logs, telemetría y huellas locales del runner normal.

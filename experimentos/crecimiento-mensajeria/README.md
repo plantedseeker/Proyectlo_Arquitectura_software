@@ -42,6 +42,11 @@ cloud está desactivado por defecto porque consume la cuota de la cuenta. Fija
 la ejecución oficial histórica permanece identificada con
 `grafana/k6:0.54.0` y no se reinterpreta retroactivamente.
 
+El proyecto cloud actual admite como máximo 100 VU. Por eso el runner transmite
+los escalones 10, 50 y 100, y ejecuta 150 y 200 solo localmente sin modificar el
+protocolo. Si la cuota aumenta, `-GrafanaCloudMaxVus 200` habilita la transmisión
+de todos los escalones.
+
 Al terminar se generan `grafana-cloud-runs.json` junto con los nuevos
 resultados locales y un [índice estable de paneles](grafana-cloud/README.md).
 Los paneles son evidencia visual complementaria: los JSON, logs, contexto y

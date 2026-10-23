@@ -4,7 +4,9 @@ param(
     [ValidatePattern('^\d+$')]
     [string] $GrafanaCloudStackId = '1889948',
     [ValidatePattern('^\d*$')]
-    [string] $GrafanaCloudProjectId = ''
+    [string] $GrafanaCloudProjectId = '',
+    [ValidateRange(1, 1000000)]
+    [int] $GrafanaCloudMaxVus = 100
 )
 
 $ErrorActionPreference = 'Stop'
@@ -44,6 +46,7 @@ if ($GrafanaCloud) {
     $env:K6_CLOUD_STACK_ID = $GrafanaCloudStackId
     Write-Host "Grafana Cloud habilitado para el Stack ID $GrafanaCloudStackId." -ForegroundColor Cyan
     Write-Warning 'Esta reejecucion transmite metricas y consume la cuota de Grafana Cloud. No reemplaza los resultados locales ya aprobados.'
+    Write-Host "Se transmitiran los escalones de hasta $GrafanaCloudMaxVus VU; los superiores se ejecutaran solo localmente." -ForegroundColor Cyan
 }
 
 function Resolve-Executable {
@@ -354,13 +357,14 @@ Write-Host '7/9 Ejecutando cinco escalones; primera corrida de cada uno es calen
 $cloudRuns = @()
 foreach ($level in $levels) {
     foreach ($run in 1..$runs) {
+        $streamToGrafanaCloud = $GrafanaCloud -and $level -le $GrafanaCloudMaxVus
         $expected = $level * $iterationsPerVu
         Write-Host "VU $level - corrida $run/$runs - $expected solicitudes"
         $summaryPath = "/growth/resultados/$timestamp/run-vu$level-$run.json"
         $expectedSummaryPath = Join-Path $outputDir "run-vu$level-$run.json"
         $flattenedSummaryPath = Join-Path $projectRoot `
             "experimentos\crecimiento-mensajeria\resultados\run-vu$level-$run.json"
-        if ($GrafanaCloud -and (Test-Path -LiteralPath $flattenedSummaryPath)) {
+        if ($streamToGrafanaCloud -and (Test-Path -LiteralPath $flattenedSummaryPath)) {
             throw "Existe un resumen cloud suelto de una ejecucion anterior: $flattenedSummaryPath"
         }
         $stdoutPath = Join-Path $outputDir "run-vu$level-$run.stdout.log"
@@ -378,7 +382,7 @@ foreach ($level in $levels) {
                 '-e', "RUN_NUMBER=$run",
                 '-e', "SUMMARY_PATH=$summaryPath"
             )
-            if ($GrafanaCloud) {
+            if ($streamToGrafanaCloud) {
                 $cloudName = "utrabajo-s11-growth-vu${level}-run${run}-${timestamp}"
                 $arguments += @(
                     '-e', 'K6_CLOUD_TOKEN',
@@ -414,7 +418,7 @@ foreach ($level in $levels) {
         # devuelta por handleSummary al directorio montado y conservar solo el
         # nombre del archivo. Normalizamos esa salida al directorio fechado.
         if (
-            $GrafanaCloud -and
+            $streamToGrafanaCloud -and
             -not (Test-Path -LiteralPath $expectedSummaryPath) -and
             (Test-Path -LiteralPath $flattenedSummaryPath)
         ) {
@@ -424,21 +428,32 @@ foreach ($level in $levels) {
             throw "k6 no creo el resumen esperado para VU $level, corrida $run."
         }
         if ($GrafanaCloud) {
-            $combinedOutput = (Get-Content -LiteralPath $stdoutPath -Raw) + "`n" + `
-                (Get-Content -LiteralPath $stderrPath -Raw -ErrorAction SilentlyContinue)
-            $urlMatch = [regex]::Match(
-                $combinedOutput,
-                'https://[^\s\)]+/a/k6-app/runs/[^\s\)]+'
-            )
+            $dashboardUrl = $null
+            if ($streamToGrafanaCloud) {
+                $combinedOutput = (Get-Content -LiteralPath $stdoutPath -Raw) + "`n" + `
+                    (Get-Content -LiteralPath $stderrPath -Raw -ErrorAction SilentlyContinue)
+                $urlMatch = [regex]::Match(
+                    $combinedOutput,
+                    'https://[^\s\)]+/a/k6-app/runs/[^\s\)]+'
+                )
+                if ($urlMatch.Success) {
+                    $dashboardUrl = $urlMatch.Value
+                }
+                else {
+                    Write-Warning "No se encontro el enlace del panel cloud en la salida de VU $level, corrida $run."
+                }
+            }
             $cloudRuns += [ordered]@{
                 load_level_vus = $level
                 run = $run
                 discarded = $run -eq 1
-                test_name = $cloudName
-                dashboard_url = if ($urlMatch.Success) { $urlMatch.Value } else { $null }
-            }
-            if (-not $urlMatch.Success) {
-                Write-Warning "No se encontro el enlace del panel cloud en la salida de VU $level, corrida $run."
+                execution = if ($streamToGrafanaCloud) {
+                    'local_streamed_to_grafana_cloud'
+                } else {
+                    'local_only_due_to_cloud_vu_quota'
+                }
+                test_name = if ($streamToGrafanaCloud) { $cloudName } else { $null }
+                dashboard_url = $dashboardUrl
             }
         }
     }
@@ -451,7 +466,10 @@ if ($GrafanaCloud) {
         stack_id = $GrafanaCloudStackId
         project_id = $GrafanaCloudProjectId
         k6_image = $k6Image
-        execution = 'local con transmision de metricas a Grafana Cloud'
+        cloud_vu_limit = $GrafanaCloudMaxVus
+        cloud_covered_levels = @($levels | Where-Object { $_ -le $GrafanaCloudMaxVus })
+        local_only_levels = @($levels | Where-Object { $_ -gt $GrafanaCloudMaxVus })
+        execution = 'local completa con transmision parcial segun cuota de Grafana Cloud'
         credential_persisted = $false
         result_directory = $relativeOutput
         runs = $cloudRuns
@@ -466,6 +484,8 @@ if ($GrafanaCloud) {
         "- Stack ID: ``$GrafanaCloudStackId``",
         "- Project ID: ``$GrafanaCloudProjectId``",
         "- Imagen de ejecucion: ``$k6Image``",
+        "- Limite del proyecto cloud: ``$GrafanaCloudMaxVus VU``",
+        "- Cobertura cloud: escalones de hasta ``$GrafanaCloudMaxVus VU``; los superiores conservan evidencia local completa",
         "- Resultado local: [``$relativeOutput``](../resultados/$timestamp/resultado.json)",
         "- Indice estructurado: [``grafana-cloud-runs.json``](../resultados/$timestamp/grafana-cloud-runs.json)",
         '',
@@ -478,6 +498,9 @@ if ($GrafanaCloud) {
         if ($cloudRun.discarded) { $label += ' (calentamiento)' }
         if ($cloudRun.dashboard_url) {
             $markdown += "- [$label]($($cloudRun.dashboard_url))"
+        }
+        elseif ($cloudRun.execution -eq 'local_only_due_to_cloud_vu_quota') {
+            $markdown += "- $label - ejecucion local sin panel cloud por limite de $GrafanaCloudMaxVus VU."
         }
         else {
             $markdown += "- $label - enlace no detectado; revisar el log local."
