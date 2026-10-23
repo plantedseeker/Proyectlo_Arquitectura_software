@@ -37,6 +37,10 @@ if ($GrafanaCloud) {
     if ([string]::IsNullOrWhiteSpace($env:K6_CLOUD_TOKEN)) {
         throw 'Grafana Cloud requiere un Personal API token no vacio.'
     }
+    $env:K6_CLOUD_TOKEN = $env:K6_CLOUD_TOKEN.Trim()
+    if ($env:K6_CLOUD_TOKEN -notmatch '^[\x21-\x7E]+$') {
+        throw 'El valor pegado no es un token valido. No copie los puntos del campo oculto: regenere el Personal API token y copie el valor revelado una sola vez.'
+    }
     $env:K6_CLOUD_STACK_ID = $GrafanaCloudStackId
     Write-Host "Grafana Cloud habilitado para el Stack ID $GrafanaCloudStackId." -ForegroundColor Cyan
     Write-Warning 'Esta reejecucion transmite metricas y consume la cuota de Grafana Cloud. No reemplaza los resultados locales ya aprobados.'

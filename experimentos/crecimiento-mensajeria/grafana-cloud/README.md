@@ -19,6 +19,11 @@ los proyectos del stack, selecciona el predeterminado y pasa su Project ID a
 cada corrida. El token no se guarda en el repositorio. El Stack ID versionado
 es `1889948`, que no es una credencial.
 
+El campo enmascarado puede copiar solamente los puntos visibles. Si ocurre,
+Grafana rechaza el encabezado `Authorization`. Se debe usar **Regenerate API
+token**, copiar inmediatamente el valor nuevo que se revela y pegarlo en el
+prompt oculto. No se debe guardar el token en capturas, archivos ni mensajes.
+
 La ejecución crea:
 
 - 20 paneles: cinco escalones por cuatro corridas;
