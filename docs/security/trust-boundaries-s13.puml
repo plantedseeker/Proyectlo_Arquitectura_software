@@ -1,0 +1,48 @@
+@startuml
+title UTrabajo — Límites de confianza S13
+skinparam shadowing false
+skinparam componentStyle rectangle
+
+actor "Usuario" as User
+node "Dispositivo Android" as Android
+node "API Spring Boot" as API {
+  component "Spring Security" as Sec
+  component "Controllers" as Ctrl
+  component "Services/Auth" as Svc
+}
+database "PostgreSQL 16" as DB
+folder "Upload storage" as Files
+cloud "CI / dependencias / imágenes" as Supply
+component "Endpoints internos experimentales" as Internal
+
+User --> Android
+Android --> Sec : HTTP/JSON + Bearer
+TB-1
+Sec --> Ctrl
+Ctrl --> Svc
+Svc --> DB : JDBC
+TB-2
+Svc --> Files : lectura/escritura
+TB-3
+Files --> Android : /uploads/** actual
+TB-4
+Supply --> API : build/runtime
+TB-5
+Internal --> API : X-Integration-Token
+TB-6
+
+note right of Android
+En local se usa HTTP.
+Fuera de local: HTTPS obligatorio.
+end note
+
+note right of Files
+Documentos sensibles no deben
+quedar públicos en producción.
+end note
+
+note bottom of Supply
+Revisar dependencias, Actions
+e imágenes como supply chain.
+end note
+@enduml
