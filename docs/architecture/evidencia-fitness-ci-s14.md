@@ -112,7 +112,9 @@ Se restauró:
 MESSAGE_CACHE_ENABLED: ${MESSAGE_CACHE_ENABLED:-false}
 ~~~
 
-Después de la corrección, el run #62 mostró el step **Enforce ADR-004 distribution decision = success** y el job backend completo = **success**. El estado final del PR debe conservar CI completo en verde antes del merge.
+Después de la corrección, el run #62 mostró el step **Enforce ADR-004 distribution decision = success** y el job backend completo = **success**. Ese run fue cancelado al añadirse documentación posterior, por la política de concurrencia del workflow.
+
+La verificación completa posterior fue el **run #63 (id 40040289798)** sobre el commit `a907bda717f60273018f2d5c5c674797507c910d`: **backend = success** y **android = success**.
 
 La violación roja queda preservada en el historial del PR/run, pero **no llega a main**.
 
@@ -122,4 +124,5 @@ La violación roja queda preservada en el historial del PR/run, pero **no llega 
 - [x] CI la detectó en la fitness function correcta;
 - [x] corrección aplicada;
 - [x] fitness function y job backend verdes después de corregir (run #62);
-- [ ] workflow completo verde y PR fusionado sin la violación — se verifica en el cierre del PR #27.
+- [x] workflow completo verde después de la corrección (run #63);
+- La fusión de PR #27 solo se realiza desde un head sin la violación.
