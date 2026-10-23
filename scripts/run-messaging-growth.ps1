@@ -363,14 +363,14 @@ if ($GrafanaCloud) {
     $cloudDirectory = Join-Path $projectRoot 'experimentos\crecimiento-mensajeria\grafana-cloud'
     New-Item -ItemType Directory -Path $cloudDirectory -Force | Out-Null
     $markdown = @(
-        '# Paneles Grafana Cloud — última reejecución S11',
+        '# Paneles Grafana Cloud - ultima reejecucion S11',
         '',
         "- Stack ID: ``$GrafanaCloudStackId``",
-        "- Imagen de ejecución: ``$k6Image``",
+        "- Imagen de ejecucion: ``$k6Image``",
         "- Resultado local: [``$relativeOutput``](../resultados/$timestamp/resultado.json)",
-        "- Índice estructurado: [``grafana-cloud-runs.json``](../resultados/$timestamp/grafana-cloud-runs.json)",
+        "- Indice estructurado: [``grafana-cloud-runs.json``](../resultados/$timestamp/grafana-cloud-runs.json)",
         '',
-        '> Esta es una reejecución complementaria para visualización. Los resultados primarios aprobados siguen siendo los JSON locales de 20261016T224331Z.',
+        '> Esta es una reejecucion complementaria para visualizacion. Los resultados primarios aprobados siguen siendo los JSON locales de 20261016T224331Z.',
         '',
         '## Ejecuciones'
     )
@@ -381,7 +381,7 @@ if ($GrafanaCloud) {
             $markdown += "- [$label]($($cloudRun.dashboard_url))"
         }
         else {
-            $markdown += "- $label — enlace no detectado; revisar el log local."
+            $markdown += "- $label - enlace no detectado; revisar el log local."
         }
     }
     [System.IO.File]::WriteAllLines(
