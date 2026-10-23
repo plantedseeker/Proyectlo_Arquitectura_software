@@ -36,7 +36,7 @@ alterar el protocolo ni presentarlos falsamente como paneles cloud.
 | Evidencia | Resultado | Dónde se comprueba |
 | --- | --- | --- |
 | Crecimiento con carga aumentada | 20 corridas entre 10 y 200 VU, sin degradación sostenida | [resultado consolidado](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json), [contexto](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/contexto.json) y [huellas](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/SHA256SUMS.txt) |
-| Curvas de degradación | p95 y throughput por escalón; comparación antes/después | [gráficas reproducibles](../experimentos/crecimiento-mensajeria/graficas/README.md) |
+| Curvas de degradación | p95 y throughput por escalón; comparación antes/después; reejecución k6/Grafana Cloud | [gráficas reproducibles](../experimentos/crecimiento-mensajeria/graficas/README.md) y [gráfica de la reejecución](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg) |
 | Dónde y cómo se degrada | creció primero la latencia; no hubo saturación ni límite atribuible | [análisis de crecimiento](../experimentos/crecimiento-mensajeria/02-analisis-crecimiento.md) |
 | Temporalidad del protocolo | criterios confirmados antes de resultados; desviación del formato oficial declarada sin reescribir historia | [trazabilidad del prerregistro](../docs/architecture/trazabilidad-prerregistro-s11.md) |
 | Matriz de fallos y resiliencia | modos observados, descartados y tácticas justificadas | [matriz de fallos](../experimentos/crecimiento-mensajeria/03-matriz-fallos.md) y [matriz de resiliencia](../experimentos/crecimiento-mensajeria/04-matriz-resiliencia.md) |
@@ -87,6 +87,8 @@ degradación sostenida hasta 200 VU. Sus valores no se mezclan con la medición
 primaria; sirven como comprobación posterior y como acceso a paneles
 interactivos. El recorrido directo está en
 [`ultima-ejecucion.md`](../experimentos/crecimiento-mensajeria/grafana-cloud/ultima-ejecucion.md),
+la curva consolidada está en
+[`03-reejecucion-k6-grafana-p95-throughput.svg`](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg),
 y la [captura de cierre](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/06-grafana-cloud-cierre-y-huellas.png)
 permite demostrar en presentación que el consolidado y sus huellas fueron
 generados correctamente.
