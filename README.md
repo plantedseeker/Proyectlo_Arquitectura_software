@@ -221,3 +221,20 @@ python .\scripts\check_architecture.py
 python .\scripts\check_distribution_decision.py
 python -m unittest discover -s .\scripts\tests -v
 ```
+
+
+## Seguridad S13
+
+El análisis integral de amenazas y controles está en
+[`dossier/10-seguridad.md`](dossier/10-seguridad.md). Usa OWASP Top 10:2025
+como referencia, pero filtra cada categoría contra el sistema real.
+
+Artefactos principales:
+
+- [matriz de amenazas y controles](dossier/10-seguridad.md);
+- [límites de confianza](docs/security/trust-boundaries-s13.puml);
+- [auditoría crítica de amenazas propuestas por IA](docs/security/auditoria-amenazas-ia-s13.md).
+
+El análisis distingue controles ya implementados de controles requeridos antes
+de un despliegue público. No afirma seguridad de producción para la topología
+local actual.

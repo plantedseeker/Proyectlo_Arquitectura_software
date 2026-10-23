@@ -80,3 +80,14 @@ El PR #1 contiene el contexto, los drivers, los escenarios, el instrumento y la
 línea base. Los PR posteriores registran contribuciones reales de S7–S8. Cada
 dueño de cuenta debe revisar y autorizar personalmente su contribución. No se
 fabrican autores, revisiones ni veredictos.
+
+
+## Semana 13 — seguridad
+
+- [`10-seguridad.md`](10-seguridad.md) — evidencia principal de S13: activos,
+  límites de confianza, OWASP Top 10:2025, matriz de amenazas, controles y
+  riesgo residual.
+- [`../docs/security/trust-boundaries-s13.puml`](../docs/security/trust-boundaries-s13.puml)
+  — fuente del diagrama de límites de confianza.
+- [`../docs/security/auditoria-amenazas-ia-s13.md`](../docs/security/auditoria-amenazas-ia-s13.md)
+  — amenazas propuestas, aceptadas, modificadas y descartadas.
