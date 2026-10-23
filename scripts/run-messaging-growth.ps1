@@ -1,5 +1,13 @@
 [CmdletBinding()]
-param()
+param(
+    [switch] $GrafanaCloud,
+    [ValidatePattern('^\d+$')]
+    [string] $GrafanaCloudStackId = '1889948',
+    [ValidatePattern('^\d*$')]
+    [string] $GrafanaCloudProjectId = '',
+    [ValidateRange(1, 1000000)]
+    [int] $GrafanaCloudMaxVus = 100
+)
 
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
@@ -12,6 +20,34 @@ $env:COMPOSE_BAKE = 'false'
 $levels = @(10, 50, 100, 150, 200)
 $runs = 4
 $iterationsPerVu = 4
+$defaultK6Image = 'grafana/k6:0.54.0'
+$cloudK6Image = 'grafana/k6:2.2.0'
+$k6Image = if ($GrafanaCloud) { $cloudK6Image } else { $defaultK6Image }
+$env:K6_IMAGE = $k6Image
+
+if ($GrafanaCloud) {
+    if (-not $env:K6_CLOUD_TOKEN) {
+        $secureToken = Read-Host 'Pegue el Personal API token de Grafana Cloud (no se mostrara)' -AsSecureString
+        $tokenPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureToken)
+        try {
+            $env:K6_CLOUD_TOKEN = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($tokenPointer)
+        }
+        finally {
+            [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($tokenPointer)
+        }
+    }
+    if ([string]::IsNullOrWhiteSpace($env:K6_CLOUD_TOKEN)) {
+        throw 'Grafana Cloud requiere un Personal API token no vacio.'
+    }
+    $env:K6_CLOUD_TOKEN = $env:K6_CLOUD_TOKEN.Trim()
+    if ($env:K6_CLOUD_TOKEN -notmatch '^[\x21-\x7E]+$') {
+        throw 'El valor pegado no es un token valido. No copie los puntos del campo oculto: regenere el Personal API token y copie el valor revelado una sola vez.'
+    }
+    $env:K6_CLOUD_STACK_ID = $GrafanaCloudStackId
+    Write-Host "Grafana Cloud habilitado para el Stack ID $GrafanaCloudStackId." -ForegroundColor Cyan
+    Write-Warning 'Esta reejecucion transmite metricas y consume la cuota de Grafana Cloud. No reemplaza los resultados locales ya aprobados.'
+    Write-Host "Se transmitiran los escalones de hasta $GrafanaCloudMaxVus VU; los superiores se ejecutaran solo localmente." -ForegroundColor Cyan
+}
 
 function Resolve-Executable {
     param(
@@ -57,6 +93,18 @@ function Invoke-Checked {
     if ($LASTEXITCODE -ne 0) {
         throw "El comando termino con codigo ${LASTEXITCODE}: $Executable $($Arguments -join ' ')"
     }
+}
+
+function Write-JsonFile {
+    param(
+        [Parameter(Mandatory)] $Value,
+        [Parameter(Mandatory)] [string] $Path
+    )
+    [System.IO.File]::WriteAllText(
+        $Path,
+        (($Value | ConvertTo-Json -Depth 10) + "`n"),
+        [System.Text.UTF8Encoding]::new($false)
+    )
 }
 
 function Start-ResourceSampler {
@@ -126,6 +174,73 @@ Invoke-Checked -Executable $docker -Arguments @('version')
 Invoke-Checked -Executable $compose -Arguments @('version')
 $dockerVersion = (& $docker version --format '{{.Client.Version}} client / {{.Server.Version}} server').Trim()
 $composeVersion = (& $compose version --short).Trim()
+
+if ($GrafanaCloud -and -not $GrafanaCloudProjectId) {
+    Write-Host 'Resolviendo el proyecto predeterminado de Grafana Cloud...'
+    $projectStdout = Join-Path ([System.IO.Path]::GetTempPath()) "utrabajo-k6-projects-$PID.stdout.json"
+    $projectStderr = Join-Path ([System.IO.Path]::GetTempPath()) "utrabajo-k6-projects-$PID.stderr.log"
+    try {
+        $projectArguments = @(
+            '--profile', 'load', 'run', '--rm', '--no-deps',
+            '-e', 'K6_CLOUD_TOKEN',
+            '-e', "K6_CLOUD_STACK_ID=$GrafanaCloudStackId",
+            'k6', 'cloud', 'project', 'list', '--json'
+        )
+        $projectProcess = Start-Process -FilePath $compose -ArgumentList $projectArguments `
+            -NoNewWindow -PassThru -Wait -RedirectStandardOutput $projectStdout `
+            -RedirectStandardError $projectStderr
+        if ($projectProcess.ExitCode -ne 0) {
+            Get-Content -LiteralPath $projectStderr -ErrorAction SilentlyContinue
+            throw "No fue posible listar los proyectos de Grafana Cloud (codigo $($projectProcess.ExitCode))."
+        }
+        $projectJson = Get-Content -LiteralPath $projectStdout -Raw
+        try {
+            $projects = @($projectJson | ConvertFrom-Json)
+        }
+        catch {
+            throw "Grafana Cloud no devolvio una lista JSON valida de proyectos: $projectJson"
+        }
+        if ($projects.Count -eq 0) {
+            throw 'El stack no contiene proyectos disponibles para el token indicado.'
+        }
+        $selectedProject = $projects | Where-Object {
+            $_.default -eq $true -or $_.is_default -eq $true -or
+            $_.isDefault -eq $true -or $_.is_default_project -eq $true
+        } | Select-Object -First 1
+        if (-not $selectedProject) {
+            $selectedProject = $projects | Where-Object {
+                $_.name -match '^default( project)?$'
+            } | Select-Object -First 1
+        }
+        if (-not $selectedProject -and $projects.Count -eq 1) {
+            $selectedProject = $projects[0]
+        }
+        if (-not $selectedProject) {
+            $availableProjects = $projects | ForEach-Object { "$($_.id): $($_.name)" }
+            throw "No fue posible determinar el proyecto predeterminado. Disponibles: $($availableProjects -join ', ')"
+        }
+        $resolvedProjectId = if ($selectedProject.id) {
+            $selectedProject.id
+        }
+        elseif ($selectedProject.project_id) {
+            $selectedProject.project_id
+        }
+        else {
+            $selectedProject.projectID
+        }
+        if ("$resolvedProjectId" -notmatch '^\d+$') {
+            throw 'El proyecto predeterminado no contiene un ID numerico valido.'
+        }
+        $GrafanaCloudProjectId = "$resolvedProjectId"
+        Write-Host "Proyecto Grafana Cloud resuelto: $GrafanaCloudProjectId ($($selectedProject.name))." -ForegroundColor Cyan
+    }
+    finally {
+        Remove-Item -LiteralPath $projectStdout, $projectStderr -Force -ErrorAction SilentlyContinue
+    }
+}
+if ($GrafanaCloud) {
+    $env:K6_CLOUD_PROJECT_ID = $GrafanaCloudProjectId
+}
 
 Write-Host '3/9 Construyendo y levantando PostgreSQL 16 y la API...'
 Invoke-Checked -Executable $compose -Arguments @('up', '--build', '-d')
@@ -219,7 +334,7 @@ if (-not $seedObject.matches_preregistered_seed) {
 )
 
 Write-Host '6/9 Capturando maquina, energia, rama y commit...'
-Invoke-Checked -Executable $python -Arguments @(
+$contextArguments = @(
     'experimentos/crecimiento-mensajeria/resumir_resultados.py',
     '--output', $outputDir,
     '--capture-context',
@@ -227,15 +342,31 @@ Invoke-Checked -Executable $python -Arguments @(
     '--branch', $branch,
     '--docker-version', $dockerVersion,
     '--compose-version', $composeVersion,
-    '--postgresql-version', $postgresqlVersion
+    '--postgresql-version', $postgresqlVersion,
+    '--k6-image', $k6Image
 )
+if ($GrafanaCloud) {
+    $contextArguments += @(
+        '--grafana-cloud-stack-id', $GrafanaCloudStackId,
+        '--grafana-cloud-project-id', $GrafanaCloudProjectId
+    )
+}
+Invoke-Checked -Executable $python -Arguments $contextArguments
 
 Write-Host '7/9 Ejecutando cinco escalones; primera corrida de cada uno es calentamiento...'
+$cloudRuns = @()
 foreach ($level in $levels) {
     foreach ($run in 1..$runs) {
+        $streamToGrafanaCloud = $GrafanaCloud -and $level -le $GrafanaCloudMaxVus
         $expected = $level * $iterationsPerVu
         Write-Host "VU $level - corrida $run/$runs - $expected solicitudes"
         $summaryPath = "/growth/resultados/$timestamp/run-vu$level-$run.json"
+        $expectedSummaryPath = Join-Path $outputDir "run-vu$level-$run.json"
+        $flattenedSummaryPath = Join-Path $projectRoot `
+            "experimentos\crecimiento-mensajeria\resultados\run-vu$level-$run.json"
+        if ($streamToGrafanaCloud -and (Test-Path -LiteralPath $flattenedSummaryPath)) {
+            throw "Existe un resumen cloud suelto de una ejecucion anterior: $flattenedSummaryPath"
+        }
         $stdoutPath = Join-Path $outputDir "run-vu$level-$run.stdout.log"
         $stderrPath = Join-Path $outputDir "run-vu$level-$run.stderr.log"
         $telemetryPath = Join-Path $outputDir "telemetry-vu$level-$run.jsonl"
@@ -249,9 +380,26 @@ foreach ($level in $levels) {
                 '-e', "LOAD_LEVEL=$level",
                 '-e', "ITERATIONS_PER_VU=$iterationsPerVu",
                 '-e', "RUN_NUMBER=$run",
-                '-e', "SUMMARY_PATH=$summaryPath",
-                'k6', 'run', '/growth/carga-crecimiento.js'
+                '-e', "SUMMARY_PATH=$summaryPath"
             )
+            if ($streamToGrafanaCloud) {
+                $cloudName = "utrabajo-s11-growth-vu${level}-run${run}-${timestamp}"
+                $arguments += @(
+                    '-e', 'K6_CLOUD_TOKEN',
+                    '-e', "K6_CLOUD_STACK_ID=$GrafanaCloudStackId",
+                    '-e', "K6_CLOUD_PROJECT_ID=$GrafanaCloudProjectId",
+                    '-e', "K6_CLOUD_NAME=$cloudName",
+                    'k6', 'cloud', 'run', '--local-execution', '--no-archive-upload',
+                    '--env', "LOAD_LEVEL=$level",
+                    '--env', "ITERATIONS_PER_VU=$iterationsPerVu",
+                    '--env', "RUN_NUMBER=$run",
+                    '--env', "SUMMARY_PATH=$summaryPath",
+                    '/growth/carga-crecimiento.js'
+                )
+            }
+            else {
+                $arguments += @('k6', 'run', '/growth/carga-crecimiento.js')
+            }
             $process = Start-Process -FilePath $compose -ArgumentList $arguments -NoNewWindow -PassThru -Wait `
                 -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
             $exitCode = $process.ExitCode
@@ -266,10 +414,104 @@ foreach ($level in $levels) {
         if ($exitCode -ne 0 -and $exitCode -ne 99) {
             throw "k6 termino con codigo inesperado $exitCode en VU $level, corrida $run."
         }
-        if (-not (Test-Path -LiteralPath (Join-Path $outputDir "run-vu$level-$run.json"))) {
+        # k6 2.x con `cloud run --local-execution` puede restringir la ruta
+        # devuelta por handleSummary al directorio montado y conservar solo el
+        # nombre del archivo. Normalizamos esa salida al directorio fechado.
+        if (
+            $streamToGrafanaCloud -and
+            -not (Test-Path -LiteralPath $expectedSummaryPath) -and
+            (Test-Path -LiteralPath $flattenedSummaryPath)
+        ) {
+            Move-Item -LiteralPath $flattenedSummaryPath -Destination $expectedSummaryPath
+        }
+        if (-not (Test-Path -LiteralPath $expectedSummaryPath)) {
             throw "k6 no creo el resumen esperado para VU $level, corrida $run."
         }
+        if ($GrafanaCloud) {
+            $dashboardUrl = $null
+            if ($streamToGrafanaCloud) {
+                $combinedOutput = (Get-Content -LiteralPath $stdoutPath -Raw) + "`n" + `
+                    (Get-Content -LiteralPath $stderrPath -Raw -ErrorAction SilentlyContinue)
+                $urlMatch = [regex]::Match(
+                    $combinedOutput,
+                    'https://[^\s\)]+/a/k6-app/runs/[^\s\)]+'
+                )
+                if ($urlMatch.Success) {
+                    $dashboardUrl = $urlMatch.Value
+                }
+                else {
+                    Write-Warning "No se encontro el enlace del panel cloud en la salida de VU $level, corrida $run."
+                }
+            }
+            $cloudRuns += [ordered]@{
+                load_level_vus = $level
+                run = $run
+                discarded = $run -eq 1
+                execution = if ($streamToGrafanaCloud) {
+                    'local_streamed_to_grafana_cloud'
+                } else {
+                    'local_only_due_to_cloud_vu_quota'
+                }
+                test_name = if ($streamToGrafanaCloud) { $cloudName } else { $null }
+                dashboard_url = $dashboardUrl
+            }
+        }
     }
+}
+
+if ($GrafanaCloud) {
+    $cloudIndex = [ordered]@{
+        schema_version = 1
+        captured_at_utc = [DateTime]::UtcNow.ToString('o')
+        stack_id = $GrafanaCloudStackId
+        project_id = $GrafanaCloudProjectId
+        k6_image = $k6Image
+        cloud_vu_limit = $GrafanaCloudMaxVus
+        cloud_covered_levels = @($levels | Where-Object { $_ -le $GrafanaCloudMaxVus })
+        local_only_levels = @($levels | Where-Object { $_ -gt $GrafanaCloudMaxVus })
+        execution = 'local completa con transmision parcial segun cuota de Grafana Cloud'
+        credential_persisted = $false
+        result_directory = $relativeOutput
+        runs = $cloudRuns
+    }
+    Write-JsonFile -Value $cloudIndex -Path (Join-Path $outputDir 'grafana-cloud-runs.json')
+
+    $cloudDirectory = Join-Path $projectRoot 'experimentos\crecimiento-mensajeria\grafana-cloud'
+    New-Item -ItemType Directory -Path $cloudDirectory -Force | Out-Null
+    $markdown = @(
+        '# Paneles Grafana Cloud - ultima reejecucion S11',
+        '',
+        "- Stack ID: ``$GrafanaCloudStackId``",
+        "- Project ID: ``$GrafanaCloudProjectId``",
+        "- Imagen de ejecucion: ``$k6Image``",
+        "- Limite del proyecto cloud: ``$GrafanaCloudMaxVus VU``",
+        "- Cobertura cloud: escalones de hasta ``$GrafanaCloudMaxVus VU``; los superiores conservan evidencia local completa",
+        "- Resultado local: [``$relativeOutput``](../resultados/$timestamp/resultado.json)",
+        "- Indice estructurado: [``grafana-cloud-runs.json``](../resultados/$timestamp/grafana-cloud-runs.json)",
+        '- Capturas versionadas: [``evidencias-ejecucion``](../evidencias-ejecucion/README.md)',
+        '',
+        '> Esta es una reejecucion complementaria para visualizacion. Los resultados primarios aprobados siguen siendo los JSON locales de 20261016T224331Z.',
+        '',
+        '## Ejecuciones'
+    )
+    foreach ($cloudRun in $cloudRuns) {
+        $label = "VU $($cloudRun.load_level_vus), corrida $($cloudRun.run)"
+        if ($cloudRun.discarded) { $label += ' (calentamiento)' }
+        if ($cloudRun.dashboard_url) {
+            $markdown += "- [$label]($($cloudRun.dashboard_url))"
+        }
+        elseif ($cloudRun.execution -eq 'local_only_due_to_cloud_vu_quota') {
+            $markdown += "- $label - ejecucion local sin panel cloud por limite de $GrafanaCloudMaxVus VU."
+        }
+        else {
+            $markdown += "- $label - enlace no detectado; revisar el log local."
+        }
+    }
+    [System.IO.File]::WriteAllLines(
+        (Join-Path $cloudDirectory 'ultima-ejecucion.md'),
+        $markdown,
+        [System.Text.UTF8Encoding]::new($false)
+    )
 }
 
 Write-Host '8/9 Agregando escalones y detectando la primera degradacion sostenida...'

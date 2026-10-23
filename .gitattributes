@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve this measured artifact set byte-for-byte so its recorded SHA-256
+# remains valid after cloning on Windows, macOS or Linux.
+experimentos/crecimiento-mensajeria/resultados/20261023T215929Z/** -text -diff

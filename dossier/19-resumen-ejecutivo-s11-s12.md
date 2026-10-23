@@ -25,17 +25,24 @@ indisponibilidad independiente ni beneficio que compense microservicios,
 broker o caché distribuida. ADR-004 permanece pendiente de ratificación humana
 en el mini-comité 2.
 
+Como evidencia visual adicional, se reejecutó el crecimiento sobre el commit
+`2a4e2f9` con `grafana/k6:2.2.0`. La reejecución produjo 20 resultados locales
+y 12 paneles en Grafana Cloud. La cuota del proyecto admite 100 VU; por eso los
+escalones de 150 y 200 VU se conservaron como ejecución local auditable, sin
+alterar el protocolo ni presentarlos falsamente como paneles cloud.
+
 ## Evidencias exigidas
 
 | Evidencia | Resultado | Dónde se comprueba |
 | --- | --- | --- |
 | Crecimiento con carga aumentada | 20 corridas entre 10 y 200 VU, sin degradación sostenida | [resultado consolidado](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json), [contexto](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/contexto.json) y [huellas](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/SHA256SUMS.txt) |
-| Curvas de degradación | p95 y throughput por escalón; comparación antes/después | [gráficas reproducibles](../experimentos/crecimiento-mensajeria/graficas/README.md) |
+| Curvas de degradación | p95 y throughput por escalón; comparación antes/después; reejecución k6/Grafana Cloud | [gráficas reproducibles](../experimentos/crecimiento-mensajeria/graficas/README.md) y [gráfica de la reejecución](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg) |
 | Dónde y cómo se degrada | creció primero la latencia; no hubo saturación ni límite atribuible | [análisis de crecimiento](../experimentos/crecimiento-mensajeria/02-analisis-crecimiento.md) |
 | Temporalidad del protocolo | criterios confirmados antes de resultados; desviación del formato oficial declarada sin reescribir historia | [trazabilidad del prerregistro](../docs/architecture/trazabilidad-prerregistro-s11.md) |
 | Matriz de fallos y resiliencia | modos observados, descartados y tácticas justificadas | [matriz de fallos](../experimentos/crecimiento-mensajeria/03-matriz-fallos.md) y [matriz de resiliencia](../experimentos/crecimiento-mensajeria/04-matriz-resiliencia.md) |
 | Táctica antes/después | caché funcional, beneficio parcial y no adopción | [resultado explicado](../experimentos/crecimiento-mensajeria/06-resultado-tactica-cache.md), [datos de comparación](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/resultado-comparacion.json) y [huellas](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/SHA256SUMS.txt) |
-| Capturas de ejecución | inicio y cierre del crecimiento y de la comparación con caché | [índice visual y comprobación SHA-256](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md) |
+| Capturas de ejecución | inicio, cierre, límite cloud comprobado y consolidación final | [índice visual y comprobación SHA-256](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md) |
+| Paneles Grafana Cloud | 12 paneles para 10–100 VU y 20 resultados locales completos hasta 200 VU | [enlaces de la última ejecución](../experimentos/crecimiento-mensajeria/grafana-cloud/ultima-ejecucion.md), [índice estructurado](../experimentos/crecimiento-mensajeria/resultados/20261023T215929Z/grafana-cloud-runs.json), [resultado consolidado](../experimentos/crecimiento-mensajeria/resultados/20261023T215929Z/resultado.json) y [huellas](../experimentos/crecimiento-mensajeria/resultados/20261023T215929Z/SHA256SUMS.txt) |
 | Distribución y costo | cuatro alternativas, dimensiones completas y órdenes de magnitud | [alternativas de distribución](../docs/architecture/alternativas-distribucion-s12.md) |
 | ADR 4 | propuesta de mantener Mensajería dentro del monolito modular | [ADR-004](../docs/adr/ADR-004-distribucion-mensajeria.md) |
 | Auditoría de IA | patrones aceptados, rechazados y supuestos pendientes | [auditoría de microservicios propuestos por IA](../docs/architecture/auditoria-ia-microservicios-s12.md) |
@@ -52,10 +59,39 @@ ejecución en terminal, mientras que los JSON, logs, contexto y archivos
 2. [Cierre del crecimiento, ruta del resultado y huellas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/01-crecimiento-cierre-y-huellas.png).
 3. [Construcción y restauración de la semilla para probar la caché](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/03-cache-construccion-y-semilla.png).
 4. [Cierre de la comparación antes/después, ruta y huellas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/04-cache-cierre-y-huellas.png).
+5. [Límite de 100 VU devuelto por Grafana Cloud](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/05-grafana-cloud-limite-100-vu.png).
+6. [Cierre, consolidación y huellas de la reejecución complementaria](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/06-grafana-cloud-cierre-y-huellas.png).
 
 El [índice de capturas](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/README.md)
-muestra las cuatro imágenes dentro de una sola página, explica qué comprueba
+muestra las seis imágenes dentro de una sola página, explica qué comprueba
 cada una y registra su SHA-256.
+
+## Reejecución complementaria con Grafana Cloud
+
+La ejecución `20261023T215929Z` repitió el mismo diseño: cinco escalones,
+cuatro corridas por escalón, primera corrida de calentamiento y cuatro
+solicitudes por VU. Midió un árbol Git limpio en `2a4e2f9`, registró máquina,
+energía, versiones y semilla, y terminó con las huellas SHA-256 de todos los
+artefactos.
+
+| VU | Cobertura | p95 mediano | Throughput mediano | Degradación sostenida |
+| ---: | --- | ---: | ---: | --- |
+| 10 | local + Grafana Cloud | 3,690 ms | 181,613 req/s | No |
+| 50 | local + Grafana Cloud | 12,202 ms | 814,148 req/s | No |
+| 100 | local + Grafana Cloud | 31,212 ms | 1.584,647 req/s | No |
+| 150 | local por cuota cloud | 49,157 ms | 1.828,755 req/s | No |
+| 200 | local por cuota cloud | 55,994 ms | 2.511,716 req/s | No |
+
+La repetición respalda la misma conclusión del resultado histórico: no apareció
+degradación sostenida hasta 200 VU. Sus valores no se mezclan con la medición
+primaria; sirven como comprobación posterior y como acceso a paneles
+interactivos. El recorrido directo está en
+[`ultima-ejecucion.md`](../experimentos/crecimiento-mensajeria/grafana-cloud/ultima-ejecucion.md),
+la curva consolidada está en
+[`03-reejecucion-k6-grafana-p95-throughput.svg`](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg),
+y la [captura de cierre](../experimentos/crecimiento-mensajeria/evidencias-ejecucion/06-grafana-cloud-cierre-y-huellas.png)
+permite demostrar en presentación que el consolidado y sus huellas fueron
+generados correctamente.
 
 ## Semana 11 — método, datos y conclusión
 

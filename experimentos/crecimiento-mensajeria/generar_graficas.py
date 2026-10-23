@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 GROWTH_RESULT = ROOT / "resultados/20261016T224331Z/resultado.json"
+CLOUD_GROWTH_RESULT = ROOT / "resultados/20261023T215929Z/resultado.json"
 CACHE_RESULT = ROOT / "comparacion-cache/20261016T230407Z/resultado-comparacion.json"
 OUTPUT_DIR = ROOT / "graficas"
 
@@ -139,7 +140,14 @@ def draw_line_chart(
     svg.text(left, top - 14, f"Unidad: {unit}. Barras: mínimo–máximo; línea: mediana.", size=11, fill=COLORS["muted"])
 
 
-def generate_growth_chart(growth: dict) -> str:
+def generate_growth_chart(
+    growth: dict,
+    *,
+    title: str = "Experimento de crecimiento S11",
+    subtitle: str = "Tres corridas válidas por escalón; la primera corrida se descartó como calentamiento.",
+    result_text: str = "Resultado: no hubo degradación sostenida hasta 200 VU; no se extrapola más allá.",
+    source_suffix: str = "cero fallos y páginas válidas.",
+) -> str:
     levels = growth["level_summaries"]
     vus = [item["load_level_vus"] for item in levels]
     p95 = [item["p95_median_ms"] for item in levels]
@@ -153,8 +161,8 @@ def generate_growth_chart(growth: dict) -> str:
         "Crecimiento S11: latencia p95 y throughput",
         "Curvas construidas desde resultado.json para los escalones 10, 50, 100, 150 y 200 VU.",
     )
-    svg.text(54, 52, "Experimento de crecimiento S11", size=30, weight=700)
-    svg.text(54, 80, "Tres corridas válidas por escalón; la primera corrida se descartó como calentamiento.", size=15, fill=COLORS["muted"])
+    svg.text(54, 52, title, size=30, weight=700)
+    svg.text(54, 80, subtitle, size=15, fill=COLORS["muted"])
 
     draw_panel(
         svg,
@@ -196,8 +204,8 @@ def generate_growth_chart(growth: dict) -> str:
     )
 
     svg.rect(42, 600, 1116, 56, fill="#e8f5ec", rx=12)
-    svg.text(64, 626, "Resultado: no hubo degradación sostenida hasta 200 VU; no se extrapola más allá.", size=16, fill=COLORS["green"], weight=700)
-    svg.text(64, 648, f'Fuente: resultado.json · commit medido {growth["measured_git_revision"][:8]} · cero fallos y páginas válidas.', size=12, fill=COLORS["muted"])
+    svg.text(64, 626, result_text, size=16, fill=COLORS["green"], weight=700)
+    svg.text(64, 648, f'Fuente: resultado.json · commit medido {growth["measured_git_revision"][:8]} · {source_suffix}', size=12, fill=COLORS["muted"])
     return svg.finish()
 
 
@@ -278,6 +286,7 @@ def generate_cache_chart(comparison: dict) -> str:
 
 def main() -> None:
     growth = load_json(GROWTH_RESULT)
+    cloud_growth = load_json(CLOUD_GROWTH_RESULT)
     comparison = load_json(CACHE_RESULT)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUTPUT_DIR / "01-crecimiento-p95-throughput.svg").write_text(
@@ -285,6 +294,16 @@ def main() -> None:
     )
     (OUTPUT_DIR / "02-cache-antes-despues.svg").write_text(
         generate_cache_chart(comparison), encoding="utf-8"
+    )
+    (OUTPUT_DIR / "03-reejecucion-k6-grafana-p95-throughput.svg").write_text(
+        generate_growth_chart(
+            cloud_growth,
+            title="Reejecución k6/Grafana Cloud S11",
+            subtitle="10–100 VU con panel cloud; 150–200 VU locales por el límite de cuota de 100 VU.",
+            result_text="Resultado: p95 creciente, throughput creciente y cero degradaciones sostenidas.",
+            source_suffix="12 paneles cloud y 20 resultados locales.",
+        ),
+        encoding="utf-8",
     )
     print(f"Gráficas generadas en {OUTPUT_DIR}")
 

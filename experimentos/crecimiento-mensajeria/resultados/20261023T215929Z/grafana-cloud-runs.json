@@ -1,0 +1,182 @@
+{
+    "schema_version":  1,
+    "captured_at_utc":  "2026-10-23T22:01:27.8708215Z",
+    "stack_id":  "1889948",
+    "project_id":  "8495102",
+    "k6_image":  "grafana/k6:2.2.0",
+    "cloud_vu_limit":  100,
+    "cloud_covered_levels":  [
+                                 10,
+                                 50,
+                                 100
+                             ],
+    "local_only_levels":  [
+                              150,
+                              200
+                          ],
+    "execution":  "local completa con transmision parcial segun cuota de Grafana Cloud",
+    "credential_persisted":  false,
+    "result_directory":  "experimentos/crecimiento-mensajeria/resultados/20261023T215929Z",
+    "runs":  [
+                 {
+                     "load_level_vus":  10,
+                     "run":  1,
+                     "discarded":  true,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu10-run1-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872843"
+                 },
+                 {
+                     "load_level_vus":  10,
+                     "run":  2,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu10-run2-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872844"
+                 },
+                 {
+                     "load_level_vus":  10,
+                     "run":  3,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu10-run3-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872845"
+                 },
+                 {
+                     "load_level_vus":  10,
+                     "run":  4,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu10-run4-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872848"
+                 },
+                 {
+                     "load_level_vus":  50,
+                     "run":  1,
+                     "discarded":  true,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu50-run1-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872850"
+                 },
+                 {
+                     "load_level_vus":  50,
+                     "run":  2,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu50-run2-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872852"
+                 },
+                 {
+                     "load_level_vus":  50,
+                     "run":  3,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu50-run3-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872853"
+                 },
+                 {
+                     "load_level_vus":  50,
+                     "run":  4,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu50-run4-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872854"
+                 },
+                 {
+                     "load_level_vus":  100,
+                     "run":  1,
+                     "discarded":  true,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu100-run1-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872856"
+                 },
+                 {
+                     "load_level_vus":  100,
+                     "run":  2,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu100-run2-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872857"
+                 },
+                 {
+                     "load_level_vus":  100,
+                     "run":  3,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu100-run3-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872858"
+                 },
+                 {
+                     "load_level_vus":  100,
+                     "run":  4,
+                     "discarded":  false,
+                     "execution":  "local_streamed_to_grafana_cloud",
+                     "test_name":  "utrabajo-s11-growth-vu100-run4-20261023T215929Z",
+                     "dashboard_url":  "https://noblebat466.grafana.net/a/k6-app/runs/8872861"
+                 },
+                 {
+                     "load_level_vus":  150,
+                     "run":  1,
+                     "discarded":  true,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 },
+                 {
+                     "load_level_vus":  150,
+                     "run":  2,
+                     "discarded":  false,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 },
+                 {
+                     "load_level_vus":  150,
+                     "run":  3,
+                     "discarded":  false,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 },
+                 {
+                     "load_level_vus":  150,
+                     "run":  4,
+                     "discarded":  false,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 },
+                 {
+                     "load_level_vus":  200,
+                     "run":  1,
+                     "discarded":  true,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 },
+                 {
+                     "load_level_vus":  200,
+                     "run":  2,
+                     "discarded":  false,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 },
+                 {
+                     "load_level_vus":  200,
+                     "run":  3,
+                     "discarded":  false,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 },
+                 {
+                     "load_level_vus":  200,
+                     "run":  4,
+                     "discarded":  false,
+                     "execution":  "local_only_due_to_cloud_vu_quota",
+                     "test_name":  null,
+                     "dashboard_url":  null
+                 }
+             ]
+}
