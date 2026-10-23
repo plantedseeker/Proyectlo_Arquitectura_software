@@ -35,8 +35,9 @@ powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-growth.ps1 -Gra
 ```
 
 El runner solicita el Personal API token de forma oculta, usa el Stack ID
-`1889948` y no escribe la credencial en archivos ni en Git. El modo cloud está
-desactivado por defecto porque consume la cuota de la cuenta. Fija
+`1889948`, consulta el proyecto predeterminado y transmite también su Project
+ID a cada corrida. No escribe la credencial en archivos ni en Git. El modo
+cloud está desactivado por defecto porque consume la cuota de la cuenta. Fija
 `grafana/k6:2.2.0` para disponer del protocolo actual de selección de stack;
 la ejecución oficial histórica permanece identificada con
 `grafana/k6:0.54.0` y no se reinterpreta retroactivamente.

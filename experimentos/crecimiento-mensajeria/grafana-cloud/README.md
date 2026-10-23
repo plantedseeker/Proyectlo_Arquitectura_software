@@ -14,8 +14,10 @@ powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-growth.ps1 -Gra
 ```
 
 El comando pide el Personal API token de Grafana Cloud de forma oculta y lo
-entrega al contenedor solo como variable de entorno. El token no se guarda en
-el repositorio. El Stack ID versionado es `1889948`, que no es una credencial.
+entrega al contenedor solo como variable de entorno. Antes de medir consulta
+los proyectos del stack, selecciona el predeterminado y pasa su Project ID a
+cada corrida. El token no se guarda en el repositorio. El Stack ID versionado
+es `1889948`, que no es una credencial.
 
 La ejecución crea:
 

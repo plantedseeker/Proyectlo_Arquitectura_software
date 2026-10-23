@@ -41,6 +41,7 @@ def capture_context(
     postgresql_version: str,
     k6_image: str,
     grafana_cloud_stack_id: str | None,
+    grafana_cloud_project_id: str | None,
 ) -> None:
     context = {
         "schema_version": 1,
@@ -71,6 +72,7 @@ def capture_context(
             "discarded_run_per_level": 1,
             "grafana_cloud_streaming": grafana_cloud_stack_id is not None,
             "grafana_cloud_stack_id": grafana_cloud_stack_id,
+            "grafana_cloud_project_id": grafana_cloud_project_id,
         },
         "baseline_reference": {
             "scenario_id": "MSG-PERF-01",
@@ -225,6 +227,7 @@ def main() -> int:
     parser.add_argument("--postgresql-version")
     parser.add_argument("--k6-image", default="grafana/k6:0.54.0")
     parser.add_argument("--grafana-cloud-stack-id")
+    parser.add_argument("--grafana-cloud-project-id")
     args = parser.parse_args()
     output = args.output.resolve()
     if args.capture_context:
@@ -247,6 +250,7 @@ def main() -> int:
             args.postgresql_version,
             args.k6_image,
             args.grafana_cloud_stack_id,
+            args.grafana_cloud_project_id,
         )
     else:
         aggregate(output)

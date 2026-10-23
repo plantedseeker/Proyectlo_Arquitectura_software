@@ -1,7 +1,8 @@
 # Paneles Grafana Cloud — ejecución pendiente
 
-La integración está preparada para el Stack ID `1889948`, pero los enlaces se
-generan únicamente después de una reejecución real. Desde la raíz del
+La integración está preparada para el Stack ID `1889948` y para descubrir su
+proyecto predeterminado, pero los enlaces se generan únicamente después de una
+reejecución real. Desde la raíz del
 repositorio, con Docker Desktop abierto y el árbol Git limpio:
 
 ```powershell
