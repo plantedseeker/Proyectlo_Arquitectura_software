@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
 
   k6:
-    image: grafana/k6:0.54.0
+    image: ${K6_IMAGE:-grafana/k6:0.54.0}
     profiles: ["load"]
     environment:
       BASE_URL: http://api:8080

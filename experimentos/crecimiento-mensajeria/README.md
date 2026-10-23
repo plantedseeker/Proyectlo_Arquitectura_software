@@ -25,6 +25,27 @@ verifica la semilla, ejecuta los cinco escalones y crea un directorio fechado
 bajo `resultados/`. Una salida 99 de k6 por incumplimiento de umbral se conserva
 como resultado experimental y no detiene los escalones restantes.
 
+### Panel complementario en Grafana Cloud
+
+Para repetir los mismos cinco escalones localmente y transmitir sus métricas a
+Grafana Cloud, ejecutar:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\run-messaging-growth.ps1 -GrafanaCloud
+```
+
+El runner solicita el Personal API token de forma oculta, usa el Stack ID
+`1889948` y no escribe la credencial en archivos ni en Git. El modo cloud está
+desactivado por defecto porque consume la cuota de la cuenta. Fija
+`grafana/k6:2.2.0` para disponer del protocolo actual de selección de stack;
+la ejecución oficial histórica permanece identificada con
+`grafana/k6:0.54.0` y no se reinterpreta retroactivamente.
+
+Al terminar se generan `grafana-cloud-runs.json` junto con los nuevos
+resultados locales y un [índice estable de paneles](grafana-cloud/README.md).
+Los paneles son evidencia visual complementaria: los JSON, logs, contexto y
+huellas SHA-256 locales siguen siendo la evidencia primaria reproducible.
+
 No se debe editar manualmente un resultado primario. Cualquier exclusión o
 repetición se documenta en el análisis con su causa.
 
