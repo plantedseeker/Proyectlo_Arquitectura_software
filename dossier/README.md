@@ -91,3 +91,14 @@ fabrican autores, revisiones ni veredictos.
   — fuente del diagrama de límites de confianza.
 - [`../docs/security/auditoria-amenazas-ia-s13.md`](../docs/security/auditoria-amenazas-ia-s13.md)
   — amenazas propuestas, aceptadas, modificadas y descartadas.
+
+
+## Semanas 13–14
+
+- [`21-checklist-semanas-13-14.md`](21-checklist-semanas-13-14.md) — estado verificable.
+- [`22-resumen-ejecutivo-s13-s14.md`](22-resumen-ejecutivo-s13-s14.md) — recorrido de exposición y defensa.
+- [`12-despliegue-observabilidad.md`](12-despliegue-observabilidad.md) — evidencia principal S14.
+- [`../docs/adr/ADR-005-despliegue-observabilidad.md`](../docs/adr/ADR-005-despliegue-observabilidad.md) — decisión S14.
+- [`../docs/adr/ADR-006-paginacion-historial-mensajes.md`](../docs/adr/ADR-006-paginacion-historial-mensajes.md) — paginación histórica renumerada.
+- [`../docs/architecture/matriz-riesgos-operativos-s14.md`](../docs/architecture/matriz-riesgos-operativos-s14.md) — riesgos operativos.
+- [`../docs/architecture/evidencia-fitness-ci-s14.md`](../docs/architecture/evidencia-fitness-ci-s14.md) — demostración CI rojo/verde.
