@@ -27,7 +27,7 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | Capturas del recorrido S10 | `../experimentos/spike-01-integracion/evidencias/` |
 | ADR-003 de integración | `../docs/adr/ADR-003-integracion-contextos.md` |
 | ADR-004 de distribución S12 | `../docs/adr/ADR-004-distribucion-mensajeria.md` |
-| ADR-005 de paginación | `../docs/adr/ADR-005-paginacion-historial-mensajes.md` |
+| ADR-006 de paginación | `../docs/adr/ADR-006-paginacion-historial-mensajes.md` |
 | Experimento de crecimiento S11 | `../experimentos/crecimiento-mensajeria/` |
 | Capturas y datos de la exposición | `evidencias-exposicion/` |
 | Matriz detallada de trazabilidad C4 | `MATRIZ-TRAZABILIDAD-C4.md` |
