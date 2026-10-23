@@ -238,3 +238,24 @@ Artefactos principales:
 El análisis distingue controles ya implementados de controles requeridos antes
 de un despliegue público. No afirma seguridad de producción para la topología
 local actual.
+
+
+## Seguridad, despliegue y observabilidad (S13–S14)
+
+El recorrido principal está en
+[`dossier/22-resumen-ejecutivo-s13-s14.md`](dossier/22-resumen-ejecutivo-s13-s14.md)
+y el estado requisito por requisito en
+[`dossier/21-checklist-semanas-13-14.md`](dossier/21-checklist-semanas-13-14.md).
+
+Evidencias principales:
+
+- [seguridad S13](dossier/10-seguridad.md);
+- [despliegue y observabilidad S14](dossier/12-despliegue-observabilidad.md);
+- [matriz de riesgos operativos](docs/architecture/matriz-riesgos-operativos-s14.md);
+- [ADR-005](docs/adr/ADR-005-despliegue-observabilidad.md);
+- [ADR-006 de paginación](docs/adr/ADR-006-paginacion-historial-mensajes.md);
+- [evidencia de fitness function en CI](docs/architecture/evidencia-fitness-ci-s14.md).
+
+S13 usa OWASP Top 10:2025 como referencia y filtra amenazas contra el sistema
+real. S14 mantiene el monolito modular, compara un despliegue administrado
+mínimo con una alternativa redundante y define métricas, logs, trazas y alertas.
