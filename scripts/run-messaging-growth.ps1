@@ -386,6 +386,10 @@ foreach ($level in $levels) {
                     '-e', "K6_CLOUD_PROJECT_ID=$GrafanaCloudProjectId",
                     '-e', "K6_CLOUD_NAME=$cloudName",
                     'k6', 'cloud', 'run', '--local-execution', '--no-archive-upload',
+                    '--env', "LOAD_LEVEL=$level",
+                    '--env', "ITERATIONS_PER_VU=$iterationsPerVu",
+                    '--env', "RUN_NUMBER=$run",
+                    '--env', "SUMMARY_PATH=$summaryPath",
                     '/growth/carga-crecimiento.js'
                 )
             }
