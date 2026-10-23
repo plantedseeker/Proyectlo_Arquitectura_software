@@ -1,0 +1,41 @@
+@startuml
+title UTrabajo — Despliegue conceptual S14
+skinparam shadowing false
+
+actor "Usuario" as U
+node "Android" as A
+cloud "DNS / TLS
+Reverse proxy" as Edge
+node "Spring Boot API
+Monolito modular" as API
+database "PostgreSQL
+administrado" as DB
+cloud "Object storage
+privado" as OS
+cloud "Observabilidad
+metrics/logs/traces/alerts" as Obs
+cloud "Secret manager" as Secrets
+
+U --> A
+A --> Edge : HTTPS
+Edge --> API : HTTPS
+Secrets --> API : secrets
+API --> DB : JDBC/TLS
+API --> OS : archivos privados
+API --> Obs : telemetry
+DB --> Obs : health/metrics
+Edge --> Obs : access/edge metrics
+
+note bottom of API
+Alternativa A:
+1 instancia API
+Costo relativo 1 D0
+end note
+
+note right of Edge
+Alternativa B:
+agrega load balancer
++ >=2 réplicas API
+Costo relativo 2–3 D0
+end note
+@enduml
