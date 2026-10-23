@@ -488,6 +488,7 @@ if ($GrafanaCloud) {
         "- Cobertura cloud: escalones de hasta ``$GrafanaCloudMaxVus VU``; los superiores conservan evidencia local completa",
         "- Resultado local: [``$relativeOutput``](../resultados/$timestamp/resultado.json)",
         "- Indice estructurado: [``grafana-cloud-runs.json``](../resultados/$timestamp/grafana-cloud-runs.json)",
+        '- Capturas versionadas: [``evidencias-ejecucion``](../evidencias-ejecucion/README.md)',
         '',
         '> Esta es una reejecucion complementaria para visualizacion. Los resultados primarios aprobados siguen siendo los JSON locales de 20261016T224331Z.',
         '',

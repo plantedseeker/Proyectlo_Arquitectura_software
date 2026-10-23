@@ -1,0 +1,59 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: /growth/carga-crecimiento.js
+        output: cloud (https://noblebat466.grafana.net/a/k6-app/runs/8872853)
+
+     scenarios: (100.00%) 1 scenario, 50 max VUs, 2m30s max duration (incl. graceful stop):
+              * latest_messages_growth: 200 iterations shared among 50 VUs (maxDuration: 2m0s, gracefulStop: 30s)
+
+{
+  "schema_version": 1,
+  "run": 3,
+  "discarded": false,
+  "captured_at_utc": "2026-10-23T22:00:18.531Z",
+  "tool": "k6",
+  "scenario": "latest_messages_growth",
+  "load_level_vus": 50,
+  "iterations_per_vu": 4,
+  "expected_requests": 200,
+  "requests": 200,
+  "throughput_rps": 785.2406605183736,
+  "checks_rate": 1,
+  "failed_request_rate": 0,
+  "valid_page_rate": 1,
+  "latency_ms": {
+    "min": 2.078718,
+    "mean": 6.699752099999999,
+    "p50": 5.467915,
+    "p90": 12.311405899999999,
+    "p95": 13.761202149999997,
+    "p99": 16.909106229999995,
+    "max": 19.507313
+  },
+  "iteration_duration_ms": {
+    "mean": 8.733841299999996,
+    "p95": 17.589465549999996,
+    "max": 19.903747
+  },
+  "response_status_counts": {
+    "200": 200,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "429": 0,
+    "5xx": 0,
+    "other": 0
+  },
+  "integrity_valid": true,
+  "thresholds_passed": true
+}
+
+running (0m00.3s), 00/50 VUs, 200 complete and 0 interrupted iterations
+latest_messages_growth ✓ [ 100% ] 50 VUs  0m00.0s/2m0s  200/200 shared iters

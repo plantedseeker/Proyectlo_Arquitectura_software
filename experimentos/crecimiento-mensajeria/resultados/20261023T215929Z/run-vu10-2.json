@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "run": 2,
+  "discarded": false,
+  "captured_at_utc": "2026-10-23T21:59:42.645Z",
+  "tool": "k6",
+  "scenario": "latest_messages_growth",
+  "load_level_vus": 10,
+  "iterations_per_vu": 4,
+  "expected_requests": 40,
+  "requests": 40,
+  "throughput_rps": 181.61267304492492,
+  "checks_rate": 1,
+  "failed_request_rate": 0,
+  "valid_page_rate": 1,
+  "latency_ms": {
+    "min": 1.471189,
+    "mean": 2.281468475000001,
+    "p50": 2.112121,
+    "p90": 3.2490636999999998,
+    "p95": 3.6899380999999996,
+    "p99": 3.8259808399999997,
+    "max": 3.862424
+  },
+  "iteration_duration_ms": {
+    "mean": 2.9363825,
+    "p95": 5.552624349999999,
+    "max": 5.894104
+  },
+  "response_status_counts": {
+    "200": 40,
+    "401": 0,
+    "403": 0,
+    "404": 0,
+    "429": 0,
+    "5xx": 0,
+    "other": 0
+  },
+  "integrity_valid": true,
+  "thresholds_passed": true
+}
