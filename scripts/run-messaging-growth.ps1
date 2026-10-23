@@ -357,6 +357,12 @@ foreach ($level in $levels) {
         $expected = $level * $iterationsPerVu
         Write-Host "VU $level - corrida $run/$runs - $expected solicitudes"
         $summaryPath = "/growth/resultados/$timestamp/run-vu$level-$run.json"
+        $expectedSummaryPath = Join-Path $outputDir "run-vu$level-$run.json"
+        $flattenedSummaryPath = Join-Path $projectRoot `
+            "experimentos\crecimiento-mensajeria\resultados\run-vu$level-$run.json"
+        if ($GrafanaCloud -and (Test-Path -LiteralPath $flattenedSummaryPath)) {
+            throw "Existe un resumen cloud suelto de una ejecucion anterior: $flattenedSummaryPath"
+        }
         $stdoutPath = Join-Path $outputDir "run-vu$level-$run.stdout.log"
         $stderrPath = Join-Path $outputDir "run-vu$level-$run.stderr.log"
         $telemetryPath = Join-Path $outputDir "telemetry-vu$level-$run.jsonl"
@@ -400,7 +406,17 @@ foreach ($level in $levels) {
         if ($exitCode -ne 0 -and $exitCode -ne 99) {
             throw "k6 termino con codigo inesperado $exitCode en VU $level, corrida $run."
         }
-        if (-not (Test-Path -LiteralPath (Join-Path $outputDir "run-vu$level-$run.json"))) {
+        # k6 2.x con `cloud run --local-execution` puede restringir la ruta
+        # devuelta por handleSummary al directorio montado y conservar solo el
+        # nombre del archivo. Normalizamos esa salida al directorio fechado.
+        if (
+            $GrafanaCloud -and
+            -not (Test-Path -LiteralPath $expectedSummaryPath) -and
+            (Test-Path -LiteralPath $flattenedSummaryPath)
+        ) {
+            Move-Item -LiteralPath $flattenedSummaryPath -Destination $expectedSummaryPath
+        }
+        if (-not (Test-Path -LiteralPath $expectedSummaryPath)) {
             throw "k6 no creo el resumen esperado para VU $level, corrida $run."
         }
         if ($GrafanaCloud) {
