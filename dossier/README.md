@@ -20,6 +20,7 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | **Resumen ejecutivo Módulo 5** | **`18-resumen-ejecutivo-modulo-5.md`** |
 | **Resumen ejecutivo S11–S12** | **`19-resumen-ejecutivo-s11-s12.md`** |
 | **Checklist S11–S12** | **`20-checklist-semanas-11-12.md`** |
+| **Tarea 2 — Uso crítico del Tutor Módulo 6 (A1–A6)** | **`23-tarea-2-uso-critico-tutor-modulo-6.md`** |
 | Modelo de dominio M5 | `../docs/dominio/` |
 | Contratos e integración M5 | `../docs/integracion/` |
 | Spike 1 M5 | `../experimentos/spike-01-integracion/` |
