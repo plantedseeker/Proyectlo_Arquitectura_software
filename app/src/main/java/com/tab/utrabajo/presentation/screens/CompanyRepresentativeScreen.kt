@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -65,7 +66,7 @@ fun CompanyRepresentativeScreen(navController: NavHostController) {
             )
         }
 
-        Text(instruction, color = Color(0xFF2F90D9))
+        Text(instruction, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(8.dp))
 
         OutlinedTextField(
@@ -97,7 +98,7 @@ fun CompanyRepresentativeScreen(navController: NavHostController) {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text(uploadDocText, color = Color(0xFF2F90D9))
+        Text(uploadDocText, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(12.dp))
 
         SingleDocumentUploadField(

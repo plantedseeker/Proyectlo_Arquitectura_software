@@ -11,10 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +31,8 @@ import androidx.navigation.NavHostController
 import com.tab.utrabajo.data.UTrabajoRepository
 import com.tab.utrabajo.R
 import com.tab.utrabajo.presentation.navigation.Screen
+import com.tab.utrabajo.presentation.components.MainTab
+import com.tab.utrabajo.presentation.components.UTrabajoBottomBar
 import java.util.*
 
 @Composable
@@ -39,11 +41,6 @@ fun ProfileScreen(navController: NavHostController? = null) {
     val repository = remember { UTrabajoRepository.getInstance() }
 
     // Recursos de texto
-    val bottomPerfil = stringResource(R.string.bottom_perfil_label)
-    val bottomChat = stringResource(R.string.bottom_chat_label)
-    val bottomHome = stringResource(R.string.bottom_home_label)
-    val bottomNotifications = stringResource(R.string.bottom_notifications_label)
-    val bottomEmpleo = stringResource(R.string.bottom_empleo_label)
 
     val profileTitle = stringResource(R.string.profile_title)
     val avatarDesc = stringResource(R.string.profile_avatar_desc)
@@ -228,99 +225,13 @@ fun ProfileScreen(navController: NavHostController? = null) {
     }
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         bottomBar = {
-            NavigationBar(
-                containerColor = Color.White,
-                modifier = Modifier.height(70.dp)
-            ) {
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Person,
-                            contentDescription = bottomPerfil,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            bottomPerfil,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = true,
-                    onClick = { }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.AutoMirrored.Filled.Chat,
-                            contentDescription = bottomChat,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            bottomChat,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { /* TODO: Navegar a Chat */ }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Home,
-                            contentDescription = bottomHome,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            bottomHome,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { navController?.popBackStack() }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Notifications,
-                            contentDescription = bottomNotifications,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            bottomNotifications,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { /* TODO: Navegar a Notificaciones */ }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Work,
-                            contentDescription = bottomEmpleo,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            bottomEmpleo,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { navController?.navigate(Screen.JobsList.route) }
+            navController?.let {
+                UTrabajoBottomBar(
+                    navController = it,
+                    selected = MainTab.Profile,
+                    companyMode = currentUser?.role == "company"
                 )
             }
         }
@@ -329,7 +240,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.background)
         ) {
             // Header con título
             Column(
@@ -342,7 +253,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     fontSize = 24.sp,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -379,7 +290,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                             Icon(
                                 Icons.Default.Person,
                                 contentDescription = avatarDesc,
-                                tint = Color.Gray,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.size(40.dp)
                             )
                         }
@@ -392,14 +303,14 @@ fun ProfileScreen(navController: NavHostController? = null) {
                             .offset(x = (-6).dp, y = (-6).dp)
                             .size(36.dp)
                             .clip(CircleShape)
-                            .background(Color.White)
+                            .background(MaterialTheme.colorScheme.background)
                             .clickable { avatarPicker.launch("image/*") },
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             Icons.Default.Edit,
                             contentDescription = avatarEditDesc,
-                            tint = Color(0xFF2F90D9)
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
@@ -416,7 +327,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                     Spacer(Modifier.height(4.dp))
                     Text(
                         text = profession,
-                        color = Color(0xFF2F90D9),
+                        color = MaterialTheme.colorScheme.primary,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium
                     )
@@ -424,7 +335,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
 
                 Text(
                     text = email,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 14.sp
                 )
 
@@ -442,7 +353,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                             .fillMaxWidth()
                             .height(48.dp),
                         shape = RoundedCornerShape(24.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2F90D9))
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                     ) {
                         Icon(Icons.Default.Edit, contentDescription = "Editar", modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(8.dp))
@@ -454,7 +365,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                 // Información de contacto
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
@@ -463,7 +374,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                             "Información de Contacto",
                             fontWeight = FontWeight.Bold,
                             fontSize = 18.sp,
-                            color = Color(0xFF2F90D9),
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(bottom = 16.dp)
                         )
 
@@ -476,7 +387,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                                 Icon(
                                     Icons.Default.Phone,
                                     contentDescription = "Teléfono",
-                                    tint = Color(0xFF2F90D9),
+                                    tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(20.dp)
                                 )
                                 Spacer(Modifier.width(12.dp))
@@ -519,7 +430,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                                 Icon(
                                     Icons.Default.LocationOn,
                                     contentDescription = "Dirección",
-                                    tint = Color(0xFF2F90D9),
+                                    tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(20.dp)
                                 )
                                 Spacer(Modifier.width(12.dp))
@@ -565,7 +476,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                                     enabled = !isLoading,
                                     modifier = Modifier.weight(1f),
                                     shape = RoundedCornerShape(12.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2F90D9))
+                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                                 ) {
                                     if (isLoading) {
                                         CircularProgressIndicator(
@@ -608,7 +519,7 @@ fun ProfileScreen(navController: NavHostController? = null) {
                         .fillMaxWidth()
                         .height(48.dp),
                     shape = RoundedCornerShape(24.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2F90D9))
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                 ) {
                     Icon(Icons.Default.Upload, contentDescription = "Subir", modifier = Modifier.size(20.dp))
                     Spacer(Modifier.width(8.dp))
@@ -619,9 +530,9 @@ fun ProfileScreen(navController: NavHostController? = null) {
 
                 // Estado del CV
                 if (cvUrl != null) {
-                    Text(text = cvLoadedText, color = Color(0xFF2F90D9), fontWeight = FontWeight.Medium)
+                    Text(text = cvLoadedText, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Medium)
                 } else {
-                    Text(text = cvNotLoadedText, color = Color.Gray)
+                    Text(text = cvNotLoadedText, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
 
                 message?.let {

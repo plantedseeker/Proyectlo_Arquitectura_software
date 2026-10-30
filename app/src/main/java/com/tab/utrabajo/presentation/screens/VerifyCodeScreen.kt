@@ -12,6 +12,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -70,7 +71,7 @@ fun VerifyCodeScreen(navController: NavHostController) {
 
         Text(
             instruction,
-            color = Color(0xFF2F90D9),
+            color = MaterialTheme.colorScheme.primary,
             fontSize = 16.sp
         )
 
@@ -121,7 +122,7 @@ fun VerifyCodeScreen(navController: NavHostController) {
 
         Text(
             expireNote,
-            color = Color(0xFF2F90D9),
+            color = MaterialTheme.colorScheme.primary,
             fontSize = 14.sp
         )
     }

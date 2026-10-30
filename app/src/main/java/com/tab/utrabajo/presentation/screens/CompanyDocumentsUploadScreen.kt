@@ -6,6 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -62,12 +63,12 @@ fun CompanyDocumentsUploadScreen(navController: NavHostController) {
 
         Text(
             instructionText,
-            color = Color(0xFF2F90D9),
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Medium
         )
         Spacer(Modifier.height(16.dp))
 
-        Text(uploadRutText, color = Color(0xFF2F90D9))
+        Text(uploadRutText, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(8.dp))
 
         SingleDocumentUploadField(
@@ -77,7 +78,7 @@ fun CompanyDocumentsUploadScreen(navController: NavHostController) {
         )
 
         Spacer(Modifier.height(16.dp))
-        Text(uploadCamaraText, color = Color(0xFF2F90D9))
+        Text(uploadCamaraText, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(8.dp))
 
         SingleDocumentUploadField(

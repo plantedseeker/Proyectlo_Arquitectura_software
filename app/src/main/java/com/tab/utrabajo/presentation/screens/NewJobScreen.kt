@@ -12,6 +12,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Work
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,7 +62,7 @@ fun EmpleoScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(color = Color(0xFFE9F3F8))
+                .background(color = MaterialTheme.colorScheme.background)
         ) {
             Box(
                 modifier = Modifier
@@ -75,7 +76,7 @@ fun EmpleoScreen(navController: NavHostController) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = backDesc,
-                        tint = Color(0xFF2B7BBF)
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
 
@@ -83,7 +84,7 @@ fun EmpleoScreen(navController: NavHostController) {
                     modifier = Modifier
                         .align(Alignment.Center)
                         .shadow(6.dp, RoundedCornerShape(24.dp))
-                        .background(Color(0xFF2B7BBF), shape = RoundedCornerShape(24.dp))
+                        .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(24.dp))
                         .clickable {
                             navController.navigate("create_job")
                         }
@@ -147,7 +148,7 @@ private fun JobCard(job: Job, onClick: () -> Unit) {
                 Box(
                     modifier = Modifier
                         .size(34.dp)
-                        .background(Color(0xFF2B7BBF), shape = RoundedCornerShape(6.dp)),
+                        .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(6.dp)),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
