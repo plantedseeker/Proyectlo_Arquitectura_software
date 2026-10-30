@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,7 +27,7 @@ fun CompanyAvatarField(enabled: Boolean = true) {
         Box(
             modifier = Modifier
                 .size(120.dp)
-                .background(Color(0xFFDCEAF6), shape = CircleShape)
+                .background(MaterialTheme.colorScheme.primaryContainer, shape = CircleShape)
                 .clickable(enabled = enabled) {
                     selectedResId = if (selectedResId == android.R.drawable.ic_menu_camera)
                         android.R.drawable.ic_menu_gallery
@@ -59,17 +61,17 @@ fun SingleDocumentUploadField(label: String, selectedFileUri: Uri?, onFileSelect
             modifier = Modifier
                 .fillMaxWidth()
                 .height(140.dp)
-                .background(Color(0xFFEAF4FB), shape = RoundedCornerShape(8.dp))
+                .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f), shape = RoundedCornerShape(18.dp))
                 .clickable { onFileSelected() },
             contentAlignment = Alignment.Center
         ) {
             if (selectedFileUri != null) {
-                Text(text = "Documento seleccionado", color = Color(0xFF2F90D9), fontWeight = FontWeight.Medium)
+                Text(text = "Documento seleccionado", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Medium)
             } else {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(painter = painterResource(id = android.R.drawable.ic_menu_upload), contentDescription = "subir documento")
                     Spacer(Modifier.height(6.dp))
-                    Text(label, color = Color(0xFF2F90D9))
+                    Text(label, color = MaterialTheme.colorScheme.primary)
                 }
             }
         }

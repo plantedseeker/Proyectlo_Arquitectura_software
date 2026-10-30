@@ -2,6 +2,7 @@ package com.tab.utrabajo.presentation.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +54,7 @@ fun StudentWorkInfoScreen(navController: NavHostController) {
 
         Text(
             title,
-            color = Color(0xFF2F90D9),
+            color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Medium
         )
         Spacer(Modifier.height(8.dp))
@@ -62,26 +63,26 @@ fun StudentWorkInfoScreen(navController: NavHostController) {
             RadioButton(
                 selected = worksNowState,
                 onClick = { if (!isLoading) worksNowState = true },
-                colors = RadioButtonDefaults.colors(selectedColor = Color(0xFF2F90D9)),
+                colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary),
                 enabled = !isLoading
             )
             Spacer(Modifier.size(8.dp))
-            Text(yesLabel, color = Color(0xFF2F90D9))
+            Text(yesLabel, color = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.size(16.dp))
             RadioButton(
                 selected = !worksNowState,
                 onClick = { if (!isLoading) worksNowState = false },
-                colors = RadioButtonDefaults.colors(selectedColor = Color(0xFF2F90D9)),
+                colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary),
                 enabled = !isLoading
             )
             Spacer(Modifier.size(8.dp))
-            Text(noLabel, color = Color(0xFF2F90D9))
+            Text(noLabel, color = MaterialTheme.colorScheme.primary)
         }
 
         Spacer(Modifier.height(18.dp))
 
         if (worksNowState) {
-            Text(companyLabel, color = Color(0xFF2F90D9))
+            Text(companyLabel, color = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.height(6.dp))
             OutlinedTextField(
                 value = companyName,
@@ -91,7 +92,7 @@ fun StudentWorkInfoScreen(navController: NavHostController) {
                 enabled = !isLoading
             )
             Spacer(Modifier.height(12.dp))
-            Text(roleLabel, color = Color(0xFF2F90D9))
+            Text(roleLabel, color = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.height(6.dp))
             OutlinedTextField(
                 value = role,

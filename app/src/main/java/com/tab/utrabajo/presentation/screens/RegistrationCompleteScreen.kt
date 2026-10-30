@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import com.tab.utrabajo.presentation.navigation.Screen
 import com.tab.utrabajo.R
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 
 @Composable
 fun RegistrationCompleteScreen(navController: NavHostController) {
@@ -27,7 +28,7 @@ fun RegistrationCompleteScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(message, color = Color(0xFF2F90D9))
+            Text(message, color = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.height(24.dp))
             Button(
                 onClick = { navController.navigate(Screen.Splash.route) },
@@ -35,14 +36,14 @@ fun RegistrationCompleteScreen(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2F90D9))
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Text(finishButton, color = Color.White)
             }
             Spacer(Modifier.height(24.dp))
             Text(
                 note,
-                color = Color(0xFF2F90D9),
+                color = MaterialTheme.colorScheme.primary,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )
         }

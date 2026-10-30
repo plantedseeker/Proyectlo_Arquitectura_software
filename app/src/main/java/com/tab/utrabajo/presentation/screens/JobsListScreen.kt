@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -34,6 +33,12 @@ import com.tab.utrabajo.R
 import com.tab.utrabajo.data.Cancellable
 import com.tab.utrabajo.data.UTrabajoRepository
 import com.tab.utrabajo.presentation.navigation.Screen
+import com.tab.utrabajo.presentation.components.MainTab
+import com.tab.utrabajo.presentation.components.UTrabajoBottomBar
+import com.tab.utrabajo.presentation.components.UTrabajoPageHeader
+import com.tab.utrabajo.presentation.components.UTrabajoEmptyState
+import com.tab.utrabajo.presentation.components.UTrabajoLoadingState
+import com.tab.utrabajo.presentation.components.UTrabajoErrorBanner
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -44,22 +49,9 @@ fun JobsListScreen(navController: NavHostController) {
     var query by remember { mutableStateOf("") }
     var jobList by remember { mutableStateOf<List<JobItemData>>(emptyList()) }
     var isLoading by remember { mutableStateOf(true) }
+    var loadError by remember { mutableStateOf<String?>(null) }
 
     // Recursos
-    val perfilLabel = stringResource(R.string.bottom_perfil_label)
-    val perfilDesc = stringResource(R.string.bottom_perfil_desc)
-
-    val chatLabel = stringResource(R.string.bottom_chat_label)
-    val chatDesc = stringResource(R.string.bottom_chat_desc)
-
-    val homeLabel = stringResource(R.string.bottom_home_label)
-    val homeDesc = stringResource(R.string.bottom_home_desc)
-
-    val notificationsLabel = stringResource(R.string.bottom_notifications_label)
-    val notificationsDesc = stringResource(R.string.bottom_notifications_desc)
-
-    val empleoLabel = stringResource(R.string.bottom_empleo_label)
-    val empleoDesc = stringResource(R.string.bottom_empleo_desc)
 
     val headerTitle = stringResource(R.string.jobslist_header_title)
     val headerSubtitle = stringResource(R.string.jobslist_header_subtitle)
@@ -104,10 +96,12 @@ fun JobsListScreen(navController: NavHostController) {
                 }
                 jobList = mapped
                 isLoading = false
+                loadError = null
             },
-            onError = {
+            onError = { error ->
                 jobList = emptyList()
                 isLoading = false
+                loadError = error
             }
         )
 
@@ -119,141 +113,22 @@ fun JobsListScreen(navController: NavHostController) {
     }
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         bottomBar = {
-            NavigationBar(
-                containerColor = Color.White,
-                modifier = Modifier.height(70.dp)
-            ) {
-                // Perfil
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Person,
-                            contentDescription = perfilDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            perfilLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { navController.navigate(Screen.Profile.route) }
-                )
-
-                // Chat
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.AutoMirrored.Filled.Chat,
-                            contentDescription = chatDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            chatLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { navController.navigate(Screen.ChatList.route) }
-                )
-
-                // Home
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Home,
-                            contentDescription = homeDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            homeLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = {
-                        navController.navigate(Screen.JobsList.route) {
-                            popUpTo(Screen.JobsList.route) { inclusive = true }
-                        }
-                    }
-                )
-
-                // Notificaciones
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Notifications,
-                            contentDescription = notificationsDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            notificationsLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { /* TODO: Navegar a Notificaciones */ }
-                )
-
-                // Empleo
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Work,
-                            contentDescription = empleoDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            empleoLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = true,
-                    onClick = { navController.navigate("applications_screen") }
-                )
-            }
+            UTrabajoBottomBar(navController, selected = MainTab.Home)
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(color = Color(0xFFE9F3F8))
+                .background(MaterialTheme.colorScheme.background)
         ) {
-            // Header
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp)
-            ) {
-                Text(
-                    text = headerTitle,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    color = Color.Black
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = headerSubtitle,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontSize = 14.sp,
-                    color = Color.Gray
-                )
-            }
+            UTrabajoPageHeader(
+                title = headerTitle,
+                subtitle = headerSubtitle,
+                eyebrow = "Oportunidades para ti"
+            )
 
             // Barra de búsqueda
             Column(
@@ -274,14 +149,12 @@ fun JobsListScreen(navController: NavHostController) {
 
             // Loading o lista
             if (isLoading) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp, vertical = 6.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(color = Color(0xFF2B7BBF))
-                }
+                UTrabajoLoadingState(modifier = Modifier.fillMaxSize())
+            } else if (loadError != null) {
+                UTrabajoErrorBanner(
+                    message = loadError.orEmpty(),
+                    modifier = Modifier.padding(horizontal = 24.dp)
+                )
             } else {
                 val filtered = jobList.filter {
                     it.position.contains(query, ignoreCase = true) ||
@@ -297,18 +170,11 @@ fun JobsListScreen(navController: NavHostController) {
                 ) {
                     if (filtered.isEmpty()) {
                         item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(120.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = "No hay empleos disponibles",
-                                    color = Color.Gray,
-                                    fontSize = 14.sp
-                                )
-                            }
+                            UTrabajoEmptyState(
+                                title = if (query.isBlank()) "No hay empleos disponibles" else "No encontramos coincidencias",
+                                subtitle = if (query.isBlank()) "Vuelve pronto para descubrir nuevas oportunidades." else "Prueba con otro cargo o rango salarial.",
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
                     } else {
                         items(items = filtered, key = { it.id }) { job ->
@@ -364,7 +230,7 @@ private fun JobCardForList(
                 onClick()
                 showDescriptionDialog = true
             },
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
@@ -377,13 +243,13 @@ private fun JobCardForList(
             Box(
                 modifier = Modifier
                     .size(52.dp)
-                    .background(Color(0xFFF2F8FB), shape = CircleShape),
+                    .background(MaterialTheme.colorScheme.primaryContainer, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Box(
                     modifier = Modifier
                         .size(34.dp)
-                        .background(Color(0xFF2B7BBF), shape = RoundedCornerShape(6.dp)),
+                        .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(10.dp)),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
@@ -407,7 +273,7 @@ private fun JobCardForList(
                     text = job.position,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
-                    color = Color(0xFF1E88E5),
+                    color = MaterialTheme.colorScheme.primary,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -416,7 +282,7 @@ private fun JobCardForList(
                     text = job.salary,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium,
-                    color = Color(0xFF2E7D32),
+                    color = MaterialTheme.colorScheme.secondary,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -503,7 +369,7 @@ private fun JobCardForList(
                             text = job.position,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF1E88E5),
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.weight(1f)
                         )
                         IconButton(onClick = {
@@ -528,13 +394,13 @@ private fun JobCardForList(
                         Text(
                             text = "Descripción",
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.Gray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
                             text = job.description.ifBlank { "Descripción no disponible" },
                             style = MaterialTheme.typography.bodyMedium,
-                            color = Color.DarkGray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
 
@@ -548,7 +414,7 @@ private fun JobCardForList(
                             text = job.salary,
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium,
-                            color = Color(0xFF2E7D32),
+                            color = MaterialTheme.colorScheme.secondary,
                             modifier = Modifier.weight(1f)
                         )
 
@@ -596,7 +462,7 @@ private fun JobCardForList(
                                     showMessage = true
                                 }
                             },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2B7BBF))
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                         ) {
                             Text(text = stringResource(R.string.apply_button))
                         }
@@ -619,7 +485,7 @@ private fun JobCardForList(
             contentAlignment = Alignment.BottomCenter
         ) {
             Snackbar(
-                containerColor = Color(0xFF2B7BBF),
+                containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = Color.White,
                 shape = RoundedCornerShape(12.dp)
             ) {

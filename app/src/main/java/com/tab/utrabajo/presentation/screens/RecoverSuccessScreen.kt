@@ -2,6 +2,7 @@ package com.tab.utrabajo.presentation.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
@@ -25,7 +26,7 @@ fun RecoverSuccessScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(message, color = Color(0xFF2F90D9))
+            Text(message, color = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.height(40.dp))
             Button(
                 onClick = { navController.navigate(Screen.Login.route) },
@@ -33,7 +34,7 @@ fun RecoverSuccessScreen(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2F90D9))
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Text(buttonLabel, color = Color.White)
             }

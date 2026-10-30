@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,7 +33,7 @@ fun RecoverStartScreen(navController: NavHostController) {
 
         Text(
             instruction,
-            color = Color(0xFF2F90D9)
+            color = MaterialTheme.colorScheme.primary
         )
         Spacer(Modifier.height(12.dp))
 
@@ -55,7 +56,7 @@ fun RecoverStartScreen(navController: NavHostController) {
         Spacer(Modifier.height(24.dp))
         Text(
             noteText,
-            color = Color(0xFF2F90D9)
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }

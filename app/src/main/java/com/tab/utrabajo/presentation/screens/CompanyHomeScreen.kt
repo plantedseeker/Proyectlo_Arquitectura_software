@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -21,6 +20,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.tab.utrabajo.R
 import com.tab.utrabajo.data.UTrabajoRepository
+import com.tab.utrabajo.presentation.components.MainTab
+import com.tab.utrabajo.presentation.components.UTrabajoBottomBar
+import com.tab.utrabajo.presentation.components.UTrabajoPageHeader
+import com.tab.utrabajo.presentation.components.UTrabajoEmptyState
+import com.tab.utrabajo.presentation.components.UTrabajoErrorBanner
+import com.tab.utrabajo.presentation.components.UTrabajoLoadingState
 
 // Data class para ofertas de trabajo (ahora incluye description)
 data class JobOffer(
@@ -32,40 +37,18 @@ data class JobOffer(
 
 @Composable
 fun CompanyHomeScreen(navController: NavHostController) {
-    // Datos de ejemplo - se usarán sólo si no hay conexión inicial
     var jobOffers by remember { mutableStateOf<List<JobOffer>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(true) }
+    var loadError by remember { mutableStateOf<String?>(null) }
     var showAddDialog by remember { mutableStateOf(false) }
     var editingJob by remember { mutableStateOf<JobOffer?>(null) }
 
     val context = LocalContext.current
     val repo = UTrabajoRepository.getInstance()
 
-    // Recursos de bottom bar / labels / descripciones
-    val perfilLabel = stringResource(R.string.bottom_perfil_label)
-    val perfilDesc = stringResource(R.string.bottom_perfil_desc)
-
-    val chatLabel = stringResource(R.string.bottom_chat_label)
-    val chatDesc = stringResource(R.string.bottom_chat_desc)
-
-    val homeLabel = stringResource(R.string.bottom_home_label)
-    val homeDesc = stringResource(R.string.bottom_home_desc)
-
-    val notificationsLabel = stringResource(R.string.bottom_notifications_label)
-    val notificationsDesc = stringResource(R.string.bottom_notifications_desc)
-
-    val empleoLabel = stringResource(R.string.bottom_empleo_label)
-    val empleoDesc = stringResource(R.string.bottom_empleo_desc)
-
     // Header
     val headerTitle = stringResource(R.string.company_header_title)
     val headerSubtitle = stringResource(R.string.company_header_subtitle)
-
-    // Datos de ejemplo para fallback (se mantuvieron)
-    val sampleOffers = listOf(
-        JobOffer("1", "Desarrollador Android", "$3,000,000", "Desarrollador con experiencia en Kotlin y Jetpack Compose."),
-        JobOffer("2", "Diseñador UX/UI", "$2,500,000", "Diseño de producto, Figma, prototipos."),
-        JobOffer("3", "Analista de Datos", "$3,200,000", "SQL, Python, visualización de datos.")
-    )
 
     // Actualización periódica desde la API para empleos activos
     DisposableEffect(Unit) {
@@ -85,10 +68,12 @@ fun CompanyHomeScreen(navController: NavHostController) {
                 )
             }
             jobOffers = mapped
+            isLoading = false
+            loadError = null
         }, onError = { err ->
-            // Si hay error, dejamos el sample para que no se vea vacío
-            jobOffers = sampleOffers
-            Toast.makeText(context, "Error cargando ofertas: $err", Toast.LENGTH_LONG).show()
+            jobOffers = emptyList()
+            isLoading = false
+            loadError = err
         })
 
         onDispose {
@@ -102,171 +87,68 @@ fun CompanyHomeScreen(navController: NavHostController) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { showAddDialog = true },
-                containerColor = Color(0xFF2B7BBF)
+                containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Agregar oferta")
             }
         },
         bottomBar = {
-            NavigationBar(
-                containerColor = Color.White,
-                modifier = Modifier.height(70.dp)
-            ) {
-                // Perfil
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Person,
-                            contentDescription = perfilDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            perfilLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { navController.navigate("profile") }
-                )
-
-                // Chat
-                // En el bottom bar del CompanyHomeScreen, CORREGIR el ítem de Chat:
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.AutoMirrored.Filled.Chat,
-                            contentDescription = chatDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            chatLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = {
-                        // Navegar a la pantalla de chats de empresa
-                        navController.navigate("company_chats")
-                    }
-                )
-
-                // Home
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Home,
-                            contentDescription = homeDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            homeLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = true,
-                    onClick = { }
-                )
-
-                // Notificaciones
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Notifications,
-                            contentDescription = notificationsDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            notificationsLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { /* TODO: Navegar a Notificaciones */ }
-                )
-
-                // Empleo
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Work,
-                            contentDescription = empleoDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = {
-                        Text(
-                            empleoLabel,
-                            fontSize = 12.sp
-                        )
-                    },
-                    selected = false,
-                    onClick = { navController.navigate("empleo") }
-                )
-            }
+            UTrabajoBottomBar(
+                navController = navController,
+                selected = MainTab.Home,
+                companyMode = true
+            )
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.background)
         ) {
-            // Header - EXACTAMENTE IGUAL
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp)
-            ) {
-                Text(
-                    text = headerTitle,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    color = Color.Black
+            UTrabajoPageHeader(
+                title = "Tus ofertas",
+                subtitle = "Administra las oportunidades publicadas por tu empresa.",
+                eyebrow = "Panel de empresa"
+            )
+
+            when {
+                isLoading -> UTrabajoLoadingState(modifier = Modifier.fillMaxSize())
+                loadError != null -> UTrabajoErrorBanner(
+                    message = loadError.orEmpty(),
+                    modifier = Modifier.padding(horizontal = 24.dp)
                 )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = headerSubtitle,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontSize = 14.sp,
-                    color = Color.Gray
+                jobOffers.isEmpty() -> UTrabajoEmptyState(
+                    title = "Aún no tienes ofertas publicadas",
+                    subtitle = "Usa el botón + para crear tu primera oportunidad.",
+                    modifier = Modifier.fillMaxWidth()
                 )
-            }
-
-            // Lista de ofertas de trabajo
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-            ) {
-                items(jobOffers) { offer ->
-                    JobOfferListItem(
-                        offer = offer,
-                        onEdit = { editingJob = offer },
-                        onDelete = {
-                            // Eliminar mediante la API local
-                            if (offer.id.isNotBlank()) {
-                                repo.deleteJobOffer(offer.id, onSuccess = {
-                                    Toast.makeText(context, "Oferta eliminada", Toast.LENGTH_SHORT).show()
-                                }, onError = { err ->
-                                    Toast.makeText(context, "Error al eliminar: $err", Toast.LENGTH_LONG).show()
-                                })
-                            } else {
-                                Toast.makeText(context, "ID inválido para eliminar", Toast.LENGTH_LONG).show()
+                else -> LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    contentPadding = PaddingValues(bottom = 24.dp)
+                ) {
+                    items(jobOffers, key = { it.id }) { offer ->
+                        JobOfferListItem(
+                            offer = offer,
+                            onEdit = { editingJob = offer },
+                            onDelete = {
+                                if (offer.id.isNotBlank()) {
+                                    repo.deleteJobOffer(
+                                        offer.id,
+                                        onSuccess = {
+                                            Toast.makeText(context, "Oferta eliminada", Toast.LENGTH_SHORT).show()
+                                        },
+                                        onError = { err ->
+                                            Toast.makeText(context, "Error al eliminar: $err", Toast.LENGTH_LONG).show()
+                                        }
+                                    )
+                                }
                             }
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
+                        )
+                    }
                 }
             }
         }
@@ -335,7 +217,7 @@ fun JobOfferListItem(
             .fillMaxWidth()
             .height(IntrinsicSize.Min),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = MaterialTheme.colorScheme.surface
         ),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 2.dp
@@ -366,7 +248,7 @@ fun JobOfferListItem(
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium,
                     fontSize = 16.sp,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -377,7 +259,7 @@ fun JobOfferListItem(
                         text = offer.description,
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 13.sp,
-                        color = Color.DarkGray,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 3
                     )
 
@@ -390,7 +272,7 @@ fun JobOfferListItem(
                         text = offer.salary,
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 14.sp,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -405,7 +287,7 @@ fun JobOfferListItem(
                     Icon(
                         Icons.Default.Edit,
                         contentDescription = "Editar oferta",
-                        tint = Color(0xFF2B7BBF)
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
 
@@ -415,7 +297,7 @@ fun JobOfferListItem(
                     Icon(
                         Icons.Default.Delete,
                         contentDescription = "Eliminar oferta",
-                        tint = Color(0xFFD32F2F)
+                        tint = MaterialTheme.colorScheme.error
                     )
                 }
             }

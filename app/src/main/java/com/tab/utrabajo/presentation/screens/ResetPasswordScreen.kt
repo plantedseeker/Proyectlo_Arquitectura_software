@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -57,7 +58,7 @@ fun ResetPasswordScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Top
     ) {
         Spacer(Modifier.height(8.dp))
-        Text(titleText, color = Color(0xFF2F90D9))
+        Text(titleText, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(8.dp))
 
         OutlinedTextField(
@@ -69,7 +70,7 @@ fun ResetPasswordScreen(navController: NavHostController) {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text(confirmPasswordLabel, color = Color(0xFF2F90D9))
+        Text(confirmPasswordLabel, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(8.dp))
 
         OutlinedTextField(
@@ -81,7 +82,7 @@ fun ResetPasswordScreen(navController: NavHostController) {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text(pwRequirementsTitle, color = Color(0xFF2F90D9))
+        Text(pwRequirementsTitle, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(6.dp))
         Text(pwReq1)
         Text(pwReq2)
@@ -116,7 +117,7 @@ fun ResetPasswordScreen(navController: NavHostController) {
         Spacer(Modifier.height(24.dp))
         Text(
             noteText,
-            color = Color(0xFF2F90D9),
+            color = MaterialTheme.colorScheme.primary,
             fontSize = 14.sp
         )
     }

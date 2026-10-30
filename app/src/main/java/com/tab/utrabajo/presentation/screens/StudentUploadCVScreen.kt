@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +54,7 @@ fun StudentUploadCVScreen(navController: NavHostController) {
         Text(
             text = titleText,
             fontSize = 20.sp,
-            color = Color(0xFF2F90D9)
+            color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(Modifier.height(12.dp))
@@ -114,7 +115,7 @@ fun StudentUploadCVScreen(navController: NavHostController) {
                 },
                 modifier = Modifier.fillMaxWidth(),
                 shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2F90D9)),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 enabled = !isLoading
             ) {
                 if (isLoading) {

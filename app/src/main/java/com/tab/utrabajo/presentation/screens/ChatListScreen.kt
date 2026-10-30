@@ -23,6 +23,10 @@ import androidx.navigation.NavHostController
 import com.tab.utrabajo.R
 import com.tab.utrabajo.data.UTrabajoRepository
 import com.tab.utrabajo.presentation.navigation.Screen
+import com.tab.utrabajo.presentation.components.MainTab
+import com.tab.utrabajo.presentation.components.UTrabajoBottomBar
+import com.tab.utrabajo.presentation.components.UTrabajoPageHeader
+import com.tab.utrabajo.presentation.components.UTrabajoErrorBanner
 
 
 @Composable
@@ -31,17 +35,7 @@ fun ChatListScreen(navController: NavHostController) {
     val currentUser = repository.getCurrentUser()
     var chats by remember { mutableStateOf<List<Map<String, Any>>>(emptyList()) }
     var isLoading by remember { mutableStateOf(true) }
-
-    val perfilLabel = stringResource(R.string.bottom_perfil_label)
-    val perfilDesc = stringResource(R.string.bottom_perfil_desc)
-    val chatLabel = stringResource(R.string.bottom_chat_label)
-    val chatDesc = stringResource(R.string.bottom_chat_desc)
-    val homeLabel = stringResource(R.string.bottom_home_label)
-    val homeDesc = stringResource(R.string.bottom_home_desc)
-    val notificationsLabel = stringResource(R.string.bottom_notifications_label)
-    val notificationsDesc = stringResource(R.string.bottom_notifications_desc)
-    val empleoLabel = stringResource(R.string.bottom_empleo_label)
-    val empleoDesc = stringResource(R.string.bottom_empleo_desc)
+    var loadError by remember { mutableStateOf<String?>(null) }
 
     DisposableEffect(Unit) {
         if (currentUser == null) {
@@ -52,10 +46,12 @@ fun ChatListScreen(navController: NavHostController) {
             onUpdate = {
                 chats = it.sortedByDescending { chat -> chat["lastMessageTime"]?.toString().orEmpty() }
                 isLoading = false
+                loadError = null
             },
-            onError = {
+            onError = { error ->
                 chats = emptyList()
                 isLoading = false
+                loadError = error
             },
         )
         onDispose {
@@ -65,111 +61,27 @@ fun ChatListScreen(navController: NavHostController) {
 
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         bottomBar = {
-            NavigationBar(
-                containerColor = Color.White,
-                modifier = Modifier.height(70.dp)
-            ) {
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Person,
-                            contentDescription = perfilDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = { Text(perfilLabel, fontSize = 12.sp) },
-                    selected = false,
-                    onClick = { navController.navigate(Screen.Profile.route) }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.AutoMirrored.Filled.Chat,
-                            contentDescription = chatDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = { Text(chatLabel, fontSize = 12.sp) },
-                    selected = true,
-                    onClick = { /* ya estamos aquí */ }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Home,
-                            contentDescription = homeDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = { Text(homeLabel, fontSize = 12.sp) },
-                    selected = false,
-                    onClick = {
-                        navController.navigate(Screen.JobsList.route) {
-                            popUpTo(Screen.JobsList.route) { inclusive = true }
-                        }
-                    }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Notifications,
-                            contentDescription = notificationsDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = { Text(notificationsLabel, fontSize = 12.sp) },
-                    selected = false,
-                    onClick = { /* TODO: Notificaciones */ }
-                )
-
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Work,
-                            contentDescription = empleoDesc,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    },
-                    label = { Text(empleoLabel, fontSize = 12.sp) },
-                    selected = false,
-                    onClick = { navController.navigate("applications_screen") }
-                )
-            }
+            UTrabajoBottomBar(
+                navController = navController,
+                selected = MainTab.Chats,
+                companyMode = currentUser?.role == "company"
+            )
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(color = Color(0xFFE9F3F8))
+                .background(MaterialTheme.colorScheme.background)
         ) {
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp)
-            ) {
-                Text(
-                    text = stringResource(R.string.chat_list_title),
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    color = Color.Black
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = stringResource(R.string.chat_list_subtitle),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontSize = 14.sp,
-                    color = Color.Gray
-                )
-            }
+            UTrabajoPageHeader(
+                title = stringResource(R.string.chat_list_title),
+                subtitle = stringResource(R.string.chat_list_subtitle),
+                eyebrow = "Mensajería"
+            )
 
             when {
                 isLoading -> {
@@ -179,8 +91,14 @@ fun ChatListScreen(navController: NavHostController) {
                             .padding(horizontal = 16.dp, vertical = 6.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        CircularProgressIndicator(color = Color(0xFF2B7BBF))
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                     }
+                }
+                loadError != null -> {
+                    UTrabajoErrorBanner(
+                        message = loadError.orEmpty(),
+                        modifier = Modifier.padding(horizontal = 24.dp)
+                    )
                 }
                 chats.isEmpty() -> {
                     Box(
@@ -194,17 +112,17 @@ fun ChatListScreen(navController: NavHostController) {
                                 Icons.AutoMirrored.Filled.Chat,
                                 contentDescription = stringResource(R.string.chat_list_empty),
                                 modifier = Modifier.size(64.dp),
-                                tint = Color.Gray
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 text = stringResource(R.string.chat_list_empty),
-                                color = Color.Gray,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontSize = 16.sp
                             )
                             Text(
                                 text = stringResource(R.string.chat_list_empty_subtitle),
-                                color = Color.Gray,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontSize = 14.sp
                             )
                         }
@@ -250,7 +168,7 @@ private fun ChatListItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() },
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -263,7 +181,7 @@ private fun ChatListItem(
             Box(
                 modifier = Modifier
                     .size(50.dp)
-                    .background(Color(0xFF2B7BBF), shape = CircleShape),
+                    .background(MaterialTheme.colorScheme.primary, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -283,14 +201,14 @@ private fun ChatListItem(
                     text = jobTitle,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 16.sp,
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = lastMessage,
                     fontSize = 14.sp,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1
                 )
             }
@@ -298,7 +216,7 @@ private fun ChatListItem(
             Text(
                 text = timeText,
                 fontSize = 12.sp,
-                color = Color.Gray
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

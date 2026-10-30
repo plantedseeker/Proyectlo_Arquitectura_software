@@ -117,13 +117,13 @@
     <string name="bottom_perfil_desc">Perfil</string>
     <string name="bottom_chat_label">Chat</string>
     <string name="bottom_chat_desc">Chat</string>
-    <string name="bottom_home_label">Hoger</string>
+    <string name="bottom_home_label">Inicio</string>
     <string name="bottom_home_desc">Inicio</string>
     <string name="bottom_notifications_label">Notificaciones</string>
     <string name="bottom_notifications_desc">Notificaciones</string>
-    <string name="bottom_empleo_label">Empieo</string>
+    <string name="bottom_empleo_label">Postulaciones</string>
     <string name="bottom_empleo_desc">Empleo</string>
-    <string name="company_header_title">Buscador</string>
+    <string name="company_header_title">Tus ofertas</string>
     <string name="company_header_subtitle">Descubre candidatos interesados en crecer contigo</string>
     <string name="company_sample_candidate_name">Carlos Lopez</string>
     <string name="company_sample_candidate_position">Full Stack Developer</string>
@@ -156,7 +156,7 @@
     <string name="jobcreated_btn_home">Volver al Inicio</string>
     <string name="jobcreated_btn_create_another">Crear Otro Empleo</string>
     <string name="jobcreated_btn_chat">Ir al Chat</string>
-    <string name="jobslist_header_title">Buscador</string>
+    <string name="jobslist_header_title">Explora empleos</string>
     <string name="jobslist_header_subtitle">Encuentra el trabajo de tus sueños</string>
     <string name="jobslist_search_placeholder">Buscar trabajos...</string>
     <string name="jobslist_view_details">Ver detalles</string>
@@ -294,7 +294,7 @@
     <string name="studentupload_error_fmt">Error: %s</string>
 
     <string name="studentwork_title">¿Trabajas actualmente?</string>
-    <string name="studentwork_yes">Si</string>
+    <string name="studentwork_yes">Sí</string>
     <string name="studentwork_no">No</string>
     <string name="studentwork_company_label">Nombre de la empresa</string>
     <string name="studentwork_role_label">Rol que desempeñas</string>
