@@ -52,6 +52,10 @@ La puntuación es una priorización de ingeniería del equipo, no una medición 
 
 ## 3. Límites de confianza
 
+![Diagrama renderizado de límites de confianza S13](../docs/security/trust-boundaries-s13.svg)
+
+**Evidencia visual:** [SVG](../docs/security/trust-boundaries-s13.svg) · [PNG](../docs/security/trust-boundaries-s13.png) · [fuente PlantUML](../docs/security/trust-boundaries-s13.puml).
+
 ~~~text
 ┌──────────────────────┐
 │ Android / dispositivo│
@@ -83,7 +87,7 @@ CI / dependencias / imágenes
 credencial X-Integration-Token
 ~~~
 
-El diagrama fuente está en `docs/security/trust-boundaries-s13.puml`.
+El diagrama textual se conserva arriba como alternativa accesible y respaldo del contenido renderizado.
 
 ## 4. Controles existentes verificados
 

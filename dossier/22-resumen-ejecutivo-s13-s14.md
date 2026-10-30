@@ -1,16 +1,18 @@
 # Resumen ejecutivo — Semanas 13 y 14
 
 > **Documento principal de navegación para exposición y revisión.** Todos los artefactos clave están enlazados para que el profesor pueda abrir la evidencia directamente desde este resumen.
+>
+> **Alcance:** el despliegue y la observabilidad de S14 son diseños conceptuales evaluados, no infraestructura productiva ya desplegada. Las imágenes renderizadas muestran la propuesta y no prueban aprovisionamiento real.
 
 ## Índice rápido de evidencias
 
 | Evidencia | Enlace directo |
 | --- | --- |
 | Seguridad S13 — matriz de amenazas, controles y OWASP | [`dossier/10-seguridad.md`](10-seguridad.md) |
-| Límites de confianza S13 | [`docs/security/trust-boundaries-s13.puml`](../docs/security/trust-boundaries-s13.puml) |
+| Límites de confianza S13 | [SVG renderizado](../docs/security/trust-boundaries-s13.svg) · [PNG](../docs/security/trust-boundaries-s13.png) · [fuente PlantUML](../docs/security/trust-boundaries-s13.puml) |
 | Auditoría de amenazas propuestas por IA | [`docs/security/auditoria-amenazas-ia-s13.md`](../docs/security/auditoria-amenazas-ia-s13.md) |
 | Despliegue y observabilidad S14 | [`dossier/12-despliegue-observabilidad.md`](12-despliegue-observabilidad.md) |
-| Diagrama conceptual de despliegue | [`docs/architecture/deployment-s14.puml`](../docs/architecture/deployment-s14.puml) |
+| Diagrama conceptual de despliegue — no desplegado | [SVG renderizado](../docs/architecture/deployment-s14.svg) · [PNG](../docs/architecture/deployment-s14.png) · [fuente PlantUML](../docs/architecture/deployment-s14.puml) |
 | Matriz de riesgos operativos S14 | [`docs/architecture/matriz-riesgos-operativos-s14.md`](../docs/architecture/matriz-riesgos-operativos-s14.md) |
 | ADR-004 — distribución de Mensajería | [`docs/adr/ADR-004-distribucion-mensajeria.md`](../docs/adr/ADR-004-distribucion-mensajeria.md) |
 | ADR-005 — despliegue y observabilidad | [`docs/adr/ADR-005-despliegue-observabilidad.md`](../docs/adr/ADR-005-despliegue-observabilidad.md) |
@@ -46,7 +48,7 @@ La decisión evita dos errores:
 | ¿El sistema ya tiene controles? | sí: BCrypt, tokens aleatorios+hash, expiración, roles, participante de chat, SQL parametrizado, límites de archivo y CI | [SecurityConfig](../backend/src/main/kotlin/com/tab/utrabajo/api/config/SecurityConfig.kt), [AuthService](../backend/src/main/kotlin/com/tab/utrabajo/api/auth/AuthService.kt), [UTrabajoService](../backend/src/main/kotlin/com/tab/utrabajo/api/service/UTrabajoService.kt), [FileStorageService](../backend/src/main/kotlin/com/tab/utrabajo/api/service/FileStorageService.kt) |
 | ¿Qué riesgo nuevo se detectó? | documentos sensibles bajo `/uploads/**` anónimo y ausencia de logging/alerting de seguridad | [S13](10-seguridad.md), [SecurityConfig](../backend/src/main/kotlin/com/tab/utrabajo/api/config/SecurityConfig.kt), [WebConfig](../backend/src/main/kotlin/com/tab/utrabajo/api/config/WebConfig.kt) |
 | ¿Qué propone S13? | priorizar T01–T12 y cerrar P0 antes de Internet | [S13](10-seguridad.md) |
-| ¿Qué despliegue propone S14? | monolito modular administrado: TLS + API + PostgreSQL administrado + object storage privado + observabilidad | [S14](12-despliegue-observabilidad.md), [diagrama](../docs/architecture/deployment-s14.puml) |
+| ¿Qué despliegue propone S14? | diseño conceptual de monolito modular administrado: TLS + API + PostgreSQL administrado + object storage privado + observabilidad; no está desplegado | [S14](12-despliegue-observabilidad.md), [diagrama renderizado](../docs/architecture/deployment-s14.svg) |
 | ¿Alternativa? | monolito redundante detrás de load balancer | [S14](12-despliegue-observabilidad.md) |
 | ¿Costo? | A=1 D0; B=2–3 D0, estimación relativa, no precio | [S14 — comparación](12-despliegue-observabilidad.md) |
 | ¿SLO de latencia reutilizado? | p95 ≤500 ms | [S14](12-despliegue-observabilidad.md), [experimento de crecimiento S11](../experimentos/crecimiento-mensajeria/) |
@@ -59,7 +61,7 @@ La decisión evita dos errores:
 ## Método
 
 1. inventariar activos;
-2. dibujar [límites de confianza](../docs/security/trust-boundaries-s13.puml);
+2. dibujar [límites de confianza](../docs/security/trust-boundaries-s13.svg) y conservar su [fuente PlantUML](../docs/security/trust-boundaries-s13.puml);
 3. mapear [OWASP Top 10:2025](https://top10.owasp.org/2025/);
 4. contrastar cada amenaza con código/configuración;
 5. puntuar probabilidad e impacto;
@@ -82,6 +84,8 @@ La matriz completa está en [`dossier/10-seguridad.md`](10-seguridad.md).
 
 ## Límites de confianza
 
+![Límites de confianza S13](../docs/security/trust-boundaries-s13.svg)
+
 ~~~text
 Android
    │
@@ -101,7 +105,7 @@ CI/dependencias === TB5
 Endpoints internos === TB6
 ~~~
 
-**Evidencia:** [fuente PlantUML del mapa de trust boundaries](../docs/security/trust-boundaries-s13.puml).
+**Evidencia:** [SVG renderizado](../docs/security/trust-boundaries-s13.svg), [PNG](../docs/security/trust-boundaries-s13.png) y [fuente PlantUML](../docs/security/trust-boundaries-s13.puml).
 
 ## Amenazas que debes saber defender
 
@@ -161,7 +165,9 @@ La decisión completa y el riesgo residual se encuentran en [`dossier/10-segurid
 
 ## Dos alternativas
 
-La comparación completa está en [`dossier/12-despliegue-observabilidad.md`](12-despliegue-observabilidad.md) y su diagrama fuente en [`deployment-s14.puml`](../docs/architecture/deployment-s14.puml).
+La comparación completa está en [`dossier/12-despliegue-observabilidad.md`](12-despliegue-observabilidad.md). El profesor puede abrir el [SVG renderizado](../docs/architecture/deployment-s14.svg), el [PNG](../docs/architecture/deployment-s14.png) o la [fuente PlantUML](../docs/architecture/deployment-s14.puml). El diagrama representa una propuesta conceptual, no infraestructura aprovisionada.
+
+![Alternativas conceptuales de despliegue S14](../docs/architecture/deployment-s14.svg)
 
 ### A — administrado mínimo — seleccionada
 
@@ -356,11 +362,11 @@ La violación nunca fue fusionada a `main`.
 # Recorrido recomendado para el profesor
 
 1. Abrir [`dossier/10-seguridad.md`](10-seguridad.md).
-2. Abrir el [mapa de trust boundaries](../docs/security/trust-boundaries-s13.puml).
+2. Abrir el [mapa renderizado de trust boundaries](../docs/security/trust-boundaries-s13.svg).
 3. Revisar T01–T04 y los controles en [la matriz S13](10-seguridad.md).
 4. Revisar [amenazas de IA aceptadas/rechazadas](../docs/security/auditoria-amenazas-ia-s13.md).
 5. Abrir [`dossier/12-despliegue-observabilidad.md`](12-despliegue-observabilidad.md).
-6. Abrir el [diagrama de despliegue](../docs/architecture/deployment-s14.puml) y comparar 1 D0 vs 2–3 D0.
+6. Abrir el [diagrama renderizado de despliegue](../docs/architecture/deployment-s14.svg) y comparar 1 D0 vs 2–3 D0, aclarando que ambas topologías son conceptuales.
 7. Revisar métricas/logs/trazas/alertas en [S14](12-despliegue-observabilidad.md).
 8. Abrir la [matriz de riesgos operativos](../docs/architecture/matriz-riesgos-operativos-s14.md).
 9. Abrir [ADR-005](../docs/adr/ADR-005-despliegue-observabilidad.md).
@@ -372,10 +378,10 @@ La violación nunca fue fusionada a `main`.
 | Tiempo | Contenido | Evidencia clicable |
 | ---: | --- | --- |
 | 0:00–0:45 | tesis S13–S14 | [este resumen](22-resumen-ejecutivo-s13-s14.md) |
-| 0:45–2:00 | activos y límites de confianza | [S13](10-seguridad.md), [trust boundaries](../docs/security/trust-boundaries-s13.puml) |
+| 0:45–2:00 | activos y límites de confianza | [S13](10-seguridad.md), [trust boundaries renderizado](../docs/security/trust-boundaries-s13.svg) |
 | 2:00–3:30 | amenazas prioritarias y controles | [matriz S13](10-seguridad.md) |
 | 3:30–4:15 | amenazas IA rechazadas | [auditoría IA](../docs/security/auditoria-amenazas-ia-s13.md) |
-| 4:15–5:30 | despliegue A vs B y costo | [S14](12-despliegue-observabilidad.md), [diagrama](../docs/architecture/deployment-s14.puml) |
+| 4:15–5:30 | despliegue conceptual A vs B y costo | [S14](12-despliegue-observabilidad.md), [diagrama renderizado](../docs/architecture/deployment-s14.svg) |
 | 5:30–7:00 | métricas, logs, trazas y alertas | [plan S14](12-despliegue-observabilidad.md) |
 | 7:00–8:00 | riesgos operativos | [matriz O01–O14](../docs/architecture/matriz-riesgos-operativos-s14.md) |
 | 8:00–9:00 | ADR-005 | [decisión formal](../docs/adr/ADR-005-despliegue-observabilidad.md) |

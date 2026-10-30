@@ -1,12 +1,18 @@
 # Semana 14 — Despliegue conceptual y observabilidad
 
 > Evidencia principal exigida por la rúbrica: **diagrama de despliegue con costo relativo + plan de observabilidad vinculado a los escenarios de fallo del Módulo 6**.
+>
+> **Alcance verificable:** el despliegue y la observabilidad aquí descritos son un diseño conceptual. No constituyen evidencia de infraestructura productiva desplegada ni de un servicio de observabilidad operando en producción.
+
+![Diagrama renderizado de despliegue conceptual S14](../docs/architecture/deployment-s14.svg)
+
+**Evidencia visual:** [SVG](../docs/architecture/deployment-s14.svg) · [PNG](../docs/architecture/deployment-s14.png) · [fuente PlantUML](../docs/architecture/deployment-s14.puml).
 
 ## 1. Punto de partida
 
 La decisión ADR-004 conserva Mensajería dentro del monolito modular porque S11 no encontró saturación sostenida hasta 200 VU. S14 no contradice esa decisión: pregunta **cómo desplegar y observar ese monolito si sale del entorno local**.
 
-No se afirma que estas topologías estén desplegadas hoy. Son diseños conceptuales comparables.
+Estas topologías, sus servicios administrados y las señales de observabilidad son propuestas conceptuales comparables. No describen recursos productivos actualmente aprovisionados ni telemetría de producción ya recolectada.
 
 ## 2. Alternativa A — monolito administrado mínimo
 
