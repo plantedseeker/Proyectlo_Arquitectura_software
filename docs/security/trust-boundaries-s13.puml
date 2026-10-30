@@ -1,48 +1,72 @@
 @startuml
 title UTrabajo — Límites de confianza S13
+left to right direction
+
+skinparam backgroundColor #FFFFFF
 skinparam shadowing false
+skinparam defaultFontName "Segoe UI"
 skinparam componentStyle rectangle
+skinparam ArrowColor #344054
+skinparam ArrowThickness 1.3
+skinparam packageBorderColor #667085
+skinparam packageFontColor #101828
+skinparam packageFontStyle bold
 
-actor "Usuario" as User
-node "Dispositivo Android" as Android
-node "API Spring Boot" as API {
-  component "Spring Security" as Sec
-  component "Controllers" as Ctrl
-  component "Services/Auth" as Svc
+package "Zona cliente · red no confiable" as ClientZone #FFF4E5 {
+  actor "Usuario" as User
+  node "Dispositivo\nAndroid" as Android
+  User --> Android : interacción
 }
-database "PostgreSQL 16" as DB
-folder "Upload storage" as Files
-cloud "CI / dependencias / imágenes" as Supply
-component "Endpoints internos experimentales" as Internal
 
-User --> Android
-Android --> Sec : HTTP/JSON + Bearer
-TB-1
-Sec --> Ctrl
-Ctrl --> Svc
-Svc --> DB : JDBC
-TB-2
-Svc --> Files : lectura/escritura
-TB-3
-Files --> Android : /uploads/** actual
-TB-4
-Supply --> API : build/runtime
-TB-5
-Internal --> API : X-Integration-Token
-TB-6
+package "Zona de aplicación" as AppZone #EAF2FF {
+  node "API Spring Boot" as API {
+    component "Spring Security" as Sec
+    component "Controllers" as Ctrl
+    component "Services / Auth" as Svc
 
-note right of Android
-En local se usa HTTP.
-Fuera de local: HTTPS obligatorio.
+    Sec --> Ctrl : principal autenticado
+    Ctrl --> Svc : caso de uso
+  }
+
+  component "Endpoints internos\nexperimentales" as Internal
+}
+
+package "Zona de datos privados" as DataZone #ECFDF3 {
+  database "PostgreSQL 16" as DB
+  folder "Upload storage" as Files
+}
+
+cloud "Zona de supply chain\nCI / dependencias / imágenes" as Supply #F4F3FF
+
+Android --> Sec : TB-1 · HTTPS/JSON + Bearer\n(HTTP solo en entorno local)
+Svc --> DB : TB-2 · JDBC parametrizado
+Svc --> Files : TB-3 · lectura / escritura
+Files -[#C2410C]-> Android : TB-4 · riesgo actual: /uploads/** público
+Supply --> API : TB-5 · build / runtime
+Internal --> Sec : TB-6 · X-Integration-Token
+
+note bottom of ClientZone
+Fuera del entorno local,
+HTTPS es obligatorio.
 end note
 
-note right of Files
-Documentos sensibles no deben
-quedar públicos en producción.
+note bottom of DataZone
+Control objetivo: documentos sensibles
+mediante descarga autenticada o URL firmada.
 end note
 
 note bottom of Supply
-Revisar dependencias, Actions
-e imágenes como supply chain.
+Revisar Actions, dependencias e imágenes;
+Git/CI no eliminan el riesgo de supply chain.
 end note
+
+legend bottom
+  |= Límite |= Cruce de confianza |
+  | TB-1 | cliente / red → autenticación de API |
+  | TB-2 | servicio → PostgreSQL |
+  | TB-3 | servicio → almacenamiento de archivos |
+  | TB-4 | archivos públicos → cliente |
+  | TB-5 | supply chain → build / runtime |
+  | TB-6 | endpoint interno → autenticación de API |
+endlegend
 @enduml

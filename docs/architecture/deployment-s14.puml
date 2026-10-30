@@ -1,41 +1,83 @@
 @startuml
 title UTrabajo — Despliegue conceptual S14
+left to right direction
+
+skinparam backgroundColor #FFFFFF
 skinparam shadowing false
+skinparam defaultFontName "Segoe UI"
+skinparam ArrowColor #344054
+skinparam ArrowThickness 1.3
+skinparam packageBorderColor #667085
+skinparam packageFontColor #101828
+skinparam packageFontStyle bold
 
 actor "Usuario" as U
-node "Android" as A
-cloud "DNS / TLS
-Reverse proxy" as Edge
-node "Spring Boot API
-Monolito modular" as API
-database "PostgreSQL
-administrado" as DB
-cloud "Object storage
-privado" as OS
-cloud "Observabilidad
-metrics/logs/traces/alerts" as Obs
-cloud "Secret manager" as Secrets
+node "Android" as Mobile
+U --> Mobile : interacción
 
-U --> A
-A --> Edge : HTTPS
-Edge --> API : HTTPS
-Secrets --> API : secrets
-API --> DB : JDBC/TLS
-API --> OS : archivos privados
-API --> Obs : telemetry
-DB --> Obs : health/metrics
-Edge --> Obs : access/edge metrics
+package "Alternativa A · Administrado mínimo · 1 D0" as AltA #EAF2FF {
+  cloud "DNS / TLS\nReverse proxy" as EdgeA
+  node "API Spring Boot ×1\nMonolito modular" as ApiA
+  database "PostgreSQL\nadministrado" as DbA
+  cloud "Object storage\nprivado" as StorageA
+  cloud "Métricas · logs\ntrazas · alertas" as ObsA
+  cloud "Secret manager" as SecretsA
 
-note bottom of API
-Alternativa A:
-1 instancia API
-Costo relativo 1 D0
+  EdgeA --> ApiA : HTTPS
+  SecretsA --> ApiA : secrets
+  ApiA --> DbA : JDBC / TLS
+  ApiA --> StorageA : archivos privados
+  ApiA --> ObsA : telemetría
+  DbA --> ObsA : health / métricas
+  EdgeA --> ObsA : access / edge
+}
+
+package "Alternativa B · Administrado redundante · 2–3 D0" as AltB #ECFDF3 {
+  cloud "Load balancer / TLS" as EdgeB
+  node "API réplica 1" as ApiB1
+  node "API réplica 2+" as ApiB2
+  database "PostgreSQL\nadministrado" as DbB
+  cloud "Object storage\ncompartido y privado" as StorageB
+  cloud "Observabilidad\npor instancia" as ObsB
+
+  EdgeB --> ApiB1 : HTTPS
+  EdgeB --> ApiB2 : HTTPS
+  ApiB1 --> DbB : JDBC / TLS
+  ApiB2 --> DbB : JDBC / TLS
+  ApiB1 --> StorageB
+  ApiB2 --> StorageB
+  ApiB1 --> ObsB : instance=1
+  ApiB2 --> ObsB : instance=2+
+}
+
+Mobile --> EdgeA : HTTPS
+Mobile --> EdgeB : HTTPS
+
+note top of AltA
+Alternativa seleccionada como primer paso:
+menor costo y complejidad; coherente con ADR-004.
 end note
 
-note right of Edge
-Alternativa B:
-agrega load balancer
-+ >=2 réplicas API
-Costo relativo 2–3 D0
+note top of AltB
+Evolución reversible si disponibilidad
+o capacidad de API aporta evidencia nueva.
 end note
+
+note bottom of AltA
+DISEÑO CONCEPTUAL — NO DESPLEGADO.
+Incluye backup/restore y health checks.
+end note
+
+note bottom of AltB
+DISEÑO CONCEPTUAL — NO DESPLEGADO.
+La redundancia de API no elimina el riesgo de DB.
+end note
+
+legend bottom
+  |= Comparación |= A |= B |
+  | API | 1 instancia | 2 o más réplicas |
+  | Costo relativo | 1 D0 | 2–3 D0 |
+  | Complejidad | baja / media | media |
+  | Estado | seleccionada conceptualmente | evolución condicionada |
+endlegend
 @enduml

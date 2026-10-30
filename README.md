@@ -232,7 +232,7 @@ como referencia, pero filtra cada categoría contra el sistema real.
 Artefactos principales:
 
 - [matriz de amenazas y controles](dossier/10-seguridad.md);
-- [límites de confianza](docs/security/trust-boundaries-s13.puml);
+- [límites de confianza renderizados](docs/security/trust-boundaries-s13.svg) ([PNG](docs/security/trust-boundaries-s13.png), [fuente PlantUML](docs/security/trust-boundaries-s13.puml));
 - [auditoría crítica de amenazas propuestas por IA](docs/security/auditoria-amenazas-ia-s13.md).
 
 El análisis distingue controles ya implementados de controles requeridos antes
@@ -251,11 +251,14 @@ Evidencias principales:
 
 - [seguridad S13](dossier/10-seguridad.md);
 - [despliegue y observabilidad S14](dossier/12-despliegue-observabilidad.md);
+- [diagrama renderizado del despliegue conceptual](docs/architecture/deployment-s14.svg) ([PNG](docs/architecture/deployment-s14.png), [fuente PlantUML](docs/architecture/deployment-s14.puml));
 - [matriz de riesgos operativos](docs/architecture/matriz-riesgos-operativos-s14.md);
 - [ADR-005](docs/adr/ADR-005-despliegue-observabilidad.md);
 - [ADR-006 de paginación](docs/adr/ADR-006-paginacion-historial-mensajes.md);
 - [evidencia de fitness function en CI](docs/architecture/evidencia-fitness-ci-s14.md).
 
 S13 usa OWASP Top 10:2025 como referencia y filtra amenazas contra el sistema
-real. S14 mantiene el monolito modular, compara un despliegue administrado
-mínimo con una alternativa redundante y define métricas, logs, trazas y alertas.
+real. S14 mantiene el monolito modular, compara conceptualmente un despliegue
+administrado mínimo con una alternativa redundante y define métricas, logs,
+trazas y alertas. Ninguna de esas topologías se presenta como infraestructura
+productiva ya desplegada.

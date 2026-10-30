@@ -11,6 +11,8 @@ UTrabajo sigue siendo un monolito modular con PostgreSQL. S11 no encontró degra
 
 El sistema local actual no es un diseño de producción: usa HTTP, defaults demo y almacenamiento local. Se requiere definir un primer despliegue conceptual sin inventar una necesidad de microservicios.
 
+> **Alcance:** este ADR decide una dirección arquitectónica. No registra infraestructura productiva desplegada ni una plataforma de observabilidad actualmente operativa.
+
 ## Alternativas
 
 ### A — monolito administrado mínimo
@@ -112,6 +114,8 @@ A → B requiere agregar load balancer/réplica y externalizar cualquier estado 
 ## Evidencia
 
 - `dossier/12-despliegue-observabilidad.md`
+- diagrama renderizado: `docs/architecture/deployment-s14.svg` y `docs/architecture/deployment-s14.png`
+- fuente reproducible: `docs/architecture/deployment-s14.puml`
 - `dossier/10-seguridad.md`
 - `docs/architecture/matriz-riesgos-operativos-s14.md`
 - `docs/architecture/alternativas-distribucion-s12.md`
