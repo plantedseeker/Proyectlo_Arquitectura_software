@@ -1108,6 +1108,144 @@ cursor cuando exista necesidad real
 
 ---
 
+# 11.1 Evidencia visual, errores, diagnósticos, soluciones y código
+
+> **Sí cuenta como evidencia.** Para la presentación final no solo se conserva el resultado “bonito”: también se documentan errores reales, diagnóstico, corrección y recuperación. Esto demuestra proceso técnico, trazabilidad y capacidad de reproducir/explicar lo ocurrido.
+
+## Evidencia visual del Spike 1 — Semana 10
+
+Índice completo:
+
+[`experimentos/spike-01-integracion/evidencias/README.md`](../experimentos/spike-01-integracion/evidencias/README.md)
+
+| Evidencia | Qué demuestra |
+| --- | --- |
+| [01-rama-base-sincronizada.png](../experimentos/spike-01-integracion/evidencias/01-rama-base-sincronizada.png) | preparación correcta de la rama/base antes del experimento |
+| [02-docker-no-disponible-backend-exitoso.png](../experimentos/spike-01-integracion/evidencias/02-docker-no-disponible-backend-exitoso.png) | Docker no estaba disponible, pero backend podía verificarse por separado |
+| [03-android-sdk-no-configurado.png](../experimentos/spike-01-integracion/evidencias/03-android-sdk-no-configurado.png) | error real de configuración del Android SDK |
+| [04-android-sdk-stacktrace.png](../experimentos/spike-01-integracion/evidencias/04-android-sdk-stacktrace.png) | diagnóstico completo del fallo de SDK |
+| [05-android-build-fallido-resumen.png](../experimentos/spike-01-integracion/evidencias/05-android-build-fallido-resumen.png) | primer cierre fallido del build Android |
+| [06-api-iniciando-health-transitorio.png](../experimentos/spike-01-integracion/evidencias/06-api-iniciando-health-transitorio.png) | estado transitorio `health: starting`, evitando confundirlo con caída definitiva |
+| [07-android-build-fallido-final.png](../experimentos/spike-01-integracion/evidencias/07-android-build-fallido-final.png) | fallo Android antes de corregir lint |
+| [08-android-lint-y-build-exitosos.png](../experimentos/spike-01-integracion/evidencias/08-android-lint-y-build-exitosos.png) | recuperación: lint, tests y build exitosos |
+| [09-spike-falso-error-stderr-compose.png](../experimentos/spike-01-integracion/evidencias/09-spike-falso-error-stderr-compose.png) | error del instrumento: PowerShell interpretó stderr normal de Compose como fallo |
+| [10-spike-ejecucion-exitosa.png](../experimentos/spike-01-integracion/evidencias/10-spike-ejecucion-exitosa.png) | ejecución final completa del spike |
+| [11-spike-resumen-corridas.png](../experimentos/spike-01-integracion/evidencias/11-spike-resumen-corridas.png) | resumen visual de corridas, checks y umbrales |
+| [12-android-lint-fallo-completo.txt](../experimentos/spike-01-integracion/evidencias/12-android-lint-fallo-completo.txt) | log textual completo del error lint antes de la corrección |
+| [SHA256SUMS.txt](../experimentos/spike-01-integracion/evidencias/SHA256SUMS.txt) | integridad de las evidencias visuales |
+
+### Secuencia visual recomendada para explicar “error → solución”
+
+~~~text
+03 SDK no configurado
+    ↓
+04 stacktrace
+    ↓
+05/07 build fallido
+    ↓
+08 lint + build exitosos
+
+09 falso error del runner
+    ↓
+corrección del tratamiento de stderr
+    ↓
+10 ejecución exitosa
+    ↓
+11 resumen de corridas
+~~~
+
+Estas capturas **no reemplazan** los JSON/logs/NDJSON del experimento. Los complementan. La fuente cuantitativa autoritativa sigue siendo [resultado.json](../experimentos/spike-01-integracion/resultados/20261016T211031Z/resultado.json).
+
+## Gráficas visuales de Semana 11
+
+| Gráfica | Uso en la exposición |
+| --- | --- |
+| [Crecimiento p95 + throughput](../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg) | mostrar visualmente cómo aumenta la latencia con los VU sin afirmar saturación |
+| [Caché antes/después](../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg) | comparar p95 y throughput antes/después de la táctica |
+| [Reejecución k6/Grafana](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg) | evidencia visual complementaria de la reejecución |
+| [README de gráficas](../experimentos/crecimiento-mensajeria/graficas/README.md) | contexto, procedencia y lectura correcta |
+
+## Diagramas renderizados que sí conviene mostrar
+
+### Seguridad S13
+
+- [Trust boundaries — SVG](../docs/security/trust-boundaries-s13.svg)
+- [Trust boundaries — PNG](../docs/security/trust-boundaries-s13.png)
+- [Fuente PlantUML](../docs/security/trust-boundaries-s13.puml)
+
+### Despliegue S14
+
+- [Despliegue conceptual — SVG](../docs/architecture/deployment-s14.svg)
+- [Despliegue conceptual — PNG](../docs/architecture/deployment-s14.png)
+- [Fuente PlantUML](../docs/architecture/deployment-s14.puml)
+
+## Evidencia visual de CI — violación y recuperación
+
+- [Run #60 — violación detectada por fitness function](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40039705894)
+- [Documento explicativo rojo → verde](../docs/architecture/evidencia-fitness-ci-s14.md)
+- [Run #64 — estado corregido y verde](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40040820129)
+
+Secuencia:
+
+~~~text
+configuración permitida
+    ↓
+violación deliberada
+    ↓
+Enforce ADR-004 distribution decision = FAILURE
+    ↓
+corrección
+    ↓
+backend + Android + fitness = SUCCESS
+~~~
+
+## Evidencia de código — fuente directa
+
+Para código, el enlace directo al archivo es más fuerte que una captura porque el profesor puede revisar el contenido real versionado.
+
+| Tema | Código |
+| --- | --- |
+| Seguridad HTTP | [SecurityConfig.kt](../backend/src/main/kotlin/com/tab/utrabajo/api/config/SecurityConfig.kt) |
+| Resolución/seguridad de sesión | [AuthService.kt](../backend/src/main/kotlin/com/tab/utrabajo/api/auth/AuthService.kt) |
+| Casos de uso y `requireChatParticipant` | [UTrabajoService.kt](../backend/src/main/kotlin/com/tab/utrabajo/api/service/UTrabajoService.kt) |
+| Almacenamiento/validación de archivos | [FileStorageService.kt](../backend/src/main/kotlin/com/tab/utrabajo/api/service/FileStorageService.kt) |
+| Contrato experimental | [JobIntegrationController.kt](../backend/src/main/kotlin/com/tab/utrabajo/api/controller/JobIntegrationController.kt) |
+| Autenticador del contrato experimental | [IntegrationTokenAuthenticator.kt](../backend/src/main/kotlin/com/tab/utrabajo/api/auth/IntegrationTokenAuthenticator.kt) |
+| Servicio de integración | [JobIntegrationService.kt](../backend/src/main/kotlin/com/tab/utrabajo/api/service/JobIntegrationService.kt) |
+| Fitness ADR-004 | [check_distribution_decision.py](../scripts/check_distribution_decision.py) |
+| Workflow real | [ci.yml](../.github/workflows/ci.yml) |
+| Configuración de despliegue local | [docker-compose.yml](../docker-compose.yml) |
+
+## Evidencia histórica de fallos/recuperación previa
+
+El repositorio también conserva capturas de cortes anteriores en
+[`dossier/evidencias-exposicion/`](evidencias-exposicion/). Aunque no son el núcleo de S9–S14, sirven si el profesor pregunta por continuidad del método experimental:
+
+- [fallo controlado de API](evidencias-exposicion/05-fallo-controlado-api.png);
+- [walking skeleton recuperado](evidencias-exposicion/06-walking-skeleton-recuperado.png);
+- [artefactos del walking skeleton](evidencias-exposicion/07-walking-skeleton-artefactos.png);
+- [ejecución de línea base](evidencias-exposicion/09-linea-base-ejecucion.png);
+- [resumen línea base](evidencias-exposicion/10-linea-base-resumen.png);
+- [restricción ADR-002](evidencias-exposicion/14-adr002-restriccion.png).
+
+### Lectura correcta
+
+Estas imágenes son **evidencia complementaria**. El orden de fuerza para defender una afirmación es:
+
+~~~text
+código/versionado + JSON/logs/resultados
+            ↓
+PR/commits/CI
+            ↓
+capturas y diagramas
+            ↓
+explicación oral
+~~~
+
+La captura ayuda a contar la historia; el artefacto versionado permite auditarla.
+
+---
+
 # 12. Trazabilidad de PR del Corte 3
 
 | Semana/bloque | PR | Resultado |
