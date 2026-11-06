@@ -5,6 +5,7 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 
 | Entrega | Artefacto |
 | --- | --- |
+| **INFORME FINAL — Corte 3 (Semanas 9–14)** | **`informe-final.md`** |
 | Contexto y sistema base | `01-contexto-sistema.md` |
 | Stakeholders, restricciones, drivers y riesgos | `02-stakeholders-drivers.md` |
 | Atributos, escenarios y mapa atributo–decisión | `03-atributos-calidad.md` |
@@ -104,3 +105,15 @@ fabrican autores, revisiones ni veredictos.
 - [`../docs/adr/ADR-006-paginacion-historial-mensajes.md`](../docs/adr/ADR-006-paginacion-historial-mensajes.md) — paginación histórica renumerada.
 - [`../docs/architecture/matriz-riesgos-operativos-s14.md`](../docs/architecture/matriz-riesgos-operativos-s14.md) — riesgos operativos.
 - [`../docs/architecture/evidencia-fitness-ci-s14.md`](../docs/architecture/evidencia-fitness-ci-s14.md) — demostración CI rojo/verde.
+
+
+## Informe final del Corte 3
+
+El documento maestro para la presentación final es
+[`informe-final.md`](informe-final.md). Integra Semanas 9–14 en un solo
+recorrido con resultados cuantitativos, ADR, experimentos, matrices,
+fitness functions, seguridad, despliegue, observabilidad, PR, CI y enlaces
+directos a cada evidencia.
+
+Para la exposición se recomienda comenzar por ese archivo y usar los resúmenes
+por bloque solo para ampliar preguntas específicas.
