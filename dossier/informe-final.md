@@ -4,7 +4,7 @@
 > **Categoría arquitectónica:** Mensajería y mesa de ayuda  
 > **Propósito del documento:** reunir en un único recorrido navegable toda la evidencia técnica, experimental, documental y de CI del tercer corte para la presentación final.
 >
-> **Referencia del repositorio al elaborar este informe:** `main` en `ec45f99ae49980d075abc410db893aa0655f123a`.
+> **Corte histórico de referencia para el cierre documentado:** `main` después de PR #33, commit `5489e21fdcd88c9d4639bfaf5fb9d66bdf72d7eb`, con UTrabajo CI #77 en `success`. Este valor identifica el estado que se resume; el propio informe puede recibir commits posteriores de documentación.
 >
 > **Regla de lectura:** este informe distingue claramente entre **evidencia medida**, **decisión propuesta**, **diseño conceptual** y **actividad humana pendiente**. No se presenta como hecho algo que el repositorio no demuestra.
 
@@ -18,6 +18,7 @@ Este archivo está pensado para funcionar como **portada de navegación** del Co
 
 | Bloque | Evidencia principal |
 | --- | --- |
+| **Historia completa — desde el inicio hasta el cierre actual** | **[`24-evolucion-completa-utrabajo.md`](24-evolucion-completa-utrabajo.md)** |
 | **Semana 9 — dominio e integración** | [`09-api-events-integration.md`](09-api-events-integration.md) |
 | **Semanas 9–10 — resumen de Módulo 5** | [`18-resumen-ejecutivo-modulo-5.md`](18-resumen-ejecutivo-modulo-5.md) |
 | **Semanas 9–10 — checklist verificable** | [`17-checklist-modulo-5.md`](17-checklist-modulo-5.md) |
@@ -39,6 +40,28 @@ Este archivo está pensado para funcionar como **portada de navegación** del Co
 | **Uso crítico del Tutor — A1–A6** | [`23-tarea-2-uso-critico-tutor-modulo-6.md`](23-tarea-2-uso-critico-tutor-modulo-6.md) |
 | **CI rojo por fitness function** | [GitHub Actions run #60](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40039705894) |
 | **CI verde posterior** | [GitHub Actions run #64](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40040820129) |
+
+---
+
+# 0.1 De dónde venimos y dónde estamos
+
+Para explicar el proyecto completo —no solo S9–S14— existe un documento histórico dedicado:
+
+**[24 — Evolución completa de UTrabajo: desde el sistema inicial hasta el estado actual](24-evolucion-completa-utrabajo.md)**
+
+Ese recorrido parte de que UTrabajo ya existía como aplicación Android + API + PostgreSQL, documenta S1–S14, C4, walking skeleton, métricas, ADR, errores, recuperación, PR, CI, seguridad, despliegue, renovación visual y el cierre consolidado. También conserva los pendientes reales detectados por la auditoría extrema.
+
+En una frase:
+
+~~~text
+AL INICIO
+producto funcional + arquitectura mayormente implícita
+
+        ↓ semestre
+
+AL CIERRE
+producto funcional + arquitectura explícita + mediciones + ADR + CI + seguridad + evidencia navegable
+~~~
 
 ---
 
