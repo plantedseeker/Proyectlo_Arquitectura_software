@@ -65,6 +65,54 @@ producto funcional + arquitectura explícita + mediciones + ADR + CI + seguridad
 
 ---
 
+## 0.2 Criterio arquitectónico y sustento de las decisiones
+
+La evidencia de UTrabajo se interpreta como una **cadena de problema → medición → alternativas → decisión → verificación**, no como una lista de tecnologías adoptadas. Los resultados que siguen pertenecen al **módulo de Mensajería y mesa de ayuda**; las cifras del ejemplo didáctico de alquiler de bicicletas (840/340 ms, 30 VU) **no son mediciones de UTrabajo**.
+
+### Riesgo localizado: qué necesitaba resolverse
+
+La pregunta arquitectónica fue si la consulta del historial de mensajes podía mantenerse eficiente al crecer la profundidad del historial y la concurrencia, **sin añadir distribución o caché prematuramente**. La operación real es `GET /api/chats/{chatId}/messages?limit=50&offset=0`; el criterio histórico de S4 fue **p95 ≤ 500 ms**. La línea base **sí cumplía**: p95 mediano de **9,109 ms** en tres corridas válidas con **10 usuarios virtuales**; no se partió de un supuesto incumplimiento de 840 ms.
+
+La localización S7 reveló el riesgo **en otra condición**: en PostgreSQL, sobre una conversación de 100.000 mensajes, la página reciente con `OFFSET 0` tomó **0,120 ms**; la página profunda con `OFFSET 50000`, **102,050 ms**; y la consulta equivalente por cursor, **0,123 ms**. Esta comparación es de **tiempo de ejecución SQL**, no de p95 HTTP ni de una mejora ya desplegada. El costo del offset profundo fue **829,675 veces** el del cursor en esa observación.
+
+[![Resumen de localización de consulta reciente, offset profundo y cursor](evidencias-exposicion/13-s7-resumen.png)](evidencias-exposicion/13-s7-resumen.png)
+
+*Evidencia visual S7:* [captura original](evidencias-exposicion/13-s7-resumen.png) · [planes SQL y resultado primario](../experimentos/localizacion-s7/resultados/localizacion.json) · [protocolo y límites](../experimentos/localizacion-s7/README.md) · [línea base k6 S4](../experimentos/medicion-escenario-01/resultados/resultado.json).
+
+### Confiabilidad: qué controles hacen auditable el resultado
+
+El protocolo S11 se **prerregistró** antes de medir: misma operación, página de 50 elementos, cuenta participante, semilla determinista de **1.000 conversaciones / 289.000 mensajes** (incluida una conversación de 100.000), k6 0.54.0 y entorno local Docker con API y PostgreSQL. Se realizaron **cuatro corridas por escalón**, descartando la primera como calentamiento y utilizando la mediana de las **tres válidas**; se verificaron solicitudes esperadas, respuestas HTTP 200, páginas correctas, versiones, estado del entorno y huellas SHA-256. Se conservaron **20 corridas** para cinco escalones de **10, 50, 100, 150 y 200 VU**. Estos controles respaldan una conclusión **reproducible en el escenario ensayado**, no una promesa general de producción.
+
+*Comprobantes:* [prerregistro S11](../experimentos/crecimiento-mensajeria/00-preregistro.md) · [JSON primario por escalones](../experimentos/crecimiento-mensajeria/resultados/20261016T224331Z/resultado.json) · [análisis y validez de 83 artefactos](../experimentos/crecimiento-mensajeria/02-analisis-crecimiento.md) · [captura de la línea base](evidencias-exposicion/10-linea-base-resumen.png).
+
+### Decisiones registradas: alternativas y sacrificios
+
+En **[ADR-006](../docs/adr/ADR-006-paginacion-historial-mensajes.md)** se compararon el historial completo, `LIMIT/OFFSET` indexado y la paginación por cursor. Se **conservó el contrato actual** para compatibilidad con Android y rapidez de la página reciente; se dejó el **cursor como migración condicionada** a navegación profunda real y a una validación posterior del endpoint HTTP. El sacrificio explícito es que los offsets profundos continúan siendo costosos mientras ese contrato exista.
+
+En **[ADR-004](../docs/adr/ADR-004-distribucion-mensajeria.md)** se contrastaron monolito modular, réplica horizontal, extracción de microservicio y arquitectura por eventos. **La decisión propuesta** es mantener Mensajería dentro del monolito modular, sin broker ni caché por defecto: se evita complejidad, coordinación y costo sin señal de saturación, pero se acepta que Mensajería **no escala ni se despliega de modo independiente**. Los estados de ratificación humana de ambos ADR permanecen explícitos, sin inventar aprobación del comité. [Matriz de alternativas de distribución](../docs/architecture/alternativas-distribucion-s12.md).
+
+### Resultado experimental y decisión que realmente se tomó
+
+El crecimiento S11 no mostró degradación sostenida hasta **200 VU**: el p95 mediano pasó de **8,963 ms (10 VU)** a **58,235 ms (200 VU)**, con **0 respuestas HTTP fallidas** y **0 páginas inválidas** en las corridas válidas; el valor en 200 VU estuvo por debajo del umbral de 500 ms. El throughput siguió aumentando, por lo que no se atribuyó un cuello de botella a API, PostgreSQL o k6.
+
+[![Crecimiento de p95 y throughput entre 10 y 200 usuarios virtuales](../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg)](../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg)
+
+*Evidencia visual del crecimiento:* [gráfica original reproducible](../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg) · [datos y análisis](../experimentos/crecimiento-mensajeria/02-analisis-crecimiento.md).
+
+Para exigir una comparación **antes/después**, se probó una caché local de un segundo a 200 VU, **sin activarla en el producto por defecto**. El p95 mediano pasó de **58,235 a 55,377 ms** (**−4,908 %**), pero el throughput bajó de **2.303,017 a 2.260,038 req/s** (**−1,866 %**); los rangos se solaparon. El veredicto preregistrado fue **`partially_supported`**: la mejora de latencia por sí sola **no justificó adoptar la táctica**.
+
+[![Comparación antes y después de la caché local: p95 y throughput](../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg)](../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg)
+
+*Evidencia visual antes/después:* [gráfica original](../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg) · [JSON comparativo](../experimentos/crecimiento-mensajeria/comparacion-cache/20261016T230407Z/resultado-comparacion.json) · [criterios, corridas y veredicto](../experimentos/crecimiento-mensajeria/06-resultado-tactica-cache.md).
+
+### Protección frente a regresiones y condiciones de revisión
+
+La protección automática corresponde **a ADR-004**, no debe atribuirse indistintamente a todas las decisiones. La **fitness function** `scripts/check_distribution_decision.py`, conectada al job backend en [`.github/workflows/ci.yml`](../.github/workflows/ci.yml), exige **cero violaciones**: rechaza activar `MESSAGE_CACHE_ENABLED` por defecto, introducir brokers/cachés distribuidas o agregar servicios de aplicación fuera de la topología admitida. Se probó un cambio deliberadamente incorrecto: el **step backend falló con exit code 1** en el [run #60](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40039705894). El **workflow global de ese run quedó Cancelled por concurrencia**; el hecho causal demostrable es el fallo del step. Una vez corregido el cambio, el [run #63](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40040289798) verificó backend y Android en verde. [Registro completo rojo → verde](../docs/architecture/evidencia-fitness-ci-s14.md).
+
+El alcance de estas conclusiones es **local**: ráfagas de hasta 200 VU en una conversación caliente, en un mismo equipo; no se probó carga diez veces mayor, tráfico sostenido por horas, múltiples nodos o un despliegue real en Internet. Además, S7 fue una observación SQL y **no prueba que la alternativa por cursor esté desplegada**. Corresponde reabrir **ADR-004** ante p95 > 500 ms en al menos dos de tres corridas comparables, errores o throughput estancado con causa atribuida, o necesidad real de disponibilidad/escala independiente; **ADR-006** ante navegación profunda demandada o deterioro demostrado de esa consulta. La corrección de la arquitectura depende de seguir midiendo y revisar la decisión, no de declarar un experimento como garantía universal.
+
+---
+
 # Galería visual embebida — evidencia tal como fue conservada
 
 > Esta sección muestra **la imagen directamente dentro del documento** y mantiene debajo el vínculo al archivo original versionado. La imagen sirve para exposición; el archivo original, los JSON, logs, código, PR y CI siguen siendo la evidencia auditable.
