@@ -42,6 +42,348 @@ UTrabajo **no nació en la materia**: llegó al curso como una aplicación Andro
 
 ---
 
+# Galería visual embebida — evidencia tal como fue conservada
+
+> Esta sección muestra **la imagen directamente dentro del documento** y mantiene debajo el vínculo al archivo original versionado. La imagen sirve para exposición; el archivo original, los JSON, logs, código, PR y CI siguen siendo la evidencia auditable.
+
+> **Uso recomendado:** durante la sustentación, mostrar primero la captura y, si el profesor pregunta “¿dónde está?”, abrir el enlace **Evidencia original** que aparece inmediatamente debajo.
+
+## A. Semanas 5–8 — ejecución, walking skeleton, medición y primera restricción
+
+### Checklist visual S5–S6
+
+Estado visual del bloque C4/walking skeleton.
+
+[![Checklist visual S5–S6](evidencias-exposicion/00-checklist-s5-s6.png)](evidencias-exposicion/00-checklist-s5-s6.png)
+
+**Evidencia original:** [`evidencias-exposicion/00-checklist-s5-s6.png`](evidencias-exposicion/00-checklist-s5-s6.png)
+
+---
+
+### Checklist visual S7–S8
+
+Estado visual de localización, ADR y restricción.
+
+[![Checklist visual S7–S8](evidencias-exposicion/01-checklist-s7-s8.png)](evidencias-exposicion/01-checklist-s7-s8.png)
+
+**Evidencia original:** [`evidencias-exposicion/01-checklist-s7-s8.png`](evidencias-exposicion/01-checklist-s7-s8.png)
+
+---
+
+### Rama sincronizada
+
+Preparación del entorno Git antes de la demostración.
+
+[![Rama sincronizada](evidencias-exposicion/02-rama-sincronizada.png)](evidencias-exposicion/02-rama-sincronizada.png)
+
+**Evidencia original:** [`evidencias-exposicion/02-rama-sincronizada.png`](evidencias-exposicion/02-rama-sincronizada.png)
+
+---
+
+### Preflight — puertos ocupados
+
+Detección previa de conflicto de puertos.
+
+[![Preflight — puertos ocupados](evidencias-exposicion/03-preflight-puertos-ocupados.png)](evidencias-exposicion/03-preflight-puertos-ocupados.png)
+
+**Evidencia original:** [`evidencias-exposicion/03-preflight-puertos-ocupados.png`](evidencias-exposicion/03-preflight-puertos-ocupados.png)
+
+---
+
+### Walking skeleton inicial
+
+Ejecución del recorrido vertical del sistema.
+
+[![Walking skeleton inicial](evidencias-exposicion/04-walking-skeleton-inicial.png)](evidencias-exposicion/04-walking-skeleton-inicial.png)
+
+**Evidencia original:** [`evidencias-exposicion/04-walking-skeleton-inicial.png`](evidencias-exposicion/04-walking-skeleton-inicial.png)
+
+---
+
+### Fallo controlado de API
+
+Fallo intencional usado para observar la señal del sistema.
+
+[![Fallo controlado de API](evidencias-exposicion/05-fallo-controlado-api.png)](evidencias-exposicion/05-fallo-controlado-api.png)
+
+**Evidencia original:** [`evidencias-exposicion/05-fallo-controlado-api.png`](evidencias-exposicion/05-fallo-controlado-api.png)
+
+---
+
+### Walking skeleton recuperado
+
+Recuperación posterior al fallo sin borrar la evidencia.
+
+[![Walking skeleton recuperado](evidencias-exposicion/06-walking-skeleton-recuperado.png)](evidencias-exposicion/06-walking-skeleton-recuperado.png)
+
+**Evidencia original:** [`evidencias-exposicion/06-walking-skeleton-recuperado.png`](evidencias-exposicion/06-walking-skeleton-recuperado.png)
+
+---
+
+### Artefactos del walking skeleton
+
+Resultados/artefactos producidos por la ejecución.
+
+[![Artefactos del walking skeleton](evidencias-exposicion/07-walking-skeleton-artefactos.png)](evidencias-exposicion/07-walking-skeleton-artefactos.png)
+
+**Evidencia original:** [`evidencias-exposicion/07-walking-skeleton-artefactos.png`](evidencias-exposicion/07-walking-skeleton-artefactos.png)
+
+---
+
+### Marcador visible en Android
+
+Checkpoint visual del mismo recorrido desde el cliente Android.
+
+[![Marcador visible en Android](evidencias-exposicion/08-android-marcador.png)](evidencias-exposicion/08-android-marcador.png)
+
+**Evidencia original:** [`evidencias-exposicion/08-android-marcador.png`](evidencias-exposicion/08-android-marcador.png)
+
+---
+
+### Línea base — ejecución
+
+Ejecución real del instrumento de línea base.
+
+[![Línea base — ejecución](evidencias-exposicion/09-linea-base-ejecucion.png)](evidencias-exposicion/09-linea-base-ejecucion.png)
+
+**Evidencia original:** [`evidencias-exposicion/09-linea-base-ejecucion.png`](evidencias-exposicion/09-linea-base-ejecucion.png)
+
+---
+
+### Línea base — resumen
+
+Resumen visual de las corridas y resultado.
+
+[![Línea base — resumen](evidencias-exposicion/10-linea-base-resumen.png)](evidencias-exposicion/10-linea-base-resumen.png)
+
+**Evidencia original:** [`evidencias-exposicion/10-linea-base-resumen.png`](evidencias-exposicion/10-linea-base-resumen.png)
+
+---
+
+### S7 — inicio de localización
+
+Inicio del instrumento de localización SQL.
+
+[![S7 — inicio de localización](evidencias-exposicion/11-s7-ejecucion-inicio.png)](evidencias-exposicion/11-s7-ejecucion-inicio.png)
+
+**Evidencia original:** [`evidencias-exposicion/11-s7-ejecucion-inicio.png`](evidencias-exposicion/11-s7-ejecucion-inicio.png)
+
+---
+
+### S7 — fin de localización
+
+Finalización de la ejecución S7.
+
+[![S7 — fin de localización](evidencias-exposicion/12-s7-ejecucion-fin.png)](evidencias-exposicion/12-s7-ejecucion-fin.png)
+
+**Evidencia original:** [`evidencias-exposicion/12-s7-ejecucion-fin.png`](evidencias-exposicion/12-s7-ejecucion-fin.png)
+
+---
+
+### S7 — resumen
+
+Comparación visual de página reciente, offset profundo y cursor.
+
+[![S7 — resumen](evidencias-exposicion/13-s7-resumen.png)](evidencias-exposicion/13-s7-resumen.png)
+
+**Evidencia original:** [`evidencias-exposicion/13-s7-resumen.png`](evidencias-exposicion/13-s7-resumen.png)
+
+---
+
+### ADR-002 — restricción
+
+Evidencia visual de la regla que protege la frontera controller → service/auth → persistencia.
+
+[![ADR-002 — restricción](evidencias-exposicion/14-adr002-restriccion.png)](evidencias-exposicion/14-adr002-restriccion.png)
+
+**Evidencia original:** [`evidencias-exposicion/14-adr002-restriccion.png`](evidencias-exposicion/14-adr002-restriccion.png)
+
+---
+
+## B. Semana 10 — Spike 1: errores reales, diagnóstico, corrección y ejecución válida
+
+### Rama/base sincronizada
+
+Preparación del árbol antes del Spike.
+
+[![Rama/base sincronizada](../experimentos/spike-01-integracion/evidencias/01-rama-base-sincronizada.png)](../experimentos/spike-01-integracion/evidencias/01-rama-base-sincronizada.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/01-rama-base-sincronizada.png`](../experimentos/spike-01-integracion/evidencias/01-rama-base-sincronizada.png)
+
+---
+
+### Docker no disponible / backend verificable
+
+Problema de infraestructura local detectado sin confundirlo con fallo del backend.
+
+[![Docker no disponible / backend verificable](../experimentos/spike-01-integracion/evidencias/02-docker-no-disponible-backend-exitoso.png)](../experimentos/spike-01-integracion/evidencias/02-docker-no-disponible-backend-exitoso.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/02-docker-no-disponible-backend-exitoso.png`](../experimentos/spike-01-integracion/evidencias/02-docker-no-disponible-backend-exitoso.png)
+
+---
+
+### Android SDK no configurado
+
+Error real de configuración del SDK.
+
+[![Android SDK no configurado](../experimentos/spike-01-integracion/evidencias/03-android-sdk-no-configurado.png)](../experimentos/spike-01-integracion/evidencias/03-android-sdk-no-configurado.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/03-android-sdk-no-configurado.png`](../experimentos/spike-01-integracion/evidencias/03-android-sdk-no-configurado.png)
+
+---
+
+### Stacktrace Android SDK
+
+Diagnóstico detallado del fallo de SDK.
+
+[![Stacktrace Android SDK](../experimentos/spike-01-integracion/evidencias/04-android-sdk-stacktrace.png)](../experimentos/spike-01-integracion/evidencias/04-android-sdk-stacktrace.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/04-android-sdk-stacktrace.png`](../experimentos/spike-01-integracion/evidencias/04-android-sdk-stacktrace.png)
+
+---
+
+### Build Android fallido — resumen
+
+Primer resumen visual del build fallido.
+
+[![Build Android fallido — resumen](../experimentos/spike-01-integracion/evidencias/05-android-build-fallido-resumen.png)](../experimentos/spike-01-integracion/evidencias/05-android-build-fallido-resumen.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/05-android-build-fallido-resumen.png`](../experimentos/spike-01-integracion/evidencias/05-android-build-fallido-resumen.png)
+
+---
+
+### API iniciando — health transitorio
+
+Estado transitorio de arranque que no debía clasificarse como caída definitiva.
+
+[![API iniciando — health transitorio](../experimentos/spike-01-integracion/evidencias/06-api-iniciando-health-transitorio.png)](../experimentos/spike-01-integracion/evidencias/06-api-iniciando-health-transitorio.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/06-api-iniciando-health-transitorio.png`](../experimentos/spike-01-integracion/evidencias/06-api-iniciando-health-transitorio.png)
+
+---
+
+### Build Android fallido — estado final
+
+Fallo previo a la corrección de lint/build.
+
+[![Build Android fallido — estado final](../experimentos/spike-01-integracion/evidencias/07-android-build-fallido-final.png)](../experimentos/spike-01-integracion/evidencias/07-android-build-fallido-final.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/07-android-build-fallido-final.png`](../experimentos/spike-01-integracion/evidencias/07-android-build-fallido-final.png)
+
+---
+
+### Lint y build exitosos
+
+Recuperación: lint, tests/build completados correctamente.
+
+[![Lint y build exitosos](../experimentos/spike-01-integracion/evidencias/08-android-lint-y-build-exitosos.png)](../experimentos/spike-01-integracion/evidencias/08-android-lint-y-build-exitosos.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/08-android-lint-y-build-exitosos.png`](../experimentos/spike-01-integracion/evidencias/08-android-lint-y-build-exitosos.png)
+
+---
+
+### Falso error por stderr de Compose
+
+Problema del runner/PowerShell, no del fenómeno medido.
+
+[![Falso error por stderr de Compose](../experimentos/spike-01-integracion/evidencias/09-spike-falso-error-stderr-compose.png)](../experimentos/spike-01-integracion/evidencias/09-spike-falso-error-stderr-compose.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/09-spike-falso-error-stderr-compose.png`](../experimentos/spike-01-integracion/evidencias/09-spike-falso-error-stderr-compose.png)
+
+---
+
+### Spike 1 — ejecución exitosa
+
+Ejecución válida después de corregir el entorno/instrumento.
+
+[![Spike 1 — ejecución exitosa](../experimentos/spike-01-integracion/evidencias/10-spike-ejecucion-exitosa.png)](../experimentos/spike-01-integracion/evidencias/10-spike-ejecucion-exitosa.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/10-spike-ejecucion-exitosa.png`](../experimentos/spike-01-integracion/evidencias/10-spike-ejecucion-exitosa.png)
+
+---
+
+### Spike 1 — resumen de corridas
+
+Resultado visual de warm-up, corridas válidas, checks y umbral.
+
+[![Spike 1 — resumen de corridas](../experimentos/spike-01-integracion/evidencias/11-spike-resumen-corridas.png)](../experimentos/spike-01-integracion/evidencias/11-spike-resumen-corridas.png)
+
+**Evidencia original:** [`../experimentos/spike-01-integracion/evidencias/11-spike-resumen-corridas.png`](../experimentos/spike-01-integracion/evidencias/11-spike-resumen-corridas.png)
+
+---
+
+**Log textual completo del fallo de lint:** [`../experimentos/spike-01-integracion/evidencias/12-android-lint-fallo-completo.txt`](../experimentos/spike-01-integracion/evidencias/12-android-lint-fallo-completo.txt)  
+**Índice de evidencias del Spike:** [`../experimentos/spike-01-integracion/evidencias/README.md`](../experimentos/spike-01-integracion/evidencias/README.md)  
+**Sellos SHA-256:** [`../experimentos/spike-01-integracion/evidencias/SHA256SUMS.txt`](../experimentos/spike-01-integracion/evidencias/SHA256SUMS.txt)
+
+## C. Semana 11 — crecimiento y táctica de caché
+
+### Crecimiento p95 + throughput
+
+Visualiza el cambio de p95 y throughput al aumentar 10 → 200 VU.
+
+[![Crecimiento p95 + throughput](../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg)](../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg)
+
+**Evidencia original:** [`../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg`](../experimentos/crecimiento-mensajeria/graficas/01-crecimiento-p95-throughput.svg)
+
+---
+
+### Caché antes/después
+
+Comparación directa del experimento de táctica.
+
+[![Caché antes/después](../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg)](../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg)
+
+**Evidencia original:** [`../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg`](../experimentos/crecimiento-mensajeria/graficas/02-cache-antes-despues.svg)
+
+---
+
+### Reejecución k6/Grafana
+
+Evidencia visual complementaria de reejecución.
+
+[![Reejecución k6/Grafana](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg)](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg)
+
+**Evidencia original:** [`../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg`](../experimentos/crecimiento-mensajeria/graficas/03-reejecucion-k6-grafana-p95-throughput.svg)
+
+---
+
+## D. Semana 13 — seguridad
+
+### Trust boundaries S13
+
+Límites de confianza y superficies principales del sistema.
+
+[![Trust boundaries S13](../docs/security/trust-boundaries-s13.png)](../docs/security/trust-boundaries-s13.png)
+
+**Evidencia original:** [`../docs/security/trust-boundaries-s13.png`](../docs/security/trust-boundaries-s13.png)
+
+---
+
+## E. Semana 14 — despliegue conceptual
+
+### Despliegue conceptual S14
+
+Topología propuesta de despliegue y operación; no representa infraestructura productiva ya aprovisionada.
+
+[![Despliegue conceptual S14](../docs/architecture/deployment-s14.png)](../docs/architecture/deployment-s14.png)
+
+**Evidencia original:** [`../docs/architecture/deployment-s14.png`](../docs/architecture/deployment-s14.png)
+
+---
+
+## F. CI — evidencia navegable de violación y recuperación
+
+No existe una captura PNG equivalente en el repositorio para este punto, por lo que se conserva el enlace directo a GitHub Actions, que es evidencia más fuerte que una captura estática:
+
+- [Run #60 — el job backend detecta la violación ADR-004](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40039705894)
+- [Documento de evidencia rojo → verde](../docs/architecture/evidencia-fitness-ci-s14.md)
+- [Run #64 — estado corregido y verde](https://github.com/plantedseeker/Proyectlo_Arquitectura_software/actions/runs/40040820129)
+
+La formulación exacta sigue siendo: el **job backend** falló por la fitness function con exit code 1; el workflow global #60 quedó después `Cancelled` por concurrencia.
+
+---
+
 # 3. Punto cero — UTrabajo antes de la arquitectura del curso
 
 ## 3.1 UTrabajo ya existía
