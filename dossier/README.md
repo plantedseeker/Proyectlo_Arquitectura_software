@@ -6,6 +6,7 @@ La categoría confirmada por el profesor es **Mensajería y mesa de ayuda**.
 | Entrega | Artefacto |
 | --- | --- |
 | **INFORME FINAL — Corte 3 (Semanas 9–14)** | **`informe-final.md`** |
+| **EVOLUCIÓN COMPLETA — inicio → estado actual** | **`24-evolucion-completa-utrabajo.md`** |
 | Contexto y sistema base | `01-contexto-sistema.md` |
 | Stakeholders, restricciones, drivers y riesgos | `02-stakeholders-drivers.md` |
 | Atributos, escenarios y mapa atributo–decisión | `03-atributos-calidad.md` |
@@ -117,3 +118,8 @@ directos a cada evidencia.
 
 Para la exposición se recomienda comenzar por ese archivo y usar los resúmenes
 por bloque solo para ampliar preguntas específicas.
+
+
+## Historia integral del proyecto
+
+Para presentar cómo evolucionó UTrabajo desde el sistema existente del inicio del curso hasta el cierre técnico-documental, usar [`24-evolucion-completa-utrabajo.md`](24-evolucion-completa-utrabajo.md). El archivo reúne cronología, métricas, ADR, PR, CI, fallos, recuperaciones, cambios de producto, estado actual y pendientes sin reescribir la evidencia histórica.
